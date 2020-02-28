@@ -579,7 +579,7 @@ public class GeneralLiability extends AutomationUtilities {
 			buttonClick(driver,objectrepository.getclkPremiumFinancePayment(),10,"Click on Premium Finance Issue Policy");
 		}
 		
-		Thread.sleep(25000);
+		Thread.sleep(65000);
 		AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
 		buttonClick(driver,objectrepository.getlnkDownloadEvidence(),10,"Clickon EOI Document");
 		

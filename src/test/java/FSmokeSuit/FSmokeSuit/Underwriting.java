@@ -50,4 +50,26 @@ public class Underwriting extends AutomationUtilities {
 
 }
 	
+	public void UWGLEditQuote (WebDriver driver) throws InterruptedException, IOException {
+		
+		buttonClick(driver,objectrepository.getUWGLEditQuote(),10,"Underwriting Edit Quote");
+		Thread.sleep(5000);
+		
+		AutomationUtilities.LogSummary(LogPath, "Check Page Name: "+ objectrepository.getUWLblPage().getText());
+		System.out.println(objectrepository.getUWLblPage().getText());
+		
+		buttonClick(driver,objectrepository.getbtnsaveandcontinue(),20,"Click on Save and Continue");
+		Thread.sleep(1000);
+		
+		AutomationUtilities.LogSummary(LogPath, "Check Page Name: "+ objectrepository.getUWLblPage().getText());
+		System.out.println(objectrepository.getUWLblPage().getText());
+		
+		buttonClick(driver,objectrepository.getbtnsaveandcontinue(),20,"Click on Save and Continue");
+		Thread.sleep(1000);
+		
+		AutomationUtilities.LogSummary(LogPath, "Check Page Name: "+ objectrepository.getUWLblPage().getText());
+		System.out.println(objectrepository.getUWLblPage().getText());
+	
+	}
+	
 }
