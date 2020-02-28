@@ -735,6 +735,12 @@ public class ObjectRepository {
 	@FindBy (xpath="//div[starts-with(@id,'AlertMsgBox')]/div/div/div[2]")
 	public WebElement UWAlertMsgBox;
 	
+	@FindBy (xpath="//button[@id='GLEditQuote']")
+	public WebElement UWGLEditQuote;
+
+	@FindBy (xpath="//label[@id='LblPage']")
+	public WebElement UWLblPage;
+	
 	
 	//div[@id="AlertMsgBox"]/div/div/div[3]/input
 	//------------------
@@ -1639,12 +1645,15 @@ public class ObjectRepository {
   public WebElement getUWbtnExit() {
 	  return UWbtnExit;
   }
-  
   public WebElement getUWAlertMsgBox() {
 	  return UWAlertMsgBox;
   }  
-  
-  
+  public WebElement getUWGLEditQuote() {
+	  return UWGLEditQuote;
+  }
+  public WebElement getUWLblPage() {
+	  return UWLblPage;
+  }
   
 
 }
