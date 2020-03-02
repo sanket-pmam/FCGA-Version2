@@ -50,7 +50,9 @@ public class Underwriting extends AutomationUtilities {
 
 }
 	
-	public void UWGLEditQuote (WebDriver driver) throws InterruptedException, IOException {
+	public void UWGLEditQuote (WebDriver driver,LoadManager objUWGLLoadManager) throws InterruptedException, IOException {
+		
+		Thread.sleep(5000);
 		
 		buttonClick(driver,objectrepository.getUWGLEditQuote(),10,"Underwriting Edit Quote");
 		Thread.sleep(5000);
@@ -69,7 +71,45 @@ public class Underwriting extends AutomationUtilities {
 		
 		AutomationUtilities.LogSummary(LogPath, "Check Page Name: "+ objectrepository.getUWLblPage().getText());
 		System.out.println(objectrepository.getUWLblPage().getText());
+		
+		buttonClick(driver,objectrepository.getbtnsaveandcontinue(),20,"Click on Save and Continue");
+		Thread.sleep(1000);
+		
+		if (objUWGLLoadManager.getAI().equalsIgnoreCase("Yes")
+				|| objUWGLLoadManager.getWaivers().equalsIgnoreCase("Yes")) {
+			
+			AutomationUtilities.LogSummary(LogPath, "Check Page Name: "+ objectrepository.getUWLblPage().getText());
+			System.out.println(objectrepository.getUWLblPage().getText());
+			
+			buttonClick(driver,objectrepository.getbtnsaveandcontinue(),20,"Click on Save and Continue");
+			Thread.sleep(1000);
+			
+		} else {
+			
+			System.out.println("Additional Insured and Wavier is selected as No.");
+			AutomationUtilities.LogSummary(LogPath, "Additional Insured and Wavier is selected as No.");
+		}
+		
+		
+		if (objUWGLLoadManager.getInlandMarine().equalsIgnoreCase("Yes")) {
+			
+		AutomationUtilities.LogSummary(LogPath, "Check Page Name: "+ objectrepository.getUWLblPage().getText());
+		System.out.println(objectrepository.getUWLblPage().getText());
+		
+		buttonClick(driver,objectrepository.getbtnsaveandcontinue(),20,"Click on Save and Continue");
+		Thread.sleep(1000);
+		
+		}
+		
+		AutomationUtilities.LogSummary(LogPath, "Check Page Name: "+ objectrepository.getUWLblPage().getText());
+		System.out.println(objectrepository.getUWLblPage().getText());
+		
+		buttonClick(driver,objectrepository.getbtnsaveandcontinue(),20,"Click on Save and Continue");
+		Thread.sleep(1000);
 	
+		AutomationUtilities.LogSummary(LogPath, "Referral Reason is : " +objectrepository.getUWReferralReason().getText());
+		System.out.println(objectrepository.getUWReferralReason().getText());
+		
 	}
 	
 }

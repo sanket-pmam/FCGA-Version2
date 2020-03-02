@@ -331,6 +331,7 @@ public class GeneralLiability extends AutomationUtilities {
     	 AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
     	 
     	 objGLunderwriting.UnderwritingSearch(driver);
+    	 objGLunderwriting.UWGLEditQuote(driver,objGlLoadManager);
     	 objGLunderwriting.UWChangeStatus(driver);
     	 AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
     	 
