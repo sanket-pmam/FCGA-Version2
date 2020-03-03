@@ -98,14 +98,14 @@ public class GeneralLiability extends AutomationUtilities {
 			System.out.println("Insured Name / Business Name is : "+AutomationUtilities.sBusinessName);
 			AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
 			
-			if(sBusinessName.isEmpty()) {
+//			if(sBusinessName.isEmpty()) {
 				
 				String sIFristName = "FCGA AUTM";
 				sendKeysToTextField(driver,objectrepository.gettxtIndividualFirstName(),sIFristName,"Frist Name");
 				
 				String sILastName = AutomationUtilities.getRandomString (9);
-				sendKeysToTextField(driver,objectrepository.gettxtIndividualFirstName(),sILastName,"Last Name");
-			}
+				sendKeysToTextField(driver,objectrepository.gettxtIndividualLastName(),sILastName,"Last Name");
+//			}
 			
 			String sDescription = "FCGA-"+ AutomationUtilities.getRandomString (9);
 			sendKeysToTextField(driver,objectrepository.gettxtDescriptionOfBusiness(),sDescription,"Business Description");
@@ -376,6 +376,7 @@ public class GeneralLiability extends AutomationUtilities {
      }
      
      buttonClick(driver,objectrepository.getlnk_DownloadFWCIQuote(),30,"Click on FWCI Quote Link");
+     DownLoadPDF(driver, "FWCI Quote Doc PDF");
      AutomationUtilities.Traverse(driver,"FWCI Quote Doc");
      System.out.println("Download FWCI Quote Document is clicked sucessfully");
      AutomationUtilities.LogSummary(LogPath,"Download FWCI Quote Document is clicked sucessfully");

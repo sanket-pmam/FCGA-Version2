@@ -2,7 +2,11 @@ package FSmokeSuit.FSmokeSuit;
 
 import java.awt.Robot;
 import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
 import java.awt.datatransfer.UnsupportedFlavorException;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.awt.AWTException;
 import java.awt.Rectangle;
@@ -59,6 +63,52 @@ public class AutomationUtilities {
    public static String FWCIProducerFee;
    public static String OLDTCID;
    
+   
+   public void DownLoadPDF(WebDriver driver, String label) throws InterruptedException, AWTException, IOException {
+	   System.out.println("Download PDF...");
+	   Thread.sleep(5000);
+	  
+	   int xCoord = 500;
+	   int yCoord = 500;
+	   
+	   	Robot rbt = new Robot();
+	   	
+	   	rbt.mouseMove(xCoord, yCoord);
+//		rbt.keyPress(KeyEvent.VK_CONTROL);
+		rbt.mousePress(InputEvent.BUTTON3_DOWN_MASK);
+		rbt.mouseRelease(InputEvent.BUTTON3_DOWN_MASK);
+		rbt.delay(3000);
+		rbt.keyPress(KeyEvent.VK_DOWN);
+		rbt.keyRelease(KeyEvent.VK_DOWN);
+		
+		rbt.keyPress(KeyEvent.VK_ENTER);
+		rbt.keyRelease(KeyEvent.VK_ENTER);
+		
+		
+		rbt.delay(5000);
+
+		//Press Home button
+		rbt.keyPress(KeyEvent.VK_HOME);
+		rbt.keyRelease(KeyEvent.VK_HOME);
+
+		Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+		StringSelection stringSelection = new StringSelection(System.getProperty("user.dir") + "\\Test Report\\PDFFile\\");
+		clipboard.setContents(stringSelection, null);
+		
+		rbt.delay(5000);
+		//Copying path by pressing control + v
+		rbt.keyPress(KeyEvent.VK_CONTROL);
+		rbt.keyPress(KeyEvent.VK_V);
+		rbt.keyRelease(KeyEvent.VK_V);
+		rbt.keyRelease(KeyEvent.VK_CONTROL);
+		
+		rbt.delay(5000);
+		rbt.keyPress(KeyEvent.VK_ENTER);
+		rbt.keyRelease(KeyEvent.VK_ENTER);
+		
+		 AutomationUtilities.LogSummary(LogPath,"Current Label : "+label+" is completely working.");
+		
+   }
  
 	public void selectDropdownlitag(WebDriver driver, WebElement element, String text, String sLabel) throws IOException, InterruptedException {
 		

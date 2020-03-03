@@ -112,6 +112,8 @@ public class AutomationDriver {
 					"TC - "+ objLoadManager.getTestCaseId() + "-" + objLoadManager.getTCScenarios() + " is getting Executed.");
 			
 			System.setProperty("webdriver.chrome.driver",System.getProperty("user.dir") + AutomationUtilities.getDataFromPropertiesFile("CHROME_DRIVER_PATH"));
+			
+			
             ChromeOptions options = new ChromeOptions();
             objWebDriver = new ChromeDriver(options);
 
