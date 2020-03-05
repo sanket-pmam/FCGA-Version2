@@ -741,8 +741,10 @@ public class ObjectRepository {
 	@FindBy (xpath="//label[@id='LblPage']")
 	public WebElement UWLblPage;
 	
+	@FindBy (xpath="//a[@data-step='skip']")
+	public WebElement iframeCancelButton;
 	
-	//div[@id="AlertMsgBox"]/div/div/div[3]/input
+
 	//------------------
 	
 	ObjectRepository(WebDriver driver) {
@@ -1654,6 +1656,11 @@ public class ObjectRepository {
   public WebElement getUWLblPage() {
 	  return UWLblPage;
   }
+  
+  public WebElement getiframeCancelButton() {
+	  return iframeCancelButton;
+  }
+
   
 
 }

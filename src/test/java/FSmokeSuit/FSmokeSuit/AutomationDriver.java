@@ -6,8 +6,12 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.DataProvider;
@@ -134,8 +138,12 @@ public class AutomationDriver {
 			objhomepage.SelectAgent(objWebDriver,objLoadManager.getAgentName());
 			AutomationUtilities.Screenshot(TCSnapPath, TestCaseID);
 
+			
+			objhomepage.checkFramePopup(objWebDriver);
+			
 			objhomepage.CreateNewQuote(objWebDriver,objLoadManager.getProduct());
-
+			
+			
 			if (objLoadManager.getProduct().contains("GL")) {
 
 				objgeneralliability.GatekepeerQuestion(objWebDriver);
