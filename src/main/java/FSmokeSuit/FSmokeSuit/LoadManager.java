@@ -74,6 +74,8 @@ public class LoadManager implements Cloneable {
 		private String WCAddressState;
 		private String WCOwnGrossannualPayroll;
 		private String WCAditionalInsured;
+		private String UWRateType;
+		private String UWModifiedRates;
 		
 		public Object clone() throws
 	     CloneNotSupportedException
@@ -596,6 +598,20 @@ public class LoadManager implements Cloneable {
 		}
 		public String getWCAditionalInsured() {
 			return WCAditionalInsured;
+		}
+
+		public void setUWRateType(String suwratetype) {
+			UWRateType = suwratetype;
+		}
+		
+		public String getUWRateType() {
+			return UWRateType;
+		}
+		public void setUWModifiedRates(String sUWModifiedRates) {
+			UWModifiedRates = sUWModifiedRates;
+		}
+		public String getUWModifiedRates() {
+			return UWModifiedRates;
 		}
 	}
 

@@ -104,7 +104,7 @@ public class ObjectRepository {
 					
 	@FindBy (xpath="//span[@id='select2-ddlLiabilityLimit-container']")
 	public WebElement dpdliabilitylimit;
-
+	
 	@FindBy (xpath="//span[@id='select2-ddlDeductible-container']")
 	public WebElement dpdDeductiblelimit;
 					
@@ -322,7 +322,13 @@ public class ObjectRepository {
 	@FindBy (xpath="//input[@value='MAKE PAYMENT & ISSUE']")
 	private WebElement GLMakePayment;
 	
+	@FindBy (xpath="//label[@id='ddlLiabilityLimit-error']")
+	private WebElement GLLiabilityLimitErr;
 	//---------------------
+	
+	@FindBy (xpath="//a[@data-step='skip']")
+	public WebElement iframeCancelButton;		
+	
 	@FindBy(xpath = "//button[@data-resin-target='download']")
 	private static WebElement Applicationdownload;
 	
@@ -714,6 +720,15 @@ public class ObjectRepository {
 	@FindBy (xpath="//select[@id='ddlCurrentStatus']")
 	public WebElement UWCurrentStatus;
 	
+	@FindBy (xpath="//input[@id='txtIRPM']")
+	public WebElement txtUWIRPM;
+	
+	@FindBy (xpath="//input[@id='txtIRPMCTR']")
+	public WebElement txtUWIRPMCTR;
+	
+	@FindBy (xpath="//label[@for='chkConsentToRate']")
+	public WebElement chkConsentToRate;
+	
 	@FindBy (xpath="//select[@id='ddlCurrentStatus']/option[1]")
 	public WebElement UWInProgressStatus;
 
@@ -744,6 +759,15 @@ public class ObjectRepository {
 	@FindBy (xpath="//ul[@id='ulReferralReason']/li")
 	public WebElement UWReferralReason;
 	
+	@FindBy (xpath="//input[@id='BtnCSPSave']")
+	public WebElement UWBtnSave;
+	
+	@FindBy (xpath="//div[@id='pgBody']/h1")
+	public WebElement UWAdditionalInsured;
+	
+	@FindBy (xpath="//div[@id='pgBody']/div[1]/div/h1")
+	public WebElement UWClassPayroll;
+	
 	//div[@id="AlertMsgBox"]/div/div/div[3]/input
 	//------------------
 	
@@ -764,7 +788,23 @@ public class ObjectRepository {
 	public WebElement getLoadingWait() {
 		return LoadingWait;
 	}
+	
+	 public WebElement getiframeCancelButton() {
+		  return iframeCancelButton;
+	  }
 
+	 public WebElement gettxtUWIRPM() {
+		 return txtUWIRPM;
+	 }
+	 
+	 public WebElement getchkConsentToRate() {
+		 return chkConsentToRate;
+	 }
+	 
+	 public WebElement gettxtUWIRPMCTR() {
+		 return txtUWIRPMCTR;
+	 }
+	 
 	// ------ WC Changes --------
 	
 	public WebElement gettxtWCCity() {
@@ -911,6 +951,10 @@ public class ObjectRepository {
 	}
 	//----- GL Changes -----------
 	
+	
+	public WebElement getGLLiabilityLimitErr() {
+		return GLLiabilityLimitErr;
+	}
 	public WebElement GKAlertMsgBox() {
 		return GKAlertMsgBox;
 	}
@@ -1158,7 +1202,6 @@ public class ObjectRepository {
    public WebElement getdpdliabilitylimit() {
 		return dpdliabilitylimit;
 	}
-
    public WebElement getdpdDeductiblelimit() {
 		return dpdDeductiblelimit;
 	}
@@ -1659,5 +1702,13 @@ public class ObjectRepository {
   public WebElement getUWReferralReason() {
 	  return UWReferralReason;
   }
-
+  public WebElement getUWBtnSave() {
+	  return UWBtnSave;
+  }
+  public WebElement getUWAdditionalInsured() {
+	  return UWAdditionalInsured;
+  }
+  public WebElement getUWClassPayroll() {
+	  return UWClassPayroll;
+  }
 }

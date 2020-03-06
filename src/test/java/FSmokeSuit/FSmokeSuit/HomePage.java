@@ -1,7 +1,10 @@
 package FSmokeSuit.FSmokeSuit;
 
 import java.io.IOException;
+import java.util.List;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 
 public class HomePage extends AutomationUtilities {
@@ -24,17 +27,34 @@ public class HomePage extends AutomationUtilities {
 		    AutomationUtilities.LogSummary(LogPath,"Agent Name is selected Sucessfully");
 		}
 		
+		public void checkFramePopup(WebDriver driver) throws InterruptedException, IOException{
+			
+			Thread.sleep(10000);
+			List<WebElement> iframes = driver.findElements(By.tagName("iframe"));
+			int numberOfTags = iframes.size();
+			System.out.println("No. of Iframes on this Web Page are: " +numberOfTags);
+			for (WebElement iframe : iframes) {
+		        //System.out.println("Inner HTML  >> "+ iframe.getAttribute("outerHTML"));
+		        if(iframe.getAttribute("outerHTML").contains("iframe srcdoc=")) {
+		        	driver.switchTo().frame(iframe);
+		        	buttonClick(driver,objectrepository.getiframeCancelButton(),30,"Clicked on Skip Cancel button on iFrame");
+		        }
+		        driver.switchTo().defaultContent();
+		       
+		        }
+		}
+		
 		public void CreateNewQuote (WebDriver driver,String sProductName) throws InterruptedException, IOException 
 		{
 			
-			Thread.sleep(20000);
+			Thread.sleep(5000);
 		
 			buttonClick(driver,objectrepository.getbtnNewQuote(),10,"New Quote Button is clicked");
 			String sRandomNumber = AutomationUtilities.getRandomString (9);
 			
-			buttonClick(driver,objectrepository.getbtnHContinue(), 10, "Continue Button is clicked");
-			Thread.sleep(2000);
-			buttonClick(driver,objectrepository.gettxtWCClosebtn(), 10, "Close button is saved sucessfully.");
+			//buttonClick(driver,objectrepository.getbtnHContinue(), 10, "Continue Button is clicked");
+			//Thread.sleep(2000);
+			//buttonClick(driver,objectrepository.gettxtWCClosebtn(), 10, "Close button is saved sucessfully.");
 			
 			Thread.sleep(2000);
 			if (sProductName.equalsIgnoreCase("GL")){

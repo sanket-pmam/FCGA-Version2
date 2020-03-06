@@ -13,7 +13,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-//Test12
+
 public class AutomationDriver {
 
 	private static WebDriver objWebDriver = null;
@@ -93,6 +93,7 @@ public class AutomationDriver {
 		TestCaseID = objLoadManager.getTestCaseId();
 		AutomationUtilities.testCaseID = TestCaseID;
 		AutomationUtilities.tcSnapPath = TCSnapPath;
+		AutomationUtilities.tcErrSnapPath = TCErrSnapPath;
 		
 		LocalDateTime myDateObj = LocalDateTime.now();
 		DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH_mm_ss");
@@ -124,14 +125,15 @@ public class AutomationDriver {
 
 
 			objWebDriver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
-			AutomationUtilities.Screenshot(TCSnapPath, TestCaseID);
+			//AutomationUtilities.Screenshot(TCSnapPath, TestCaseID);
 
 			objLoginPage.Agentlogin(objWebDriver);
-			AutomationUtilities.Screenshot(TCSnapPath, TestCaseID);
+			//AutomationUtilities.Screenshot(TCSnapPath, TestCaseID);
 
 			objhomepage.SelectAgent(objWebDriver,objLoadManager.getAgentName());
-			AutomationUtilities.Screenshot(TCSnapPath, TestCaseID);
+			//AutomationUtilities.Screenshot(TCSnapPath, TestCaseID);
 
+			objhomepage.checkFramePopup(objWebDriver);
 			objhomepage.CreateNewQuote(objWebDriver,objLoadManager.getProduct());
 
 			if (objLoadManager.getProduct().contains("GL")) {
@@ -155,8 +157,8 @@ public class AutomationDriver {
 				objgeneralliability.ClassSpecificQues(objWebDriver,testcasePath, "No");
 				objgeneralliability.Quote(objLoadManager,objLoginPage,objunderwriting,objhomepage,objWebDriver);
 				objgeneralliability.WriteGLQuoteDetails (testcasePath,TCSheetName,objLoadManager);
-				objgeneralliability.Application(objLoadManager, objWebDriver);
-				objgeneralliability.PolicyIssue(objLoadManager, objWebDriver);
+				//objgeneralliability.Application(objLoadManager, objWebDriver);
+				//objgeneralliability.PolicyIssue(objLoadManager, objWebDriver);
 
 			} else {
 
@@ -167,8 +169,8 @@ public class AutomationDriver {
 				
 				objworkerscompensation.GeneralQuestions(objLoadManager, objWebDriver);
 				objworkerscompensation.Losses(objLoadManager, objWebDriver);
-				objworkerscompensation.Application(objLoadManager, objWebDriver, AutomationUtilities.sBusinessName,objLoginPage,objunderwriting,objhomepage);
-				objworkerscompensation.PolicyIssue(objLoadManager, objWebDriver);
+				//objworkerscompensation.Application(objLoadManager, objWebDriver, AutomationUtilities.sBusinessName,objLoginPage,objunderwriting,objhomepage);
+				//objworkerscompensation.PolicyIssue(objLoadManager, objWebDriver);
 				
 			}
 			
@@ -177,6 +179,7 @@ public class AutomationDriver {
 			
 			EndTime = myFormatObj.format(myDateObj).toString();
 			AutomationUtilities.ReportGeneration(TCReportPath,TCRPSHEETNAME,objLoadManager,objLoadManager.getTestCaseId(),Product,objLoadManager.getTCScenarios(),AutomationUtilities.sBusinessName,AutomationUtilities.QuoteNo,AutomationUtilities.PolicyNo,"Pass",StartTime,EndTime);
+			StartTime = EndTime;
 			
 			objWebDriver.close();
      		objWebDriver.quit();
@@ -185,16 +188,9 @@ public class AutomationDriver {
 
 		} catch (Throwable t) {
 			
-				t.printStackTrace();
+			t.printStackTrace();
 				
-				objWebDriver.close();
-	     		objWebDriver.quit();
-	     		objWebDriver = null;
-
-		} finally {
-			if (objWebDriver != null) {
-				
-				AutomationUtilities.AutmSnapfile = new File(
+			AutomationUtilities.AutmSnapfile = new File(
 						TCErrSnapPath + "ErrSnap_"+AutomationUtilities.testCaseID+"-"+ myFormatObj.format(myDateObj).toString());
 		
 			AutomationUtilities.Screenshot(TCErrSnapPath, TestCaseID);
@@ -202,7 +198,15 @@ public class AutomationDriver {
 			
 			EndTime = myFormatObj.format(myDateObj).toString();
 			AutomationUtilities.ReportGeneration(TCReportPath,TCRPSHEETNAME,objLoadManager,objLoadManager.getTestCaseId(),Product,objLoadManager.getTCScenarios(),AutomationUtilities.sBusinessName,AutomationUtilities.QuoteNo,AutomationUtilities.PolicyNo,"Fail",StartTime,EndTime);
+			StartTime = EndTime;
 			
+				objWebDriver.close();
+	     		objWebDriver.quit();
+	     		objWebDriver = null;
+
+		} finally {
+			if (objWebDriver != null) {
+				
 				objWebDriver.close();
     			objWebDriver.quit();
     			objWebDriver = null;

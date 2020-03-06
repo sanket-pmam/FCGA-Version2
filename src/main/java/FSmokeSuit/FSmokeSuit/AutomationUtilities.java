@@ -2,7 +2,11 @@ package FSmokeSuit.FSmokeSuit;
 
 import java.awt.Robot;
 import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
 import java.awt.datatransfer.UnsupportedFlavorException;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.awt.AWTException;
 import java.awt.Rectangle;
@@ -35,6 +39,8 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
+import org.testng.asserts.SoftAssert;
 
 public class AutomationUtilities {     
 	
@@ -44,6 +50,7 @@ public class AutomationUtilities {
    public static File AutmSnapfile;
    public static String testCaseID;
    public static String tcSnapPath;
+   public static String tcErrSnapPath;
    public static String QuoteNo;
    public static String PolicyNo;
    public static WebDriverWait wait=null;
@@ -59,7 +66,64 @@ public class AutomationUtilities {
    public static String FWCIProducerFee;
    public static String OLDTCID;
    
- 
+   
+   public static boolean compareStrings(String actualStr, String expectedStr){
+	   SoftAssert Soft_Assert = new SoftAssert();
+	   try{
+	    Assert.assertEquals(actualStr, expectedStr);
+	    }catch(Throwable t){
+	     Soft_Assert.fail("Actual String '"+actualStr+"' And Expected String '"+expectedStr +"' Do Not Match.");
+	     return false;
+	    }
+	   return true;
+	  } 
+   
+   public static void DownLoadPDF(WebDriver driver, String label) throws InterruptedException, AWTException, IOException {
+	   System.out.println("Download PDF...");
+	   Thread.sleep(5000);
+	  
+	   int xCoord = 500;
+	   int yCoord = 500;
+	   
+	   	Robot rbt = new Robot();
+	   	
+	   	rbt.mouseMove(xCoord, yCoord);
+//		rbt.keyPress(KeyEvent.VK_CONTROL);
+		rbt.mousePress(InputEvent.BUTTON3_DOWN_MASK);
+		rbt.mouseRelease(InputEvent.BUTTON3_DOWN_MASK);
+		rbt.delay(3000);
+		rbt.keyPress(KeyEvent.VK_DOWN);
+		rbt.keyRelease(KeyEvent.VK_DOWN);
+		
+		rbt.keyPress(KeyEvent.VK_ENTER);
+		rbt.keyRelease(KeyEvent.VK_ENTER);
+		
+		
+		rbt.delay(5000);
+
+		//Press Home button
+		rbt.keyPress(KeyEvent.VK_HOME);
+		rbt.keyRelease(KeyEvent.VK_HOME);
+
+		Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+		StringSelection stringSelection = new StringSelection(System.getProperty("user.dir") + "\\Test Report\\PDFFile\\");
+		clipboard.setContents(stringSelection, null);
+		
+		rbt.delay(5000);
+		//Copying path by pressing control + v
+		rbt.keyPress(KeyEvent.VK_CONTROL);
+		rbt.keyPress(KeyEvent.VK_V);
+		rbt.keyRelease(KeyEvent.VK_V);
+		rbt.keyRelease(KeyEvent.VK_CONTROL);
+		
+		rbt.delay(5000);
+		rbt.keyPress(KeyEvent.VK_ENTER);
+		rbt.keyRelease(KeyEvent.VK_ENTER);
+		
+		 AutomationUtilities.LogSummary(LogPath,"Current Label : "+label+" is completely working.");
+		
+   }
+   
 	public void selectDropdownlitag(WebDriver driver, WebElement element, String text, String sLabel) throws IOException, InterruptedException {
 		
 		String searchText = text;
@@ -248,17 +312,18 @@ public class AutomationUtilities {
     logcount++;
     }
 
-    public static void ReadClassSpecificQuestion (String testcasePath,String tcSheetName,String Data,String logpath,String ColName ) {
+    public static void ReadClassSpecificQuestion (String testcasePath,String tcSheetName,String Data,String logpath,String ColName ) throws AWTException, InterruptedException {
 	
 	File file =    new File(testcasePath);
-
+	String TestCaseID = null;
+	
     try {
        
         FileInputStream fis = new FileInputStream(file);
 	    XSSFWorkbook wb = new XSSFWorkbook(fis);
 	    XSSFSheet sheet = wb.getSheet(tcSheetName);
 	    XSSFRow headerRow = sheet.getRow(0);			      
-        Row rowObj=sheet.getRow(0);		        
+        Row rowObj=sheet.getRow(0);	
 	    String result = "";
 	    String Output="";
 	    int resultCol = -1;
@@ -287,9 +352,20 @@ public class AutomationUtilities {
 	            } else { 
 	            	
 	    	       Output ="Class Specific Question have not been Matched Sucessfully";
+	    	       
 	         }
-            	
+	        		
 	       }
+	    	
+	    	if(Output.equalsIgnoreCase("Class Specific Question have not been Matched Sucessfully")) {
+ 
+        		LocalDateTime myDateObj = LocalDateTime.now();
+	   			DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH_mm_ss");
+	    	       AutomationUtilities.AutmSnapfile = new File(
+	    	    		   tcErrSnapPath + "ErrSnap_"+AutomationUtilities.testCaseID+"-"+ myFormatObj.format(myDateObj).toString());
+			
+				AutomationUtilities.Screenshot(tcErrSnapPath, TestCaseID);
+        	}
 	    	
 	      AutomationUtilities.LogSummary(logpath,Output);
 	      result="xxx";
@@ -471,7 +547,8 @@ public class AutomationUtilities {
         	 break;
         	 } 	   
 	   }
-     
+   
+	 DownLoadPDF(driver,pdfName);
 	 Thread.sleep(3000);
 	 driver.close();
 	 driver.switchTo().window(parentWindow);
@@ -508,7 +585,7 @@ public class AutomationUtilities {
 	   } else if(PaymentOption.equalsIgnoreCase("10pay")) {
 		   buttonClick(driver,objectrepository.getchkPaymentOpt_10pay(),10,"Click on Payment Option 10Pay");
 	   }
-	   	
+	   	Thread.sleep(3000);
     }
    
     public static void ReportGeneration(String ReportPath, String TCSheetName, LoadManager objLoadManager, String testcaseid2, String product, String tcScenarios,String insuredname, String quoteNo2, String policyNo2, String status,String starttime,String endtime) {

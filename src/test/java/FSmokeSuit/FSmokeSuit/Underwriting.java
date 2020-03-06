@@ -24,18 +24,38 @@ public class Underwriting extends AutomationUtilities {
 
 	}
 	
-	public void UWChangeStatus (WebDriver driver) throws InterruptedException, IOException {
+	public void UWChangeStatus (WebDriver driver,LoadManager objUWGLLoadManager) throws InterruptedException, IOException {
 		
 		Thread.sleep(5000);
+		
+		if(objUWGLLoadManager.getUWRateType().equalsIgnoreCase("IRPM")) {
+			
+			sendKeysToTextField(driver,objectrepository.gettxtUWIRPM(),objUWGLLoadManager.getUWModifiedRates(),"IRPM");
+			
+		}else if(objUWGLLoadManager.getUWRateType().equalsIgnoreCase("CTR")){
+			
+			buttonClick(driver,objectrepository.getchkConsentToRate(),10,"CTR");
+			sendKeysToTextField(driver,objectrepository.gettxtUWIRPMCTR(),objUWGLLoadManager.getUWModifiedRates(),"CTR");
+		} else {
+			
+			System.out.println("Worker Compensation is to create");
+		}
+		
 		buttonClick(driver,objectrepository.getUWCurrentStatus(),10,"UW Current Status");
 		buttonClick(driver,objectrepository.getUWAcceptedStatus(),10,"UW Accepted Status");
 		buttonClick(driver,objectrepository.getUWbtnReRate(),10,"UW Re Rate button");
 		Thread.sleep(5000);
 		AutomationUtilities.LogSummary(LogPath, "Alert Message in PopUp : "+ objectrepository.getUWAlertMsgBox().getText());
 		Thread.sleep(2000);
-		buttonClick(driver,objectrepository.gettxtWCClosebtn(), 10, "Close button is saved sucessfully.");
-		Thread.sleep(1000);
-		buttonClick(driver,objectrepository.getUWbtnExit(),10,"Exit is Clicked");
+		if(objectrepository.getUWAlertMsgBox().getText().equalsIgnoreCase("IRPM updated successfully.")) {
+			buttonClick(driver,objectrepository.gettxtWCClosebtn(), 10, "Close button is saved sucessfully.");
+			Thread.sleep(1000);
+			buttonClick(driver,objectrepository.getUWbtnExit(),10,"Exit is Clicked");
+		}else {
+			System.out.println("Message is incorrect");
+		}
+		
+		
 	}
 	
 	public void AgentSearch (WebDriver driver) throws InterruptedException, IOException {
@@ -61,25 +81,25 @@ public class Underwriting extends AutomationUtilities {
 		System.out.println(objectrepository.getUWLblPage().getText());
 		
 		buttonClick(driver,objectrepository.getbtnsaveandcontinue(),20,"Click on Save and Continue");
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 		
 		AutomationUtilities.LogSummary(LogPath, "Check Page Name: "+ objectrepository.getUWLblPage().getText());
 		System.out.println(objectrepository.getUWLblPage().getText());
 		
 		buttonClick(driver,objectrepository.getbtnsaveandcontinue(),20,"Click on Save and Continue");
-		Thread.sleep(1000);
+		Thread.sleep(8000);
 		
-		AutomationUtilities.LogSummary(LogPath, "Check Page Name: "+ objectrepository.getUWLblPage().getText());
-		System.out.println(objectrepository.getUWLblPage().getText());
+		AutomationUtilities.LogSummary(LogPath, "Check Page Name: "+ objectrepository.getUWClassPayroll().getText());
+		System.out.println(objectrepository.getUWClassPayroll().getText());
 		
 		buttonClick(driver,objectrepository.getbtnsaveandcontinue(),20,"Click on Save and Continue");
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 		
 		if (objUWGLLoadManager.getAI().equalsIgnoreCase("Yes")
 				|| objUWGLLoadManager.getWaivers().equalsIgnoreCase("Yes")) {
 			
-			AutomationUtilities.LogSummary(LogPath, "Check Page Name: "+ objectrepository.getUWLblPage().getText());
-			System.out.println(objectrepository.getUWLblPage().getText());
+			AutomationUtilities.LogSummary(LogPath, "Check Page Name: "+ objectrepository.getUWAdditionalInsured().getText());
+			System.out.println(objectrepository.getUWAdditionalInsured().getText());
 			
 			buttonClick(driver,objectrepository.getbtnsaveandcontinue(),20,"Click on Save and Continue");
 			Thread.sleep(1000);
@@ -104,7 +124,7 @@ public class Underwriting extends AutomationUtilities {
 		AutomationUtilities.LogSummary(LogPath, "Check Page Name: "+ objectrepository.getUWLblPage().getText());
 		System.out.println(objectrepository.getUWLblPage().getText());
 		
-		buttonClick(driver,objectrepository.getbtnsaveandcontinue(),20,"Click on Save and Continue");
+		buttonClick(driver,objectrepository.getUWBtnSave(),20,"Click on Save and Continue");
 		Thread.sleep(1000);
 	
 		AutomationUtilities.LogSummary(LogPath, "Referral Reason is : " +objectrepository.getUWReferralReason().getText());
