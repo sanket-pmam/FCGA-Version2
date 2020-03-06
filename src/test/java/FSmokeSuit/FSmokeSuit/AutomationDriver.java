@@ -138,7 +138,6 @@ public class AutomationDriver {
 			objhomepage.SelectAgent(objWebDriver,objLoadManager.getAgentName());
 			AutomationUtilities.Screenshot(TCSnapPath, TestCaseID);
 
-			
 			objhomepage.checkFramePopup(objWebDriver);
 			
 			objhomepage.CreateNewQuote(objWebDriver,objLoadManager.getProduct());

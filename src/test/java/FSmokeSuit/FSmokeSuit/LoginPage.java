@@ -16,6 +16,9 @@ public void Agentlogin(WebDriver driver) throws InterruptedException, IOExceptio
 {
 	
 	driver.get(AutomationUtilities.getDataFromPropertiesFile("AGENTURL"));
+	
+	waitforpageload(driver, 5);
+	
 	AutomationUtilities.LogSummary(LogPath, "URL: " + AutomationUtilities.getDataFromPropertiesFile("AGENTURL"));
 	String sUserName = AutomationUtilities.getDataFromPropertiesFile("USER_NAME");
 	String sPassword = AutomationUtilities.getDataFromPropertiesFile("PASSWORD");

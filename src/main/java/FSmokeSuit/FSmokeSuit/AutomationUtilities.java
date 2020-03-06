@@ -18,11 +18,15 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Properties;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
+
 import javax.imageio.ImageIO;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -33,12 +37,17 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import com.google.common.base.Function;
 
 public class AutomationUtilities {     
 	
@@ -63,6 +72,27 @@ public class AutomationUtilities {
    public static String FWCIProducerFee;
    public static String OLDTCID;
    
+   
+	static Function<WebDriver, Boolean> documentWait = new Function<WebDriver, Boolean>() {
+		public Boolean apply(WebDriver driver) {
+			return (Boolean) ((JavascriptExecutor) driver).executeScript("return document.readyState=='complete'")
+					? (Boolean) ((JavascriptExecutor) driver).executeScript("return jQuery.active==0")
+					: false;
+		}
+	};
+	
+   public static void waitforpageload(WebDriver driver, int iTimeOut) {
+		System.out.println("Wait for Page load......");
+		String Label = "";
+		try {
+			Label = driver.getTitle();
+			Wait<WebDriver> waitforload = new FluentWait<WebDriver>(driver).withTimeout(Duration.ofSeconds(iTimeOut))
+					.pollingEvery(Duration.ofSeconds(iTimeOut)).ignoring(NoSuchElementException.class);
+			waitforload.until(documentWait);
+		} catch (Exception ex) {
+			System.out.println("Error: " + Label + " " + ex.getMessage());
+		}
+	}
    
    public void DownLoadPDF(WebDriver driver, String label) throws InterruptedException, AWTException, IOException {
 	   System.out.println("Download PDF...");

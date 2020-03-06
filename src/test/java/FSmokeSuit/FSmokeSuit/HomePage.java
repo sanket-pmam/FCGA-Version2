@@ -19,8 +19,8 @@ public class HomePage extends AutomationUtilities {
 		
 		public void SelectAgent(WebDriver driver,String sAgentName) throws InterruptedException, IOException 
 		{
-			
-			Thread.sleep(2000);
+			waitforpageload(driver, 5);
+			//Thread.sleep(2000);
 			buttonClick(driver,objectrepository.getSelectAgent(),50,"Agency Contact");
 			
 			EsendKeysToTextField(driver,objectrepository.getSearchAgent(), sAgentName,"AgentName");
@@ -62,19 +62,28 @@ public class HomePage extends AutomationUtilities {
 		}
 		
 		public void checkFramePopup(WebDriver driver) throws InterruptedException, IOException{
+			
+			for(int i=1; i<=3; i++) {
+				waitforpageload(driver, 5);
 			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 			List<WebElement> iframes = driver.findElements(By.tagName("iframe"));
 			int numberOfTags = iframes.size();
-			System.out.println("No. of Iframes on this Web Page are: " +numberOfTags);
+			System.out.println("No. of Iframes on this Web Page are: " + numberOfTags);
+
 			for (WebElement iframe : iframes) {
-		        System.out.println("Inner HTML  >> "+ iframe.getAttribute("outerHTML"));
-		        if(iframe.getAttribute("outerHTML").contains("iframe srcdoc=")) {
-		        	driver.switchTo().frame(iframe);
-		        	buttonClick(driver,objectrepository.getiframeCancelButton(),30,"Clicked on Skip Cancel button on iFrame");
-		        }
-		        driver.switchTo().defaultContent();
-		       
-		        }
+				System.out.println("Inner HTML  >> " + iframe.getAttribute("outerHTML"));
+				if (iframe.getAttribute("outerHTML").contains("iframe srcdoc=")) {
+					driver.switchTo().frame(iframe);
+					driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+					buttonClick(driver, objectrepository.getiframeCancelButton(), 30,
+							"Clicked on Let's Go button on Pop-up");
+				}
+				Thread.sleep(2000);
+				driver.switchTo().defaultContent();
+				
+
+			}
+			}
 			
 			
 		}

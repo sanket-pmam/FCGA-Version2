@@ -741,7 +741,7 @@ public class ObjectRepository {
 	@FindBy (xpath="//label[@id='LblPage']")
 	public WebElement UWLblPage;
 	
-	@FindBy (xpath="//a[@data-step='skip']")
+	@FindBy (xpath="//a[@data-step='end']")
 	public WebElement iframeCancelButton;
 	
 
