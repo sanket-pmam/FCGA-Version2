@@ -123,10 +123,6 @@ public class AutomationDriver {
 			Underwriting objunderwriting = new Underwriting(objWebDriver);
 			objWebDriver.manage().window().maximize();
 
-
-			objWebDriver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
-			//AutomationUtilities.Screenshot(TCSnapPath, TestCaseID);
-
 			objLoginPage.Agentlogin(objWebDriver);
 			//AutomationUtilities.Screenshot(TCSnapPath, TestCaseID);
 

@@ -2,6 +2,8 @@ package FSmokeSuit.FSmokeSuit;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -29,19 +31,25 @@ public class HomePage extends AutomationUtilities {
 		
 		public void checkFramePopup(WebDriver driver) throws InterruptedException, IOException{
 			
-			Thread.sleep(10000);
+			for(int i=1; i<=3; i++) {
+				waitforpageload(driver, 5);
+				
 			List<WebElement> iframes = driver.findElements(By.tagName("iframe"));
 			int numberOfTags = iframes.size();
 			System.out.println("No. of Iframes on this Web Page are: " +numberOfTags);
 			for (WebElement iframe : iframes) {
 		        //System.out.println("Inner HTML  >> "+ iframe.getAttribute("outerHTML"));
-		        if(iframe.getAttribute("outerHTML").contains("iframe srcdoc=")) {
-		        	driver.switchTo().frame(iframe);
-		        	buttonClick(driver,objectrepository.getiframeCancelButton(),30,"Clicked on Skip Cancel button on iFrame");
-		        }
+				if (iframe.getAttribute("outerHTML").contains("iframe srcdoc=")) {
+					driver.switchTo().frame(iframe);
+					driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+					buttonClick(driver, objectrepository.getiframeCancelButton(), 30,
+							"Clicked on Let's Go button on Pop-up");
+				}
+				Thread.sleep(2000);
 		        driver.switchTo().defaultContent();
 		       
 		        }
+			}
 		}
 		
 		public void CreateNewQuote (WebDriver driver,String sProductName) throws InterruptedException, IOException 

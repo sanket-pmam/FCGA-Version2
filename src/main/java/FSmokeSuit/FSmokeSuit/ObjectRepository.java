@@ -326,7 +326,7 @@ public class ObjectRepository {
 	private WebElement GLLiabilityLimitErr;
 	//---------------------
 	
-	@FindBy (xpath="//a[@data-step='skip']")
+	@FindBy (xpath="//a[@data-step='end']")
 	public WebElement iframeCancelButton;		
 	
 	@FindBy(xpath = "//button[@data-resin-target='download']")
@@ -723,6 +723,9 @@ public class ObjectRepository {
 	@FindBy (xpath="//input[@id='txtIRPM']")
 	public WebElement txtUWIRPM;
 	
+	@FindBy (xpath="//input[@id='txtIRPM1']")
+	public WebElement txtUWIRPM1;
+	
 	@FindBy (xpath="//input[@id='txtIRPMCTR']")
 	public WebElement txtUWIRPMCTR;
 	
@@ -795,6 +798,10 @@ public class ObjectRepository {
 
 	 public WebElement gettxtUWIRPM() {
 		 return txtUWIRPM;
+	 }
+	 
+	 public WebElement gettxtUWIRPM1() {
+		 return txtUWIRPM1;
 	 }
 	 
 	 public WebElement getchkConsentToRate() {

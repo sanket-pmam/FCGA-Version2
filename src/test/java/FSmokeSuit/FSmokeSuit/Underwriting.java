@@ -38,7 +38,8 @@ public class Underwriting extends AutomationUtilities {
 			sendKeysToTextField(driver,objectrepository.gettxtUWIRPMCTR(),objUWGLLoadManager.getUWModifiedRates(),"CTR");
 		} else {
 			
-			System.out.println("Worker Compensation is to create");
+			sendKeysToTextField(driver,objectrepository.gettxtUWIRPM1(),objUWGLLoadManager.getUWModifiedRates(),"Debit/Credit");
+			
 		}
 		
 		buttonClick(driver,objectrepository.getUWCurrentStatus(),10,"UW Current Status");

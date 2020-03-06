@@ -18,19 +18,24 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Properties;
 import java.util.Set;
 import javax.imageio.ImageIO;
+import java.util.concurrent.TimeUnit;
+import org.openqa.selenium.NoSuchElementException;
 import org.apache.poi.ss.usermodel.Cell;
+import org.openqa.selenium.support.ui.FluentWait;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -41,6 +46,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
+import com.google.common.base.Function;
 
 public class AutomationUtilities {     
 	
@@ -67,6 +73,28 @@ public class AutomationUtilities {
    public static String OLDTCID;
    
    
+   static Function<WebDriver, Boolean> documentWait = new Function<WebDriver, Boolean>() {
+		public Boolean apply(WebDriver driver) {
+			return (Boolean) ((JavascriptExecutor) driver).executeScript("return document.readyState=='complete'")
+					? (Boolean) ((JavascriptExecutor) driver).executeScript("return jQuery.active==0")
+					: false;
+		}
+	};
+
+  public static void waitforpageload(WebDriver driver, int iTimeOut) {
+		System.out.println("Wait for Page load......");
+		String Label = "";
+		try {
+			Label = driver.getTitle();
+			Wait<WebDriver> waitforload = new FluentWait<WebDriver>(driver).withTimeout(Duration.ofSeconds(iTimeOut))
+					.pollingEvery(Duration.ofSeconds(iTimeOut)).ignoring(NoSuchElementException.class);
+			waitforload.until(documentWait);
+			driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		} catch (Exception ex) {
+			System.out.println("Error: " + Label + " " + ex.getMessage());
+		}
+	}
+  
    public static boolean compareStrings(String actualStr, String expectedStr){
 	   SoftAssert Soft_Assert = new SoftAssert();
 	   try{
