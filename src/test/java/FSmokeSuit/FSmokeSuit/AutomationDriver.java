@@ -6,18 +6,14 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
-
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-//Test12
+
 public class AutomationDriver {
 
 	private static WebDriver objWebDriver = null;
@@ -130,13 +126,13 @@ public class AutomationDriver {
 
 
 			objWebDriver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
-			AutomationUtilities.Screenshot(TCSnapPath, TestCaseID);
+			//AutomationUtilities.Screenshot(TCSnapPath, TestCaseID);
 
 			objLoginPage.Agentlogin(objWebDriver);
-			AutomationUtilities.Screenshot(TCSnapPath, TestCaseID);
+			//AutomationUtilities.Screenshot(TCSnapPath, TestCaseID);
 
 			objhomepage.SelectAgent(objWebDriver,objLoadManager.getAgentName());
-			AutomationUtilities.Screenshot(TCSnapPath, TestCaseID);
+			//AutomationUtilities.Screenshot(TCSnapPath, TestCaseID);
 
 			objhomepage.checkFramePopup(objWebDriver);
 			
@@ -186,6 +182,7 @@ public class AutomationDriver {
 			
 			EndTime = myFormatObj.format(myDateObj).toString();
 			AutomationUtilities.ReportGeneration(TCReportPath,TCRPSHEETNAME,objLoadManager,objLoadManager.getTestCaseId(),Product,objLoadManager.getTCScenarios(),AutomationUtilities.sBusinessName,AutomationUtilities.QuoteNo,AutomationUtilities.PolicyNo,"Pass",StartTime,EndTime);
+			StartTime = EndTime;
 			
 			objWebDriver.close();
      		objWebDriver.quit();
@@ -196,13 +193,6 @@ public class AutomationDriver {
 			
 				t.printStackTrace();
 				
-				objWebDriver.close();
-	     		objWebDriver.quit();
-	     		objWebDriver = null;
-
-		} finally {
-			if (objWebDriver != null) {
-				
 				AutomationUtilities.AutmSnapfile = new File(
 						TCErrSnapPath + "ErrSnap_"+AutomationUtilities.testCaseID+"-"+ myFormatObj.format(myDateObj).toString());
 		
@@ -211,7 +201,15 @@ public class AutomationDriver {
 			
 			EndTime = myFormatObj.format(myDateObj).toString();
 			AutomationUtilities.ReportGeneration(TCReportPath,TCRPSHEETNAME,objLoadManager,objLoadManager.getTestCaseId(),Product,objLoadManager.getTCScenarios(),AutomationUtilities.sBusinessName,AutomationUtilities.QuoteNo,AutomationUtilities.PolicyNo,"Fail",StartTime,EndTime);
+			StartTime = EndTime;
 			
+				objWebDriver.close();
+	     		objWebDriver.quit();
+	     		objWebDriver = null;
+
+		} finally {
+			if (objWebDriver != null) {
+
 				objWebDriver.close();
     			objWebDriver.quit();
     			objWebDriver = null;

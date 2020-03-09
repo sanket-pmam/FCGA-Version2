@@ -50,7 +50,9 @@ public class Underwriting extends AutomationUtilities {
 
 }
 	
-	public void UWGLEditQuote (WebDriver driver) throws InterruptedException, IOException {
+public void UWGLEditQuote (WebDriver driver,LoadManager objUWGLLoadManager) throws InterruptedException, IOException {
+		
+		Thread.sleep(5000);
 		
 		buttonClick(driver,objectrepository.getUWGLEditQuote(),10,"Underwriting Edit Quote");
 		Thread.sleep(5000);
@@ -59,17 +61,68 @@ public class Underwriting extends AutomationUtilities {
 		System.out.println(objectrepository.getUWLblPage().getText());
 		
 		buttonClick(driver,objectrepository.getbtnsaveandcontinue(),20,"Click on Save and Continue");
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 		
+		AutomationUtilities.LogSummary(LogPath, "Check Page Name: "+ objectrepository.getUWLblPage().getText());
+		System.out.println(objectrepository.getUWLblPage().getText());
+		
+		buttonClick(driver,objectrepository.getbtnsaveandcontinue(),20,"Click on Save and Continue");
+		Thread.sleep(8000);
+		
+		AutomationUtilities.LogSummary(LogPath, "Check Page Name: "+ objectrepository.getUWClassPayroll().getText());
+		System.out.println(objectrepository.getUWClassPayroll().getText());
+		
+		buttonClick(driver,objectrepository.getbtnsaveandcontinue(),20,"Click on Save and Continue");
+		Thread.sleep(2000);
+		
+		if (objUWGLLoadManager.getAI().equalsIgnoreCase("Yes")
+				|| objUWGLLoadManager.getWaivers().equalsIgnoreCase("Yes")) {
+			
+			AutomationUtilities.LogSummary(LogPath, "Check Page Name: "+ objectrepository.getUWAdditionalInsured().getText());
+			System.out.println(objectrepository.getUWAdditionalInsured().getText());
+			
+			buttonClick(driver,objectrepository.getbtnsaveandcontinue(),20,"Click on Save and Continue");
+			Thread.sleep(1000);
+			
+		} else {
+			
+			System.out.println("Additional Insured and Wavier is selected as No.");
+			AutomationUtilities.LogSummary(LogPath, "Additional Insured and Wavier is selected as No.");
+		}
+		
+		
+		if (objUWGLLoadManager.getInlandMarine().equalsIgnoreCase("Yes")) {
+			
 		AutomationUtilities.LogSummary(LogPath, "Check Page Name: "+ objectrepository.getUWLblPage().getText());
 		System.out.println(objectrepository.getUWLblPage().getText());
 		
 		buttonClick(driver,objectrepository.getbtnsaveandcontinue(),20,"Click on Save and Continue");
 		Thread.sleep(1000);
 		
+		}
+		
 		AutomationUtilities.LogSummary(LogPath, "Check Page Name: "+ objectrepository.getUWLblPage().getText());
 		System.out.println(objectrepository.getUWLblPage().getText());
+		
+		buttonClick(driver,objectrepository.getUWBtnSave(),20,"Click on Save and Continue");
+		Thread.sleep(1000);
 	
+		AutomationUtilities.LogSummary(LogPath, "Referral Reason is : " +objectrepository.getUWReferralReason().getText());
+		System.out.println(objectrepository.getUWReferralReason().getText());
+		
+        if(objUWGLLoadManager.getUWRateType().equalsIgnoreCase("IRPM")) {
+			
+			sendKeysToTextField(driver,objectrepository.gettxtUWIRPM(),objUWGLLoadManager.getUWModifiedRates(),"IRPM");
+			
+		}else if(objUWGLLoadManager.getUWRateType().equalsIgnoreCase("CTR")){
+			
+			buttonClick(driver,objectrepository.getchkConsentToRate(),10,"CTR");
+			sendKeysToTextField(driver,objectrepository.gettxtUWIRPMCTR(),objUWGLLoadManager.getUWModifiedRates(),"CTR");
+		} else {
+			
+			System.out.println("IRPM Value is not getting Changed");
+		}
+		
 	}
 	
 }

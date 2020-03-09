@@ -44,7 +44,7 @@ public class GeneralLiability extends AutomationUtilities {
 	
 	public void GatekepeerQuestion(WebDriver driver) throws InterruptedException, IOException, AWTException {
 		
-    for (int i =1; i<=LastQCount(driver,ElementNamexpath);i++) {
+		/*for (int i =1; i<=LastQCount(driver,ElementNamexpath);i++) {
     	
     	driver.findElement(By.xpath("//label[@for='radio-"+i+"']")).click(); // No button 
     }
@@ -57,7 +57,7 @@ public class GeneralLiability extends AutomationUtilities {
        AutomationUtilities.LogSummary(LogPath,"GateKeeper Validation Message :"+ objectrepository.GKAlertMsgBox().getText());
        
        Thread.sleep(1000);
-       buttonClick(driver,objectrepository.gettxtWCClosebtn(), 10, "Close button is saved sucessfully.");
+       buttonClick(driver,objectrepository.gettxtWCClosebtn(), 10, "Close button is saved sucessfully.");*/
 
     for (int j =1; j<=LastQCount(driver,ElementNamexpath);j++) {
     	if(j==LastQCount(driver,ElementNamexpath)-1)	{
@@ -70,7 +70,7 @@ public class GeneralLiability extends AutomationUtilities {
     }
     
     buttonClick(driver,objectrepository.getbtnsaveandcontinue(),10,"Click on Save and Continue");
-    AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
+    //AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
     
     System.out.println("Gatekeeper Question have been completed Sucessfully");
     AutomationUtilities.LogSummary(LogPath,"Gatekeeper Question have been completed Sucessfully");
@@ -96,22 +96,22 @@ public class GeneralLiability extends AutomationUtilities {
 			AutomationUtilities.sBusinessName = "FCGA AUTM -"+ AutomationUtilities.getRandomString (9);
 			sendKeysToTextField(driver,objectrepository.gettxtBusinessName(),AutomationUtilities.sBusinessName,"Business Name");
 			System.out.println("Insured Name / Business Name is : "+AutomationUtilities.sBusinessName);
-			AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
+			//AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
 			
-//			if(sBusinessName.isEmpty()) {
+			if(sBusinessName.isEmpty()) {
 				
 				String sIFristName = "FCGA AUTM";
 				sendKeysToTextField(driver,objectrepository.gettxtIndividualFirstName(),sIFristName,"Frist Name");
 				
-				String sILastName = AutomationUtilities.getRandomString (9);
+				String sILastName = "A"+AutomationUtilities.getRandomString (9);
 				sendKeysToTextField(driver,objectrepository.gettxtIndividualLastName(),sILastName,"Last Name");
-//			}
+			}
 			
 			String sDescription = "FCGA-"+ AutomationUtilities.getRandomString (9);
 			sendKeysToTextField(driver,objectrepository.gettxtDescriptionOfBusiness(),sDescription,"Business Description");
 			sendKeysToTextField(driver,objectrepository.gettxtYearsInBusiness(),objGlLoadManager.getExperience(),"Years In Business");
   
-			AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
+			//AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
 			
 			if(objectrepository.gettxtYearsInTrade().isEnabled()) {
 				sendKeysToTextField(driver,objectrepository.gettxtYearsInTrade(),objGlLoadManager.getExperience(),"Years In Trade");
@@ -153,11 +153,11 @@ public class GeneralLiability extends AutomationUtilities {
 	            	buttonClick(driver,objectrepository.getrbInlandMarineNo(),10,"Inland Marine as No");
 	            }
 			 
-			 AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
+			// AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
 			 
 			 buttonClick(driver,objectrepository.getbtnsaveandcontinue(),10,"Click on Save and Continue");   
 			 
-			 AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
+			// AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
 			 
 			 System.out.println("Risk Level have been completed Sucessfully");
 			 AutomationUtilities.LogSummary(LogPath,"Risk Level have been completed Sucessfully");
@@ -180,7 +180,7 @@ public class GeneralLiability extends AutomationUtilities {
 					Eprecentage = 100 - (Eprecentage*i);  
 				}
 				driver.findElement(By.xpath("//td[@data-fieldid ='"+ClassCode[i]+"']//parent :: tr// following-sibling :: td//input[@class='dynamicAdd form-control'][@name='percentage']")).sendKeys(Integer.toString(Eprecentage));
-				AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
+				//AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
 			}
 			}
 			else {
@@ -193,7 +193,7 @@ public class GeneralLiability extends AutomationUtilities {
 			}
 			
 			sendKeysToTextField(driver,objectrepository.gettxtExpectedGrossAmount(),objGlLoadManager.getExpectedGrossReceipts(),"Expected Gross Amount");
-			AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
+			//AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
 			
 			if(!objGlLoadManager.getSubClassCode().isEmpty()) {
 			
@@ -205,18 +205,18 @@ public class GeneralLiability extends AutomationUtilities {
 			
 			buttonClick(driver,objectrepository.getbtnAddSubClassCode(),10,"Click Add Button");
 			sendKeysToTextField(driver,objectrepository.getSubClasscodePercentage(),"100","Percentage");
-			AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
+			//AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
 			
 			}
 
 			sendKeysToTextField(driver,objectrepository.getUnSubcontractorCost(),objGlLoadManager.getSubContractorGrossReciepts(),"Expected Sub Class Code Gross Amount");
 			sendKeysToTextField(driver,objectrepository.gettxtActivePartner(),objGlLoadManager.getActiveOwner(),"Active Owner");
-			AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
+			//AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
 			
-			if(!(classcodecount > 1)) {
+			/*if(!(classcodecount > 1)) {
 				
 			    sendKeysToTextField(driver,objectrepository.getClasscodePercentage(),"200","Enter Percentage");
-			    AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
+			    //AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
 			    
 			    buttonClick(driver,objectrepository.getbtnsaveandcontinue(),10,"Click on Save & Continue Button");
 			
@@ -226,11 +226,11 @@ public class GeneralLiability extends AutomationUtilities {
 				AutomationUtilities.LogSummary(LogPath,"Error Message generated is : "+ objectrepository.getErrorMessage().getText().toString()+".");	
 				Thread.sleep(6000);
 				
-				buttonClick(driver,objectrepository.getbtnClose(),10,"Click on Button Close");
+				buttonClick(driver,objectrepository.getbtnClose(),10,"Click on Button Close");*/
 				sendKeysToTextField(driver,objectrepository.getClasscodePercentage(),"100","Percentage");
-				AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
-			  }
-			}
+				//AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
+			  //}
+			//}
 			
 			buttonClick(driver,objectrepository.getbtnsaveandcontinue(),10,"Click on Save & Continue Button");
 			System.out.println("Class & Payroll have been completed Sucessfully");
@@ -239,13 +239,13 @@ public class GeneralLiability extends AutomationUtilities {
 		
 		public void AI(WebDriver driver) throws InterruptedException, IOException, AWTException {
 			
-			AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
-			
+			//AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
+			Thread.sleep(3000);
 			JavascriptExecutor js = (JavascriptExecutor) driver;  
 			js.executeScript("window.scrollBy(0,1000)");
 			js.executeScript("window.scrollBy(0,1000)");
 			
-			AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
+			//AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
 			
 			buttonClick(driver,objectrepository.getbtnsaveandcontinue(),10,"Click on Save and Continue");
 			
@@ -260,7 +260,7 @@ public class GeneralLiability extends AutomationUtilities {
 	        	driver.findElement(By.xpath("//label[@for='radio-"+i+"']")).click(); // no button
 	        }
 	        
-	        AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
+	        //AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
 	        buttonClick(driver,objectrepository.getdpdinstallationfloater(),10,"Click on Installation Floater Drop down");
 	        EsendKeysToTextField(driver,objectrepository.gettxtUniquetextbox(),objGlLoadManager.getInstallationFloater(),"Installation Floater have been entered");
 	        
@@ -269,7 +269,7 @@ public class GeneralLiability extends AutomationUtilities {
 	        
 	        buttonClick(driver,objectrepository.getdpdleasedequipment(),10,"Click on Leased Equipment Drop down");
 	        EsendKeysToTextField(driver,objectrepository.gettxtUniquetextbox(),objGlLoadManager.getContractorsHandTools(),"Click on Leased Equipment Drop down");
-	        AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
+	       // AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
 	        
 	        buttonClick(driver,objectrepository.getbtnsaveandcontinue(),10,"Click on Save and Continue");
 			
@@ -309,7 +309,7 @@ public class GeneralLiability extends AutomationUtilities {
 	        	}
 		  }	
         
-        AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
+        //AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
         buttonClick(driver,objectrepository.getbtnsaveandcontinue(),20,"Click on Save and Continue");
         
         System.out.println("Class Specific have been completed Sucessfully");
@@ -318,35 +318,38 @@ public class GeneralLiability extends AutomationUtilities {
 
 	public void Quote (LoadManager objGlLoadManager,LoginPage objGLloginpage,Underwriting objGLunderwriting,HomePage objhomepage, WebDriver driver) throws IOException, InterruptedException, AWTException, UnsupportedFlavorException {
 		
-     Thread.sleep(20000);
+	waitforpageload(driver, 10);
      
      if(objGlLoadManager.getTCScenarios().equalsIgnoreCase("Referral Flow")) {
     	
+    	 Thread.sleep(3000);
     	 sendKeysToTextField(driver,objectrepository.gettxtRefferal(),"OK-Approved for Refferal","Refferal Reason");
     	 buttonClick(driver,objectrepository.getBtnDoneRefferal(),10,"Click on Refferal (Done button)");
-    	 AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
+    	// AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
     	 
+    	 objhomepage.checkFramePopup(driver);
     	 objGLloginpage.AgentSignOut (driver);
     	 objGLloginpage.UWlogin(driver);
-    	 AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
+    	 //AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
     	 
     	 objGLunderwriting.UnderwritingSearch(driver);
     	 objGLunderwriting.UWChangeStatus(driver);
-    	 AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
+    	// AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
     	 
     	 
     	 objGLloginpage.UWSignOut(driver);
     	 objGLloginpage.Agentlogin(driver);
-    	 AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
+    	// AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
     	 
     	 objhomepage.SelectAgent(driver,objGlLoadManager.getAgentName()); 
-		 AutomationUtilities.Screenshot(tcSnapPath, testCaseID);
-			
+		// AutomationUtilities.Screenshot(tcSnapPath, testCaseID);
+		
+    	 objhomepage.checkFramePopup(driver);
     	 objGLunderwriting.AgentSearch(driver);
-    	 AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
+    	// AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
      }
 		
-     Thread.sleep(15000);
+     waitforpageload(driver, 15);
      
      System.out.println("Quote Date: "+ objectrepository.getlbl_QuoteDate().getText());
      AutomationUtilities.LogSummary(LogPath,"Quote Date : "+ objectrepository.getlbl_QuoteDate().getText());
@@ -362,21 +365,19 @@ public class GeneralLiability extends AutomationUtilities {
      
      System.out.println("Insured Name: "+ objectrepository.getlbl_InsuredName().getText());
      AutomationUtilities.LogSummary(LogPath,"Insured Name: "+ objectrepository.getlbl_InsuredName().getText());
-     AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
+     //AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
      
      if(objGlLoadManager.getState().equalsIgnoreCase("Texas")) {
     	 
 			sendKeysToTextField(driver,objectrepository.gettxt_ProducerFee(),"100","Enter Producer Fee");
-			buttonClick(driver,objectrepository.getbtn_SaveProducerFee(),10,"Click on Button Save");
-			AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
-			
-			Thread.sleep(6000);
+			buttonClick(driver,objectrepository.getbtn_SaveProducerFee(),30,"Click on Button Save");
+			//AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
+			Thread.sleep(5000);
 			buttonClick(driver,objectrepository.getbtn_CloseProducerFee(),10,"Click on Button Close");
-			AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
+			//AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
      }
      
      buttonClick(driver,objectrepository.getlnk_DownloadFWCIQuote(),30,"Click on FWCI Quote Link");
-     DownLoadPDF(driver, "FWCI Quote Doc PDF");
      AutomationUtilities.Traverse(driver,"FWCI Quote Doc");
      System.out.println("Download FWCI Quote Document is clicked sucessfully");
      AutomationUtilities.LogSummary(LogPath,"Download FWCI Quote Document is clicked sucessfully");
@@ -428,24 +429,24 @@ public class GeneralLiability extends AutomationUtilities {
          
      }
      
-     AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
+     //AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
      buttonClick(driver,objectrepository.getbtn_ICSavebutton(),10,"Click on Save Insurance Company");
      
-     AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
+     //AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
      Thread.sleep(3000);
      
 	 buttonClick(driver,objectrepository.getbtn_CloseProducerFee(),10,"Click on Button Close");
-	 AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
+	 //AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
 	 
 	 AutomationUtilities.QuoteNo = objectrepository.getlbl_QuoteNo().getText();
 	 System.out.println("Quote No: "+ objectrepository.getlbl_QuoteNo().getText());
      AutomationUtilities.LogSummary(LogPath,"Quote No: "+ objectrepository.getlbl_QuoteNo().getText());
-     AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
+     //AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
      
 	 buttonClick(driver,objectrepository.getbtn_Appbutton(),10,"Click on Application Button");
      System.out.println("Click on Application Button");
      AutomationUtilities.LogSummary(LogPath,"Click on Application Button");
-     AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
+     //AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
      
      System.out.println("Quote Page have been completed Sucessfully");
      AutomationUtilities.LogSummary(LogPath,"Quote Page have been completed Sucessfully");
@@ -469,14 +470,14 @@ public class GeneralLiability extends AutomationUtilities {
 		
 		String sInspectionName = "Inspector -"+ AutomationUtilities.getRandomString (9);
 		sendKeysToTextField(driver,objectrepository.gettxtcontactforinspection(),sInspectionName,"Enter contact for inspection");
-	    AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
+	    //AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
 	    
 		sendKeysToTextField(driver,objectrepository.gettxtFristAddressline(),objGlLoadManager.getFristAddressline(),"Enter 1st line of Address"); 
         sendKeysToTextField(driver,objectrepository.gettxtSecAddressline(),objGlLoadManager.getSecAddressline(),"Enter 2nd line of Address");
 		sendKeysToTextField(driver,objectrepository.gettxtLocationCity(),objGlLoadManager.getLocationCity(),"Enter City Name");
 		sendKeysToTextField(driver,objectrepository.gettxtLocationZipCode(),objGlLoadManager.getLocationZipCode(),"Enter Zip Code");
 		
-		AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
+		//AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
 		if(objectrepository.getUseasis().isDisplayed()) {
 			
 			buttonClick(driver,objectrepository.getUseasis(),10,"Click on Use as is");
@@ -487,10 +488,10 @@ public class GeneralLiability extends AutomationUtilities {
 
 		String FEIN = AutomationUtilities.getRandomString (9);
 		sendKeysToTextField(driver,objectrepository.gettxtBusinessFEINSSN(),FEIN,"Enter Business FEIN");
-		AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
+		//AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
 		 
 		buttonClick(driver,objectrepository.getchkSameAddress(),10,"Click on Same Address check box");
-		AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
+		//AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
 			
 		sendKeysToTextField(driver,objectrepository.gettxtExpirationDate(),dateFormat.format(cal.getTime()),"Enter Business Expiration Date");  
 		sendKeysToTextField(driver,objectrepository.gettxtInsuranceCarrier(),objGlLoadManager.getTypeofCompany(),"Enter Insurance Carrier");
@@ -522,22 +523,22 @@ public class GeneralLiability extends AutomationUtilities {
 		  
 		sendKeysToTextField(driver,objectrepository.gettxtIndustrial(),"100","Enter Industrial Percentage");
 		sendKeysToTextField(driver,objectrepository.gettxtNewConstruction(),"100","Enter New Construction Percentage");
-		AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
+		//AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
 		
 		buttonClick(driver,objectrepository.getrdoPerformContractYes(),10,"Click on Perform Contract as Yes");
 		sendKeysToTextField(driver,objectrepository.gettxtWorkSubcontracted(),"OK - Approved","Enter New Construction Percentage");
 		buttonClick(driver,objectrepository.getrdoRequireCertificatesGLYes(),10,"Click on Perform Contract as Yes");
 		buttonClick(driver,objectrepository.getrdoRequireCertificatesWCYes(),10,"Click on Perform Contract as Yes");
-		AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
+		//AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
 		
 		buttonClick(driver,objectrepository.getrdoAgree(),10,"Click on Agree radio button");
-		AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
+		//AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
 		
 		buttonClick(driver,objectrepository.getbtnPrintSubmit(),10,"Click on Print & Submit Application");
 		Thread.sleep(15000);
 		
 		AutomationUtilities.Traverse(driver,"Download Application Document");
-	    AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
+	    //AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
 	    buttonClick(driver,objectrepository.getGLMakePayment(),10,"Click on Make Payment");
 		
 	    System.out.println("Application Page have been completed Sucessfully");
@@ -553,11 +554,11 @@ public class GeneralLiability extends AutomationUtilities {
 		WebElement element = objectrepository.getchkIssue_Line1();
 		JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("document.getElementById('chkIssue_1').click();", element);
-		AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
+		//AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
 		executor.executeScript("document.getElementById('chkIssue_2').click();", element);
-		AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
+		//AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
 		executor.executeScript("document.getElementById('chkIssue_3').click();", element);
-		AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
+		//AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
 		/*************NEW CODE ENDS**************/
 		
 		System.out.println("PaymentOption is:>>>>>" +objGlLoadManager.getPaymentOption());
@@ -580,12 +581,12 @@ public class GeneralLiability extends AutomationUtilities {
 			buttonClick(driver,objectrepository.getclkPremiumFinancePayment(),10,"Click on Premium Finance Issue Policy");
 		}
 		
-		Thread.sleep(65000);
-		AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
+		waitforpageload(driver, 35);
+		//AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
 		buttonClick(driver,objectrepository.getlnkDownloadEvidence(),10,"Clickon EOI Document");
 		
 		AutomationUtilities.Traverse(driver,"EOI Document");
-	    AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
+	    //AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
 		
 		
 		AutomationUtilities.PolicyNo =objectrepository.gettxtPolicyNumber().getText() ;

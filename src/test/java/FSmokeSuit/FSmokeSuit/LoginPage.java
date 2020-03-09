@@ -38,7 +38,7 @@ AutomationUtilities.LogSummary(LogPath,"Agent Log In is done Sucessfully");
 
 public void AgentSignOut(WebDriver driver) throws InterruptedException, IOException {
 	
-	Thread.sleep(15000);
+	waitforpageload(driver, 5);
 	buttonClick(driver,objectrepository.getBtnLogOff(), 10, "Sign Out");
 	Thread.sleep(4000);
 	AutomationUtilities.LogSummary(LogPath,"Agent SignOut is done Sucessfully");	

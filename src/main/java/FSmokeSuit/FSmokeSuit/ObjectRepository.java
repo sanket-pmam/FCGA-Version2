@@ -744,7 +744,30 @@ public class ObjectRepository {
 	@FindBy (xpath="//a[@data-step='end']")
 	public WebElement iframeCancelButton;
 	
-
+	@FindBy (xpath="//ul[@id='ulReferralReason']/li")
+	public WebElement UWReferralReason;
+	
+	@FindBy (xpath="//input[@id='BtnCSPSave']")
+	public WebElement UWBtnSave;
+	
+	@FindBy (xpath="//div[@id='pgBody']/h1")
+	public WebElement UWAdditionalInsured;
+	
+	@FindBy (xpath="//div[@id='pgBody']/div[1]/div/h1")
+	public WebElement UWClassPayroll;
+	
+	@FindBy (xpath="//input[@id='txtIRPM']")
+	public WebElement txtUWIRPM;
+	
+	@FindBy (xpath="//input[@id='txtIRPM1']")
+	public WebElement txtUWIRPM1;
+	
+	@FindBy (xpath="//input[@id='txtIRPMCTR']")
+	public WebElement txtUWIRPMCTR;
+	
+	@FindBy (xpath="//label[@for='chkConsentToRate']")
+	public WebElement chkConsentToRate;
+	
 	//------------------
 	
 	ObjectRepository(WebDriver driver) {
@@ -1611,7 +1634,7 @@ public class ObjectRepository {
   }
   
   
- //------------------Underwriting ------------------------
+//------------------Underwriting ------------------------
 
   public WebElement gettxtUWSearch() {
 	  return txtUWSearch;
@@ -1656,7 +1679,33 @@ public class ObjectRepository {
   public WebElement getUWLblPage() {
 	  return UWLblPage;
   }
-  
+  public WebElement getUWReferralReason() {
+	  return UWReferralReason;
+  }
+  public WebElement getUWBtnSave() {
+	  return UWBtnSave;
+  }
+  public WebElement getUWAdditionalInsured() {
+	  return UWAdditionalInsured;
+  }
+  public WebElement getUWClassPayroll() {
+	  return UWClassPayroll;
+  }
+  public WebElement gettxtUWIRPM() {
+		 return txtUWIRPM;
+	 }
+	 
+	 public WebElement gettxtUWIRPM1() {
+		 return txtUWIRPM1;
+	 }
+	 
+	 public WebElement getchkConsentToRate() {
+		 return chkConsentToRate;
+	 }
+	 
+	 public WebElement gettxtUWIRPMCTR() {
+		 return txtUWIRPMCTR;
+	 }
   public WebElement getiframeCancelButton() {
 	  return iframeCancelButton;
   }

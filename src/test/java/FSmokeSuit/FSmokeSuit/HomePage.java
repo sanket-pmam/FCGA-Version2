@@ -32,14 +32,14 @@ public class HomePage extends AutomationUtilities {
 		public void CreateNewQuote (WebDriver driver,String sProductName) throws InterruptedException, IOException 
 		{
 			
-			Thread.sleep(20000);
+			Thread.sleep(5000);
 		
 			buttonClick(driver,objectrepository.getbtnNewQuote(),10,"New Quote Button is clicked");
 			String sRandomNumber = AutomationUtilities.getRandomString (9);
 			
-			buttonClick(driver,objectrepository.getbtnHContinue(), 10, "Continue Button is clicked");
-			Thread.sleep(2000);
-			buttonClick(driver,objectrepository.gettxtWCClosebtn(), 10, "Close button is saved sucessfully.");
+			//buttonClick(driver,objectrepository.getbtnHContinue(), 10, "Continue Button is clicked");
+			//Thread.sleep(2000);
+			//buttonClick(driver,objectrepository.gettxtWCClosebtn(), 10, "Close button is saved sucessfully.");
 			
 			Thread.sleep(2000);
 			if (sProductName.equalsIgnoreCase("GL")){
@@ -57,6 +57,7 @@ public class HomePage extends AutomationUtilities {
 				sendKeysToTextField(driver,objectrepository.getinpFEIN(),sRandomNumber,"FEIN Number is Entered");
 				
 			}
+			
 		    buttonClick(driver,objectrepository.getbtnHContinue(), 10, "Continue Button is clicked");
 		    AutomationUtilities.LogSummary(LogPath,"New Quote is going to be created");
 		}
@@ -65,7 +66,6 @@ public class HomePage extends AutomationUtilities {
 			
 			for(int i=1; i<=3; i++) {
 				waitforpageload(driver, 5);
-			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 			List<WebElement> iframes = driver.findElements(By.tagName("iframe"));
 			int numberOfTags = iframes.size();
 			System.out.println("No. of Iframes on this Web Page are: " + numberOfTags);

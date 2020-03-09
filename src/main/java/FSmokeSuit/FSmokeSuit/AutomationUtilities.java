@@ -24,9 +24,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Properties;
 import java.util.Set;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
-
 import javax.imageio.ImageIO;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -94,7 +91,7 @@ public class AutomationUtilities {
 		}
 	}
    
-   public void DownLoadPDF(WebDriver driver, String label) throws InterruptedException, AWTException, IOException {
+   public static void DownLoadPDF(WebDriver driver, String label) throws InterruptedException, AWTException, IOException {
 	   System.out.println("Download PDF...");
 	   Thread.sleep(5000);
 	  
@@ -216,6 +213,7 @@ public class AutomationUtilities {
    public static void buttonClick(WebDriver driver,WebElement element, int waitAfterClick, String label) throws InterruptedException, IOException {
 			drawBorder(driver,element);
 			element.click(); 
+			waitforpageload(driver, waitAfterClick);
 			AutomationUtilities.LogSummary(LogPath," Current Label : "+label+" is completely working.");
 			
 		}	
@@ -552,6 +550,7 @@ public class AutomationUtilities {
         	 } 	   
 	   }
      
+	 DownLoadPDF(driver,pdfName);
 	 Thread.sleep(3000);
 	 driver.close();
 	 driver.switchTo().window(parentWindow);
