@@ -52,6 +52,7 @@ public class WorkersCompensation extends AutomationUtilities {
 		sendKeysToTextField(driver,objectrepository.gettxtWCCity(), objWCLoadManager.getWCCity(),"City");
 		//AutomationUtilities.Screenshot(tcSnapPath, testCaseID);
 		
+		Thread.sleep(2000);
         if(objectrepository.getUseasis().isDisplayed()) {
 			buttonClick(driver,objectrepository.getUseasis(),10,"Click on Use as is");
 			}
@@ -117,38 +118,40 @@ public class WorkersCompensation extends AutomationUtilities {
 		//AutomationUtilities.Screenshot(tcSnapPath, testCaseID);
 		}
 		
-		buttonClick(driver,objectrepository.getBtnWCNext(), 10, "Next button is saved sucessfully.");
+		buttonClick(driver,objectrepository.getBtnWCNext(), 15, "Next button is saved sucessfully.");
 		//AutomationUtilities.Screenshot(tcSnapPath, testCaseID);
 		
 		if(objectrepository.getUseasis().isDisplayed()) {
 			buttonClick(driver,objectrepository.getUseasis(),10,"Click on Use as is");
 			}
 		
+		Thread.sleep(2000);
 		System.out.println("System is showing validation message for DBA -- " + objectrepository.gettxtWCDBANameerror().getText());
 		AutomationUtilities.LogSummary(LogPath,"System is showing validation message for DBA -- " + objectrepository.gettxtWCDBANameerror().getText());
 		sendKeysToTextField(driver,objectrepository.gettxtWCDBAName(), AutomationUtilities.sBusinessName + "DB","Agent Entered DBA Name as different as Business Name");
 		//AutomationUtilities.Screenshot(tcSnapPath, testCaseID);
 		
-		buttonClick(driver,objectrepository.getBtnWCNext(), 10, "Next button is saved sucessfully.");
+		buttonClick(driver,objectrepository.getBtnWCNext(), 10, "Next button is saved successfully.");
 		//AutomationUtilities.Screenshot(tcSnapPath, testCaseID);
-		Thread.sleep(3000);
+		Thread.sleep(2000);
 		
-		System.out.println("Page Label Name is :"+ objectrepository.gettxtWCPageLabel().getText());
+		/*System.out.println("Page Label Name is :"+ objectrepository.gettxtWCPageLabel().getText());
 		Thread.sleep(1000);
 		
 		if(objectrepository.gettxtWCPageLabel().getText().equalsIgnoreCase("Business Summary")) {
-			buttonClick(driver,objectrepository.gettxtWCClosebtn(), 10, "Close button is saved sucessfully.");
+			buttonClick(driver,objectrepository.gettxtWCClosebtn(), 10, "Close button is saved successfully.");
 		}else {
 			System.out.println("Close button is not Present");
 			
-		}
-		System.out.println("Business Summary have been completed Sucessfully");
-		AutomationUtilities.LogSummary(LogPath, "Business Summary have been completed Sucessfully");
+		}*/
+		System.out.println("Business Summary have been completed Successfully");
+		AutomationUtilities.LogSummary(LogPath, "Business Summary have been completed Successfully");
 	}
 
 	public void GeneralQuestions(LoadManager objWCLoadManager, WebDriver driver) throws IOException, InterruptedException, AWTException {
 		
-		Thread.sleep(5000);
+		waitforpageload(driver, 10);
+		
 		javascriptExecutorClick(driver, objectrepository.rdQuestion_1(), "Question-1");
 		javascriptExecutorClick(driver, objectrepository.rdQuestion_2(), "Question-2");
 		javascriptExecutorClick(driver, objectrepository.rdQuestion_3(), "Question-3");
@@ -191,7 +194,7 @@ public class WorkersCompensation extends AutomationUtilities {
 
 	public void Losses(LoadManager objWCLoadManager, WebDriver driver) throws IOException, InterruptedException, AWTException {
 
-		Thread.sleep(5000);
+		waitforpageload(driver, 5);
 		
 		selectDropdownlitag(driver, objectrepository.gethadCoverage(), "Yes", "Had a coverage Yes/No");
 		javascriptExecutorClick(driver, objectrepository.rdAnyLosses(), "Any Losses Yes/No");
@@ -205,7 +208,7 @@ public class WorkersCompensation extends AutomationUtilities {
 
 	public void Application(LoadManager objWCLoadManager, WebDriver driver, String sBusinessNameValue,LoginPage objWCloginpage,Underwriting objWCunderwriting,HomePage objhomepage) throws IOException, InterruptedException, AWTException, UnsupportedFlavorException {
 
-		Thread.sleep(10000);
+		waitforpageload(driver, 15);
 
 		WebElement selWCNameInsured_element = objectrepository.getselWCNameInsured();
 		selWCNameInsured_element.click();
@@ -251,8 +254,8 @@ public class WorkersCompensation extends AutomationUtilities {
 		AutomationUtilities.Screenshot(tcSnapPath, testCaseID);
 		
 		Thread.sleep(2000);
-		buttonClick(driver,objectrepository.getWCAgreebtn(),10,"Click on Agree Button");
-		AutomationUtilities.Screenshot(tcSnapPath, testCaseID);
+		buttonClick(driver,objectrepository.getWCAgreebtn(),20,"Click on Agree Button");
+		//AutomationUtilities.Screenshot(tcSnapPath, testCaseID);
 		
 		if(objWCLoadManager.getTCScenarios().equalsIgnoreCase("Referral Flow")) {
 			
@@ -261,6 +264,7 @@ public class WorkersCompensation extends AutomationUtilities {
 			//AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
 			
 			buttonClick(driver,objectrepository.getWCBacktoRecord(),10,"Back to Record");
+			objhomepage.checkFramePopup(driver);
 			objWCloginpage.AgentSignOut (driver);
 			objWCloginpage.UWlogin(driver);
 	    	//AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
@@ -277,24 +281,28 @@ public class WorkersCompensation extends AutomationUtilities {
 	    	 objhomepage.SelectAgent(driver,objWCLoadManager.getAgentName()); 
 			 //AutomationUtilities.Screenshot(tcSnapPath, testCaseID);
 				
+	    	 objhomepage.checkFramePopup(driver);
 	    	 objWCunderwriting.AgentSearch(driver);
 	    	 //AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
 		
 		}
 		
+		Thread.sleep(2000);
 		buttonClick(driver,objectrepository.getbtnWCDownloadQuote(),10,"Quote Document");
 		AutomationUtilities.Traverse(driver,"Quote Document");
 	    System.out.println("Download WC Quote Document is clicked sucessfully");
 	    AutomationUtilities.LogSummary(LogPath,"Download WC Quote Document is clicked successfully");
 	     
 		
-		buttonClick(driver,objectrepository.getbtnWCDownloadRatingWorksheet(),10,"Rating Document");
-		buttonClick(driver,objectrepository.getlnkWCCondensedRatingWorksheet(),10,"Condensed Rating Worksheet");
+		buttonClick(driver,objectrepository.getbtnWCDownloadRatingWorksheet(),50,"Rating Document");
+		Thread.sleep(2000);
+		buttonClick(driver,objectrepository.getlnkWCCondensedRatingWorksheet(),15,"Condensed Rating Worksheet");
 		AutomationUtilities.Traverse(driver,"Rating Document");
+		buttonClick(driver,objectrepository.gettxtAppClosebtn(),10,"Close Condensed Rating Worksheet");
 	    System.out.println("Download WC Rating Document is clicked sucessfully");
 	    AutomationUtilities.LogSummary(LogPath,"Download WC Rating Document is clicked successfully");
 		
-	    
+	    Thread.sleep(2000);
 	    buttonClick(driver,objectrepository.getbtnWCDownloadApplication(),10,"Application Document");
 	    AutomationUtilities.Traverse(driver,"Application Document");
 	    System.out.println("Download WC Application Document is clicked sucessfully");
@@ -310,7 +318,7 @@ public class WorkersCompensation extends AutomationUtilities {
 	
      public void PolicyIssue (LoadManager objWCLoadManager,WebDriver driver) throws InterruptedException, AWTException, IOException, UnsupportedFlavorException {
 		
-		Thread.sleep(10000);
+    	 waitforpageload(driver, 15);
 		
 		/*************NEW CODE START**************/
 		WebElement element = objectrepository.getchkIssue_Line1();
@@ -346,6 +354,11 @@ public class WorkersCompensation extends AutomationUtilities {
 		}
 		
 		//AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
+		
+		waitforpageload(driver, 15);
+		
+		/////
+		/////
 		
 		AutomationUtilities.PolicyNo =objectrepository.getWCtxtPolicyNumber().getText() ;
 		//AutomationUtilities.Screenshot(tcSnapPath,testCaseID);

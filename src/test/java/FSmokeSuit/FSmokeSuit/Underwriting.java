@@ -120,6 +120,7 @@ public void UWGLEditQuote (WebDriver driver,LoadManager objUWGLLoadManager) thro
 			sendKeysToTextField(driver,objectrepository.gettxtUWIRPMCTR(),objUWGLLoadManager.getUWModifiedRates(),"CTR");
 		} else {
 			
+			AutomationUtilities.LogSummary(LogPath, "IRPM Value is not getting Changed");
 			System.out.println("IRPM Value is not getting Changed");
 		}
 		

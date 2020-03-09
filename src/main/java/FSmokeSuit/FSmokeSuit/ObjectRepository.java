@@ -768,6 +768,9 @@ public class ObjectRepository {
 	@FindBy (xpath="//label[@for='chkConsentToRate']")
 	public WebElement chkConsentToRate;
 	
+	@FindBy (xpath="//button[@id='BtnClose']")
+	public WebElement txtAppClosebtn;
+	
 	//------------------
 	
 	ObjectRepository(WebDriver driver) {
@@ -1611,6 +1614,9 @@ public class ObjectRepository {
 	  return btnWCDownloadApplication;
   }
   
+  public WebElement gettxtAppClosebtn() {
+		 return txtAppClosebtn;
+	 }
 
  //-----------------Referral -------------------------
   
