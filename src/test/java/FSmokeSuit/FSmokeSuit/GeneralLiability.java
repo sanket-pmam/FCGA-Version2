@@ -255,7 +255,7 @@ public class GeneralLiability extends AutomationUtilities {
 		
 		public void IM(LoadManager objGlLoadManager, WebDriver driver) throws InterruptedException, IOException, AWTException {
 			
-			driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
+			waitforpageload(driver, 10);
 	        for (int i =1; i<=LastQCount(driver,ElementNamexpath);i++) {
 	        	driver.findElement(By.xpath("//label[@for='radio-"+i+"']")).click(); // no button
 	        }
@@ -281,7 +281,7 @@ public class GeneralLiability extends AutomationUtilities {
 
 	public void ClassSpecificQues (WebDriver driver,String testcasePath,String QAns) throws Exception {
         
-		driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
+		waitforpageload(driver, 10);
 		
 		  if (QAns.equalsIgnoreCase("No")) {
 			  
@@ -318,7 +318,7 @@ public class GeneralLiability extends AutomationUtilities {
 
 	public void Quote (LoadManager objGlLoadManager,LoginPage objGLloginpage,Underwriting objGLunderwriting,HomePage objhomepage, WebDriver driver) throws IOException, InterruptedException, AWTException, UnsupportedFlavorException {
 		
-	waitforpageload(driver, 10);
+	waitforpageload(driver, 15);
      
      if(objGlLoadManager.getTCScenarios().equalsIgnoreCase("Referral Flow")) {
     	
@@ -348,9 +348,10 @@ public class GeneralLiability extends AutomationUtilities {
     	 objhomepage.checkFramePopup(driver);
     	 objGLunderwriting.AgentSearch(driver);
     	// AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
+    	 waitforpageload(driver, 15);
      }
 		
-     waitforpageload(driver, 15);
+     
      
      System.out.println("Quote Date: "+ objectrepository.getlbl_QuoteDate().getText());
      AutomationUtilities.LogSummary(LogPath,"Quote Date : "+ objectrepository.getlbl_QuoteDate().getText());
@@ -549,7 +550,7 @@ public class GeneralLiability extends AutomationUtilities {
 	
 	public void PolicyIssue (LoadManager objGlLoadManager,WebDriver driver) throws InterruptedException, AWTException, IOException, UnsupportedFlavorException {
 		
-		Thread.sleep(10000);
+		waitforpageload(driver, 15);
 		
 		/*************NEW CODE START**************/
 		WebElement element = objectrepository.getchkIssue_Line1();
@@ -582,7 +583,7 @@ public class GeneralLiability extends AutomationUtilities {
 			buttonClick(driver,objectrepository.getclkPremiumFinancePayment(),10,"Click on Premium Finance Issue Policy");
 		}
 		
-		waitforpageload(driver, 35);
+		waitforpageload(driver, 65);
 		//AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
 		buttonClick(driver,objectrepository.getlnkDownloadEvidence(),10,"Clickon EOI Document");
 		

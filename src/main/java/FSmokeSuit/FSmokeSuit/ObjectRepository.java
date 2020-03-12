@@ -771,6 +771,25 @@ public class ObjectRepository {
 	@FindBy (xpath="//button[@id='BtnClose']")
 	public WebElement txtAppClosebtn;
 	
+	//------notes and messages--------
+	
+	@FindBy (xpath="//button[@id='btnenvlop']")
+	public WebElement UWNotes;
+	
+	@FindBy (xpath="//input[@id='txtQuoteNote']")
+	public WebElement txtNotes;
+	
+	@FindBy (xpath="//button[@id='BtnPostNote']")
+	public WebElement UWPostNote;
+	
+	@FindBy (xpath="//button[@id='btnsticynote']")
+	public WebElement UWMessages;
+	
+	@FindBy (xpath="//input[@id='txtQuoteQuestion']")
+	public WebElement txtMessages;
+	
+	@FindBy (xpath="//button[@id='BtnAskProducer']")
+	public WebElement UWAskProducer;
 	//------------------
 	
 	ObjectRepository(WebDriver driver) {
@@ -791,6 +810,33 @@ public class ObjectRepository {
 		return LoadingWait;
 	}
 
+	
+	//----------------notes and messages-------------
+	
+	public WebElement getUWNotes() {
+		return UWNotes;
+	}
+	
+	public WebElement gettxtNotes() {
+		return txtNotes;
+	}
+	
+	public WebElement getUWPostNote() {
+		return UWPostNote;
+	}
+	
+	public WebElement getUWMessages() {
+		return UWMessages;
+	}
+	
+	public WebElement gettxtMessages() {
+		return txtMessages;
+	}
+	
+	public WebElement getUWAskProducer() {
+		return UWAskProducer;
+	}
+	
 	// ------ WC Changes --------
 	
 	public WebElement gettxtWCCity() {

@@ -1,15 +1,27 @@
 package FSmokeSuit.FSmokeSuit;
 
 import java.awt.AWTException;
+import java.io.Console;
 import java.io.File;
 import java.io.IOException;
+import java.sql.Date;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.logging.LogEntries;
+import org.openqa.selenium.logging.LogEntry;
+import org.openqa.selenium.logging.LogType;
+import org.openqa.selenium.logging.LoggingPreferences;
+import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -112,7 +124,10 @@ public class AutomationDriver {
 					"TC - "+ objLoadManager.getTestCaseId() + "-" + objLoadManager.getTCScenarios() + " is getting Executed.");
 			
 			System.setProperty("webdriver.chrome.driver",System.getProperty("user.dir") + AutomationUtilities.getDataFromPropertiesFile("CHROME_DRIVER_PATH"));
-			
+			DesiredCapabilities caps = DesiredCapabilities.chrome();
+			LoggingPreferences logPrefs = new LoggingPreferences();
+	        logPrefs.enable(LogType.BROWSER, Level.ALL);
+	        caps.setCapability(CapabilityType.LOGGING_PREFS, logPrefs);
 			
             ChromeOptions options = new ChromeOptions();
             objWebDriver = new ChromeDriver(options);
@@ -170,6 +185,7 @@ public class AutomationDriver {
 				AutomationUtilities.ExcelUpdate(testcasePath, TCSheetName, AutomationUtilities.sBusinessName, objLoadManager,
 						"Insured Name");
 				
+				Thread.sleep(2000);
 				objworkerscompensation.GeneralQuestions(objLoadManager, objWebDriver);
 				objworkerscompensation.Losses(objLoadManager, objWebDriver);
 				objworkerscompensation.Application(objLoadManager, objWebDriver, AutomationUtilities.sBusinessName,objLoginPage,objunderwriting,objhomepage);

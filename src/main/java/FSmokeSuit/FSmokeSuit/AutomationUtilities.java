@@ -24,6 +24,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Properties;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
+
 import javax.imageio.ImageIO;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -86,6 +88,7 @@ public class AutomationUtilities {
 			Wait<WebDriver> waitforload = new FluentWait<WebDriver>(driver).withTimeout(Duration.ofSeconds(iTimeOut))
 					.pollingEvery(Duration.ofSeconds(iTimeOut)).ignoring(NoSuchElementException.class);
 			waitforload.until(documentWait);
+			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		} catch (Exception ex) {
 			System.out.println("Error: " + Label + " " + ex.getMessage());
 		}

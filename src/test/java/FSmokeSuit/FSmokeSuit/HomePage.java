@@ -2,8 +2,6 @@ package FSmokeSuit.FSmokeSuit;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -25,7 +23,7 @@ public class HomePage extends AutomationUtilities {
 			
 			EsendKeysToTextField(driver,objectrepository.getSearchAgent(), sAgentName,"AgentName");
 			
-		    buttonClick(driver,objectrepository.getbtnContinue(), 30, "Continue Button");
+		    buttonClick(driver,objectrepository.getbtnContinue(), 15, "Continue Button");
 		    AutomationUtilities.LogSummary(LogPath,"Agent Name is selected Sucessfully");
 		}
 		
@@ -64,8 +62,8 @@ public class HomePage extends AutomationUtilities {
 		
 		public void checkFramePopup(WebDriver driver) throws InterruptedException, IOException{
 			
-			for(int i=1; i<=3; i++) {
-				waitforpageload(driver, 5);
+			waitforpageload(driver, 5);
+			for(int i=1; i<=1; i++) {
 			List<WebElement> iframes = driver.findElements(By.tagName("iframe"));
 			int numberOfTags = iframes.size();
 			System.out.println("No. of Iframes on this Web Page are: " + numberOfTags);
@@ -74,8 +72,7 @@ public class HomePage extends AutomationUtilities {
 				System.out.println("Inner HTML  >> " + iframe.getAttribute("outerHTML"));
 				if (iframe.getAttribute("outerHTML").contains("iframe srcdoc=")) {
 					driver.switchTo().frame(iframe);
-					driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-					buttonClick(driver, objectrepository.getiframeCancelButton(), 30,
+					buttonClick(driver, objectrepository.getiframeCancelButton(), 10,
 							"Clicked on Let's Go button on Pop-up");
 				}
 				Thread.sleep(2000);
