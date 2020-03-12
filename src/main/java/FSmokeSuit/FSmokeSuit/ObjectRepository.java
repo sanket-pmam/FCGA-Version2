@@ -705,6 +705,9 @@ public class ObjectRepository {
 	@FindBy (xpath="//a[contains(text(),'Edit Quote')]")
 	public WebElement btnEditQuote;
 	
+	@FindBy (xpath="//a[contains(text(),'Messages')]")
+	public WebElement btnMessages;
+	
 	@FindBy (xpath="//textarea[@id='txtRefferal']")
 	public WebElement txtRefferal;
 	
@@ -790,6 +793,19 @@ public class ObjectRepository {
 	
 	@FindBy (xpath="//button[@id='BtnAskProducer']")
 	public WebElement UWAskProducer;
+	
+	@FindBy (xpath="//a[@id='lnknmNotes']/span/i")
+	public WebElement GLMessages;
+	
+	@FindBy (xpath="//textarea[@id='txtNMNote']")
+	public WebElement GLtxtNote;
+	
+	@FindBy (xpath="//button[@id='btnNMSave']")
+	public WebElement GLSend;
+	
+	@FindBy (xpath="//span[@data-id='chat_window_1']")
+	public WebElement GLClose;
+	
 	//------------------
 	
 	ObjectRepository(WebDriver driver) {
@@ -835,6 +851,22 @@ public class ObjectRepository {
 	
 	public WebElement getUWAskProducer() {
 		return UWAskProducer;
+	}
+	
+	public WebElement getGLMessages() {
+		return GLMessages;
+	}
+	
+	public WebElement getGLtxtNote() {
+		return GLtxtNote;
+	}
+	
+	public WebElement getGLSend() {
+		return GLSend;
+	}
+	
+	public WebElement getGLClose() {
+		return GLClose;
 	}
 	
 	// ------ WC Changes --------
@@ -1700,6 +1732,9 @@ public class ObjectRepository {
   
   public WebElement getbtnEditQuote() {
 	  return btnEditQuote;
+  }
+  public WebElement getbtnMessages() {
+	  return btnMessages;
   }
   public WebElement getUWCurrentStatus() {
 	  return UWCurrentStatus;

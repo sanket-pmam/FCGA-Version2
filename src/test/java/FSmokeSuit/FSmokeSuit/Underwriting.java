@@ -33,6 +33,8 @@ public class Underwriting extends AutomationUtilities {
 		AutomationUtilities.LogSummary(LogPath, "Alert Message in PopUp : "+ objectrepository.getUWAlertMsgBox().getText());
 		Thread.sleep(2000);
 		buttonClick(driver,objectrepository.gettxtWCClosebtn(), 20, "Close button is saved sucessfully.");
+		UWNotes(driver, "NotesMessage");
+		UWMessages(driver, "NotesMessage");
 		buttonClick(driver,objectrepository.getUWbtnExit(),10,"Exit is Clicked");
 	}
 	
@@ -41,6 +43,7 @@ public class Underwriting extends AutomationUtilities {
 		waitforpageload(driver, 10);
 		sendKeysToTextField(driver,objectrepository.gettxtAgentSearch(),AutomationUtilities.sBusinessName,"Frist Name");
 		buttonClick(driver,objectrepository.getbtnSearch(),40,"Search Record");
+		AutomationUtilities.ActionMessages(driver,objectrepository,"hi wORLD");
 		buttonClick(driver,objectrepository.getbtnAction(),10,"Action");
 		buttonClick(driver,objectrepository.getbtnEditQuote(),10,"Edit Quote");
 		waitforpageload(driver, 30);

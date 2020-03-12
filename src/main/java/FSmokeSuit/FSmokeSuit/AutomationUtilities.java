@@ -641,4 +641,22 @@ public class AutomationUtilities {
 	    }
 	}
 
+    public static void GLMessages(WebDriver driver,ObjectRepository objectrepository, String AGMessage) throws InterruptedException, IOException
+    {
+    	buttonClick(driver,objectrepository.getGLMessages(),10,"Notes");
+    	sendKeysToTextField(driver,objectrepository.getGLtxtNote(),AGMessage,"Notes messages test");
+    	buttonClick(driver,objectrepository.getGLSend(),10,"Send");
+    	buttonClick(driver,objectrepository.getGLClose(),10,"Close");
+    }
+    
+    public static void ActionMessages(WebDriver driver,ObjectRepository objectrepository, String AGMessage) throws InterruptedException, IOException
+    {
+    	buttonClick(driver,objectrepository.getbtnAction(),10,"Action");
+		buttonClick(driver,objectrepository.getbtnMessages(),10,"Messages");
+    	buttonClick(driver,objectrepository.getGLMessages(),10,"Notes");
+    	sendKeysToTextField(driver,objectrepository.getGLtxtNote(),AGMessage,"Notes messages test");
+    	buttonClick(driver,objectrepository.getGLSend(),10,"Send");
+    	buttonClick(driver,objectrepository.getGLClose(),10,"Close");
+    }
+    
 }

@@ -210,7 +210,7 @@ public class WorkersCompensation extends AutomationUtilities {
 
 		waitforpageload(driver, 15);
 
-		/*WebElement selWCNameInsured_element = objectrepository.getselWCNameInsured();
+		WebElement selWCNameInsured_element = objectrepository.getselWCNameInsured();
 		selWCNameInsured_element.click();
 
 		WebElement WCNameInsuredtxt_element = objectrepository.getWCNameInsuredtxt();
@@ -265,7 +265,7 @@ public class WorkersCompensation extends AutomationUtilities {
 			//AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
 			
 			buttonClick(driver,objectrepository.getWCBacktoRecord(),10,"Back to Record");
-			objhomepage.checkFramePopup(driver);*/
+			objhomepage.checkFramePopup(driver);
 			objWCloginpage.AgentSignOut (driver);
 			objWCloginpage.UWlogin(driver);
 	    	//AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
@@ -276,7 +276,7 @@ public class WorkersCompensation extends AutomationUtilities {
 	    	 
 	    	 
 	    	 objWCloginpage.UWSignOut(driver);
-	    	/* objWCloginpage.Agentlogin(driver);
+	    	 objWCloginpage.Agentlogin(driver);
 	    	 //AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
 	    	 
 	    	 objhomepage.SelectAgent(driver,objWCLoadManager.getAgentName()); 
@@ -310,7 +310,7 @@ public class WorkersCompensation extends AutomationUtilities {
 	    AutomationUtilities.LogSummary(LogPath,"Download WC Application Document is clicked successfully");
 		
 		
-		buttonClick(driver,objectrepository.getWCMakePayment(),10,"Click on Make Payment");*/
+		buttonClick(driver,objectrepository.getWCMakePayment(),10,"Click on Make Payment");
 		
 		System.out.println("Application Screen have been completed Sucessfully");
 		AutomationUtilities.LogSummary(LogPath,"Application Screen have been completed Sucessfully");	

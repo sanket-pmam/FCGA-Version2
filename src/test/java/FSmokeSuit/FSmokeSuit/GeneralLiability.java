@@ -247,6 +247,8 @@ public class GeneralLiability extends AutomationUtilities {
 			
 			//AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
 			
+			AutomationUtilities.GLMessages(driver,objectrepository, "String AGMessage");
+			
 			buttonClick(driver,objectrepository.getbtnsaveandcontinue(),10,"Click on Save and Continue");
 			
 			System.out.println("Aditional Insured have been completed Sucessfully");
