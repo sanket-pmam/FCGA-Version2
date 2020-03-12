@@ -22,7 +22,7 @@ public class ConsoleLogger {
 	// LogEntries logEntries2 = objWebDriver.manage().logs().get(LogType.DRIVER);
 	 //LogEntries logEntries3 = objWebDriver.manage().logs().get(LogType.SERVER);
 	 //LogEntries logEntries4 = objWebDriver.manage().logs().get(LogType.PERFORMANCE);
-       for (LogEntry entry : logEntries.getAll()) {
+       for (LogEntry entry : logEntries) {
            System.out.println(new Date(entry.getTimestamp()) + " " + entry.getLevel() + " " + entry.getMessage() + " " + entry.toString());
        } 
 
