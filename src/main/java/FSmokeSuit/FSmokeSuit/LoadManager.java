@@ -76,6 +76,17 @@ public class LoadManager implements Cloneable {
 		private String WCAditionalInsured;
 		private String UWRateType;
 		private String UWModifiedRates;
+		private String WCClassCodeDesc;
+		private String WCClassCodeColor;
+		private String ReferralReason;
+		private String WCBusinessName;
+		private String WCDBAName;
+		private String BusinessName;
+		private String FristName;
+		private String LastName;
+		private String ScheduleEquipment;
+		private String ScheduleEquipmentDescription;
+		private String ScheduleEquipmentAmount;
 		
 		public Object clone() throws
 	     CloneNotSupportedException
@@ -612,5 +623,81 @@ public class LoadManager implements Cloneable {
 		}
 		public String getUWModifiedRates() {
 			return UWModifiedRates;
+		}
+
+		public void setWCClassCodeDesc(String swcclasscodedesc) {
+			WCClassCodeDesc = swcclasscodedesc;
+		}
+		public String getWCClassCodeDesc() {
+			return WCClassCodeDesc;
+		}
+
+		public void setWCClassCodeColor(String swcclasscodecolor) {
+			WCClassCodeColor = swcclasscodecolor;
+		}
+		public String getWCClassCodeColor() {
+			return WCClassCodeColor;
+		}
+
+		public void setReferralReason(String sreferralreason) {
+			ReferralReason = sreferralreason;
+		}
+		public String getReferralReason() {
+			return ReferralReason;
+		}
+
+		public void setWCBusinessName(String swcbusinessname) {
+			WCBusinessName = swcbusinessname;
+		}
+		public String getWCBusinessName() {
+			return WCBusinessName;
+		}
+
+		public void setWCDBAName(String swcdbaname) {
+			WCDBAName = swcdbaname;
+		}
+		public String getWCDBAName() {
+			return WCDBAName;
+		}
+
+		public void setBusinessName(String sbusinessname) {
+			BusinessName = sbusinessname;
+		}
+		public String getBusinessName() {
+			return BusinessName;
+		}
+
+		public void setFristName(String sfristname) {
+			FristName = sfristname;
+		}
+		public String getGLFristName() {
+			return FristName;
+		}
+		public void setLastName(String slastname) {
+			LastName = slastname;
+		}
+		public String getLastName() {
+			return LastName;
+		}
+
+		public void setScheduleEquipment(String sScheduleEquipment) {
+			ScheduleEquipment = sScheduleEquipment;	
+		}
+		public String getScheduleEquipment() {
+			return ScheduleEquipment;
+		}
+
+		public void setScheduleEquipmentDescription(String sScheduleEquipDesc) {
+			ScheduleEquipmentDescription = sScheduleEquipDesc;
+		}
+		public String getScheduleEquipmentDescription() {
+			return ScheduleEquipmentDescription;
+		}
+
+		public void setScheduleEquipmentAmount(String sScheduleEquipmentAmount) {
+			ScheduleEquipmentAmount = sScheduleEquipmentAmount;
+		}
+		public String getScheduleEquipmentAmount() {
+			return ScheduleEquipmentAmount;
 		}
 	}

@@ -179,6 +179,15 @@ public class ObjectRepository {
 	
 	@FindBy (xpath="//div[@class ='modal-body text-danger']/ul/li")
 	public WebElement ErrorMessage;
+	
+	@FindBy (xpath="//input[@id='btnAdd']")
+	public WebElement btn_ScheduleEquip;
+	
+	@FindBy (xpath="//tbody[@id='dynamicBody']/tr[3]/td[2]/input")
+	public WebElement txt_ScheduleEquipDesc;
+	
+	@FindBy (xpath="//tbody[@id='dynamicBody']/tr[3]/td[3]/input")
+	public WebElement txt_ScheduleEquipAcount;
 //--------	
 	@FindBy(xpath = "//label[@id='lblQuoteDate']")
 	private WebElement lbl_QuoteDate;
@@ -1355,6 +1364,17 @@ public class ObjectRepository {
 		return dpdleasedequipment;
 	}
   
+  public WebElement getbtnScheduleEquip() {
+		return btn_ScheduleEquip;
+	}
+  
+  public WebElement gettxtScheduleEquipDesc() {
+		return txt_ScheduleEquipDesc;
+	}
+  
+  public WebElement gettxtScheduleEquipAcount() {
+		return txt_ScheduleEquipAcount;
+	}
   public WebElement gettxtApplicationDate() {
 	  return txtApplicationDate;
   }
@@ -1547,12 +1567,15 @@ public class ObjectRepository {
 	  return rdQuestion_13;
   }
   
+  
+//industrial question
+  
   public WebElement chkBedding() {
 	  return chkBedding;
   }
   
-  //industrial question
   
+  //---------------"0005"-----------------
   public WebElement rdIQuestion_1() {
 	  return rdIQuestion_1;
   }

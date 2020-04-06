@@ -7,9 +7,7 @@ import java.awt.datatransfer.StringSelection;
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
-import java.awt.image.BufferedImage;
 import java.awt.AWTException;
-import java.awt.Rectangle;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -25,8 +23,7 @@ import java.util.List;
 import java.util.Properties;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
-
-import javax.imageio.ImageIO;
+import org.apache.commons.io.FileUtils;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFCell;
@@ -37,6 +34,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -50,17 +49,20 @@ import com.google.common.base.Function;
 
 public class AutomationUtilities {     
 	
+   public static String sReferralReason = "";
    public static String LogPath;
    public static String fileContents="";
    public static int logcount = 1;
    public static File AutmSnapfile;
    public static String testCaseID;
    public static String tcSnapPath;
-   public static String QuoteNo;
-   public static String PolicyNo;
+   public static String QuoteNo = "";
+   public static String PolicyNo= "";
    public static WebDriverWait wait=null;
    public static Robot rbt;
    public static String sBusinessName;
+   public static String sClassCode;
+   public static String sClassCodeDesc;
    public static String QuoteDate;
    public static String CountyCode;
    public static String FWCIPremium;
@@ -70,7 +72,7 @@ public class AutomationUtilities {
    public static String CBProducerFee;
    public static String FWCIProducerFee;
    public static String OLDTCID;
-   
+   public static String IndustialQ="";
    
 	static Function<WebDriver, Boolean> documentWait = new Function<WebDriver, Boolean>() {
 		public Boolean apply(WebDriver driver) {
@@ -81,14 +83,14 @@ public class AutomationUtilities {
 	};
 	
    public static void waitforpageload(WebDriver driver, int iTimeOut) {
-		System.out.println("Wait for Page load......");
+		//System.out.println("Wait for Page load......");
 		String Label = "";
 		try {
 			Label = driver.getTitle();
 			Wait<WebDriver> waitforload = new FluentWait<WebDriver>(driver).withTimeout(Duration.ofSeconds(iTimeOut))
 					.pollingEvery(Duration.ofSeconds(iTimeOut)).ignoring(NoSuchElementException.class);
 			waitforload.until(documentWait);
-			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+			driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		} catch (Exception ex) {
 			System.out.println("Error: " + Label + " " + ex.getMessage());
 		}
@@ -188,7 +190,7 @@ public class AutomationUtilities {
 	}
 
    
-	public void javascriptExecutorClick(WebDriver driver, WebElement element, String label) throws IOException {
+	public static void javascriptExecutorClick(WebDriver driver, WebElement element, String label) throws IOException {
 
 		try {
 
@@ -217,7 +219,7 @@ public class AutomationUtilities {
 			drawBorder(driver,element);
 			element.click(); 
 			waitforpageload(driver, waitAfterClick);
-			AutomationUtilities.LogSummary(LogPath," Current Label : "+label+" is completely working.");
+			//AutomationUtilities.LogSummary(LogPath," Current Label : "+label+" is completely working.");
 			
 		}	
 	
@@ -257,10 +259,10 @@ public class AutomationUtilities {
 	    
     	drawBorder(driver,element);
 	    element.sendKeys(Keys.chord(Keys.CONTROL, "a"), text);
-	    Thread.sleep(2000);
+	    waitforpageload(driver,5);
 	    element.sendKeys(Keys.TAB);
-	    AutomationUtilities.LogSummary(LogPath,"Current Label : "+label+" is completely working.");
-	    System.out.println("Current Label : "+label+" is completely working.");
+	    //AutomationUtilities.LogSummary(LogPath,"Current Label : "+label+" is completely working.");
+	    //System.out.println("Current Label : "+label+" is completely working.");
     }
 
     public static void EsendKeysToTextField(WebDriver driver,WebElement element, String text, String label) throws InterruptedException, IOException {
@@ -268,9 +270,9 @@ public class AutomationUtilities {
         drawBorder(driver,element);
 	    element.sendKeys(Keys.chord(Keys.CONTROL, "a"), text);
 	    element.sendKeys(Keys.ENTER);
-	    Thread.sleep(1000);
-	    AutomationUtilities.LogSummary(LogPath,"Current Label : "+label+" is completely working.");
-	    System.out.println("Current Label : "+label+" is completely working.");
+	    waitforpageload(driver,5);
+	    //AutomationUtilities.LogSummary(LogPath,"Current Label : "+label+" is completely working.");
+	    //System.out.println("Current Label : "+label+" is completely working.");
     }
 
 
@@ -291,10 +293,10 @@ public class AutomationUtilities {
      return sb.toString(); 
     } 
 
-    public static void Screenshot(String SnapPath,String TCID) throws AWTException, IOException, InterruptedException 
+    public static void Screenshot(String SnapPath,String TCID,WebDriver driver) throws AWTException, IOException, InterruptedException 
      { 
-	     Thread.sleep(1000);
-	     Robot r = new Robot(); 
+	     //Thread.sleep(1000);
+	     //Robot r = new Robot(); 
          LocalDateTime myDateObj = LocalDateTime.now();
 		 DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH_mm_ss");
 		 
@@ -307,9 +309,13 @@ public class AutomationUtilities {
 	      } 
 
 	     SnapPath = AutmSnapfile.getAbsolutePath()+"\\NewSnap_"+TCID+myFormatObj.format(myDateObj).toString() + ".jpg";
-         Rectangle capture = new Rectangle((Toolkit.getDefaultToolkit().getScreenSize())); 
-         BufferedImage Image = r.createScreenCapture(capture); 
-         ImageIO.write(Image, "jpg", new File(SnapPath)); 
+	     TakesScreenshot scrShot =((TakesScreenshot)driver);
+	     File SrcFile=scrShot.getScreenshotAs(OutputType.FILE);
+	     File DestFile=new File(SnapPath);
+	     FileUtils.copyFile(SrcFile, DestFile);
+	     //Rectangle capture = new Rectangle((Toolkit.getDefaultToolkit().getScreenSize())); 
+         //BufferedImage Image = r.createScreenCapture(capture); 
+         //ImageIO.write(Image, "jpg", new File(SnapPath)); 
          AutomationUtilities.LogSummary(LogPath,"Screenshot saved successfully");
          System.out.println("Screenshot saved"); 
      } 
@@ -593,7 +599,7 @@ public class AutomationUtilities {
 	   	
     }
    
-    public static void ReportGeneration(String ReportPath, String TCSheetName, LoadManager objLoadManager, String testcaseid2, String product, String tcScenarios,String insuredname, String quoteNo2, String policyNo2, String status,String starttime,String endtime) {
+    public static void ReportGeneration(String ReportPath, String TCSheetName, LoadManager objLoadManager, String testcaseid2, String product, String tcScenarios,String tcClassCode, String tcClassCodeDesc, String insuredname,String IndustialQ,String Reason, String quoteNo2, String policyNo2, String status,String starttime,String endtime) {
 	
 	AutomationUtilities.ReportExcelUpdate(ReportPath, TCSheetName,testcaseid2, testcaseid2, objLoadManager,
 			"TC ID");
@@ -601,8 +607,16 @@ public class AutomationUtilities {
 			"Product");
 	AutomationUtilities.ReportExcelUpdate(ReportPath, TCSheetName,"0", tcScenarios, objLoadManager,
 			"Test Scenario");
+	AutomationUtilities.ReportExcelUpdate(ReportPath, TCSheetName,"0", tcClassCode, objLoadManager,
+			"Class Code");
+	AutomationUtilities.ReportExcelUpdate(ReportPath, TCSheetName,"0", tcClassCodeDesc, objLoadManager,
+			"Class Description");
 	AutomationUtilities.ReportExcelUpdate(ReportPath, TCSheetName,"0", insuredname, objLoadManager,
 			"Insured Name");
+	AutomationUtilities.ReportExcelUpdate(ReportPath, TCSheetName,"0", IndustialQ, objLoadManager,
+			"Industial Question Count");
+	AutomationUtilities.ReportExcelUpdate(ReportPath, TCSheetName,"0", Reason, objLoadManager,
+			"Referral Reason");
 	AutomationUtilities.ReportExcelUpdate(ReportPath, TCSheetName,"0", quoteNo2, objLoadManager,
 			"Quote No");
 	AutomationUtilities.ReportExcelUpdate(ReportPath, TCSheetName,"0", policyNo2, objLoadManager,

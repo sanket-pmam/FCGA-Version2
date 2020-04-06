@@ -30,8 +30,6 @@ public class HomePage extends AutomationUtilities {
 		public void CreateNewQuote (WebDriver driver,String sProductName) throws InterruptedException, IOException 
 		{
 			
-			Thread.sleep(5000);
-		
 			buttonClick(driver,objectrepository.getbtnNewQuote(),10,"New Quote Button is clicked");
 			String sRandomNumber = AutomationUtilities.getRandomString (9);
 			
@@ -43,10 +41,10 @@ public class HomePage extends AutomationUtilities {
 			if (sProductName.equalsIgnoreCase("GL")){
 				
 				buttonClick(driver, objectrepository.getbtnrdbGeneralLiability(),30,"GL Radio Button is clicked");
-				System.out.println("Selecting GL Radio Button");
+				//System.out.println("Selecting GL Radio Button");
 			}
 			else {
-				System.out.println("Selecting WC Radio Button");
+				//System.out.println("Selecting WC Radio Button");
 				//Thread.sleep(5000);
 				//buttonClickWithoutWait(driver,objectrepository.getbtnrdbWorkersComp(),"WC Radio Button is clicked");
 				buttonClick(driver,objectrepository.getbtnrdbWorkersComp(),30,"WC Radio Button is clicked");
@@ -65,11 +63,11 @@ public class HomePage extends AutomationUtilities {
 			waitforpageload(driver, 5);
 			for(int i=1; i<=1; i++) {
 			List<WebElement> iframes = driver.findElements(By.tagName("iframe"));
-			int numberOfTags = iframes.size();
-			System.out.println("No. of Iframes on this Web Page are: " + numberOfTags);
+			//int numberOfTags = iframes.size();
+			//System.out.println("No. of Iframes on this Web Page are: " + numberOfTags);
 
 			for (WebElement iframe : iframes) {
-				System.out.println("Inner HTML  >> " + iframe.getAttribute("outerHTML"));
+				//System.out.println("Inner HTML  >> " + iframe.getAttribute("outerHTML"));
 				if (iframe.getAttribute("outerHTML").contains("iframe srcdoc=")) {
 					driver.switchTo().frame(iframe);
 					buttonClick(driver, objectrepository.getiframeCancelButton(), 10,
@@ -77,8 +75,6 @@ public class HomePage extends AutomationUtilities {
 				}
 				Thread.sleep(2000);
 				driver.switchTo().defaultContent();
-				
-
 			}
 			}
 			

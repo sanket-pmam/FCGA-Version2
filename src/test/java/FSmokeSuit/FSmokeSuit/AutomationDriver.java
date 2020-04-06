@@ -120,6 +120,7 @@ public class AutomationDriver {
 			HomePage objhomepage = new HomePage(objWebDriver);
 			GeneralLiability objgeneralliability = new GeneralLiability(objWebDriver);
 			WorkersCompensation objworkerscompensation = new WorkersCompensation(objWebDriver);
+			WCIndustrialQ industrialq = new WCIndustrialQ(objWebDriver);
 			Underwriting objunderwriting = new Underwriting(objWebDriver);
 			objWebDriver.manage().window().maximize();
 
@@ -168,12 +169,10 @@ public class AutomationDriver {
 				
 				AutomationUtilities.ExcelUpdate(testcasePath, TCSheetName, AutomationUtilities.sBusinessName, objLoadManager,
 						"Insured Name");
-				
-				Thread.sleep(2000);
-				objworkerscompensation.GeneralQuestions(objLoadManager, objWebDriver);
-				objworkerscompensation.Losses(objLoadManager, objWebDriver);
-				objworkerscompensation.Application(objLoadManager, objWebDriver, AutomationUtilities.sBusinessName,objLoginPage,objunderwriting,objhomepage);
-				objworkerscompensation.PolicyIssue(objLoadManager, objWebDriver);
+				objworkerscompensation.GeneralQuestions(objLoadManager,industrialq, objWebDriver);
+				//objworkerscompensation.Losses(objLoadManager, objWebDriver);
+				//objworkerscompensation.Application(objLoadManager, objWebDriver, AutomationUtilities.sBusinessName,objLoginPage,objunderwriting,objhomepage);
+				//objworkerscompensation.PolicyIssue(objLoadManager, objWebDriver);
 				
 			}
 			
@@ -181,7 +180,7 @@ public class AutomationDriver {
 			AutomationUtilities.ExcelUpdate(testcasePath, TCSheetName, "Pass", objLoadManager,"Status F/P");
 			
 			EndTime = myFormatObj.format(myDateObj).toString();
-			AutomationUtilities.ReportGeneration(TCReportPath,TCRPSHEETNAME,objLoadManager,objLoadManager.getTestCaseId(),Product,objLoadManager.getTCScenarios(),AutomationUtilities.sBusinessName,AutomationUtilities.QuoteNo,AutomationUtilities.PolicyNo,"Pass",StartTime,EndTime);
+			AutomationUtilities.ReportGeneration(TCReportPath,TCRPSHEETNAME,objLoadManager,objLoadManager.getTestCaseId(),Product,objLoadManager.getTCScenarios(),AutomationUtilities.sClassCode,AutomationUtilities.sClassCodeDesc,AutomationUtilities.sBusinessName,AutomationUtilities.IndustialQ,AutomationUtilities.sReferralReason,AutomationUtilities.QuoteNo,AutomationUtilities.PolicyNo,"Pass",StartTime,EndTime);
 			StartTime = EndTime;
 			
 			objWebDriver.close();
@@ -196,11 +195,11 @@ public class AutomationDriver {
 				AutomationUtilities.AutmSnapfile = new File(
 						TCErrSnapPath + "ErrSnap_"+AutomationUtilities.testCaseID+"-"+ myFormatObj.format(myDateObj).toString());
 		
-			AutomationUtilities.Screenshot(TCErrSnapPath, TestCaseID);
+			AutomationUtilities.Screenshot(TCErrSnapPath, TestCaseID, objWebDriver);
 			AutomationUtilities.ExcelUpdate(testcasePath, TCSheetName, "Fail", objLoadManager,"Status F/P");
 			
 			EndTime = myFormatObj.format(myDateObj).toString();
-			AutomationUtilities.ReportGeneration(TCReportPath,TCRPSHEETNAME,objLoadManager,objLoadManager.getTestCaseId(),Product,objLoadManager.getTCScenarios(),AutomationUtilities.sBusinessName,AutomationUtilities.QuoteNo,AutomationUtilities.PolicyNo,"Fail",StartTime,EndTime);
+			AutomationUtilities.ReportGeneration(TCReportPath,TCRPSHEETNAME,objLoadManager,objLoadManager.getTestCaseId(),Product,objLoadManager.getTCScenarios(),AutomationUtilities.sClassCode,AutomationUtilities.sClassCodeDesc,AutomationUtilities.sBusinessName,AutomationUtilities.IndustialQ,AutomationUtilities.sReferralReason,AutomationUtilities.QuoteNo,AutomationUtilities.PolicyNo,"Fail",StartTime,EndTime);
 			StartTime = EndTime;
 			
 				objWebDriver.close();

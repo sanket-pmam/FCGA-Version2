@@ -166,6 +166,7 @@ public class GeneralLiability extends AutomationUtilities {
 		public void classPayroll(LoadManager objGlLoadManager, WebDriver driver) throws InterruptedException, IOException, AWTException {
 			
 			String[] ClassCode = objGlLoadManager.getClassCode().split("/");
+			AutomationUtilities.sClassCode = objGlLoadManager.getClassCode();
 			int classcodecount = ClassCode.length;
 			if(classcodecount > 1) {
 			int Eprecentage = 100/classcodecount;
@@ -273,6 +274,13 @@ public class GeneralLiability extends AutomationUtilities {
 	        EsendKeysToTextField(driver,objectrepository.gettxtUniquetextbox(),objGlLoadManager.getContractorsHandTools(),"Click on Leased Equipment Drop down");
 	       // AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
 	        
+	        if (objGlLoadManager.getScheduleEquipment().equalsIgnoreCase("Yes") ) {
+	        	
+	        	buttonClick(driver,objectrepository.getbtnScheduleEquip(),10,"Schedule Equipment");
+	        	sendKeysToTextField(driver,objectrepository.gettxtScheduleEquipDesc(),objGlLoadManager.getScheduleEquipmentDescription(),"Schedule Equipment Description");
+	        	sendKeysToTextField(driver,objectrepository.gettxtScheduleEquipAcount(),objGlLoadManager.getScheduleEquipmentAmount(),"Schedule Equipment Amount" );
+	        }
+	        	
 	        buttonClick(driver,objectrepository.getbtnsaveandcontinue(),10,"Click on Save and Continue");
 			
 	        System.out.println("Inland Marine have been completed Sucessfully");
@@ -523,7 +531,7 @@ public class GeneralLiability extends AutomationUtilities {
 		}		
 		
 		sendKeysToTextField(driver,objectrepository.gettxtGeneralRemarks(),"OK - Approved","Enter Insurance Carrier");
-		AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
+		//AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
 		  
 		sendKeysToTextField(driver,objectrepository.gettxtIndustrial(),"100","Enter Industrial Percentage");
 		sendKeysToTextField(driver,objectrepository.gettxtNewConstruction(),"100","Enter New Construction Percentage");
@@ -570,7 +578,7 @@ public class GeneralLiability extends AutomationUtilities {
 		
 		buttonClick(driver,objectrepository.getdpddepositpaymentmethod(),10,"Click on Deposit Payment Method");
 		EsendKeysToTextField(driver,objectrepository.gettxtUniquetextbox(),objGlLoadManager.getDepositPaymentMethod(),"Deposit Payment Method");
-		AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
+		//AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
 		
 		if(objGlLoadManager.getDepositPaymentMethod().equalsIgnoreCase("Check")) {
 			

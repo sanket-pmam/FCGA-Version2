@@ -34,11 +34,17 @@ public class WorkersCompensation extends AutomationUtilities {
 		EsendKeysToTextField(driver,objectrepository.gettxtUniquetextbox(), objWCLoadManager.getWCState(), "State Name");
         
 		Thread.sleep(3000);
-		sendKeysToTextField(driver,objectrepository.gettxtWCClassCodes(), objWCLoadManager.getWCClassCode(), "Class Code");
+		sendKeysToTextField(driver,objectrepository.gettxtWCClassCodes(), objWCLoadManager.getWCClassCodeDesc(), "Class Code");
 		buttonClick(driver,objectrepository.getbtnWCContinue(), 10, "Click on Continue");
+		AutomationUtilities.sClassCode = objWCLoadManager.getWCClassCode();
+		AutomationUtilities.sClassCodeDesc = objWCLoadManager.getWCClassCodeDesc();
 		//AutomationUtilities.Screenshot(tcSnapPath, testCaseID);
 
-		AutomationUtilities.sBusinessName = "FCGA AUTM-" + AutomationUtilities.getRandomString(9);
+		if(objWCLoadManager.getWCBusinessName().isBlank()) {
+		    AutomationUtilities.sBusinessName = "FCGA AUTM-" + AutomationUtilities.getRandomString(9);
+		}else {
+			AutomationUtilities.sBusinessName =	objWCLoadManager.getWCBusinessName();
+		}
 		sendKeysToTextField(driver,objectrepository.gettxtWCBussInsuredName(), AutomationUtilities.sBusinessName, "Business Name");
 		System.out.println("Insured Name / Business Name is : " + AutomationUtilities.sBusinessName);
 		AutomationUtilities.LogSummary(LogPath, "Insured Name / Business Name is : " + AutomationUtilities.sBusinessName);
@@ -77,12 +83,12 @@ public class WorkersCompensation extends AutomationUtilities {
 		//AutomationUtilities.Screenshot(tcSnapPath, testCaseID);
 		
 		if (objWCLoadManager.getWCExpMod() != null) {
-			System.out.println("Clcking Current Experience Mod radio button");
+			//System.out.println("Clcking Current Experience Mod radio button");
 			WebElement element = objectrepository.getlblWCrdoCurrExpModYes();
 
 			JavascriptExecutor executor = (JavascriptExecutor) driver;
 			executor.executeScript("document.getElementById('rdoCurrExpModYes').click();", element);
-			System.out.println("Radio button has been selected");
+			//System.out.println("Radio button has been selected");
 			Thread.sleep(2000);
 
 			sendKeysToTextField(driver,objectrepository.gettxtWCExpMod(), objWCLoadManager.getWCExpMod(), "Current Experience Mod is entered");
@@ -125,7 +131,7 @@ public class WorkersCompensation extends AutomationUtilities {
 			buttonClick(driver,objectrepository.getUseasis(),10,"Click on Use as is");
 			}
 		
-		//Thread.sleep(2000);
+		//Thread.sleep(5000);
 		//System.out.println("System is showing validation message for DBA -- " + objectrepository.gettxtWCDBANameerror().getText());
 		//AutomationUtilities.LogSummary(LogPath,"System is showing validation message for DBA -- " + objectrepository.gettxtWCDBANameerror().getText());
 		//sendKeysToTextField(driver,objectrepository.gettxtWCDBAName(), AutomationUtilities.sBusinessName + "DB","Agent Entered DBA Name as different as Business Name");
@@ -144,13 +150,25 @@ public class WorkersCompensation extends AutomationUtilities {
 			System.out.println("Close button is not Present");
 			
 		}*/
+		
+		
+		
 		System.out.println("Business Summary have been completed Successfully");
 		AutomationUtilities.LogSummary(LogPath, "Business Summary have been completed Successfully");
 	}
 
-	public void GeneralQuestions(LoadManager objWCLoadManager, WebDriver driver) throws IOException, InterruptedException, AWTException {
+	public void GeneralQuestions(LoadManager objWCLoadManager,WCIndustrialQ industrialq ,WebDriver driver) throws IOException, InterruptedException, AWTException {
 		
-		waitforpageload(driver, 10);
+		waitforpageload(driver, 15);
+		String ClassCode = objWCLoadManager.getWCClassCode();
+		/*String ReferalReason = driver.findElement(By.xpath("//input[@id='hdnReferralObject']")).getAttribute("value");
+		if(ReferalReason.isEmpty()) {
+			AutomationUtilities.LogSummary(LogPath, "No Referral Reason Found");
+			System.out.println("No Referral Reason Found");
+		}else {
+		    AutomationUtilities.LogSummary(LogPath, "Referral Reason: "+ReferalReason);
+		    System.out.println("Referral Reason Found, Referral Reason: "+ ReferalReason);
+		}*/
 		
 		javascriptExecutorClick(driver, objectrepository.rdQuestion_1(), "Question-1");
 		javascriptExecutorClick(driver, objectrepository.rdQuestion_2(), "Question-2");
@@ -165,7 +183,17 @@ public class WorkersCompensation extends AutomationUtilities {
 		javascriptExecutorClick(driver, objectrepository.rdQuestion_11(), "Question-11");
 		javascriptExecutorClick(driver, objectrepository.rdQuestion_12(), "Question-12");
 		javascriptExecutorClick(driver, objectrepository.rdQuestion_13(), "Question-13");
-
+	
+		
+		industrialq.CheckWCIndustrialQ (ClassCode,driver);
+		
+		/*List<WebElement> elementName = driver.findElements(By.xpath("//tr[contains(@data-fieldid,'IQ')and @data-level='Primary']"));
+        int IndustialQ = elementName.size();
+        System.out.println("Industrial Question Count is : "+IndustialQ);
+        AutomationUtilities.LogSummary(LogPath, "Industrial Question Count is : "+IndustialQ);
+        AutomationUtilities.IndustialQ =String.valueOf(IndustialQ);
+        AutomationUtilities.Screenshot(tcSnapPath, testCaseID,driver);
+        
 		checkCheckBox(driver, objectrepository.chkBedding(), 2, "Bedding Plants");
 		AutomationUtilities.Screenshot(tcSnapPath, testCaseID);
 		
@@ -183,13 +211,13 @@ public class WorkersCompensation extends AutomationUtilities {
 		javascriptExecutorClick(driver, objectrepository.rdIQuestion_12(), "Question-12");
 		javascriptExecutorClick(driver, objectrepository.rdIQuestion_13(), "Question-13");
 		javascriptExecutorClick(driver, objectrepository.rdIQuestion_14(), "Question-14");
-		javascriptExecutorClick(driver, objectrepository.rdIQuestion_15(), "Question-15");
+		javascriptExecutorClick(driver, objectrepository.rdIQuestion_15(), "Question-15");*/
 
-		buttonClick(driver,objectrepository.getBtnWCNext(), 10, "Next button is saved sucessfully.");
+		buttonClick(driver,objectrepository.getBtnWCNext(), 10, "Next button is saved successfully.");
 		//AutomationUtilities.Screenshot(tcSnapPath, testCaseID);
 
-		System.out.println("General & Industrial Questions have been completed Sucessfully");
-		AutomationUtilities.LogSummary(LogPath, "General & Industrial Questions have been completed Sucessfully");
+		//System.out.println("General & Industrial Questions have been completed Successfully");
+		AutomationUtilities.LogSummary(LogPath, "General & Industrial Questions have been completed Successfully");
 	}
 
 	public void Losses(LoadManager objWCLoadManager, WebDriver driver) throws IOException, InterruptedException, AWTException {
@@ -202,7 +230,7 @@ public class WorkersCompensation extends AutomationUtilities {
 		sendKeysToTextField(driver,objectrepository.gettxtLossCarrier(), "Test", "Loss Page Carrier");
 		buttonClick(driver,objectrepository.btnSubmit(), 10, "Submit Losses");
 
-		System.out.println("Losses Page has been completed");
+		//System.out.println("Losses Page has been completed");
 		AutomationUtilities.LogSummary(LogPath, "Losses Page has been completed");
 	}
 
@@ -217,7 +245,7 @@ public class WorkersCompensation extends AutomationUtilities {
 		WCNameInsuredtxt_element.click();
 
 		Thread.sleep(3000);
-		AutomationUtilities.Screenshot(tcSnapPath, testCaseID);
+		//AutomationUtilities.Screenshot(tcSnapPath, testCaseID);
 
 		selectDropdownlitag(driver, objectrepository.getWCApplicationRelationsip(), "Primary", "Relaionship");
 		sendKeysToTextField(driver,objectrepository.getWAppliactionCAddress1(), objWCLoadManager.getWCAddress1(),"WC Application Address");
@@ -291,8 +319,8 @@ public class WorkersCompensation extends AutomationUtilities {
 		Thread.sleep(2000);
 		buttonClick(driver,objectrepository.getbtnWCDownloadQuote(),10,"Quote Document");
 		AutomationUtilities.Traverse(driver,"Quote Document");
-	    System.out.println("Download WC Quote Document is clicked sucessfully");
-	    AutomationUtilities.LogSummary(LogPath,"Download WC Quote Document is clicked successfully");
+	   // System.out.println("Download WC Quote Document is clicked sucessfully");
+	    //AutomationUtilities.LogSummary(LogPath,"Download WC Quote Document is clicked successfully");
 	     
 		
 		buttonClick(driver,objectrepository.getbtnWCDownloadRatingWorksheet(),50,"Rating Document");
@@ -300,14 +328,14 @@ public class WorkersCompensation extends AutomationUtilities {
 		buttonClick(driver,objectrepository.getlnkWCCondensedRatingWorksheet(),15,"Condensed Rating Worksheet");
 		AutomationUtilities.Traverse(driver,"Rating Document");
 		buttonClick(driver,objectrepository.gettxtAppClosebtn(),10,"Close Condensed Rating Worksheet");
-	    System.out.println("Download WC Rating Document is clicked sucessfully");
-	    AutomationUtilities.LogSummary(LogPath,"Download WC Rating Document is clicked successfully");
+	    //System.out.println("Download WC Rating Document is clicked sucessfully");
+	    //AutomationUtilities.LogSummary(LogPath,"Download WC Rating Document is clicked successfully");
 		
 	    Thread.sleep(2000);
 	    buttonClick(driver,objectrepository.getbtnWCDownloadApplication(),10,"Application Document");
 	    AutomationUtilities.Traverse(driver,"Application Document");
-	    System.out.println("Download WC Application Document is clicked sucessfully");
-	    AutomationUtilities.LogSummary(LogPath,"Download WC Application Document is clicked successfully");
+	   // System.out.println("Download WC Application Document is clicked sucessfully");
+	   // AutomationUtilities.LogSummary(LogPath,"Download WC Application Document is clicked successfully");
 		
 		
 		buttonClick(driver,objectrepository.getWCMakePayment(),10,"Click on Make Payment");
@@ -334,7 +362,7 @@ public class WorkersCompensation extends AutomationUtilities {
 		//AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
 		/*************NEW CODE ENDS**************/
 		
-		System.out.println("PaymentOption is:>>>>>" +objWCLoadManager.getPaymentOption());
+		//System.out.println("PaymentOption is:>>>>>" +objWCLoadManager.getPaymentOption());
 		AutomationUtilities.ClickPaymentOptions(driver,objectrepository,objWCLoadManager.getPaymentOption());
 		
 		buttonClick(driver,objectrepository.getdpddepositpaymentmethod(),10,"Click on Deposit Payment Method");
