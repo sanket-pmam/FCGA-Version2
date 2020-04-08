@@ -40,7 +40,7 @@ public class WorkersCompensation extends AutomationUtilities {
 		AutomationUtilities.sClassCodeDesc = objWCLoadManager.getWCClassCodeDesc();
 		//AutomationUtilities.Screenshot(tcSnapPath, testCaseID);
 
-		if(objWCLoadManager.getWCBusinessName().isBlank()) {
+		if(objWCLoadManager.getWCBusinessName().equalsIgnoreCase("")) {
 		    AutomationUtilities.sBusinessName = "FCGA AUTM-" + AutomationUtilities.getRandomString(9);
 		}else {
 			AutomationUtilities.sBusinessName =	objWCLoadManager.getWCBusinessName();

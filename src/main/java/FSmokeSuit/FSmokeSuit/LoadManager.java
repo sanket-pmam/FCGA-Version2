@@ -2,6 +2,18 @@ package FSmokeSuit.FSmokeSuit;
 
 public class LoadManager implements Cloneable {
 	
+		private String AICG2037;
+		private String AICG1019;
+		private String AICG2404;
+		private String AICG2012;
+		private String AICG2028;
+		private String AICG2029;
+		private String AICG2024;
+		private String AICG2005;
+		private String AICG2011;
+		private String AICG2007;
+		private String AICG2026;
+		private String UWModifyPerm;
 		private double TestCaseId;
 		private String Product;
 		private String State;
@@ -87,6 +99,8 @@ public class LoadManager implements Cloneable {
 		private String ScheduleEquipment;
 		private String ScheduleEquipmentDescription;
 		private String ScheduleEquipmentAmount;
+		private String AIFCG1001;
+		private String AICG2010;
 		
 		public Object clone() throws
 	     CloneNotSupportedException
@@ -699,5 +713,104 @@ public class LoadManager implements Cloneable {
 		}
 		public String getScheduleEquipmentAmount() {
 			return ScheduleEquipmentAmount;
+		}
+
+		public void setAIFCG1001(String sAIFCG1001) {
+			AIFCG1001 = sAIFCG1001;
+		}
+		public String getAIFCG1001() {
+			return AIFCG1001;
+		}
+
+		public void setAICG2010(String sAICG2010) {
+			AICG2010 = sAICG2010;
+		}
+		public String getAICG2010() {
+			return AICG2010;
+		}
+
+		public void setAICG2037(String sAICG2037) {
+			AICG2037 = sAICG2037;
+		}
+		public String getAICG2037() {
+			return AICG2037;
+		}
+		
+		public void setAICG1019(String sAICG1019) {
+			AICG1019 = sAICG1019;
+			
+		}
+		public String getAICG1019() {
+			return AICG1019;
+		}
+		
+		public void setAICG2404(String sAICG2404) {
+			AICG2404 = sAICG2404;
+		}
+		public String getAICG2404() {
+			return AICG2404;
+		}
+		
+		public void setAICG2012(String sAICG2012) {
+			AICG2012 = sAICG2012;
+		}
+		public String getAICG2012() {
+			return AICG2012;
+		}
+		
+		public void setAICG2029(String sAICG2029) {
+			AICG2029 = sAICG2029;
+		}
+		public String getAICG2029() {
+			return AICG2029;
+		}
+		
+		public void setAICG2028(String sAICG2028) {
+			AICG2028 = sAICG2028;			
+		}
+		public String getAICG2028() {
+			return AICG2028;
+		}
+
+		public void setAICG2024(String sAICG2024) {
+			AICG2024 =sAICG2024;			
+		}
+		public String getAICG2024() {
+			return AICG2024;
+		}
+		
+		public void setAICG2005(String sAICG2005) {
+			AICG2005 = sAICG2005;		
+		}
+		public String getAICG2005() {
+			return AICG2005;
+		}
+		
+		public void setAICG2011(String sAICG2011) {
+			AICG2011= sAICG2011;			
+		}
+		public String getAICG2011() {
+			return AICG2011;
+		}
+		
+		public void setAICG2007(String sAICG2007) {
+			AICG2007 = sAICG2007;		
+		}
+		public String getAICG2007() {
+			return AICG2007;
+		}
+		
+		public void setAICG2026(String sAICG2026) {
+			AICG2026 = sAICG2026;		
+		}
+		public String getAICG2026() {
+			return AICG2026;
+		}
+
+		public void setUWModifyPerm(String sUWModifyPerm) {
+			UWModifyPerm = sUWModifyPerm;		
+		}
+		public String getUWModifyPerm() {
+			return UWModifyPerm;
 		}
 	}

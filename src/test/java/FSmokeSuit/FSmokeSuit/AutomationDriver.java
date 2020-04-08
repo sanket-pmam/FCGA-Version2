@@ -147,7 +147,7 @@ public class AutomationDriver {
 
 				if (objLoadManager.getAI().equalsIgnoreCase("Yes")
 						|| objLoadManager.getWaivers().equalsIgnoreCase("Yes")) {
-					objgeneralliability.AI(objWebDriver);
+					objgeneralliability.AI(objLoadManager,objWebDriver);
 				} else {
 					System.out.println("Additional Insured and Wavier is selected as No.");
 					AutomationUtilities.LogSummary(TCLogPath, "Additional Insured and Wavier is selected as No.");

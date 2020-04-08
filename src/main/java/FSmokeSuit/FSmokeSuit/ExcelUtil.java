@@ -57,9 +57,9 @@ public class ExcelUtil {
                 	case 7:   dataObj.setLastName(cellObj.getStringCellValue()); break;
                 	case 8:   dataObj.setState(cellObj.getStringCellValue()); break;
                 	case 9:   dataObj.setCounty(cellObj.getStringCellValue()); break;
-                	case 10:   dataObj.setClassCode(cellObj.getStringCellValue()); break;
-                	case 11:   dataObj.setSubClassCode(cellObj.getStringCellValue()); break;
-                	case 12:   dataObj.setExperience(cellObj.getNumericCellValue()); break;
+                	case 10:  dataObj.setClassCode(cellObj.getStringCellValue()); break;
+                	case 11:  dataObj.setSubClassCode(cellObj.getStringCellValue()); break;
+                	case 12:  dataObj.setExperience(cellObj.getNumericCellValue()); break;
                 	case 13:  dataObj.setClaims(cellObj.getNumericCellValue()); break;
                 	case 14:  dataObj.setPriorInsurance(cellObj.getStringCellValue()); break;
                 	case 15:  dataObj.setLiabilityLimit(cellObj.getStringCellValue()); break;
@@ -77,34 +77,48 @@ public class ExcelUtil {
                 	case 27:  dataObj.setScheduleEquipment(cellObj.getStringCellValue()); break;
                 	case 28:  dataObj.setScheduleEquipmentDescription(cellObj.getStringCellValue()); break;
                 	case 29:  dataObj.setScheduleEquipmentAmount(cellObj.getStringCellValue()); break;
-                	case 30:  dataObj.setFristAddressline(cellObj.getStringCellValue()); break;
-                	case 31:  dataObj.setSecAddressline(cellObj.getStringCellValue()); break;
-                	case 32:  dataObj.setBusinessType(cellObj.getStringCellValue()); break;
-                	case 33:  dataObj.setLocationCity(cellObj.getStringCellValue()); break;
-                	case 34:  dataObj.setLocationZipCode(cellObj.getStringCellValue()); break;
-                	case 35:  dataObj.setBusinessPhone(cellObj.getStringCellValue()); break;
-                	case 36:  dataObj.setBusinessEmail(cellObj.getStringCellValue()); break;
-                	case 37:  dataObj.setActiveOwner(cellObj.getNumericCellValue()); break;
-                	case 38:  dataObj.setUWRateType(cellObj.getStringCellValue()); break;
-                	case 39:  dataObj.setUWModifiedRates(cellObj.getStringCellValue()); break;
-                	case 40:  dataObj.setTypeofCompany(cellObj.getStringCellValue()); break;
-                	case 41:  dataObj.setPaymentOption(cellObj.getStringCellValue()); break;
-                	case 42:  dataObj.setDepositPaymentMethod(cellObj.getStringCellValue()); break;
+                	case 30:  dataObj.setAIFCG1001(cellObj.getStringCellValue()); break;
+                	case 31:  dataObj.setAICG2010(cellObj.getStringCellValue()); break;
+                	case 32:  dataObj.setAICG2037(cellObj.getStringCellValue()); break;
+                	case 33:  dataObj.setAICG1019(cellObj.getStringCellValue()); break;
+                	case 34:  dataObj.setAICG2404(cellObj.getStringCellValue()); break;
+                	case 35:  dataObj.setAICG2012(cellObj.getStringCellValue()); break;
+                	case 36:  dataObj.setAICG2029(cellObj.getStringCellValue()); break;
+                	case 37:  dataObj.setAICG2028(cellObj.getStringCellValue()); break;
+                	case 38:  dataObj.setAICG2024(cellObj.getStringCellValue()); break;
+                	case 39:  dataObj.setAICG2005(cellObj.getStringCellValue()); break;
+                	case 40:  dataObj.setAICG2011(cellObj.getStringCellValue()); break;
+                	case 41:  dataObj.setAICG2007(cellObj.getStringCellValue()); break;
+                	case 42:  dataObj.setAICG2026(cellObj.getStringCellValue()); break;
+                	case 43:  dataObj.setFristAddressline(cellObj.getStringCellValue()); break;
+                	case 44:  dataObj.setSecAddressline(cellObj.getStringCellValue()); break;
+                	case 45:  dataObj.setBusinessType(cellObj.getStringCellValue()); break;
+                	case 46:  dataObj.setLocationCity(cellObj.getStringCellValue()); break;
+                	case 47:  dataObj.setLocationZipCode(cellObj.getStringCellValue()); break;
+                	case 48:  dataObj.setBusinessPhone(cellObj.getStringCellValue()); break;
+                	case 49:  dataObj.setBusinessEmail(cellObj.getStringCellValue()); break;
+                	case 50:  dataObj.setActiveOwner(cellObj.getNumericCellValue()); break;
+                	case 51:  dataObj.setUWModifyPerm(cellObj.getStringCellValue()); break;
+                	case 52:  dataObj.setUWRateType(cellObj.getStringCellValue()); break;
+                	case 53:  dataObj.setUWModifiedRates(cellObj.getStringCellValue()); break;
+                	case 54:  dataObj.setTypeofCompany(cellObj.getStringCellValue()); break;
+                	case 55:  dataObj.setPaymentOption(cellObj.getStringCellValue()); break;
+                	case 56:  dataObj.setDepositPaymentMethod(cellObj.getStringCellValue()); break;
                 	
                 	//-----------------------------------------------------------------
                 	
-                	case 43:  dataObj.setScriptStatus(cellObj.getStringCellValue()); break;   
-                	case 44:  dataObj.setInsuredName(cellObj.getStringCellValue()); break;
-                	case 45:  dataObj.setQuoteDate(cellObj.getStringCellValue()); break;
-                	case 46:  dataObj.setQuoteNo(cellObj.getStringCellValue()); break;
-                	case 47:  dataObj.setCountyCode(cellObj.getStringCellValue()); break;
-                	case 48:  dataObj.setFWCIPremium(cellObj.getStringCellValue()); break;
-                	case 49:  dataObj.setFWCIMGAPolicyFee(cellObj.getStringCellValue()); break;
-                	case 50:  dataObj.setCBPremium(cellObj.getStringCellValue()); break;
-                	case 51:  dataObj.setCBMGAPolicyFee(cellObj.getStringCellValue()); break;
-                	case 52:  dataObj.setFWCIProducerFee(cellObj.getStringCellValue()); break;
-                	case 53:  dataObj.setCBProducerFee(cellObj.getStringCellValue()); break;
-                	case 54:  dataObj.setPolicyNo(cellObj.getStringCellValue()); break;
+                	case 57:  dataObj.setScriptStatus(cellObj.getStringCellValue()); break;   
+                	case 58:  dataObj.setInsuredName(cellObj.getStringCellValue()); break;
+                	case 59:  dataObj.setQuoteDate(cellObj.getStringCellValue()); break;
+                	case 60:  dataObj.setQuoteNo(cellObj.getStringCellValue()); break;
+                	case 61:  dataObj.setCountyCode(cellObj.getStringCellValue()); break;
+                	case 62:  dataObj.setFWCIPremium(cellObj.getStringCellValue()); break;
+                	case 63:  dataObj.setFWCIMGAPolicyFee(cellObj.getStringCellValue()); break;
+                	case 64:  dataObj.setCBPremium(cellObj.getStringCellValue()); break;
+                	case 65:  dataObj.setCBMGAPolicyFee(cellObj.getStringCellValue()); break;
+                	case 66:  dataObj.setFWCIProducerFee(cellObj.getStringCellValue()); break;
+                	case 67:  dataObj.setCBProducerFee(cellObj.getStringCellValue()); break;
+                	case 68:  dataObj.setPolicyNo(cellObj.getStringCellValue()); break;
                 	
                 	}	 
                 	

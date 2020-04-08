@@ -93,19 +93,33 @@ public class GeneralLiability extends AutomationUtilities {
 			buttonClick(driver,objectrepository.getdpdCounty(),10,"Click on County");
 			EsendKeysToTextField(driver,objectrepository.gettxtUniquetextbox(),objGlLoadManager.getCounty(),"County Name");
 			
-			AutomationUtilities.sBusinessName = "FCGA AUTM -"+ AutomationUtilities.getRandomString (9);
-			sendKeysToTextField(driver,objectrepository.gettxtBusinessName(),AutomationUtilities.sBusinessName,"Business Name");
-			System.out.println("Insured Name / Business Name is : "+AutomationUtilities.sBusinessName);
-			//AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
-			
-			if(sBusinessName.isEmpty()) {
+			if(objGlLoadManager.getBusinessName().equalsIgnoreCase("")) {
 				
-				String sIFristName = "FCGA AUTM";
-				sendKeysToTextField(driver,objectrepository.gettxtIndividualFirstName(),sIFristName,"Frist Name");
+				sendKeysToTextField(driver,objectrepository.gettxtIndividualFirstName(),objGlLoadManager.getGLFristName(),"Frist Name");
+				sendKeysToTextField(driver,objectrepository.gettxtIndividualLastName(),objGlLoadManager.getLastName(),"Last Name");
 				
-				String sILastName = "A"+AutomationUtilities.getRandomString (9);
-				sendKeysToTextField(driver,objectrepository.gettxtIndividualLastName(),sILastName,"Last Name");
+				if(objGlLoadManager.getGLFristName().equalsIgnoreCase("")) {
+					
+					AutomationUtilities.sBusinessName = "FCGA AUTM-" + AutomationUtilities.getRandomString(9);
+					sendKeysToTextField(driver,objectrepository.gettxtBusinessName(),AutomationUtilities.sBusinessName,"Business Name");
+					
+					if(sBusinessName.isEmpty()) {
+						
+					String sIFristName = "FCGA AUTM";
+					sendKeysToTextField(driver,objectrepository.gettxtIndividualFirstName(),sIFristName,"Frist Name");
+					
+					String sILastName = "A"+AutomationUtilities.getRandomString (9);
+					sendKeysToTextField(driver,objectrepository.gettxtIndividualLastName(),sILastName,"Last Name");
+				  } 
+				}
+			    
+			}else {
+				AutomationUtilities.sBusinessName =	objGlLoadManager.getBusinessName();
+				sendKeysToTextField(driver,objectrepository.gettxtBusinessName(),AutomationUtilities.sBusinessName,"Business Name");
 			}
+		
+			//System.out.println("Insured Name / Business Name is : "+AutomationUtilities.sBusinessName);
+			//AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
 			
 			String sDescription = "FCGA-"+ AutomationUtilities.getRandomString (9);
 			sendKeysToTextField(driver,objectrepository.gettxtDescriptionOfBusiness(),sDescription,"Business Description");
@@ -167,6 +181,7 @@ public class GeneralLiability extends AutomationUtilities {
 			
 			String[] ClassCode = objGlLoadManager.getClassCode().split("/");
 			AutomationUtilities.sClassCode = objGlLoadManager.getClassCode();
+			AutomationUtilities.sClassCodeDesc = driver.findElements(By.xpath("//td[@data-fieldid='AIR']")).toString();
 			int classcodecount = ClassCode.length;
 			if(classcodecount > 1) {
 			int Eprecentage = 100/classcodecount;
@@ -238,17 +253,79 @@ public class GeneralLiability extends AutomationUtilities {
 			AutomationUtilities.LogSummary(LogPath,"Class & Payroll have been completed Sucessfully");				
 		}
 		
-		public void AI(WebDriver driver) throws InterruptedException, IOException, AWTException {
+		public void AI(LoadManager objGlLoadManager,WebDriver driver) throws InterruptedException, IOException, AWTException {
 			
 			//AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
 			Thread.sleep(3000);
-			JavascriptExecutor js = (JavascriptExecutor) driver;  
-			js.executeScript("window.scrollBy(0,1000)");
-			js.executeScript("window.scrollBy(0,1000)");
+			AutomationUtilities.GLMessages(driver,objectrepository, "String AGMessage");
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			
+			Thread.sleep(2000);
+			if(objGlLoadManager.getWaivers().equalsIgnoreCase("Yes")) {
+				
+				if(!objGlLoadManager.getAICG2404().equalsIgnoreCase("0")) {
+					sendKeysToTextField(driver,objectrepository.getrdCG2404(),objGlLoadManager.getAICG2404(),"Waiver of Surbogation");
+				}
+			}
+			
+			if (objGlLoadManager.getAI().equalsIgnoreCase("Yes")) {
+				
+				if(objGlLoadManager.getAIFCG1001().equalsIgnoreCase("Yes")) {
+					buttonClick(driver,objectrepository.getrdFCG1001(),10,"Click on FCG1001");
+				}
+				if(!objGlLoadManager.getAICG2010().equalsIgnoreCase("0")) {
+					sendKeysToTextField(driver,objectrepository.getrdCG2010(),objGlLoadManager.getAICG2010(),"Enter on CG2010");
+				}
+				if(!objGlLoadManager.getAICG2037().equalsIgnoreCase("0")) {
+					sendKeysToTextField(driver,objectrepository.getrdCG2037(),objGlLoadManager.getAICG2037(),"Enter on CG2037");
+				}
+				if(!objGlLoadManager.getAICG1019().equalsIgnoreCase("0")) {
+					sendKeysToTextField(driver,objectrepository.getrdCG1019(),objGlLoadManager.getAICG1019(),"Enter on CG1019");
+				}
+				
+				if(objGlLoadManager.getWaivers().equalsIgnoreCase("Yes")) {
+					
+					if(!objGlLoadManager.getAICG2404().equalsIgnoreCase("0")) {
+						sendKeysToTextField(driver,objectrepository.getrdCG2404(),objGlLoadManager.getAICG2404(),"Waiver of Surbogation");
+					}
+				}
+				
+				if(!objGlLoadManager.getAICG2012().equalsIgnoreCase("0")) {
+					sendKeysToTextField(driver,objectrepository.getrdCG2012(),objGlLoadManager.getAICG2012(),"Enter on CG2012");
+				}
+				if(!objGlLoadManager.getAICG2029().equalsIgnoreCase("0")) {
+					sendKeysToTextField(driver,objectrepository.getrdCG2029(),objGlLoadManager.getAICG2029(),"Enter on CG2029");
+				}
+				if(!objGlLoadManager.getAICG2028().equalsIgnoreCase("0")) {
+					sendKeysToTextField(driver,objectrepository.getrdCG2028(),objGlLoadManager.getAICG2028(),"Enter on CG2028");
+				}
+				if(!objGlLoadManager.getAICG2024().equalsIgnoreCase("0")) {
+					sendKeysToTextField(driver,objectrepository.getrdCG2024(),objGlLoadManager.getAICG2024(),"Enter on CG2024");
+				}
+				if(!objGlLoadManager.getAICG2005().equalsIgnoreCase("0")) {
+					sendKeysToTextField(driver,objectrepository.getrdCG2005(),objGlLoadManager.getAICG2005(),"Enter on CG2005");
+				}
+				if(!objGlLoadManager.getAICG2011().equalsIgnoreCase("0")) {
+					sendKeysToTextField(driver,objectrepository.getrdCG2011(),objGlLoadManager.getAICG2011(),"Enter on CG2011");
+				}
+				if(!objGlLoadManager.getAICG2026().equalsIgnoreCase("0")) {
+					sendKeysToTextField(driver,objectrepository.getrdCG2026(),objGlLoadManager.getAICG2026(),"Enter on CG2026");
+				}
+				if(!objGlLoadManager.getAICG2007().equalsIgnoreCase("0")) {
+					sendKeysToTextField(driver,objectrepository.getrdCG2007(),objGlLoadManager.getAICG2007(),"Enter on CG2007");
+				}
+			} else {
+				
+				js.executeScript("window.scrollBy(0,1000)");
+				js.executeScript("window.scrollBy(0,1000)");
+			}
+			
+			  
+			
 			
 			//AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
 			
-			AutomationUtilities.GLMessages(driver,objectrepository, "String AGMessage");
+			
 			
 			buttonClick(driver,objectrepository.getbtnsaveandcontinue(),10,"Click on Save and Continue");
 			
@@ -276,7 +353,7 @@ public class GeneralLiability extends AutomationUtilities {
 	        
 	        if (objGlLoadManager.getScheduleEquipment().equalsIgnoreCase("Yes") ) {
 	        	
-	        	buttonClick(driver,objectrepository.getbtnScheduleEquip(),10,"Schedule Equipment");
+	        	buttonClick(driver,objectrepository.getbtnScheduleEquip(),20,"Schedule Equipment");
 	        	sendKeysToTextField(driver,objectrepository.gettxtScheduleEquipDesc(),objGlLoadManager.getScheduleEquipmentDescription(),"Schedule Equipment Description");
 	        	sendKeysToTextField(driver,objectrepository.gettxtScheduleEquipAcount(),objGlLoadManager.getScheduleEquipmentAmount(),"Schedule Equipment Amount" );
 	        }
@@ -343,7 +420,11 @@ public class GeneralLiability extends AutomationUtilities {
     	 //AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
     	 
     	 objGLunderwriting.UnderwritingSearch(driver);
-    	 objGLunderwriting.UWGLEditQuote(driver,objGlLoadManager);
+    	 
+    	 if(objGlLoadManager.getUWModifyPerm().equalsIgnoreCase("Yes")) {
+    		 objGLunderwriting.UWGLEditQuote(driver,objGlLoadManager);
+    	 }
+    	 
     	 objGLunderwriting.UWChangeStatus(driver);
     	// AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
     	 
@@ -510,26 +591,265 @@ public class GeneralLiability extends AutomationUtilities {
 		
 		if(!objGlLoadManager.getLocationAgregate().equalsIgnoreCase("0")) {
 			
-			for(int i =1;i<=Integer.valueOf(objGlLoadManager.getLocationAgregate());i++) {
+			if(Integer.valueOf(objGlLoadManager.getLocationAgregate())> 1) {
 				
-				driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2504_"+i+"']")).sendKeys("CG2504_"+i);
-				driver.findElement(By.xpath("//input[@id='txtAddress1CG2504_"+i+"']")).sendKeys(objGlLoadManager.getFristAddressline());
-				driver.findElement(By.xpath("//input[@id='txtCityCG2504_"+i+"']")).sendKeys(objGlLoadManager.getLocationCity());
-				driver.findElement(By.xpath("//input[@id='txtZipCodeCG2504_"+i+"']")).sendKeys(objGlLoadManager.getLocationZipCode());
+				for(int i =1;i<=Integer.valueOf(objGlLoadManager.getLocationAgregate());i++) {
+					
+					driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2504_"+i+"']")).sendKeys("CG2504_"+i);
+					driver.findElement(By.xpath("//input[@id='txtAddress1CG2504_"+i+"']")).sendKeys(objGlLoadManager.getFristAddressline());
+					driver.findElement(By.xpath("//input[@id='txtCityCG2504_"+i+"']")).sendKeys(objGlLoadManager.getLocationCity());
+					driver.findElement(By.xpath("//input[@id='txtZipCodeCG2504_"+i+"']")).sendKeys(objGlLoadManager.getLocationZipCode());
+				}
+			} else {
+				
+				driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2504']")).sendKeys("CG2504");
+				driver.findElement(By.xpath("//input[@id='txtAddress1CG2504']")).sendKeys(objGlLoadManager.getFristAddressline());
+				driver.findElement(By.xpath("//input[@id='txtCityCG2504']")).sendKeys(objGlLoadManager.getLocationCity());
+				driver.findElement(By.xpath("//input[@id='txtZipCodeCG2504']")).sendKeys(objGlLoadManager.getLocationZipCode());
 			}
+			
 		}
 		
         if(!objGlLoadManager.getProjectAgregate().equalsIgnoreCase("0")) {
 			
-			for(int i =1;i<=Integer.valueOf(objGlLoadManager.getProjectAgregate());i++) {
-				
-				driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2503_"+i+"']")).sendKeys("CG2503_"+i);
-				driver.findElement(By.xpath("//input[@id='txtAddress1CG2503_"+i+"']")).sendKeys(objGlLoadManager.getFristAddressline());
-				driver.findElement(By.xpath("//input[@id='txtCityCG2503_"+i+"']")).sendKeys(objGlLoadManager.getLocationCity());
-				driver.findElement(By.xpath("//input[@id='txtZipCodeCG2503_"+i+"']")).sendKeys(objGlLoadManager.getLocationZipCode());
-			}
+        	if(Integer.valueOf(objGlLoadManager.getProjectAgregate())> 1) {
+        		
+        		for(int i =1;i<=Integer.valueOf(objGlLoadManager.getProjectAgregate());i++) {
+    				
+    				driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2503_"+i+"']")).sendKeys("CG2503_"+i);
+    				driver.findElement(By.xpath("//input[@id='txtAddress1CG2503_"+i+"']")).sendKeys(objGlLoadManager.getFristAddressline());
+    				driver.findElement(By.xpath("//input[@id='txtCityCG2503_"+i+"']")).sendKeys(objGlLoadManager.getLocationCity());
+    				driver.findElement(By.xpath("//input[@id='txtZipCodeCG2503_"+i+"']")).sendKeys(objGlLoadManager.getLocationZipCode());
+    			}
+        	} else {
+        		
+        		driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2503']")).sendKeys("CG2503");
+				driver.findElement(By.xpath("//input[@id='txtAddress1CG2503']")).sendKeys(objGlLoadManager.getFristAddressline());
+				driver.findElement(By.xpath("//input[@id='txtCityCG2503']")).sendKeys(objGlLoadManager.getLocationCity());
+				driver.findElement(By.xpath("//input[@id='txtZipCodeCG2503']")).sendKeys(objGlLoadManager.getLocationZipCode());
+			
+        	}
+			
 		}		
-		
+        
+
+		if(!objGlLoadManager.getAICG2010().equalsIgnoreCase("0")) {
+			
+			if(Integer.valueOf(objGlLoadManager.getAICG2010())> 1) {
+				
+				for(int i =1;i<=Integer.valueOf(objGlLoadManager.getAICG2010());i++) {
+					
+					driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2010_"+i+"']")).sendKeys("CG2010_"+i);
+					driver.findElement(By.xpath("//input[@id='txtAddress1CG2010_"+i+"']")).sendKeys(objGlLoadManager.getFristAddressline());
+					driver.findElement(By.xpath("//input[@id='txtCityCG2010_"+i+"']")).sendKeys(objGlLoadManager.getLocationCity());
+					driver.findElement(By.xpath("//input[@id='txtZipCodeCG2010_"+i+"']")).sendKeys(objGlLoadManager.getLocationZipCode());
+				}
+			} else {
+				
+				driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2010']")).sendKeys("CG2010");
+				driver.findElement(By.xpath("//input[@id='txtAddress1CG2010']")).sendKeys(objGlLoadManager.getFristAddressline());
+				driver.findElement(By.xpath("//input[@id='txtCityCG2010']")).sendKeys(objGlLoadManager.getLocationCity());
+				driver.findElement(By.xpath("//input[@id='txtZipCodeCG2010']")).sendKeys(objGlLoadManager.getLocationZipCode());
+
+			}
+            
+		}
+		if(!objGlLoadManager.getAICG2037().equalsIgnoreCase("0")) {
+              
+			if(Integer.valueOf(objGlLoadManager.getAICG2037())> 1) {
+				
+				for(int i =1;i<=Integer.valueOf(objGlLoadManager.getAICG2037());i++) {
+					
+					driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2037_"+i+"']")).sendKeys("CG2037_"+i);
+					driver.findElement(By.xpath("//input[@id='txtAddress1CG2037_"+i+"']")).sendKeys(objGlLoadManager.getFristAddressline());
+					driver.findElement(By.xpath("//input[@id='txtCityCG2037_"+i+"']")).sendKeys(objGlLoadManager.getLocationCity());
+					driver.findElement(By.xpath("//input[@id='txtZipCodeCG2037_"+i+"']")).sendKeys(objGlLoadManager.getLocationZipCode());
+				}
+			}else {
+				
+				driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2037']")).sendKeys("CG2037");
+				driver.findElement(By.xpath("//input[@id='txtAddress1CG2037']")).sendKeys(objGlLoadManager.getFristAddressline());
+				driver.findElement(By.xpath("//input[@id='txtCityCG2037']")).sendKeys(objGlLoadManager.getLocationCity());
+				driver.findElement(By.xpath("//input[@id='txtZipCodeCG2037']")).sendKeys(objGlLoadManager.getLocationZipCode());
+			}
+			
+		}
+		if(!objGlLoadManager.getAICG1019().equalsIgnoreCase("0")) {
+			
+			if(Integer.valueOf(objGlLoadManager.getAICG1019())> 1) {
+				
+				for(int i =1;i<=Integer.valueOf(objGlLoadManager.getAICG1019());i++) {
+					
+					driver.findElement(By.xpath("//input[@id='txtCompanyNameCG1019_"+i+"']")).sendKeys("CG1019_"+i);
+					driver.findElement(By.xpath("//input[@id='txtAddress1CG1019_"+i+"']")).sendKeys(objGlLoadManager.getFristAddressline());
+					driver.findElement(By.xpath("//input[@id='txtCityCG1019_"+i+"']")).sendKeys(objGlLoadManager.getLocationCity());
+					driver.findElement(By.xpath("//input[@id='txtZipCodeCG1019_"+i+"']")).sendKeys(objGlLoadManager.getLocationZipCode());
+				}
+			} else {
+				
+				driver.findElement(By.xpath("//input[@id='txtCompanyNameCG1019']")).sendKeys("CG1019");
+				driver.findElement(By.xpath("//input[@id='txtAddress1CG1019']")).sendKeys(objGlLoadManager.getFristAddressline());
+				driver.findElement(By.xpath("//input[@id='txtCityCG1019']")).sendKeys(objGlLoadManager.getLocationCity());
+				driver.findElement(By.xpath("//input[@id='txtZipCodeCG1019']")).sendKeys(objGlLoadManager.getLocationZipCode());
+	
+			}
+           
+		}
+			
+	    if(!objGlLoadManager.getAICG2404().equalsIgnoreCase("0")) {
+
+	    	if(Integer.valueOf(objGlLoadManager.getAICG2404())> 1) {
+				
+	    	for(int i =1;i<=Integer.valueOf(objGlLoadManager.getAICG2404());i++) {
+				
+				driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2404_"+i+"']")).sendKeys("CG2404_"+i);
+				driver.findElement(By.xpath("//input[@id='txtAddress1CG2404_"+i+"']")).sendKeys(objGlLoadManager.getFristAddressline());
+				driver.findElement(By.xpath("//input[@id='txtCityCG2404_"+i+"']")).sendKeys(objGlLoadManager.getLocationCity());
+				driver.findElement(By.xpath("//input[@id='txtZipCodeCG2404_"+i+"']")).sendKeys(objGlLoadManager.getLocationZipCode());
+			}
+		  } else {
+			
+			    driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2404']")).sendKeys("CG2404");
+				driver.findElement(By.xpath("//input[@id='txtAddress1CG2404']")).sendKeys(objGlLoadManager.getFristAddressline());
+				driver.findElement(By.xpath("//input[@id='txtCityCG2404']")).sendKeys(objGlLoadManager.getLocationCity());
+				driver.findElement(By.xpath("//input[@id='txtZipCodeCG2404']")).sendKeys(objGlLoadManager.getLocationZipCode());
+			}
+	    }
+		if(!objGlLoadManager.getAICG2012().equalsIgnoreCase("0")) {
+			
+			if(Integer.valueOf(objGlLoadManager.getAICG2012())> 1) {
+				
+		    	for(int i =1;i<=Integer.valueOf(objGlLoadManager.getAICG2012());i++) {
+					
+					driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2012_"+i+"']")).sendKeys("CG2012_"+i);
+					driver.findElement(By.xpath("//input[@id='txtAddress1CG2012_"+i+"']")).sendKeys(objGlLoadManager.getFristAddressline());
+					driver.findElement(By.xpath("//input[@id='txtCityCG2012_"+i+"']")).sendKeys(objGlLoadManager.getLocationCity());
+					driver.findElement(By.xpath("//input[@id='txtZipCodeCG2012_"+i+"']")).sendKeys(objGlLoadManager.getLocationZipCode());
+				}
+			  } else {
+				
+				    driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2012']")).sendKeys("CG2012");
+					driver.findElement(By.xpath("//input[@id='txtAddress1CG2012']")).sendKeys(objGlLoadManager.getFristAddressline());
+					driver.findElement(By.xpath("//input[@id='txtCityCG2012']")).sendKeys(objGlLoadManager.getLocationCity());
+					driver.findElement(By.xpath("//input[@id='txtZipCodeCG2012']")).sendKeys(objGlLoadManager.getLocationZipCode());
+				}
+		}
+		if(!objGlLoadManager.getAICG2029().equalsIgnoreCase("0")) {
+              
+			if(Integer.valueOf(objGlLoadManager.getAICG2029())> 1) {
+				
+		    	  for(int i =1;i<=Integer.valueOf(objGlLoadManager.getAICG2029());i++) {
+					
+					driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2029_"+i+"']")).sendKeys("CG2029_"+i);
+					driver.findElement(By.xpath("//input[@id='txtAddress1CG2029_"+i+"']")).sendKeys(objGlLoadManager.getFristAddressline());
+					driver.findElement(By.xpath("//input[@id='txtCityCG2029_"+i+"']")).sendKeys(objGlLoadManager.getLocationCity());
+					driver.findElement(By.xpath("//input[@id='txtZipCodeCG2029_"+i+"']")).sendKeys(objGlLoadManager.getLocationZipCode());
+				}
+			  } else {
+				
+				    driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2029']")).sendKeys("CG2029");
+					driver.findElement(By.xpath("//input[@id='txtAddress1CG2029']")).sendKeys(objGlLoadManager.getFristAddressline());
+					driver.findElement(By.xpath("//input[@id='txtCityCG2029']")).sendKeys(objGlLoadManager.getLocationCity());
+					driver.findElement(By.xpath("//input[@id='txtZipCodeCG2029']")).sendKeys(objGlLoadManager.getLocationZipCode());
+				}
+		}
+		if(!objGlLoadManager.getAICG2028().equalsIgnoreCase("0")) {
+			
+			if(Integer.valueOf(objGlLoadManager.getAICG2028())> 1) {
+				
+		    	  for(int i =1;i<=Integer.valueOf(objGlLoadManager.getAICG2028());i++) {
+					
+					driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2028_"+i+"']")).sendKeys("CG2028_"+i);
+					driver.findElement(By.xpath("//input[@id='txtAddress1CG2028_"+i+"']")).sendKeys(objGlLoadManager.getFristAddressline());
+					driver.findElement(By.xpath("//input[@id='txtCityCG2028_"+i+"']")).sendKeys(objGlLoadManager.getLocationCity());
+					driver.findElement(By.xpath("//input[@id='txtZipCodeCG2028_"+i+"']")).sendKeys(objGlLoadManager.getLocationZipCode());
+				}
+			  } else {
+				
+				    driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2028']")).sendKeys("CG2028");
+					driver.findElement(By.xpath("//input[@id='txtAddress1CG2028']")).sendKeys(objGlLoadManager.getFristAddressline());
+					driver.findElement(By.xpath("//input[@id='txtCityCG2028']")).sendKeys(objGlLoadManager.getLocationCity());
+					driver.findElement(By.xpath("//input[@id='txtZipCodeCG2028']")).sendKeys(objGlLoadManager.getLocationZipCode());
+				}
+		}
+		if(!objGlLoadManager.getAICG2024().equalsIgnoreCase("0")) {
+			
+			if(Integer.valueOf(objGlLoadManager.getAICG2024())> 1) {
+				
+		    	  for(int i =1;i<=Integer.valueOf(objGlLoadManager.getAICG2024());i++) {
+					
+					driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2024_"+i+"']")).sendKeys("CG2024_"+i);
+					driver.findElement(By.xpath("//input[@id='txtAddress1CG2024_"+i+"']")).sendKeys(objGlLoadManager.getFristAddressline());
+					driver.findElement(By.xpath("//input[@id='txtCityCG2024_"+i+"']")).sendKeys(objGlLoadManager.getLocationCity());
+					driver.findElement(By.xpath("//input[@id='txtZipCodeCG2024_"+i+"']")).sendKeys(objGlLoadManager.getLocationZipCode());
+				}
+			  } else {
+				
+				    driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2024']")).sendKeys("CG2024");
+					driver.findElement(By.xpath("//input[@id='txtAddress1CG2024']")).sendKeys(objGlLoadManager.getFristAddressline());
+					driver.findElement(By.xpath("//input[@id='txtCityCG2024']")).sendKeys(objGlLoadManager.getLocationCity());
+					driver.findElement(By.xpath("//input[@id='txtZipCodeCG2024']")).sendKeys(objGlLoadManager.getLocationZipCode());
+				}
+		}
+		if(!objGlLoadManager.getAICG2005().equalsIgnoreCase("0")) {
+			
+			if(Integer.valueOf(objGlLoadManager.getAICG2005())> 1) {
+				
+		    	  for(int i =1;i<=Integer.valueOf(objGlLoadManager.getAICG2005());i++) {
+					
+					driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2005_"+i+"']")).sendKeys("CG2005_"+i);
+					driver.findElement(By.xpath("//input[@id='txtAddress1CG2005_"+i+"']")).sendKeys(objGlLoadManager.getFristAddressline());
+					driver.findElement(By.xpath("//input[@id='txtCityCG2005_"+i+"']")).sendKeys(objGlLoadManager.getLocationCity());
+					driver.findElement(By.xpath("//input[@id='txtZipCodeCG2005_"+i+"']")).sendKeys(objGlLoadManager.getLocationZipCode());
+				}
+			  } else {
+				
+				    driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2005']")).sendKeys("CG2005");
+					driver.findElement(By.xpath("//input[@id='txtAddress1CG2005']")).sendKeys(objGlLoadManager.getFristAddressline());
+					driver.findElement(By.xpath("//input[@id='txtCityCG2005']")).sendKeys(objGlLoadManager.getLocationCity());
+					driver.findElement(By.xpath("//input[@id='txtZipCodeCG2005']")).sendKeys(objGlLoadManager.getLocationZipCode());
+				}
+		}
+		if(!objGlLoadManager.getAICG2011().equalsIgnoreCase("0")) {
+			
+			if(Integer.valueOf(objGlLoadManager.getAICG2011())> 1) {
+				
+		    	  for(int i =1;i<=Integer.valueOf(objGlLoadManager.getAICG2011());i++) {
+					
+					driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2011_"+i+"']")).sendKeys("CG2011_"+i);
+					driver.findElement(By.xpath("//input[@id='txtAddress1CG2011_"+i+"']")).sendKeys(objGlLoadManager.getFristAddressline());
+					driver.findElement(By.xpath("//input[@id='txtCityCG2011_"+i+"']")).sendKeys(objGlLoadManager.getLocationCity());
+					driver.findElement(By.xpath("//input[@id='txtZipCodeCG2011_"+i+"']")).sendKeys(objGlLoadManager.getLocationZipCode());
+				}
+			  } else {
+				
+				    driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2011']")).sendKeys("CG2011");
+					driver.findElement(By.xpath("//input[@id='txtAddress1CG2011']")).sendKeys(objGlLoadManager.getFristAddressline());
+					driver.findElement(By.xpath("//input[@id='txtCityCG2011']")).sendKeys(objGlLoadManager.getLocationCity());
+					driver.findElement(By.xpath("//input[@id='txtZipCodeCG2011']")).sendKeys(objGlLoadManager.getLocationZipCode());
+				}
+		}
+		if(!objGlLoadManager.getAICG2026().equalsIgnoreCase("0")) {
+			
+			if(Integer.valueOf(objGlLoadManager.getAICG2026())> 1) {
+				
+		    	  for(int i =1;i<=Integer.valueOf(objGlLoadManager.getAICG2026());i++) {
+					
+					driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2026_"+i+"']")).sendKeys("CG2011_"+i);
+					driver.findElement(By.xpath("//input[@id='txtAddress1CG2026_"+i+"']")).sendKeys(objGlLoadManager.getFristAddressline());
+					driver.findElement(By.xpath("//input[@id='txtCityCG2026_"+i+"']")).sendKeys(objGlLoadManager.getLocationCity());
+					driver.findElement(By.xpath("//input[@id='txtZipCodeCG2026_"+i+"']")).sendKeys(objGlLoadManager.getLocationZipCode());
+				}
+			  } else {
+				
+				    driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2026']")).sendKeys("CG2011");
+					driver.findElement(By.xpath("//input[@id='txtAddress1CG2026']")).sendKeys(objGlLoadManager.getFristAddressline());
+					driver.findElement(By.xpath("//input[@id='txtCityCG2026']")).sendKeys(objGlLoadManager.getLocationCity());
+					driver.findElement(By.xpath("//input[@id='txtZipCodeCG2026']")).sendKeys(objGlLoadManager.getLocationZipCode());
+				}
+		}
+
+        
 		sendKeysToTextField(driver,objectrepository.gettxtGeneralRemarks(),"OK - Approved","Enter Insurance Carrier");
 		//AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
 		  

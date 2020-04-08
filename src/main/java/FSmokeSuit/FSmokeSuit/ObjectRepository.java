@@ -48,7 +48,6 @@ public class ObjectRepository {
 	
 //	@FindBy(xpath = "//input[@id='rdbWorkersComp'and @value='w']")
 	@FindBy(xpath = "//label[@for='rdbWorkersComp']")
-	
 	private WebElement btnrdbWorkersComp;
 	
 	@FindBy(xpath = "//input[@id='txtFEIN']")
@@ -330,6 +329,47 @@ public class ObjectRepository {
 	
 	@FindBy (xpath="//input[@value='MAKE PAYMENT & ISSUE']")
 	private WebElement GLMakePayment;
+	
+	// --------- AI ------------
+	
+	@FindBy (xpath="//div[@id='FCG1001']/label")
+	private WebElement rdFCG1001;
+	
+	@FindBy (xpath="//input[@id='txtindividualCG2010']")
+	private WebElement rdCG2010;
+	
+	@FindBy (xpath="//input[@id='txtindividualCG2037']")
+	private WebElement rdCG2037;
+	
+	@FindBy (xpath="//input[@id='txtindividualFCG993']")
+	private WebElement rdCG1019;
+	
+	@FindBy (xpath="//input[@id='txtindividualCG2404']")
+	private WebElement rdCG2404;
+
+	@FindBy (xpath="//input[@id='txtQuestnVal_CG2012']")
+	private WebElement rdCG2012;
+	
+	@FindBy (xpath="//input[@id='txtQuestnVal_CG2029']")
+	private WebElement rdCG2029;
+	
+	@FindBy (xpath="//input[@id='txtQuestnVal_CG2028']")
+	private WebElement rdCG2028;
+	
+	@FindBy (xpath="//input[@id='txtQuestnVal_CG2024']")
+	private WebElement rdCG2024;
+	
+	@FindBy (xpath="//input[@id='txtQuestnVal_CG2005']")
+	private WebElement rdCG2005;
+	
+	@FindBy (xpath="//input[@id='txtQuestnVal_CG2011']")
+	private WebElement rdCG2011;
+	
+	@FindBy (xpath="//input[@id='txtQuestnVal_CG2026']")
+	private WebElement rdCG2026;
+	
+	@FindBy (xpath="//div[@id='CG2007']/label")
+	private WebElement rdCG2007;
 	
 	//---------------------
 	@FindBy(xpath = "//button[@data-resin-target='download']")
@@ -1804,22 +1844,60 @@ public class ObjectRepository {
   public WebElement gettxtUWIRPM() {
 		 return txtUWIRPM;
 	 }
-	 
-	 public WebElement gettxtUWIRPM1() {
+  public WebElement gettxtUWIRPM1() {
 		 return txtUWIRPM1;
 	 }
-	 
-	 public WebElement getchkConsentToRate() {
+  public WebElement getchkConsentToRate() {
 		 return chkConsentToRate;
 	 }
-	 
-	 public WebElement gettxtUWIRPMCTR() {
+  public WebElement gettxtUWIRPMCTR() {
 		 return txtUWIRPMCTR;
 	 }
   public WebElement getiframeCancelButton() {
 	  return iframeCancelButton;
   }
 
+  //------------------AI GL -------------------------------------
   
+  public WebElement getrdFCG1001() {
+	  return rdFCG1001;
+  }
+  public WebElement getrdCG2010() {
+	  return rdCG2010;
+  } 
+  public WebElement getrdCG2037() {
+	  return rdCG2037;
+  }
+  public WebElement getrdCG1019() {
+	  return rdCG1019;
+  }
+  public WebElement getrdCG2404() {
+	  return rdCG2404;
+  } 
+  public WebElement getrdCG2012() {
+	  return rdCG2012;
+  }
+  public WebElement getrdCG2029() {
+	  return rdCG2029;
+  }
+  public WebElement getrdCG2028() {
+	  return rdCG2028;
+  } 
+  public WebElement getrdCG2024() {
+	  return rdCG2024;
+  }
+  public WebElement getrdCG2005() {
+	  return rdCG2005;
+  }
+  public WebElement getrdCG2011() {
+	  return rdCG2011;
+  } 
+  public WebElement getrdCG2007() {
+	  return rdCG2007;
+  }
+
+public WebElement getrdCG2026() {
+	return rdCG2026;
+}
 
 }
