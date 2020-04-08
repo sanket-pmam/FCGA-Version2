@@ -70,10 +70,9 @@ public class HomePage extends AutomationUtilities {
 				//System.out.println("Inner HTML  >> " + iframe.getAttribute("outerHTML"));
 				if (iframe.getAttribute("outerHTML").contains("iframe srcdoc=")) {
 					driver.switchTo().frame(iframe);
-					buttonClick(driver, objectrepository.getiframeCancelButton(), 10,
+					buttonClick(driver, objectrepository.getiframeCancelButton(),1,
 							"Clicked on Let's Go button on Pop-up");
 				}
-				Thread.sleep(2000);
 				driver.switchTo().defaultContent();
 			}
 			}

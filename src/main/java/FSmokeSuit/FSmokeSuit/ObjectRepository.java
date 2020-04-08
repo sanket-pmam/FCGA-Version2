@@ -182,10 +182,10 @@ public class ObjectRepository {
 	@FindBy (xpath="//input[@id='btnAdd']")
 	public WebElement btn_ScheduleEquip;
 	
-	@FindBy (xpath="//tbody[@id='dynamicBody']/tr[3]/td[2]/input")
+	@FindBy (xpath="//input[@class='form-control EquipmentTB ']")
 	public WebElement txt_ScheduleEquipDesc;
 	
-	@FindBy (xpath="//tbody[@id='dynamicBody']/tr[3]/td[3]/input")
+	@FindBy (xpath="//input[@name='txtACVLimit']")
 	public WebElement txt_ScheduleEquipAcount;
 //--------	
 	@FindBy(xpath = "//label[@id='lblQuoteDate']")

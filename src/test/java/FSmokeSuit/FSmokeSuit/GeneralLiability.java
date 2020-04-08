@@ -261,11 +261,13 @@ public class GeneralLiability extends AutomationUtilities {
 			JavascriptExecutor js = (JavascriptExecutor) driver;
 			
 			Thread.sleep(2000);
+			if (objGlLoadManager.getAI().equalsIgnoreCase("No")) {
 			if(objGlLoadManager.getWaivers().equalsIgnoreCase("Yes")) {
 				
 				if(!objGlLoadManager.getAICG2404().equalsIgnoreCase("0")) {
 					sendKeysToTextField(driver,objectrepository.getrdCG2404(),objGlLoadManager.getAICG2404(),"Waiver of Surbogation");
-				}
+				   }
+			   }
 			}
 			
 			if (objGlLoadManager.getAI().equalsIgnoreCase("Yes")) {
@@ -311,8 +313,8 @@ public class GeneralLiability extends AutomationUtilities {
 				if(!objGlLoadManager.getAICG2026().equalsIgnoreCase("0")) {
 					sendKeysToTextField(driver,objectrepository.getrdCG2026(),objGlLoadManager.getAICG2026(),"Enter on CG2026");
 				}
-				if(!objGlLoadManager.getAICG2007().equalsIgnoreCase("0")) {
-					sendKeysToTextField(driver,objectrepository.getrdCG2007(),objGlLoadManager.getAICG2007(),"Enter on CG2007");
+				if(!objGlLoadManager.getAICG2007().equalsIgnoreCase("Yes")) {
+					buttonClick(driver,objectrepository.getrdCG2007(),10,"Enter on CG2007");
 				}
 			} else {
 				
@@ -320,13 +322,7 @@ public class GeneralLiability extends AutomationUtilities {
 				js.executeScript("window.scrollBy(0,1000)");
 			}
 			
-			  
-			
-			
 			//AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
-			
-			
-			
 			buttonClick(driver,objectrepository.getbtnsaveandcontinue(),10,"Click on Save and Continue");
 			
 			System.out.println("Aditional Insured have been completed Sucessfully");
@@ -528,7 +524,7 @@ public class GeneralLiability extends AutomationUtilities {
      //AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
      Thread.sleep(3000);
      
-	 buttonClick(driver,objectrepository.getbtn_CloseProducerFee(),10,"Click on Button Close");
+	 buttonClick(driver,objectrepository.getbtn_CloseProducerFee(),15,"Click on Button Close");
 	 //AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
 	 
 	 AutomationUtilities.QuoteNo = objectrepository.getlbl_QuoteNo().getText();
@@ -680,17 +676,17 @@ public class GeneralLiability extends AutomationUtilities {
 				
 				for(int i =1;i<=Integer.valueOf(objGlLoadManager.getAICG1019());i++) {
 					
-					driver.findElement(By.xpath("//input[@id='txtCompanyNameCG1019_"+i+"']")).sendKeys("CG1019_"+i);
-					driver.findElement(By.xpath("//input[@id='txtAddress1CG1019_"+i+"']")).sendKeys(objGlLoadManager.getFristAddressline());
-					driver.findElement(By.xpath("//input[@id='txtCityCG1019_"+i+"']")).sendKeys(objGlLoadManager.getLocationCity());
-					driver.findElement(By.xpath("//input[@id='txtZipCodeCG1019_"+i+"']")).sendKeys(objGlLoadManager.getLocationZipCode());
+					driver.findElement(By.xpath("//input[@id='txtCompanyNameFCG1019_"+i+"']")).sendKeys("CG1019_"+i);
+					driver.findElement(By.xpath("//input[@id='txtAddress1FCG1019_"+i+"']")).sendKeys(objGlLoadManager.getFristAddressline());
+					driver.findElement(By.xpath("//input[@id='txtCityFCG1019_"+i+"']")).sendKeys(objGlLoadManager.getLocationCity());
+					driver.findElement(By.xpath("//input[@id='txtZipCodeFCG1019_"+i+"']")).sendKeys(objGlLoadManager.getLocationZipCode());
 				}
 			} else {
 				
-				driver.findElement(By.xpath("//input[@id='txtCompanyNameCG1019']")).sendKeys("CG1019");
-				driver.findElement(By.xpath("//input[@id='txtAddress1CG1019']")).sendKeys(objGlLoadManager.getFristAddressline());
-				driver.findElement(By.xpath("//input[@id='txtCityCG1019']")).sendKeys(objGlLoadManager.getLocationCity());
-				driver.findElement(By.xpath("//input[@id='txtZipCodeCG1019']")).sendKeys(objGlLoadManager.getLocationZipCode());
+				driver.findElement(By.xpath("//input[@id='txtCompanyNameFCG1019']")).sendKeys("CG1019");
+				driver.findElement(By.xpath("//input[@id='txtAddress1FCG1019']")).sendKeys(objGlLoadManager.getFristAddressline());
+				driver.findElement(By.xpath("//input[@id='txtCityFCG1019']")).sendKeys(objGlLoadManager.getLocationCity());
+				driver.findElement(By.xpath("//input[@id='txtZipCodeFCG1019']")).sendKeys(objGlLoadManager.getLocationZipCode());
 	
 			}
            
