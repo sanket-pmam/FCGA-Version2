@@ -1,0 +1,19 @@
+
+1: Please Enter Product Name to start SmokeTest : (WC/GL)
+2: Sheet Name : TD_GL
+3: Product:GL
+4: ========********************************========
+5: New Quote is getting Created.
+6: TC - 1-Straight Through Flow is getting Executed.
+7: URL: https://dev_winston.fwcins.com/FWCPortal/User/Login/Login.html
+8: Agent UserName: Acentria36 / Agent Password:AI495!
+9: Agent Log In is done Sucessfully
+10: Agent Name is selected Sucessfully
+11: New Quote is going to be created
+12: Gatekeeper Question have been completed Sucessfully
+13: Risk Level have been completed Sucessfully
+14: Class & Payroll have been completed Sucessfully
+15: Screenshot saved successfully
+16: ========********************************========
+17: New Quote is getting Created.
+18: TC - 2-Straight Through Flow is getting Executed.
