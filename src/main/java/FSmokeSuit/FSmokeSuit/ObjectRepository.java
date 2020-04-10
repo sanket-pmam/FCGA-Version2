@@ -137,7 +137,7 @@ public class ObjectRepository {
 	@FindBy (xpath="//button[@id='btnAddClassification']")
 	public WebElement btnAddClassCode;
 	
-	@FindBy (xpath="//input[@class='dynamicAdd form-control'][@name='percentage']")
+	@FindBy (xpath="//input[@class='dynamicAdd form-control'][@name='percentage'][@maxlength='3']")
 	public WebElement ClasscodePercentage;
 					
 	@FindBy (xpath="//input[@id='expectedGrossReceipts']")
@@ -326,6 +326,34 @@ public class ObjectRepository {
 	
 	@FindBy(xpath = "//label[@for='rdoRequireCertificatesWCYes']")
 	private WebElement rdoRequireCertificatesWCYes;
+	
+	//--------- schedule mod ----------
+	
+	@FindBy(xpath = "//input[@id='txtMakeEq1']")
+	private WebElement txtSMMake;
+	
+	@FindBy(xpath = "//input[@id='txtModelEq1']")
+	private WebElement txtSMModel;
+	
+	@FindBy(xpath = "//input[@id='txtSerialEq1']")
+	private WebElement txtSMSerialNo;
+	
+	@FindBy(xpath = "//label[@for='chkLossPayeeEq1']")
+	private WebElement chkSMLossPayee;
+
+	@FindBy(xpath = "//input[@id='txtNameEq1']")
+	private WebElement txtSMName;
+	
+	@FindBy(xpath = "//input[@id='txtAdd1Eq1']")
+	private WebElement txtSMAddr;
+	
+	@FindBy(xpath = "//input[@id='txtCityEq1']")
+	private WebElement txtSMCity;
+	
+	@FindBy(xpath = "//input[@id='txtZipEq1']")
+	private WebElement txtSMZip;
+	
+   //----------------------------------
 	
 	@FindBy (xpath="//input[@value='MAKE PAYMENT & ISSUE']")
 	private WebElement GLMakePayment;
@@ -781,7 +809,7 @@ public class ObjectRepository {
 	@FindBy (xpath="//input[@id='btnReRate']")
 	public WebElement UWbtnReRate;
 	
-	@FindBy (xpath="//input[@id='btnExit_Common']")
+	@FindBy (xpath="//div[@id ='dvQuoteDoc']//input[@id='btnExit_Common']")
 	public WebElement UWbtnExit;
 	
 	@FindBy (xpath="//div[starts-with(@id,'AlertMsgBox')]/div/div/div[2]")
@@ -828,19 +856,28 @@ public class ObjectRepository {
 	@FindBy (xpath="//button[@id='btnenvlop']")
 	public WebElement UWNotes;
 	
-	@FindBy (xpath="//input[@id='txtQuoteNote']")
+	@FindBy (xpath="//textarea[@id='txtQuoteNote']")
 	public WebElement txtNotes;
 	
-	@FindBy (xpath="//button[@id='BtnPostNote']")
+	@FindBy (xpath="//input[@id='BtnPostNote']")
 	public WebElement UWPostNote;
 	
 	@FindBy (xpath="//button[@id='btnsticynote']")
 	public WebElement UWMessages;
 	
-	@FindBy (xpath="//input[@id='txtQuoteQuestion']")
+	@FindBy (xpath="//textarea[@id='txtQuoteQuestion']")
 	public WebElement txtMessages;
 	
-	@FindBy (xpath="//button[@id='BtnAskProducer']")
+	@FindBy (xpath="//button [@id='btntxtfile']")
+	public WebElement UWdocs;
+	
+	@FindBy (xpath="//a[@id='QDoccollapseThree']")
+	public WebElement UWotherdocs;
+	
+	@FindBy (xpath="//form[@id='demo-upload']")
+	public WebElement UWdocsupload;
+	
+	@FindBy (xpath="//input[@id='BtnAskProducer']")
 	public WebElement UWAskProducer;
 	
 	@FindBy (xpath="//a[@id='lnknmNotes']/span/i")
@@ -892,6 +929,18 @@ public class ObjectRepository {
 	
 	public WebElement getUWMessages() {
 		return UWMessages;
+	}
+	
+	public WebElement getUWdocs() {
+		return UWdocs;
+	}
+	
+	public WebElement getUWotherdocs() {
+		return UWotherdocs;
+	}
+	
+	public WebElement getUWdocsupload() {
+		return UWdocsupload;
 	}
 	
 	public WebElement gettxtMessages() {
@@ -1104,7 +1153,30 @@ public class ObjectRepository {
 	public WebElement getrdoRequireCertificatesWCYes() {
 		return rdoRequireCertificatesWCYes;
 	}
-
+	public WebElement gettxtSMMake() {
+	    return txtSMMake;
+	} 
+	public WebElement gettxtSMModel() {
+	    return txtSMModel;
+	}   
+	public WebElement gettxtSMSerialNo() {
+	   return txtSMSerialNo;
+	}  
+	public WebElement getchkSMLossPayee() {
+	   return chkSMLossPayee;
+	}  
+	public WebElement gettxtSMName() { 
+	   return txtSMName;
+	}  
+	public WebElement gettxtSMAddr() {
+	   return txtSMAddr;
+	}  
+	public WebElement gettxtSMCity() {
+	   return txtSMCity;
+	}  
+	public WebElement gettxtSMZip() {
+	   return txtSMZip;
+	}  
 	public WebElement getUseasis() {
 		return Useasis;
 	}

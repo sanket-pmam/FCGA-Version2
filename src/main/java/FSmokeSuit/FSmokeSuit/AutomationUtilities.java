@@ -19,6 +19,7 @@ import java.io.OutputStream;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 import java.util.Set;
@@ -44,6 +45,7 @@ import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 import com.google.common.base.Function;
 
@@ -62,7 +64,7 @@ public class AutomationUtilities {
    public static Robot rbt;
    public static String sBusinessName;
    public static String sClassCode;
-   public static String sClassCodeDesc;
+   public static String sClassCodeDesc = "";
    public static String QuoteDate;
    public static String CountyCode;
    public static String FWCIPremium;
@@ -73,6 +75,7 @@ public class AutomationUtilities {
    public static String FWCIProducerFee;
    public static String OLDTCID;
    public static String IndustialQ="";
+   public static int tcCount=0;
    
 	static Function<WebDriver, Boolean> documentWait = new Function<WebDriver, Boolean>() {
 		public Boolean apply(WebDriver driver) {
@@ -81,6 +84,9 @@ public class AutomationUtilities {
 					: false;
 		}
 	};
+	
+	
+	
 	
    public static void waitforpageload(WebDriver driver, int iTimeOut) {
 		//System.out.println("Wait for Page load......");
@@ -97,7 +103,7 @@ public class AutomationUtilities {
 	}
    
    public static void DownLoadPDF(WebDriver driver, String label) throws InterruptedException, AWTException, IOException {
-	   System.out.println("Download PDF...");
+	   //System.out.println("Download PDF...");
 	   Thread.sleep(5000);
 	  
 	   int xCoord = 500;
@@ -138,7 +144,7 @@ public class AutomationUtilities {
 		rbt.keyPress(KeyEvent.VK_ENTER);
 		rbt.keyRelease(KeyEvent.VK_ENTER);
 		
-		 AutomationUtilities.LogSummary(LogPath,"Current Label : "+label+" is completely working.");
+		 //AutomationUtilities.LogSummary(LogPath,"Current Label : "+label+" is completely working.");
 		
    }
  
@@ -259,8 +265,8 @@ public class AutomationUtilities {
 	    
     	drawBorder(driver,element);
 	    element.sendKeys(Keys.chord(Keys.CONTROL, "a"), text);
-	    waitforpageload(driver,5);
 	    element.sendKeys(Keys.TAB);
+	    waitforpageload(driver,5);
 	    //AutomationUtilities.LogSummary(LogPath,"Current Label : "+label+" is completely working.");
 	    //System.out.println("Current Label : "+label+" is completely working.");
     }
@@ -335,7 +341,7 @@ public class AutomationUtilities {
     logcount++;
     }
 
-    public static void ReadClassSpecificQuestion (String testcasePath,String tcSheetName,String Data,String logpath,String ColName ) {
+    public static void ReadWriteClassSpecificQuestion (String testcasePath,String tcSheetName,int count, int tccount,String Data,String logpath,String ColName ) {
 	
 	File file =    new File(testcasePath);
 
@@ -345,10 +351,12 @@ public class AutomationUtilities {
 	    XSSFWorkbook wb = new XSSFWorkbook(fis);
 	    XSSFSheet sheet = wb.getSheet(tcSheetName);
 	    XSSFRow headerRow = sheet.getRow(0);			      
-        Row rowObj=sheet.getRow(0);		        
+        Row rowObj=sheet.getRow(0);
+        int Rowcount = 0;
 	    String result = "";
 	    String Output="";
 	    int resultCol = -1;
+	    
 	    for (Cell cell : headerRow){
 	        result = cell.getStringCellValue();
 	        if (result.equals(ColName)){
@@ -363,26 +371,55 @@ public class AutomationUtilities {
 	    while(result.equalsIgnoreCase("Primary Underwriting Question (Expected)")){
 	    	
 	    	for(int rowNum=1;rowNum<=sheet.getLastRowNum();rowNum++) {
-	        	rowObj=sheet.getRow(rowNum); 
+	        	rowObj=sheet.getRow(rowNum);
 	        	Cell cellObj=rowObj.getCell(resultCol);
+	        	Rowcount = rowNum;
 	        	
 	        	if(cellObj.getStringCellValue().equalsIgnoreCase(Data)) {
 	        		
-	        		Output ="Class Specific Question have been Matched Sucessfully";
+	        		Output ="Matched";
 	        		break;
 	        		
 	            } else { 
 	            	
-	    	       Output ="Class Specific Question have not been Matched Sucessfully";
+	    	       Output ="Not Matched";
 	         }
             	
 	       }
-	    	
-	      AutomationUtilities.LogSummary(logpath,Output);
+	    	 
+	      XSSFRow row = sheet.getRow(Rowcount);
+	      XSSFCell xssfCell = row.getCell(resultCol+tccount); 
+	      xssfCell.setCellValue(Output);
+	      AutomationUtilities.LogSummary(logpath,"Class Specific Question "+count+": "+Output);
 	      result="xxx";
 	      
-	      wb.close();
-	      fis.close();
+	        fis.close();
+	        
+	     if(Output =="Matched") {   
+	    	 
+		    FileOutputStream outputStream = new FileOutputStream(file);
+		    wb.write(outputStream);
+		    outputStream.close();
+		    outputStream=null;
+	     }
+	     
+	     for (int i =1; i<=sheet.getLastRowNum(); i++) {
+	    	 
+	    	 rowObj=sheet.getRow(i);
+	         Cell cellObj=rowObj.getCell(resultCol+tccount);
+	         
+	         if(!cellObj.getStringCellValue().equalsIgnoreCase("Matched")) {
+	        	 cellObj.setCellValue("Not Matched");
+	        	 FileOutputStream outputStream = new FileOutputStream(file);
+	 		     wb.write(outputStream);
+	 		     outputStream.close();
+	 		     outputStream=null;
+	         }
+	     }
+		 wb.close();  
+	     wb=null;
+		 fis=null;
+		 
         }
       }
     catch (IOException e) {
@@ -495,60 +532,8 @@ public class AutomationUtilities {
       } 
    }
 
-    public static void ExcelUpdateClassSpecificQuestion (String testcasePath,String tcSheetName,String Data,int i,String ColName ) {
-	
-	File file = new File(testcasePath);
+   public static void Traverse(WebDriver driver,String pdfName) throws AWTException, InterruptedException, UnsupportedFlavorException, IOException {
 
-    try {
-       
-        FileInputStream fis = new FileInputStream(file);
-	    XSSFWorkbook wb = new XSSFWorkbook(fis);
-	    XSSFSheet sheet = wb.getSheet(tcSheetName);
-	    XSSFRow headerRow = sheet.getRow(0);
-	    String result = "";
-	    int resultCol = -1;
-	    for (Cell cell : headerRow){
-	        result = cell.getStringCellValue();
-	        if (result.equals(ColName)){
-	            resultCol = cell.getColumnIndex();
-	            break;
-	         }
-	    }
-	    if (resultCol == -1){
-	        System.out.println("Searched Collumn is not found in sheet");
-	        //return;
-	    }   
-
-	    for(int count = 1;count<=sheet.getLastRowNum();count++){
-	    	 
-	    	if(count == i) {
-	    	
-	    	 XSSFRow row = sheet.getRow(count);
-	         XSSFCell xssfCell = row.getCell(resultCol);
-	         xssfCell.setCellValue(Data);
-	        
-	    	}
-	    }
-	    
-	    fis.close();
-	    FileOutputStream outputStream = new FileOutputStream(file);
-	    wb.write(outputStream);
-	    wb.close();
-	    outputStream.close();
-	    wb=null;
-	    fis=null;
-	    outputStream=null;
-      }
-    catch (IOException e) {
-        System.out.println("Test data file not found");
-      } 
-   }
-
-
-   public static String Traverse(WebDriver driver,String pdfName) throws AWTException, InterruptedException, UnsupportedFlavorException, IOException {
-	
-	String pdfFilePath="X";
-	  
 	 String parentWindow= driver.getWindowHandle();
 	 Set<String> allWindows = driver.getWindowHandles();
 	 for(String curWindow : allWindows){
@@ -563,7 +548,7 @@ public class AutomationUtilities {
 	 Thread.sleep(3000);
 	 driver.close();
 	 driver.switchTo().window(parentWindow);
-     return pdfFilePath;
+	 
      
     }
 
@@ -657,20 +642,34 @@ public class AutomationUtilities {
 
     public static void GLMessages(WebDriver driver,ObjectRepository objectrepository, String AGMessage) throws InterruptedException, IOException
     {
-    	buttonClick(driver,objectrepository.getGLMessages(),10,"Notes");
+    	buttonClick(driver,objectrepository.getGLMessages(),5,"Notes");
     	sendKeysToTextField(driver,objectrepository.getGLtxtNote(),AGMessage,"Notes messages test");
     	buttonClick(driver,objectrepository.getGLSend(),10,"Send");
-    	buttonClick(driver,objectrepository.getGLClose(),10,"Close");
+    	buttonClick(driver,objectrepository.getGLClose(),5,"Close");
     }
     
     public static void ActionMessages(WebDriver driver,ObjectRepository objectrepository, String AGMessage) throws InterruptedException, IOException
     {
     	buttonClick(driver,objectrepository.getbtnAction(),10,"Action");
 		buttonClick(driver,objectrepository.getbtnMessages(),10,"Messages");
-    	buttonClick(driver,objectrepository.getGLMessages(),10,"Notes");
-    	sendKeysToTextField(driver,objectrepository.getGLtxtNote(),AGMessage,"Notes messages test");
+    	//buttonClick(driver,objectrepository.getGLMessages(),10,"Notes");
+    	sendKeysToTextField(driver,objectrepository.getGLtxtNote(),AGMessage,"Action Message");
     	buttonClick(driver,objectrepository.getGLSend(),10,"Send");
-    	buttonClick(driver,objectrepository.getGLClose(),10,"Close");
+    	buttonClick(driver,objectrepository.getGLClose(),5,"Close");
     }
+
+	public static void CheckDuplicateQuestions(ArrayList<String> questionArray, String question) {
+	
+		int i=0;
+		for (String questions : questionArray) {
+		    if (questions.equalsIgnoreCase(question)) {
+		        i++;
+		    }
+		  if(i == 2) {
+			  
+			  Assert.fail("Duplicate Question");
+		  }
+		}
+	}
     
 }

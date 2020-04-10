@@ -14,6 +14,34 @@ public class LoadManager implements Cloneable {
 		private String AICG2007;
 		private String AICG2026;
 		private String UWModifyPerm;
+		private String SEMake;
+		private String SEModel;
+		private String SESerialNo;
+		private String SELossPayee;
+		private String SEName;
+		private String SEAddr;
+		private String SECity;
+		private String SEZip;
+		private String AgentNotes;
+		private String AgentMessages;
+		private String UWModifyRiskLPerm;
+		private String UWModifyCounty;
+		private String UWModifyBName;
+		private String UWModifyFName;
+		private String UWModifyLName;
+		private String UWModifyLL;
+		private String UWModifyDeductible;
+		private String UWModifyClassPay;
+		private String UWModifyMClasscode;
+		private String UWModifySClasscode;
+		private String UWModifyActiveOwner;
+		private String UWModifyClassSpecificQ;
+		private String UWModifyExpectedGross;
+		private String UWModifySubContractorGross;
+		private String UWModifyUnSubContractorGross;
+		private String UWQuoteStatus;
+		private String UWNotes;
+		private String UWMessages;
 		private double TestCaseId;
 		private String Product;
 		private String State;
@@ -40,6 +68,7 @@ public class LoadManager implements Cloneable {
 		private String TypeofCompany;
 		private double ActiveOwner;
 		private double SubContractorGrossReciepts;
+		private String UnSubContractorGrossReciepts;
 		private String InstallationFloater;
 		private String ContractorsHandTools;
 		private String RentedorLeasedEquipment;
@@ -271,6 +300,13 @@ public class LoadManager implements Cloneable {
 			return String.valueOf(Math.round(SubContractorGrossReciepts));
 		}
 
+		public void setUnSubContractorGrossReciepts(String unSubcontractorGR) {
+			UnSubContractorGrossReciepts = unSubcontractorGR;
+		}
+		public String getUnSubContractorGrossReciepts() {
+			return UnSubContractorGrossReciepts;
+		}
+		
 		public void setInstallationFloater(String installationfloater) {
 			InstallationFloater = installationfloater;
 		}
@@ -812,5 +848,202 @@ public class LoadManager implements Cloneable {
 		}
 		public String getUWModifyPerm() {
 			return UWModifyPerm;
+		}
+
+		public void setSEMake(String sSEMake) {
+			SEMake = sSEMake;
+		}
+		public String getSEMake() {
+			return SEMake;
+		}
+		
+		public void setSEModel(String sSEModel) {
+			SEModel = sSEModel;
+		}
+		public String getSEModel() {
+			return SEModel;
+		}
+		
+		public void setSESerialNo(String sSESerialNo) {
+			SESerialNo = sSESerialNo;	
+		}
+		public String getSESerialNo() {
+			return SESerialNo;
+		}
+		
+		public void setSELossPayee(String sSELossPayee) {
+			SELossPayee = sSELossPayee;		
+		}
+		public String getSELossPayee() {
+			return SELossPayee;
+		}
+		
+		public void setSEName(String sSEName) {
+			SEName = sSEName;			
+		}
+		public String getSEName() {
+			return SEName;
+		}
+		
+		public void setSEAddr(String sSEAddr) {
+			SEAddr = sSEAddr;			
+		}
+		public String getSEAddr() {
+			return SEAddr;
+		}
+		
+		public void setSECity(String sSECity) {
+			SECity	= sSECity;	
+		}
+		public String getSECity() {
+			return SECity;
+		}
+		
+		public void setSEZip(String sSEZip) {
+			SEZip = sSEZip;
+		}
+		public String getSEZip() {
+			return SEZip;
+		}
+
+		public void setAgentNotes(String sAgentNotes) {
+			AgentNotes = sAgentNotes;
+		}
+		public String getAgentNotes() {
+			return AgentNotes;
+		}
+
+		public void setAgentMessages(String sAgentMessages) {
+			AgentMessages = sAgentMessages;
+		}
+		public String getAgentMessages() {
+			return AgentMessages;
+		}
+		
+		public void setUWModifyRiskLPerm(String sUWModifyRiskLPerm) {
+			UWModifyRiskLPerm = sUWModifyRiskLPerm;
+		}
+		public String getUWModifyRiskLPerm() {
+			return UWModifyRiskLPerm;
+		}
+		
+		public void setUWModifyCounty(String sUWModifyCounty) {
+			UWModifyCounty = sUWModifyCounty;	
+		}
+		public String getUWModifyCounty() {
+			return UWModifyCounty;
+		}
+		
+		public void setUWModifyBName(String sUWModifyBName) {
+			UWModifyBName = sUWModifyBName;
+		}
+		public String getUWModifyBName() {
+			return UWModifyBName;
+		}
+		
+		public void setUWModifyFName(String sUWModifyFName) {
+			UWModifyFName = sUWModifyFName;
+		}
+		public String getUWModifyFName() {
+			return UWModifyFName;
+		}
+		
+		public void setUWModifyLName(String sUWModifyLName) {
+			UWModifyLName = sUWModifyLName;
+		}
+		public String getUWModifyLName() {
+			return UWModifyLName;
+		}
+		
+		public void setUWModifyLL(String sUWModifyLL) {
+			UWModifyLL = sUWModifyLL;
+		}
+		public String getUWModifyLL() {
+			return UWModifyLL;
+		}
+		
+		public void setUWModifyDeductible(String sUWModifyDeductible) {
+			UWModifyDeductible = sUWModifyDeductible;
+		}
+		public String getUWModifyDeductible() {
+			return UWModifyDeductible;
+		}
+		
+		public void setUWModifyClassPay(String sUWModifyClassPay) {
+			UWModifyClassPay = sUWModifyClassPay;
+		}
+		public String getUWModifyClassPay() {
+			return UWModifyClassPay;
+		}
+		
+		public void setUWModifyMainClasscode(String sUWModifyMClasscode) {
+			UWModifyMClasscode = sUWModifyMClasscode;
+		}
+		public String getUWModifyMainClasscode(){
+			return UWModifyMClasscode;
+		}
+		
+		public void setUWModifySubClasscode(String sUWModifySClasscode) {
+			UWModifySClasscode = sUWModifySClasscode;
+			
+		}
+		public String getUWModifySubClasscode(){
+			return UWModifySClasscode;
+		}
+		
+		public void setUWModifyActiveOwner(String sUWModifyActiveOwner) {
+			UWModifyActiveOwner = sUWModifyActiveOwner;
+		}
+		public String getUWModifyActiveOwner(){
+			return UWModifyActiveOwner;
+		}
+		
+		public void setUWModifyClassSpecificQ(String sUWModifyClassSpecificQ) {
+			UWModifyClassSpecificQ = sUWModifyClassSpecificQ;			
+		}
+		public String getUWModifyClassSpecificQ(){
+			return UWModifyClassSpecificQ;
+		}
+		
+		public void setUWNotes(String sUWNotes) {
+			UWNotes = sUWNotes;
+		}
+		public String getUWNotes(){
+			return UWNotes;
+		}
+		
+		public void setUWMessages(String sUWMessages) {
+			UWMessages = sUWMessages;
+		}
+		public String getUWMessages(){
+			return UWMessages;
+		}
+
+		public void setUWModifyExpectedGross(String sUWModifyExpectedGross) {
+			UWModifyExpectedGross =sUWModifyExpectedGross;
+		}
+		public String getUWModifyExpectedGross(){
+			return UWModifyExpectedGross;
+		}
+		
+		public void setUWModifySubContractorGross(String sUWModifySubContractorGross) {
+			UWModifySubContractorGross = sUWModifySubContractorGross;			
+		}
+		public String getUWModifySubContractorGross(){
+			return UWModifySubContractorGross;
+		}
+		
+		public void setUWModifyUnSubContractorGross(String sUWModifyUnSubContractorGross) {
+			UWModifyUnSubContractorGross = sUWModifyUnSubContractorGross;	
+		}
+		public String getUWModifyUnSubContractorGross(){
+			return UWModifyUnSubContractorGross;
+		}
+
+		public void setUWQuoteStatus(String sUWQuoteStatus) {
+			UWQuoteStatus = sUWQuoteStatus;			
+		}
+		public String getUWQuoteStatus(){
+			return UWQuoteStatus;
 		}
 	}

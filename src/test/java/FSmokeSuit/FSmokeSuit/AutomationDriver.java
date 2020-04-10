@@ -20,6 +20,7 @@ public class AutomationDriver {
 	String testcasePath;
 	String TCSheetName;
 	String TCSnapPath;
+	int OldtcCount;
 	String TCErrSnapPath;
 	String TCTempletReportPath;
 	String TCRPSHEETNAME;
@@ -93,7 +94,8 @@ public class AutomationDriver {
 		TestCaseID = objLoadManager.getTestCaseId();
 		AutomationUtilities.testCaseID = TestCaseID;
 		AutomationUtilities.tcSnapPath = TCSnapPath;
-		
+	    AutomationUtilities.tcCount = OldtcCount;
+	    
 		LocalDateTime myDateObj = LocalDateTime.now();
 		DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH_mm_ss");
 		
@@ -111,6 +113,8 @@ public class AutomationDriver {
 			AutomationUtilities.LogSummary(TCLogPath,
 					"TC - "+ objLoadManager.getTestCaseId() + "-" + objLoadManager.getTCScenarios() + " is getting Executed.");
 			
+			AutomationUtilities.tcCount = AutomationUtilities.tcCount + 1;
+			OldtcCount = AutomationUtilities.tcCount;
 			System.setProperty("webdriver.chrome.driver",System.getProperty("user.dir") + AutomationUtilities.getDataFromPropertiesFile("CHROME_DRIVER_PATH"));
 			
             ChromeOptions options = new ChromeOptions();

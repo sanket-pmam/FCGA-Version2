@@ -17,13 +17,13 @@ public class HomePage extends AutomationUtilities {
 		
 		public void SelectAgent(WebDriver driver,String sAgentName) throws InterruptedException, IOException 
 		{
-			waitforpageload(driver, 5);
+			waitforpageload(driver, 2);
 			//Thread.sleep(2000);
-			buttonClick(driver,objectrepository.getSelectAgent(),50,"Agency Contact");
+			buttonClick(driver,objectrepository.getSelectAgent(),10,"Agency Contact");
 			
 			EsendKeysToTextField(driver,objectrepository.getSearchAgent(), sAgentName,"AgentName");
 			
-		    buttonClick(driver,objectrepository.getbtnContinue(), 15, "Continue Button");
+		    buttonClick(driver,objectrepository.getbtnContinue(), 10, "Continue Button");
 		    AutomationUtilities.LogSummary(LogPath,"Agent Name is selected Sucessfully");
 		}
 		
@@ -40,14 +40,14 @@ public class HomePage extends AutomationUtilities {
 			Thread.sleep(2000);
 			if (sProductName.equalsIgnoreCase("GL")){
 				
-				buttonClick(driver, objectrepository.getbtnrdbGeneralLiability(),30,"GL Radio Button is clicked");
+				buttonClick(driver, objectrepository.getbtnrdbGeneralLiability(),10,"GL Radio Button is clicked");
 				//System.out.println("Selecting GL Radio Button");
 			}
 			else {
 				//System.out.println("Selecting WC Radio Button");
 				//Thread.sleep(5000);
 				//buttonClickWithoutWait(driver,objectrepository.getbtnrdbWorkersComp(),"WC Radio Button is clicked");
-				buttonClick(driver,objectrepository.getbtnrdbWorkersComp(),30,"WC Radio Button is clicked");
+				buttonClick(driver,objectrepository.getbtnrdbWorkersComp(),10,"WC Radio Button is clicked");
 				
 				
 				sendKeysToTextField(driver,objectrepository.getinpFEIN(),sRandomNumber,"FEIN Number is Entered");

@@ -4,6 +4,7 @@ import java.awt.AWTException;
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -23,7 +24,7 @@ public class GeneralLiability extends AutomationUtilities {
 	public static ObjectRepository objectrepository = null;
 	String QClassSpecACount= null;
 	String QClassSpecValue= null;
-	
+	ArrayList<String> QuestionArray = new ArrayList<String>();
 //------------------------	
 	String ElementNamexpath = "//td[@style= 'display:none'][@class='border-white']";
 	String QuestionNamexpath = "//tr[@class='visibleTr']";
@@ -69,7 +70,7 @@ public class GeneralLiability extends AutomationUtilities {
        }
     }
     
-    buttonClick(driver,objectrepository.getbtnsaveandcontinue(),10,"Click on Save and Continue");
+    buttonClick(driver,objectrepository.getbtnsaveandcontinue(),5,"Click on Save and Continue");
     //AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
     
     System.out.println("Gatekeeper Question have been completed Sucessfully");
@@ -179,9 +180,8 @@ public class GeneralLiability extends AutomationUtilities {
 	}
 		public void classPayroll(LoadManager objGlLoadManager, WebDriver driver) throws InterruptedException, IOException, AWTException {
 			
-			String[] ClassCode = objGlLoadManager.getClassCode().split("/");
 			AutomationUtilities.sClassCode = objGlLoadManager.getClassCode();
-			AutomationUtilities.sClassCodeDesc = driver.findElements(By.xpath("//td[@data-fieldid='AIR']")).toString();
+			String[] ClassCode = objGlLoadManager.getClassCode().split("/");
 			int classcodecount = ClassCode.length;
 			if(classcodecount > 1) {
 			int Eprecentage = 100/classcodecount;
@@ -190,7 +190,8 @@ public class GeneralLiability extends AutomationUtilities {
 				buttonClick(driver,objectrepository.getdpdclasscode(),10,"Click on Class Code Drop down");
 				EsendKeysToTextField(driver,objectrepository.gettxtUniquetextbox(),ClassCode[i],"Class Codes");
 				buttonClick(driver,objectrepository.getbtnAddClassCode(),10,"Click on Add Button");
-				
+				AutomationUtilities.sClassCodeDesc = AutomationUtilities.sClassCodeDesc + driver.findElement(By.xpath("//td[@data-fieldid='"+ClassCode[i]+"']//parent :: tr// following-sibling :: td//b")).getText().toString();
+                System.out.println("Class Code Desc : "+ AutomationUtilities.sClassCodeDesc);
 				if(i == classcodecount-1) {
 					
 					Eprecentage = 100 - (Eprecentage*i);  
@@ -204,6 +205,7 @@ public class GeneralLiability extends AutomationUtilities {
 				buttonClick(driver,objectrepository.getdpdclasscode(),10,"Click on Class Code Drop down");
 				EsendKeysToTextField(driver,objectrepository.gettxtUniquetextbox(),objGlLoadManager.getClassCode(),"Class Codes");
 				buttonClick(driver,objectrepository.getbtnAddClassCode(),10,"Click on Add Button");
+				AutomationUtilities.sClassCodeDesc = driver.findElement(By.xpath("//td[@data-fieldid='"+objGlLoadManager.getClassCode()+"']//parent :: tr// following-sibling :: td//b")).getText().toString();
 				
 		       
 			}
@@ -213,6 +215,8 @@ public class GeneralLiability extends AutomationUtilities {
 			
 			if(!objGlLoadManager.getSubClassCode().isEmpty()) {
 			
+			AutomationUtilities.sClassCode = objGlLoadManager.getClassCode()+","+objGlLoadManager.getSubClassCode();
+				
 			sendKeysToTextField(driver,objectrepository.getInSubcontractorCost(),objGlLoadManager.getSubContractorGrossReciepts(),"Expected Sub Class Code Gross Amount");
 			sendKeysToTextField(driver,objectrepository.getSubcontractorCostopdes(),"OK-Approved", "Sub Contractor Description");
 			
@@ -222,11 +226,15 @@ public class GeneralLiability extends AutomationUtilities {
 			buttonClick(driver,objectrepository.getbtnAddSubClassCode(),10,"Click Add Button");
 			sendKeysToTextField(driver,objectrepository.getSubClasscodePercentage(),"100","Percentage");
 			//AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
-			
-			}
+			AutomationUtilities.sClassCodeDesc = AutomationUtilities.sClassCodeDesc +"/"+ driver.findElement(By.xpath("//td[@data-fieldid='"+objGlLoadManager.getSubClassCode()+"']//parent :: tr// following-sibling :: td//b")).getText().toString();
+			}else {
 
-			sendKeysToTextField(driver,objectrepository.getUnSubcontractorCost(),objGlLoadManager.getSubContractorGrossReciepts(),"Expected Sub Class Code Gross Amount");
+			sendKeysToTextField(driver,objectrepository.getUnSubcontractorCost(),objGlLoadManager.getUnSubContractorGrossReciepts(),"Expected Sub Class Code Gross Amount");
+			}
+			
 			sendKeysToTextField(driver,objectrepository.gettxtActivePartner(),objGlLoadManager.getActiveOwner(),"Active Owner");
+			sendKeysToTextField(driver,objectrepository.getClasscodePercentage(),"100","Percentage");
+			
 			//AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
 			
 			/*if(!(classcodecount > 1)) {
@@ -243,7 +251,6 @@ public class GeneralLiability extends AutomationUtilities {
 				Thread.sleep(6000);
 				
 				buttonClick(driver,objectrepository.getbtnClose(),10,"Click on Button Close");*/
-				sendKeysToTextField(driver,objectrepository.getClasscodePercentage(),"100","Percentage");
 				//AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
 			  //}
 			//}
@@ -255,12 +262,14 @@ public class GeneralLiability extends AutomationUtilities {
 		
 		public void AI(LoadManager objGlLoadManager,WebDriver driver) throws InterruptedException, IOException, AWTException {
 			
+			waitforpageload(driver, 5);
 			//AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
-			Thread.sleep(3000);
-			AutomationUtilities.GLMessages(driver,objectrepository, "String AGMessage");
+			//Thread.sleep(3000);
+			
+			AutomationUtilities.GLMessages(driver,objectrepository, objGlLoadManager.getAgentMessages());
 			JavascriptExecutor js = (JavascriptExecutor) driver;
 			
-			Thread.sleep(2000);
+			//Thread.sleep(2000);
 			if (objGlLoadManager.getAI().equalsIgnoreCase("No")) {
 			if(objGlLoadManager.getWaivers().equalsIgnoreCase("Yes")) {
 				
@@ -369,25 +378,21 @@ public class GeneralLiability extends AutomationUtilities {
 		  if (QAns.equalsIgnoreCase("No")) {
 			  
 			    String xpath = "//tr[@class='visibleTr']";
-
+			    
 	        	for (int i =1; i<=LastQCount(driver,xpath);i++) {
 	       
 	        		QClassSpecACount = driver.findElement(By.xpath("//tr[@class='visibleTr']["+i+"]")).getAttribute("id").toString();
 	        		
-	        		
 	        		QClassSpecValue = driver.findElement(By.xpath("//tr[@id='"+QClassSpecACount+"']/td[5]")).getText().toString();
 	        		
-	        		System.out.println("Class Specific Question "+i+" :"+QClassSpecValue);
+	        		//System.out.println("Class Specific Question "+i+" :"+QClassSpecValue);
 	        		AutomationUtilities.LogSummary(LogPath,"Class Specific Question "+i+" :"+QClassSpecValue);
-	        		
 	        		String [] Qvalue = QClassSpecValue.split(":");
 	        		Qvalue[1] = Qvalue[1].replaceFirst(" ","");
-	        		
-	        		AutomationUtilities.ExcelUpdateClassSpecificQuestion(testcasePath, "TD_CSQ", Qvalue[0], i ,"Actual Class Code");
-	        		AutomationUtilities.ExcelUpdateClassSpecificQuestion(testcasePath, "TD_CSQ", Qvalue[1], i ,"Primary Underwriting Question (Actual)");
-	        		
-	        		AutomationUtilities.ReadClassSpecificQuestion (testcasePath,"TD_CSQ",Qvalue[1],LogPath,"Primary Underwriting Question (Expected)" );
-	        		
+	        		QuestionArray.add(Qvalue[1]);
+	        
+	        		AutomationUtilities.CheckDuplicateQuestions(QuestionArray,Qvalue[1]);
+	        		AutomationUtilities.ReadWriteClassSpecificQuestion (testcasePath,"TD_CSQ",i,AutomationUtilities.tcCount,Qvalue[1],LogPath,"Primary Underwriting Question (Expected)" );
 	        		driver.findElement(By.xpath("//tr[@class='visibleTr']//td[contains(text(),'Question')]//parent :: tr// following-sibling :: td//input[contains(@name,'question"+QClassSpecACount+"')]//parent :: div//label[starts-with(@for,'radio-')]")).click(); // no button
 	        	}
 		  }	
@@ -421,7 +426,7 @@ public class GeneralLiability extends AutomationUtilities {
     		 objGLunderwriting.UWGLEditQuote(driver,objGlLoadManager);
     	 }
     	 
-    	 objGLunderwriting.UWChangeStatus(driver);
+    	 objGLunderwriting.UWChangeStatus(driver,objGlLoadManager);
     	// AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
     	 
     	 
@@ -433,7 +438,7 @@ public class GeneralLiability extends AutomationUtilities {
 		// AutomationUtilities.Screenshot(tcSnapPath, testCaseID);
 		
     	 objhomepage.checkFramePopup(driver);
-    	 objGLunderwriting.AgentSearch(driver);
+    	 objGLunderwriting.AgentSearch(driver,objGlLoadManager);
     	// AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
     	 waitforpageload(driver, 15);
      }
@@ -507,14 +512,14 @@ public class GeneralLiability extends AutomationUtilities {
      if(objGlLoadManager.getTypeofCompany().equalsIgnoreCase("FWCI")) {
     	 
     	 buttonClick(driver,objectrepository.getrdo_FWCIbutton(),10,"Click on FWCI Insurance Company");
-         System.out.println("Click on FWCI Insurance Company");
-         AutomationUtilities.LogSummary(LogPath,"Click on FWCI Insurance Company");
+         //System.out.println("Click on FWCI Insurance Company");
+         //AutomationUtilities.LogSummary(LogPath,"Click on FWCI Insurance Company");
          
      }else {
     	 
          buttonClick(driver,objectrepository.getrdo_CBbutton(),10,"Click on CB Insurance Company");
-         System.out.println("Click on CB Insurance Company");
-         AutomationUtilities.LogSummary(LogPath,"Click on CB Insurance Company");
+         //System.out.println("Click on CB Insurance Company");
+         //AutomationUtilities.LogSummary(LogPath,"Click on CB Insurance Company");
          
      }
      
@@ -524,17 +529,18 @@ public class GeneralLiability extends AutomationUtilities {
      //AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
      Thread.sleep(3000);
      
-	 buttonClick(driver,objectrepository.getbtn_CloseProducerFee(),15,"Click on Button Close");
+	 buttonClick(driver,objectrepository.getbtn_CloseProducerFee(),10,"Click on Button Close");
 	 //AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
+	 Thread.sleep(3000);
 	 
 	 AutomationUtilities.QuoteNo = objectrepository.getlbl_QuoteNo().getText();
-	 System.out.println("Quote No: "+ objectrepository.getlbl_QuoteNo().getText());
+	 //System.out.println("Quote No: "+ objectrepository.getlbl_QuoteNo().getText());
      AutomationUtilities.LogSummary(LogPath,"Quote No: "+ objectrepository.getlbl_QuoteNo().getText());
      //AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
      
 	 buttonClick(driver,objectrepository.getbtn_Appbutton(),10,"Click on Application Button");
-     System.out.println("Click on Application Button");
-     AutomationUtilities.LogSummary(LogPath,"Click on Application Button");
+     //System.out.println("Click on Application Button");
+     //AutomationUtilities.LogSummary(LogPath,"Click on Application Button");
      //AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
      
      System.out.println("Quote Page have been completed Sucessfully");
@@ -564,9 +570,11 @@ public class GeneralLiability extends AutomationUtilities {
 		sendKeysToTextField(driver,objectrepository.gettxtFristAddressline(),objGlLoadManager.getFristAddressline(),"Enter 1st line of Address"); 
         sendKeysToTextField(driver,objectrepository.gettxtSecAddressline(),objGlLoadManager.getSecAddressline(),"Enter 2nd line of Address");
 		sendKeysToTextField(driver,objectrepository.gettxtLocationCity(),objGlLoadManager.getLocationCity(),"Enter City Name");
+		Thread.sleep(1500);
 		sendKeysToTextField(driver,objectrepository.gettxtLocationZipCode(),objGlLoadManager.getLocationZipCode(),"Enter Zip Code");
 		
 		//AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
+		Thread.sleep(2000);
 		if(objectrepository.getUseasis().isDisplayed()) {
 			
 			buttonClick(driver,objectrepository.getUseasis(),10,"Click on Use as is");
@@ -846,7 +854,7 @@ public class GeneralLiability extends AutomationUtilities {
 		}
 
         
-		sendKeysToTextField(driver,objectrepository.gettxtGeneralRemarks(),"OK - Approved","Enter Insurance Carrier");
+		sendKeysToTextField(driver,objectrepository.gettxtGeneralRemarks(),objGlLoadManager.getAgentNotes(),"Enter Notes and Remarks");
 		//AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
 		  
 		sendKeysToTextField(driver,objectrepository.gettxtIndustrial(),"100","Enter Industrial Percentage");
@@ -858,6 +866,23 @@ public class GeneralLiability extends AutomationUtilities {
 		buttonClick(driver,objectrepository.getrdoRequireCertificatesGLYes(),10,"Click on Perform Contract as Yes");
 		buttonClick(driver,objectrepository.getrdoRequireCertificatesWCYes(),10,"Click on Perform Contract as Yes");
 		//AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
+		
+		if (objGlLoadManager.getScheduleEquipment().equalsIgnoreCase("Yes") ) {
+			
+			sendKeysToTextField(driver,objectrepository.gettxtSMMake(),objGlLoadManager.getSEMake(),"Schedule Equipment Make");
+			sendKeysToTextField(driver,objectrepository.gettxtSMModel(),objGlLoadManager.getSEModel(),"Schedule Equipment Model");
+			sendKeysToTextField(driver,objectrepository.gettxtSMSerialNo(),objGlLoadManager.getSESerialNo(),"Schedule Equipment Make");
+		
+			if(objGlLoadManager.getSELossPayee().equalsIgnoreCase("Yes")) {
+				
+				buttonClick(driver,objectrepository.getchkSMLossPayee(),10,"Click on Schedule Equipment Loss Payee");
+				sendKeysToTextField(driver,objectrepository.gettxtSMName(),objGlLoadManager.getSEName(),"Schedule Equipment Name");
+				sendKeysToTextField(driver,objectrepository.gettxtSMAddr(),objGlLoadManager.getSEAddr(),"Schedule Equipment Address");
+				sendKeysToTextField(driver,objectrepository.gettxtSMCity(),objGlLoadManager.getSECity(),"Schedule Equipment City");
+				sendKeysToTextField(driver,objectrepository.gettxtSMZip(),objGlLoadManager.getSEZip(),"Schedule Equipment Zip Code");
+				
+			}
+		}
 		
 		buttonClick(driver,objectrepository.getrdoAgree(),10,"Click on Agree radio button");
 		//AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
@@ -909,7 +934,8 @@ public class GeneralLiability extends AutomationUtilities {
 			buttonClick(driver,objectrepository.getclkPremiumFinancePayment(),10,"Click on Premium Finance Issue Policy");
 		}
 		
-		waitforpageload(driver, 65);
+		waitforpageload(driver, 85);
+		Thread.sleep(5000);
 		//AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
 		buttonClick(driver,objectrepository.getlnkDownloadEvidence(),10,"Clickon EOI Document");
 		

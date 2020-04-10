@@ -299,7 +299,7 @@ public class WorkersCompensation extends AutomationUtilities {
 	    	//AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
 			
 	    	objWCunderwriting.UnderwritingSearch(driver);
-	    	objWCunderwriting.UWChangeStatus(driver);
+	    	objWCunderwriting.UWChangeStatus(driver,objWCLoadManager);
 	    	//AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
 	    	 
 	    	 
@@ -311,7 +311,7 @@ public class WorkersCompensation extends AutomationUtilities {
 			 //AutomationUtilities.Screenshot(tcSnapPath, testCaseID);
 				
 	    	 objhomepage.checkFramePopup(driver);
-	    	 objWCunderwriting.AgentSearch(driver);
+	    	 objWCunderwriting.AgentSearch(driver,objWCLoadManager);
 	    	 //AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
 		
 		}
