@@ -5,7 +5,7 @@
     <classes>
       <class name="FSmokeSuit.FSmokeSuit.AutomationDriver">
         <methods>
-          <include name="AutomationDriverExecution" invocation-numbers="0 1 2 3 4"/>
+          <include name="AutomationDriverExecution"/>
         </methods>
       </class> <!-- FSmokeSuit.FSmokeSuit.AutomationDriver -->
     </classes>

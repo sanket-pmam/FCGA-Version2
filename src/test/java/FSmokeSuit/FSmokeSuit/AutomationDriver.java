@@ -103,6 +103,10 @@ public class AutomationDriver {
 			
 			AutomationUtilities.AutmSnapfile = new File(
 				TCSnapPath + "NewSnap_"+AutomationUtilities.testCaseID+"-"+ myFormatObj.format(myDateObj).toString());
+		    
+			AutomationUtilities.AutmPDFfile = new File(
+		    		 System.getProperty("user.dir") + "\\Test Report\\PDFFile\\TC-0"+AutomationUtilities.testCaseID+ myFormatObj.format(myDateObj).toString());
+
 		}
 		
 		try {

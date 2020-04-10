@@ -56,6 +56,7 @@ public class AutomationUtilities {
    public static String fileContents="";
    public static int logcount = 1;
    public static File AutmSnapfile;
+   public static File AutmPDFfile;
    public static String testCaseID;
    public static String tcSnapPath;
    public static String QuoteNo = "";
@@ -111,6 +112,15 @@ public class AutomationUtilities {
 	   
 	   	Robot rbt = new Robot();
 	   	
+	   
+	   	if (!AutmPDFfile.exists()){
+            if (AutmPDFfile.mkdir()) {
+                System.out.println("Folder/Directory is created successfully");
+            } else {
+                System.out.println("Directory/Folder creation failed!!!");
+            }
+      } 
+	   	
 	   	rbt.mouseMove(xCoord, yCoord);
 //		rbt.keyPress(KeyEvent.VK_CONTROL);
 		rbt.mousePress(InputEvent.BUTTON3_DOWN_MASK);
@@ -130,7 +140,7 @@ public class AutomationUtilities {
 		rbt.keyRelease(KeyEvent.VK_HOME);
 
 		Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-		StringSelection stringSelection = new StringSelection(System.getProperty("user.dir") + "\\Test Report\\PDFFile\\");
+		StringSelection stringSelection = new StringSelection(AutmPDFfile.getAbsolutePath()+"/Autm_");
 		clipboard.setContents(stringSelection, null);
 		
 		rbt.delay(5000);

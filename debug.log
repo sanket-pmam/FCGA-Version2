@@ -46,3 +46,4 @@
 [0116/223731.877:ERROR:registration_protocol_win.cc(84)] TransactNamedPipe: The pipe has been ended. (0x6D)
 [0116/224754.018:ERROR:registration_protocol_win.cc(84)] TransactNamedPipe: The pipe has been ended. (0x6D)
 [0116/225209.484:ERROR:registration_protocol_win.cc(84)] TransactNamedPipe: The pipe has been ended. (0x6D)
+[0409/183507.013:ERROR:prune_crash_reports.cc(35)] PruneCrashReportDatabase: Failed to get pending reports

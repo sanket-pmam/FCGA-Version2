@@ -471,6 +471,8 @@ public class GeneralLiability extends AutomationUtilities {
 			//AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
      }
      
+
+     
      buttonClick(driver,objectrepository.getlnk_DownloadFWCIQuote(),30,"Click on FWCI Quote Link");
      AutomationUtilities.Traverse(driver,"FWCI Quote Doc");
      System.out.println("Download FWCI Quote Document is clicked sucessfully");
@@ -575,8 +577,9 @@ public class GeneralLiability extends AutomationUtilities {
 		
 		//AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
 		Thread.sleep(2000);
-		if(objectrepository.getUseasis().isDisplayed()) {
-			
+		if(!objectrepository.getUseasis().isDisplayed()) {
+			System.out.println("Use as is not coming");
+		}else {
 			buttonClick(driver,objectrepository.getUseasis(),10,"Click on Use as is");
 			}
 		
