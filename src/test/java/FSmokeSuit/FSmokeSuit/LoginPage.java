@@ -1,6 +1,8 @@
 package FSmokeSuit.FSmokeSuit;
 
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.WebDriver;
 
 public class LoginPage extends AutomationUtilities 
@@ -40,7 +42,7 @@ public void AgentSignOut(WebDriver driver) throws InterruptedException, IOExcept
 	
 	waitforpageload(driver, 5);
 	buttonClick(driver,objectrepository.getBtnLogOff(), 10, "Sign Out");
-	Thread.sleep(4000);
+	driver.manage().timeouts().implicitlyWait(4, TimeUnit.SECONDS);
 	AutomationUtilities.LogSummary(LogPath,"Agent SignOut is done Sucessfully");	
 	
 }
@@ -68,10 +70,10 @@ AutomationUtilities.LogSummary(LogPath,"UW Log In is done Sucessfully");
 
 public void UWSignOut(WebDriver driver) throws InterruptedException, IOException {
 	
-	Thread.sleep(3000);
+	waitforpageload(driver, 5);
 	buttonClick(driver,objectrepository.getUWUserName(), 10, "UW UserName");
 	buttonClick(driver,objectrepository.getBtnLogOff(), 10, "Sign Out");
-	Thread.sleep(4000);
+	driver.manage().timeouts().implicitlyWait(4, TimeUnit.SECONDS);
 	AutomationUtilities.LogSummary(LogPath,"UW SignOut is done Sucessfully");	
 	
 }

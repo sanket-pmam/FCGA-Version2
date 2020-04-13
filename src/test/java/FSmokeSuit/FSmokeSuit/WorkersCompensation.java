@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -33,7 +35,7 @@ public class WorkersCompensation extends AutomationUtilities {
 		buttonClick(driver,objectrepository.getWCState(), 10, "Click on State");
 		EsendKeysToTextField(driver,objectrepository.gettxtUniquetextbox(), objWCLoadManager.getWCState(), "State Name");
         
-		Thread.sleep(3000);
+		driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 		sendKeysToTextField(driver,objectrepository.gettxtWCClassCodes(), objWCLoadManager.getWCClassCodeDesc(), "Class Code");
 		buttonClick(driver,objectrepository.getbtnWCContinue(), 10, "Click on Continue");
 		AutomationUtilities.sClassCode = objWCLoadManager.getWCClassCode();
@@ -58,7 +60,7 @@ public class WorkersCompensation extends AutomationUtilities {
 		sendKeysToTextField(driver,objectrepository.gettxtWCCity(), objWCLoadManager.getWCCity(),"City");
 		//AutomationUtilities.Screenshot(tcSnapPath, testCaseID);
 		
-		Thread.sleep(2000);
+		driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
         if(objectrepository.getUseasis().isDisplayed()) {
 			buttonClick(driver,objectrepository.getUseasis(),10,"Click on Use as is");
 			}
@@ -89,7 +91,7 @@ public class WorkersCompensation extends AutomationUtilities {
 			JavascriptExecutor executor = (JavascriptExecutor) driver;
 			executor.executeScript("document.getElementById('rdoCurrExpModYes').click();", element);
 			//System.out.println("Radio button has been selected");
-			Thread.sleep(2000);
+			driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
 
 			sendKeysToTextField(driver,objectrepository.gettxtWCExpMod(), objWCLoadManager.getWCExpMod(), "Current Experience Mod is entered");
 
@@ -127,7 +129,8 @@ public class WorkersCompensation extends AutomationUtilities {
 		buttonClick(driver,objectrepository.getBtnWCNext(), 05, "Next button is saved sucessfully.");
 		//AutomationUtilities.Screenshot(tcSnapPath, testCaseID);
 		
-		if(objectrepository.getUseasis().isDisplayed()) {
+		if(CheckElementPresent(objectrepository.getUseasis()) == true ) {
+		//if(objectrepository.getUseasis().isDisplayed()) {
 			buttonClick(driver,objectrepository.getUseasis(),10,"Click on Use as is");
 			}
 		
@@ -244,14 +247,14 @@ public class WorkersCompensation extends AutomationUtilities {
 		WebElement WCNameInsuredtxt_element = objectrepository.getWCNameInsuredtxt();
 		WCNameInsuredtxt_element.click();
 
-		Thread.sleep(3000);
+		driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 		//AutomationUtilities.Screenshot(tcSnapPath, testCaseID);
 
 		selectDropdownlitag(driver, objectrepository.getWCApplicationRelationsip(), "Primary", "Relaionship");
 		sendKeysToTextField(driver,objectrepository.getWAppliactionCAddress1(), objWCLoadManager.getWCAddress1(),"WC Application Address");
 		sendKeysToTextField(driver,objectrepository.getWAppliactionCity(), objWCLoadManager.getWCCity(), "WC Application City");
 		buttonClick(driver,objectrepository.getWAppliactionState(), 10, "WC Application State drop down");
-		Thread.sleep(2000);
+		driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
 		EsendKeysToTextField(driver,objectrepository.gettxtUniquetextbox(), objWCLoadManager.getWCState(), "State Name");
 		sendKeysToTextField(driver,objectrepository.getWCAppliactionZipcode(), objWCLoadManager.getWCZipCode(),"WC Application Zipcode");
 		buttonClick(driver,objectrepository.getWAppliactionAddLoact(), 10, "Add Location button");
@@ -260,13 +263,13 @@ public class WorkersCompensation extends AutomationUtilities {
 
 		
 		//Adding Second Address
-		Thread.sleep(3000);
+		driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
 		selectDropdownlitag(driver, objectrepository.getselWCNameInsured(),  objWCLoadManager.getWCFirstName() +" "+ objWCLoadManager.getWCLastName(), "Name Insured");
 		selectDropdownlitag(driver, objectrepository.getWCApplicationRelationsip(), "Primary", "Relaionship");
 		sendKeysToTextField(driver,objectrepository.getWAppliactionCAddress1(), objWCLoadManager.getWCAddress1(),"WC Application Address");
 		sendKeysToTextField(driver,objectrepository.getWAppliactionCity(), objWCLoadManager.getWCCity(), "WC Application City"); 
 		buttonClick(driver,objectrepository.getWAppliactionState(), 10, "WC Application State drop down");
-		Thread.sleep(2000);
+		driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
 		EsendKeysToTextField(driver,objectrepository.gettxtUniquetextbox(), objWCLoadManager.getWCState(), "State Name"); 
 		sendKeysToTextField(driver,objectrepository.getWCAppliactionZipcode(), objWCLoadManager.getWCZipCode(),"WC Application Zipcode"); 
 		buttonClick(driver,objectrepository.getWAppliactionAddLoact(), 10, "Add Location button");
@@ -278,11 +281,11 @@ public class WorkersCompensation extends AutomationUtilities {
 		sendKeysToTextField(driver,objectrepository.getWCcontactPhone(), objWCLoadManager.getWCcontactPhone(), "Contact infromation Phone Number");
 		sendKeysToTextField(driver,objectrepository.getWCcontactEmail(), objWCLoadManager.getWCcontactEmail(), "Contact infromation Email");
 		buttonClick(driver,objectrepository.getWCconatactMailingAddress(), 10, "Add Location button");
-		Thread.sleep(2000);
+		driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
 		EsendKeysToTextField(driver,objectrepository.gettxtUniquetextbox(),objWCLoadManager.getWCAddress1(),"Contact Address");
 		//AutomationUtilities.Screenshot(tcSnapPath, testCaseID);
 		
-		Thread.sleep(2000);
+		driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
 		buttonClick(driver,objectrepository.getWCAgreebtn(),20,"Click on Agree Button");
 		//AutomationUtilities.Screenshot(tcSnapPath, testCaseID);
 		
@@ -316,7 +319,7 @@ public class WorkersCompensation extends AutomationUtilities {
 		
 		}
 		
-		Thread.sleep(2000);
+		driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
 		buttonClick(driver,objectrepository.getbtnWCDownloadQuote(),10,"Quote Document");
 		AutomationUtilities.Traverse(driver,"Quote Document");
 	   // System.out.println("Download WC Quote Document is clicked sucessfully");
@@ -324,14 +327,14 @@ public class WorkersCompensation extends AutomationUtilities {
 	     
 		
 		buttonClick(driver,objectrepository.getbtnWCDownloadRatingWorksheet(),50,"Rating Document");
-		Thread.sleep(2000);
+		driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
 		buttonClick(driver,objectrepository.getlnkWCCondensedRatingWorksheet(),15,"Condensed Rating Worksheet");
 		AutomationUtilities.Traverse(driver,"Rating Document");
 		buttonClick(driver,objectrepository.gettxtAppClosebtn(),10,"Close Condensed Rating Worksheet");
-	    //System.out.println("Download WC Rating Document is clicked sucessfully");
+	    //System.out.println("Download WC Rating Document is clicked successfully");
 	    //AutomationUtilities.LogSummary(LogPath,"Download WC Rating Document is clicked successfully");
 		
-	    Thread.sleep(2000);
+		driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
 	    buttonClick(driver,objectrepository.getbtnWCDownloadApplication(),10,"Application Document");
 	    AutomationUtilities.Traverse(driver,"Application Document");
 	   // System.out.println("Download WC Application Document is clicked sucessfully");

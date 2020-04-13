@@ -81,7 +81,7 @@ public class GeneralLiability extends AutomationUtilities {
 
 	public void Risklevel(LoadManager objGlLoadManager,WebDriver driver) throws InterruptedException, IOException, AWTException {
 		
-
+		    String sIFristName, sILastName;
 		    SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
 		    Date date = new Date();
 		    
@@ -98,7 +98,8 @@ public class GeneralLiability extends AutomationUtilities {
 				
 				sendKeysToTextField(driver,objectrepository.gettxtIndividualFirstName(),objGlLoadManager.getGLFristName(),"Frist Name");
 				sendKeysToTextField(driver,objectrepository.gettxtIndividualLastName(),objGlLoadManager.getLastName(),"Last Name");
-				
+				AutomationUtilities.sBusinessName = AutomationUtilities.sBusinessName + objGlLoadManager.getGLFristName() + objGlLoadManager.getLastName();
+						
 				if(objGlLoadManager.getGLFristName().equalsIgnoreCase("")) {
 					
 					AutomationUtilities.sBusinessName = "FCGA AUTM-" + AutomationUtilities.getRandomString(9);
@@ -106,11 +107,13 @@ public class GeneralLiability extends AutomationUtilities {
 					
 					if(sBusinessName.isEmpty()) {
 						
-					String sIFristName = "FCGA AUTM";
+					sIFristName = "FCGA AUTM";
 					sendKeysToTextField(driver,objectrepository.gettxtIndividualFirstName(),sIFristName,"Frist Name");
 					
-					String sILastName = "A"+AutomationUtilities.getRandomString (9);
+					sILastName = "A"+AutomationUtilities.getRandomString (9);
 					sendKeysToTextField(driver,objectrepository.gettxtIndividualLastName(),sILastName,"Last Name");
+					
+					AutomationUtilities.sBusinessName = AutomationUtilities.sBusinessName + sIFristName + sILastName;
 				  } 
 				}
 			    
@@ -119,13 +122,12 @@ public class GeneralLiability extends AutomationUtilities {
 				sendKeysToTextField(driver,objectrepository.gettxtBusinessName(),AutomationUtilities.sBusinessName,"Business Name");
 			}
 		
-			//System.out.println("Insured Name / Business Name is : "+AutomationUtilities.sBusinessName);
+			System.out.println("Insured Name / Business Name is : "+AutomationUtilities.sBusinessName);
+			AutomationUtilities.LogSummary(LogPath,"Insured Name / Business Name is : "+AutomationUtilities.sBusinessName);
 			//AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
 			
-			String sDescription = "FCGA-"+ AutomationUtilities.getRandomString (9);
-			sendKeysToTextField(driver,objectrepository.gettxtDescriptionOfBusiness(),sDescription,"Business Description");
-			sendKeysToTextField(driver,objectrepository.gettxtYearsInBusiness(),objGlLoadManager.getExperience(),"Years In Business");
-  
+			sendKeysToTextField(driver,objectrepository.gettxtDescriptionOfBusiness(),objGlLoadManager.getDescriptionOfBusiness(),"Business Description");
+			sendKeysToTextField(driver,objectrepository.gettxtYearsInBusiness(),objGlLoadManager.getYearsInBusiness(),"Years In Business");
 			//AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
 			
 			if(objectrepository.gettxtYearsInTrade().isEnabled()) {
@@ -181,8 +183,11 @@ public class GeneralLiability extends AutomationUtilities {
 		public void classPayroll(LoadManager objGlLoadManager, WebDriver driver) throws InterruptedException, IOException, AWTException {
 			
 			AutomationUtilities.sClassCode = objGlLoadManager.getClassCode();
+			AutomationUtilities.sSubClassCode = objGlLoadManager.getSubClassCode();
 			String[] ClassCode = objGlLoadManager.getClassCode().split("/");
+			String[] SubClassCode = objGlLoadManager.getSubClassCode().split("/");
 			int classcodecount = ClassCode.length;
+			int subclasscodecount = SubClassCode.length;
 			if(classcodecount > 1) {
 			int Eprecentage = 100/classcodecount;
 			for(int i=0;i<classcodecount;i++) {
@@ -206,7 +211,7 @@ public class GeneralLiability extends AutomationUtilities {
 				EsendKeysToTextField(driver,objectrepository.gettxtUniquetextbox(),objGlLoadManager.getClassCode(),"Class Codes");
 				buttonClick(driver,objectrepository.getbtnAddClassCode(),10,"Click on Add Button");
 				AutomationUtilities.sClassCodeDesc = driver.findElement(By.xpath("//td[@data-fieldid='"+objGlLoadManager.getClassCode()+"']//parent :: tr// following-sibling :: td//b")).getText().toString();
-				
+				sendKeysToTextField(driver,objectrepository.getClasscodePercentage(),"100","Percentage");
 		       
 			}
 			
@@ -216,24 +221,45 @@ public class GeneralLiability extends AutomationUtilities {
 			if(!objGlLoadManager.getSubClassCode().isEmpty()) {
 			
 			AutomationUtilities.sClassCode = objGlLoadManager.getClassCode()+","+objGlLoadManager.getSubClassCode();
-				
 			sendKeysToTextField(driver,objectrepository.getInSubcontractorCost(),objGlLoadManager.getSubContractorGrossReciepts(),"Expected Sub Class Code Gross Amount");
-			sendKeysToTextField(driver,objectrepository.getSubcontractorCostopdes(),"OK-Approved", "Sub Contractor Description");
+			sendKeysToTextField(driver,objectrepository.getSubcontractorCostopdes(),objGlLoadManager.getSubcontractorDesc(), "Sub Contractor Description");
 			
+			if(subclasscodecount > 1) {
+				
+			int Eprecentage = 100/subclasscodecount;
+			for(int i=0;i<subclasscodecount;i++) {
+
+				buttonClick(driver,objectrepository.getSubClasscodes(),10," Click Sub Class Code");
+				EsendKeysToTextField(driver,objectrepository.gettxtUniquetextbox(),SubClassCode [i],"Sub Class Codes");
+				
+                if(i == subclasscodecount-1) {
+					
+					Eprecentage = 100 - (Eprecentage*i);  
+				}
+                
+				buttonClick(driver,objectrepository.getbtnAddSubClassCode(),10,"Click Add Button");
+				sendKeysToTextField(driver,objectrepository.getSubClasscodePercentage(),Integer.toString(Eprecentage),"Percentage");
+			  }
+			}
+			else {
+
 			buttonClick(driver,objectrepository.getSubClasscodes(),10," Click Sub Class Code");
 			EsendKeysToTextField(driver,objectrepository.gettxtUniquetextbox(),objGlLoadManager.getSubClassCode(),"Sub Class Codes");
 			
 			buttonClick(driver,objectrepository.getbtnAddSubClassCode(),10,"Click Add Button");
 			sendKeysToTextField(driver,objectrepository.getSubClasscodePercentage(),"100","Percentage");
-			//AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
+             }
+
 			AutomationUtilities.sClassCodeDesc = AutomationUtilities.sClassCodeDesc +"/"+ driver.findElement(By.xpath("//td[@data-fieldid='"+objGlLoadManager.getSubClassCode()+"']//parent :: tr// following-sibling :: td//b")).getText().toString();
-			}else {
+			
+			}
+			else {
 
 			sendKeysToTextField(driver,objectrepository.getUnSubcontractorCost(),objGlLoadManager.getUnSubContractorGrossReciepts(),"Expected Sub Class Code Gross Amount");
 			}
 			
 			sendKeysToTextField(driver,objectrepository.gettxtActivePartner(),objGlLoadManager.getActiveOwner(),"Active Owner");
-			sendKeysToTextField(driver,objectrepository.getClasscodePercentage(),"100","Percentage");
+			
 			
 			//AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
 			
@@ -410,8 +436,8 @@ public class GeneralLiability extends AutomationUtilities {
      
      if(objGlLoadManager.getTCScenarios().equalsIgnoreCase("Referral Flow")) {
     	
-    	 Thread.sleep(3000);
-    	 sendKeysToTextField(driver,objectrepository.gettxtRefferal(),"OK-Approved for Refferal","Refferal Reason");
+    	 
+    	 sendKeysToTextField(driver,objectrepository.gettxtRefferal(),objGlLoadManager.getUWReferralRemark(),"Refferal Reason");
     	 buttonClick(driver,objectrepository.getBtnDoneRefferal(),10,"Click on Refferal (Done button)");
     	// AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
     	 
@@ -427,8 +453,7 @@ public class GeneralLiability extends AutomationUtilities {
     	 }
     	 
     	 objGLunderwriting.UWChangeStatus(driver,objGlLoadManager);
-    	// AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
-    	 
+    	// AutomationUtilities.Screenshot(tcSnapPath,testCaseID)
     	 
     	 objGLloginpage.UWSignOut(driver);
     	 objGLloginpage.Agentlogin(driver);
@@ -440,10 +465,10 @@ public class GeneralLiability extends AutomationUtilities {
     	 objhomepage.checkFramePopup(driver);
     	 objGLunderwriting.AgentSearch(driver,objGlLoadManager);
     	// AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
-    	 waitforpageload(driver, 15);
+    	 waitforpageload(driver, 115);
      }
 		
-     
+     //driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
      
      System.out.println("Quote Date: "+ objectrepository.getlbl_QuoteDate().getText());
      AutomationUtilities.LogSummary(LogPath,"Quote Date : "+ objectrepository.getlbl_QuoteDate().getText());
@@ -461,18 +486,24 @@ public class GeneralLiability extends AutomationUtilities {
      AutomationUtilities.LogSummary(LogPath,"Insured Name: "+ objectrepository.getlbl_InsuredName().getText());
      //AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
      
-     if(objGlLoadManager.getState().equalsIgnoreCase("Texas")) {
+     if(objGlLoadManager.getUWModifyState().isBlank()) {
+          if(objGlLoadManager.getState().equalsIgnoreCase("Texas")) {
     	 
-			sendKeysToTextField(driver,objectrepository.gettxt_ProducerFee(),"100","Enter Producer Fee");
-			buttonClick(driver,objectrepository.getbtn_SaveProducerFee(),30,"Click on Button Save");
-			//AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
-			Thread.sleep(5000);
+    	   sendKeysToTextField(driver,objectrepository.gettxt_ProducerFee(),objGlLoadManager.getProducerFee(),"Enter Producer Fee");
+			buttonClick(driver,objectrepository.getbtn_SaveProducerFee(),70,"Click on Button Save");
+            Thread.sleep(4000);
 			buttonClick(driver,objectrepository.getbtn_CloseProducerFee(),10,"Click on Button Close");
-			//AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
+			//AutomationUtilities.Screenshot(tcSnapPath,testCaseID)
+         }
+     } else if(objGlLoadManager.getUWModifyState().equalsIgnoreCase("Texas")) {
+  	        
+    	    sendKeysToTextField(driver,objectrepository.gettxt_ProducerFee(),objGlLoadManager.getProducerFee(),"Enter Producer Fee");
+			buttonClick(driver,objectrepository.getbtn_SaveProducerFee(),70,"Click on Button Save");
+            Thread.sleep(4000);
+			buttonClick(driver,objectrepository.getbtn_CloseProducerFee(),10,"Click on Button Close");
+			//AutomationUtilities.Screenshot(tcSnapPath,testCaseID)
      }
-     
 
-     
      buttonClick(driver,objectrepository.getlnk_DownloadFWCIQuote(),30,"Click on FWCI Quote Link");
      AutomationUtilities.Traverse(driver,"FWCI Quote Doc");
      System.out.println("Download FWCI Quote Document is clicked sucessfully");
@@ -499,17 +530,29 @@ public class GeneralLiability extends AutomationUtilities {
      AutomationUtilities.LogSummary(LogPath,"CB MGA Policy Fee: "+ objectrepository.getlbl_CBMGAPolicyFee().getText());
      AutomationUtilities.CBMGAPolicyFee = objectrepository.getlbl_CBMGAPolicyFee().getText();
      
-     if(objGlLoadManager.getState().equalsIgnoreCase("Texas")) {
+     if(objGlLoadManager.getUWModifyState().isBlank()) {
+        if(objGlLoadManager.getState().equalsIgnoreCase("Texas")) {
     	 
-     System.out.println("FWCI Producer Fee: "+ objectrepository.getlbl_FWCIProducerFee().getText());
-     AutomationUtilities.LogSummary(LogPath,"FWCI Producer Fee: "+ objectrepository.getlbl_FWCIProducerFee().getText());
-     AutomationUtilities.FWCIProducerFee = objectrepository.getlbl_FWCIProducerFee().getText();
+           System.out.println("FWCI Producer Fee: "+ objectrepository.getlbl_FWCIProducerFee().getText());
+           AutomationUtilities.LogSummary(LogPath,"FWCI Producer Fee: "+ objectrepository.getlbl_FWCIProducerFee().getText());
+           AutomationUtilities.FWCIProducerFee = objectrepository.getlbl_FWCIProducerFee().getText();
      
-     System.out.println("CB Producer Fee: "+ objectrepository.getlbl_CBProducerFee().getText());
-     AutomationUtilities.LogSummary(LogPath,"CB Producer Fee: "+ objectrepository.getlbl_CBMGAPolicyFee().getText());
-     AutomationUtilities.CBProducerFee = objectrepository.getlbl_CBProducerFee().getText();
+           System.out.println("CB Producer Fee: "+ objectrepository.getlbl_CBProducerFee().getText());
+           AutomationUtilities.LogSummary(LogPath,"CB Producer Fee: "+ objectrepository.getlbl_CBMGAPolicyFee().getText());
+           AutomationUtilities.CBProducerFee = objectrepository.getlbl_CBProducerFee().getText();
      
-	  }
+	      }
+     }else if(objGlLoadManager.getUWModifyState().equalsIgnoreCase("Texas")) {
+    	 
+    	 System.out.println("FWCI Producer Fee: "+ objectrepository.getlbl_FWCIProducerFee().getText());
+         AutomationUtilities.LogSummary(LogPath,"FWCI Producer Fee: "+ objectrepository.getlbl_FWCIProducerFee().getText());
+         AutomationUtilities.FWCIProducerFee = objectrepository.getlbl_FWCIProducerFee().getText();
+   
+         System.out.println("CB Producer Fee: "+ objectrepository.getlbl_CBProducerFee().getText());
+         AutomationUtilities.LogSummary(LogPath,"CB Producer Fee: "+ objectrepository.getlbl_CBMGAPolicyFee().getText());
+         AutomationUtilities.CBProducerFee = objectrepository.getlbl_CBProducerFee().getText();
+   
+     }
      
      if(objGlLoadManager.getTypeofCompany().equalsIgnoreCase("FWCI")) {
     	 
@@ -526,14 +569,10 @@ public class GeneralLiability extends AutomationUtilities {
      }
      
      //AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
-     buttonClick(driver,objectrepository.getbtn_ICSavebutton(),10,"Click on Save Insurance Company");
-     
-     //AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
-     Thread.sleep(3000);
-     
+     buttonClick(driver,objectrepository.getbtn_ICSavebutton(),20,"Click on Save Insurance Company");
+     driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 	 buttonClick(driver,objectrepository.getbtn_CloseProducerFee(),10,"Click on Button Close");
-	 //AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
-	 Thread.sleep(3000);
+	 driver.manage().timeouts().implicitlyWait(35, TimeUnit.SECONDS);
 	 
 	 AutomationUtilities.QuoteNo = objectrepository.getlbl_QuoteNo().getText();
 	 //System.out.println("Quote No: "+ objectrepository.getlbl_QuoteNo().getText());
@@ -565,23 +604,34 @@ public class GeneralLiability extends AutomationUtilities {
 	    buttonClick(driver,objectrepository.getdpdBusinessType(),10,"Business Type Name dropdown is clicked");
 		EsendKeysToTextField(driver,objectrepository.gettxtUniquetextbox(),objGlLoadManager.getBusinessType(),"Business Type Name is entered");
 		
-		String sInspectionName = "Inspector -"+ AutomationUtilities.getRandomString (9);
-		sendKeysToTextField(driver,objectrepository.gettxtcontactforinspection(),sInspectionName,"Enter contact for inspection");
+		sendKeysToTextField(driver,objectrepository.gettxtcontactforinspection(),objGlLoadManager.getInspectorName(),"Enter contact for inspection");
 	    //AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
 	    
 		sendKeysToTextField(driver,objectrepository.gettxtFristAddressline(),objGlLoadManager.getFristAddressline(),"Enter 1st line of Address"); 
         sendKeysToTextField(driver,objectrepository.gettxtSecAddressline(),objGlLoadManager.getSecAddressline(),"Enter 2nd line of Address");
-		sendKeysToTextField(driver,objectrepository.gettxtLocationCity(),objGlLoadManager.getLocationCity(),"Enter City Name");
-		Thread.sleep(1500);
-		sendKeysToTextField(driver,objectrepository.gettxtLocationZipCode(),objGlLoadManager.getLocationZipCode(),"Enter Zip Code");
 		
-		//AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
-		Thread.sleep(2000);
-		if(!objectrepository.getUseasis().isDisplayed()) {
-			System.out.println("Use as is not coming");
-		}else {
+        if(objGlLoadManager.getUWModifyCity().isBlank() && objGlLoadManager.getUWModifyZip().isBlank()) {
+        
+        	sendKeysToTextField(driver,objectrepository.gettxtLocationCity(),objGlLoadManager.getLocationCity(),"Enter City Name");
+		    sendKeysToTextField(driver,objectrepository.gettxtLocationZipCode(),objGlLoadManager.getLocationZipCode(),"Enter Zip Code");
+		    AutomationUtilities.sAddress = objGlLoadManager.getFristAddressline()+","+objGlLoadManager.getSecAddressline()+","+objGlLoadManager.getLocationCity()+","+objGlLoadManager.getLocationZipCode();
+			
+        }else {
+        	sendKeysToTextField(driver,objectrepository.gettxtLocationCity(),objGlLoadManager.getUWModifyCity(),"Enter City Name");
+		    sendKeysToTextField(driver,objectrepository.gettxtLocationZipCode(),objGlLoadManager.getUWModifyZip(),"Enter Zip Code");
+		    AutomationUtilities.sAddress = objGlLoadManager.getFristAddressline()+","+objGlLoadManager.getSecAddressline()+","+objGlLoadManager.getUWModifyCity()+","+objGlLoadManager.getUWModifyZip();
+			
+        }
+		
+        //AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
+		//driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+		
+        if(CheckElementPresent(objectrepository.getUseasis()) == true ) {
+			AutomationUtilities.SmartyStreet = "No";
 			buttonClick(driver,objectrepository.getUseasis(),10,"Click on Use as is");
-			}
+		}else {
+			AutomationUtilities.SmartyStreet = "Yes";
+		}
 		
 		sendKeysToTextField(driver,objectrepository.gettxtBusinessPhone(),objGlLoadManager.getBusinessPhone(),"Enter Business Phone Number");
 		sendKeysToTextField(driver,objectrepository.gettxtBusinessEmail(),objGlLoadManager.getBusinessEmail(),"Enter Business Emails");
@@ -604,6 +654,7 @@ public class GeneralLiability extends AutomationUtilities {
 					
 					driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2504_"+i+"']")).sendKeys("CG2504_"+i);
 					driver.findElement(By.xpath("//input[@id='txtAddress1CG2504_"+i+"']")).sendKeys(objGlLoadManager.getFristAddressline());
+					driver.findElement(By.xpath("//input[@id='txtAddress2CG2504_"+i+"']")).sendKeys(objGlLoadManager.getSecAddressline());
 					driver.findElement(By.xpath("//input[@id='txtCityCG2504_"+i+"']")).sendKeys(objGlLoadManager.getLocationCity());
 					driver.findElement(By.xpath("//input[@id='txtZipCodeCG2504_"+i+"']")).sendKeys(objGlLoadManager.getLocationZipCode());
 				}
@@ -611,6 +662,7 @@ public class GeneralLiability extends AutomationUtilities {
 				
 				driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2504']")).sendKeys("CG2504");
 				driver.findElement(By.xpath("//input[@id='txtAddress1CG2504']")).sendKeys(objGlLoadManager.getFristAddressline());
+				driver.findElement(By.xpath("//input[@id='txtAddress2CG2504']")).sendKeys(objGlLoadManager.getSecAddressline());
 				driver.findElement(By.xpath("//input[@id='txtCityCG2504']")).sendKeys(objGlLoadManager.getLocationCity());
 				driver.findElement(By.xpath("//input[@id='txtZipCodeCG2504']")).sendKeys(objGlLoadManager.getLocationZipCode());
 			}
@@ -625,6 +677,7 @@ public class GeneralLiability extends AutomationUtilities {
     				
     				driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2503_"+i+"']")).sendKeys("CG2503_"+i);
     				driver.findElement(By.xpath("//input[@id='txtAddress1CG2503_"+i+"']")).sendKeys(objGlLoadManager.getFristAddressline());
+    				driver.findElement(By.xpath("//input[@id='txtAddress2CG2503_"+i+"']")).sendKeys(objGlLoadManager.getSecAddressline());
     				driver.findElement(By.xpath("//input[@id='txtCityCG2503_"+i+"']")).sendKeys(objGlLoadManager.getLocationCity());
     				driver.findElement(By.xpath("//input[@id='txtZipCodeCG2503_"+i+"']")).sendKeys(objGlLoadManager.getLocationZipCode());
     			}
@@ -632,6 +685,7 @@ public class GeneralLiability extends AutomationUtilities {
         		
         		driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2503']")).sendKeys("CG2503");
 				driver.findElement(By.xpath("//input[@id='txtAddress1CG2503']")).sendKeys(objGlLoadManager.getFristAddressline());
+				driver.findElement(By.xpath("//input[@id='txtAddress2CG2503']")).sendKeys(objGlLoadManager.getSecAddressline());
 				driver.findElement(By.xpath("//input[@id='txtCityCG2503']")).sendKeys(objGlLoadManager.getLocationCity());
 				driver.findElement(By.xpath("//input[@id='txtZipCodeCG2503']")).sendKeys(objGlLoadManager.getLocationZipCode());
 			
@@ -648,6 +702,7 @@ public class GeneralLiability extends AutomationUtilities {
 					
 					driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2010_"+i+"']")).sendKeys("CG2010_"+i);
 					driver.findElement(By.xpath("//input[@id='txtAddress1CG2010_"+i+"']")).sendKeys(objGlLoadManager.getFristAddressline());
+					driver.findElement(By.xpath("//input[@id='txtAddress2CG2010_"+i+"']")).sendKeys(objGlLoadManager.getSecAddressline());
 					driver.findElement(By.xpath("//input[@id='txtCityCG2010_"+i+"']")).sendKeys(objGlLoadManager.getLocationCity());
 					driver.findElement(By.xpath("//input[@id='txtZipCodeCG2010_"+i+"']")).sendKeys(objGlLoadManager.getLocationZipCode());
 				}
@@ -655,6 +710,7 @@ public class GeneralLiability extends AutomationUtilities {
 				
 				driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2010']")).sendKeys("CG2010");
 				driver.findElement(By.xpath("//input[@id='txtAddress1CG2010']")).sendKeys(objGlLoadManager.getFristAddressline());
+				driver.findElement(By.xpath("//input[@id='txtAddress2CG2010']")).sendKeys(objGlLoadManager.getSecAddressline());
 				driver.findElement(By.xpath("//input[@id='txtCityCG2010']")).sendKeys(objGlLoadManager.getLocationCity());
 				driver.findElement(By.xpath("//input[@id='txtZipCodeCG2010']")).sendKeys(objGlLoadManager.getLocationZipCode());
 
@@ -669,6 +725,7 @@ public class GeneralLiability extends AutomationUtilities {
 					
 					driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2037_"+i+"']")).sendKeys("CG2037_"+i);
 					driver.findElement(By.xpath("//input[@id='txtAddress1CG2037_"+i+"']")).sendKeys(objGlLoadManager.getFristAddressline());
+					driver.findElement(By.xpath("//input[@id='txtAddress2CG2037_"+i+"']")).sendKeys(objGlLoadManager.getSecAddressline());
 					driver.findElement(By.xpath("//input[@id='txtCityCG2037_"+i+"']")).sendKeys(objGlLoadManager.getLocationCity());
 					driver.findElement(By.xpath("//input[@id='txtZipCodeCG2037_"+i+"']")).sendKeys(objGlLoadManager.getLocationZipCode());
 				}
@@ -676,6 +733,7 @@ public class GeneralLiability extends AutomationUtilities {
 				
 				driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2037']")).sendKeys("CG2037");
 				driver.findElement(By.xpath("//input[@id='txtAddress1CG2037']")).sendKeys(objGlLoadManager.getFristAddressline());
+				driver.findElement(By.xpath("//input[@id='txtAddress2CG2037']")).sendKeys(objGlLoadManager.getSecAddressline());
 				driver.findElement(By.xpath("//input[@id='txtCityCG2037']")).sendKeys(objGlLoadManager.getLocationCity());
 				driver.findElement(By.xpath("//input[@id='txtZipCodeCG2037']")).sendKeys(objGlLoadManager.getLocationZipCode());
 			}
@@ -689,6 +747,7 @@ public class GeneralLiability extends AutomationUtilities {
 					
 					driver.findElement(By.xpath("//input[@id='txtCompanyNameFCG1019_"+i+"']")).sendKeys("CG1019_"+i);
 					driver.findElement(By.xpath("//input[@id='txtAddress1FCG1019_"+i+"']")).sendKeys(objGlLoadManager.getFristAddressline());
+					driver.findElement(By.xpath("//input[@id='txtAddress2FCG1019_"+i+"']")).sendKeys(objGlLoadManager.getSecAddressline());
 					driver.findElement(By.xpath("//input[@id='txtCityFCG1019_"+i+"']")).sendKeys(objGlLoadManager.getLocationCity());
 					driver.findElement(By.xpath("//input[@id='txtZipCodeFCG1019_"+i+"']")).sendKeys(objGlLoadManager.getLocationZipCode());
 				}
@@ -696,6 +755,7 @@ public class GeneralLiability extends AutomationUtilities {
 				
 				driver.findElement(By.xpath("//input[@id='txtCompanyNameFCG1019']")).sendKeys("CG1019");
 				driver.findElement(By.xpath("//input[@id='txtAddress1FCG1019']")).sendKeys(objGlLoadManager.getFristAddressline());
+				driver.findElement(By.xpath("//input[@id='txtAddress2FCG1019']")).sendKeys(objGlLoadManager.getSecAddressline());
 				driver.findElement(By.xpath("//input[@id='txtCityFCG1019']")).sendKeys(objGlLoadManager.getLocationCity());
 				driver.findElement(By.xpath("//input[@id='txtZipCodeFCG1019']")).sendKeys(objGlLoadManager.getLocationZipCode());
 	
@@ -711,6 +771,7 @@ public class GeneralLiability extends AutomationUtilities {
 				
 				driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2404_"+i+"']")).sendKeys("CG2404_"+i);
 				driver.findElement(By.xpath("//input[@id='txtAddress1CG2404_"+i+"']")).sendKeys(objGlLoadManager.getFristAddressline());
+				driver.findElement(By.xpath("//input[@id='txtAddress2CG2404_"+i+"']")).sendKeys(objGlLoadManager.getSecAddressline());
 				driver.findElement(By.xpath("//input[@id='txtCityCG2404_"+i+"']")).sendKeys(objGlLoadManager.getLocationCity());
 				driver.findElement(By.xpath("//input[@id='txtZipCodeCG2404_"+i+"']")).sendKeys(objGlLoadManager.getLocationZipCode());
 			}
@@ -718,6 +779,7 @@ public class GeneralLiability extends AutomationUtilities {
 			
 			    driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2404']")).sendKeys("CG2404");
 				driver.findElement(By.xpath("//input[@id='txtAddress1CG2404']")).sendKeys(objGlLoadManager.getFristAddressline());
+				driver.findElement(By.xpath("//input[@id='txtAddress2CG2404']")).sendKeys(objGlLoadManager.getSecAddressline());
 				driver.findElement(By.xpath("//input[@id='txtCityCG2404']")).sendKeys(objGlLoadManager.getLocationCity());
 				driver.findElement(By.xpath("//input[@id='txtZipCodeCG2404']")).sendKeys(objGlLoadManager.getLocationZipCode());
 			}
@@ -730,6 +792,7 @@ public class GeneralLiability extends AutomationUtilities {
 					
 					driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2012_"+i+"']")).sendKeys("CG2012_"+i);
 					driver.findElement(By.xpath("//input[@id='txtAddress1CG2012_"+i+"']")).sendKeys(objGlLoadManager.getFristAddressline());
+					driver.findElement(By.xpath("//input[@id='txtAddress2CG2012_"+i+"']")).sendKeys(objGlLoadManager.getSecAddressline());
 					driver.findElement(By.xpath("//input[@id='txtCityCG2012_"+i+"']")).sendKeys(objGlLoadManager.getLocationCity());
 					driver.findElement(By.xpath("//input[@id='txtZipCodeCG2012_"+i+"']")).sendKeys(objGlLoadManager.getLocationZipCode());
 				}
@@ -737,6 +800,7 @@ public class GeneralLiability extends AutomationUtilities {
 				
 				    driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2012']")).sendKeys("CG2012");
 					driver.findElement(By.xpath("//input[@id='txtAddress1CG2012']")).sendKeys(objGlLoadManager.getFristAddressline());
+					driver.findElement(By.xpath("//input[@id='txtAddress2CG2012']")).sendKeys(objGlLoadManager.getSecAddressline());
 					driver.findElement(By.xpath("//input[@id='txtCityCG2012']")).sendKeys(objGlLoadManager.getLocationCity());
 					driver.findElement(By.xpath("//input[@id='txtZipCodeCG2012']")).sendKeys(objGlLoadManager.getLocationZipCode());
 				}
@@ -749,6 +813,7 @@ public class GeneralLiability extends AutomationUtilities {
 					
 					driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2029_"+i+"']")).sendKeys("CG2029_"+i);
 					driver.findElement(By.xpath("//input[@id='txtAddress1CG2029_"+i+"']")).sendKeys(objGlLoadManager.getFristAddressline());
+					driver.findElement(By.xpath("//input[@id='txtAddress2CG2029_"+i+"']")).sendKeys(objGlLoadManager.getSecAddressline());
 					driver.findElement(By.xpath("//input[@id='txtCityCG2029_"+i+"']")).sendKeys(objGlLoadManager.getLocationCity());
 					driver.findElement(By.xpath("//input[@id='txtZipCodeCG2029_"+i+"']")).sendKeys(objGlLoadManager.getLocationZipCode());
 				}
@@ -756,6 +821,7 @@ public class GeneralLiability extends AutomationUtilities {
 				
 				    driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2029']")).sendKeys("CG2029");
 					driver.findElement(By.xpath("//input[@id='txtAddress1CG2029']")).sendKeys(objGlLoadManager.getFristAddressline());
+					driver.findElement(By.xpath("//input[@id='txtAddress2CG2029']")).sendKeys(objGlLoadManager.getSecAddressline());
 					driver.findElement(By.xpath("//input[@id='txtCityCG2029']")).sendKeys(objGlLoadManager.getLocationCity());
 					driver.findElement(By.xpath("//input[@id='txtZipCodeCG2029']")).sendKeys(objGlLoadManager.getLocationZipCode());
 				}
@@ -768,6 +834,7 @@ public class GeneralLiability extends AutomationUtilities {
 					
 					driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2028_"+i+"']")).sendKeys("CG2028_"+i);
 					driver.findElement(By.xpath("//input[@id='txtAddress1CG2028_"+i+"']")).sendKeys(objGlLoadManager.getFristAddressline());
+					driver.findElement(By.xpath("//input[@id='txtAddress2CG2028_"+i+"']")).sendKeys(objGlLoadManager.getSecAddressline());
 					driver.findElement(By.xpath("//input[@id='txtCityCG2028_"+i+"']")).sendKeys(objGlLoadManager.getLocationCity());
 					driver.findElement(By.xpath("//input[@id='txtZipCodeCG2028_"+i+"']")).sendKeys(objGlLoadManager.getLocationZipCode());
 				}
@@ -775,6 +842,7 @@ public class GeneralLiability extends AutomationUtilities {
 				
 				    driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2028']")).sendKeys("CG2028");
 					driver.findElement(By.xpath("//input[@id='txtAddress1CG2028']")).sendKeys(objGlLoadManager.getFristAddressline());
+					driver.findElement(By.xpath("//input[@id='txtAddress2CG2028']")).sendKeys(objGlLoadManager.getSecAddressline());
 					driver.findElement(By.xpath("//input[@id='txtCityCG2028']")).sendKeys(objGlLoadManager.getLocationCity());
 					driver.findElement(By.xpath("//input[@id='txtZipCodeCG2028']")).sendKeys(objGlLoadManager.getLocationZipCode());
 				}
@@ -787,6 +855,7 @@ public class GeneralLiability extends AutomationUtilities {
 					
 					driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2024_"+i+"']")).sendKeys("CG2024_"+i);
 					driver.findElement(By.xpath("//input[@id='txtAddress1CG2024_"+i+"']")).sendKeys(objGlLoadManager.getFristAddressline());
+					driver.findElement(By.xpath("//input[@id='txtAddress2CG2024_"+i+"']")).sendKeys(objGlLoadManager.getSecAddressline());
 					driver.findElement(By.xpath("//input[@id='txtCityCG2024_"+i+"']")).sendKeys(objGlLoadManager.getLocationCity());
 					driver.findElement(By.xpath("//input[@id='txtZipCodeCG2024_"+i+"']")).sendKeys(objGlLoadManager.getLocationZipCode());
 				}
@@ -794,6 +863,7 @@ public class GeneralLiability extends AutomationUtilities {
 				
 				    driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2024']")).sendKeys("CG2024");
 					driver.findElement(By.xpath("//input[@id='txtAddress1CG2024']")).sendKeys(objGlLoadManager.getFristAddressline());
+					driver.findElement(By.xpath("//input[@id='txtAddress2CG2024']")).sendKeys(objGlLoadManager.getSecAddressline());
 					driver.findElement(By.xpath("//input[@id='txtCityCG2024']")).sendKeys(objGlLoadManager.getLocationCity());
 					driver.findElement(By.xpath("//input[@id='txtZipCodeCG2024']")).sendKeys(objGlLoadManager.getLocationZipCode());
 				}
@@ -806,6 +876,7 @@ public class GeneralLiability extends AutomationUtilities {
 					
 					driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2005_"+i+"']")).sendKeys("CG2005_"+i);
 					driver.findElement(By.xpath("//input[@id='txtAddress1CG2005_"+i+"']")).sendKeys(objGlLoadManager.getFristAddressline());
+					driver.findElement(By.xpath("//input[@id='txtAddress2CG2005_"+i+"']")).sendKeys(objGlLoadManager.getSecAddressline());
 					driver.findElement(By.xpath("//input[@id='txtCityCG2005_"+i+"']")).sendKeys(objGlLoadManager.getLocationCity());
 					driver.findElement(By.xpath("//input[@id='txtZipCodeCG2005_"+i+"']")).sendKeys(objGlLoadManager.getLocationZipCode());
 				}
@@ -813,6 +884,7 @@ public class GeneralLiability extends AutomationUtilities {
 				
 				    driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2005']")).sendKeys("CG2005");
 					driver.findElement(By.xpath("//input[@id='txtAddress1CG2005']")).sendKeys(objGlLoadManager.getFristAddressline());
+					driver.findElement(By.xpath("//input[@id='txtAddress2CG2005']")).sendKeys(objGlLoadManager.getSecAddressline());
 					driver.findElement(By.xpath("//input[@id='txtCityCG2005']")).sendKeys(objGlLoadManager.getLocationCity());
 					driver.findElement(By.xpath("//input[@id='txtZipCodeCG2005']")).sendKeys(objGlLoadManager.getLocationZipCode());
 				}
@@ -825,6 +897,7 @@ public class GeneralLiability extends AutomationUtilities {
 					
 					driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2011_"+i+"']")).sendKeys("CG2011_"+i);
 					driver.findElement(By.xpath("//input[@id='txtAddress1CG2011_"+i+"']")).sendKeys(objGlLoadManager.getFristAddressline());
+					driver.findElement(By.xpath("//input[@id='txtAddress2CG2011_"+i+"']")).sendKeys(objGlLoadManager.getSecAddressline());
 					driver.findElement(By.xpath("//input[@id='txtCityCG2011_"+i+"']")).sendKeys(objGlLoadManager.getLocationCity());
 					driver.findElement(By.xpath("//input[@id='txtZipCodeCG2011_"+i+"']")).sendKeys(objGlLoadManager.getLocationZipCode());
 				}
@@ -832,6 +905,7 @@ public class GeneralLiability extends AutomationUtilities {
 				
 				    driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2011']")).sendKeys("CG2011");
 					driver.findElement(By.xpath("//input[@id='txtAddress1CG2011']")).sendKeys(objGlLoadManager.getFristAddressline());
+					driver.findElement(By.xpath("//input[@id='txtAddress2CG2011']")).sendKeys(objGlLoadManager.getSecAddressline());
 					driver.findElement(By.xpath("//input[@id='txtCityCG2011']")).sendKeys(objGlLoadManager.getLocationCity());
 					driver.findElement(By.xpath("//input[@id='txtZipCodeCG2011']")).sendKeys(objGlLoadManager.getLocationZipCode());
 				}
@@ -844,6 +918,7 @@ public class GeneralLiability extends AutomationUtilities {
 					
 					driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2026_"+i+"']")).sendKeys("CG2011_"+i);
 					driver.findElement(By.xpath("//input[@id='txtAddress1CG2026_"+i+"']")).sendKeys(objGlLoadManager.getFristAddressline());
+					driver.findElement(By.xpath("//input[@id='txtAddress2CG2026_"+i+"']")).sendKeys(objGlLoadManager.getSecAddressline());
 					driver.findElement(By.xpath("//input[@id='txtCityCG2026_"+i+"']")).sendKeys(objGlLoadManager.getLocationCity());
 					driver.findElement(By.xpath("//input[@id='txtZipCodeCG2026_"+i+"']")).sendKeys(objGlLoadManager.getLocationZipCode());
 				}
@@ -851,6 +926,7 @@ public class GeneralLiability extends AutomationUtilities {
 				
 				    driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2026']")).sendKeys("CG2011");
 					driver.findElement(By.xpath("//input[@id='txtAddress1CG2026']")).sendKeys(objGlLoadManager.getFristAddressline());
+					driver.findElement(By.xpath("//input[@id='txtAddress2CG2026']")).sendKeys(objGlLoadManager.getSecAddressline());
 					driver.findElement(By.xpath("//input[@id='txtCityCG2026']")).sendKeys(objGlLoadManager.getLocationCity());
 					driver.findElement(By.xpath("//input[@id='txtZipCodeCG2026']")).sendKeys(objGlLoadManager.getLocationZipCode());
 				}
@@ -860,8 +936,36 @@ public class GeneralLiability extends AutomationUtilities {
 		sendKeysToTextField(driver,objectrepository.gettxtGeneralRemarks(),objGlLoadManager.getAgentNotes(),"Enter Notes and Remarks");
 		//AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
 		  
-		sendKeysToTextField(driver,objectrepository.gettxtIndustrial(),"100","Enter Industrial Percentage");
-		sendKeysToTextField(driver,objectrepository.gettxtNewConstruction(),"100","Enter New Construction Percentage");
+		
+		sendKeysToTextField(driver,objectrepository.gettxtLicenseType(),objGlLoadManager.getLicenseType(),"License Type");
+		sendKeysToTextField(driver,objectrepository.gettxtLicenseNumber(),objGlLoadManager.getLicenseNumber(),"License Number");
+		
+		int ICRTotalPercent = Integer.valueOf(objGlLoadManager.getIndustrialPercent())+Integer.valueOf(objGlLoadManager.getCommercialPercent())+Integer.valueOf(objGlLoadManager.getResidentialPercent());
+		
+		try{
+		    if(ICRTotalPercent == 100) {
+		      sendKeysToTextField(driver,objectrepository.gettxtIndustrial(),objGlLoadManager.getIndustrialPercent(),"Enter Industrial Percentage");
+		      sendKeysToTextField(driver,objectrepository.gettxtCommercial(),objGlLoadManager.getCommercialPercent(),"Enter Commercial Percentage");
+		      sendKeysToTextField(driver,objectrepository.gettxtResidential(),objGlLoadManager.getResidentialPercent(),"Enter Resedential Percentage");
+		    }
+		  }
+		  catch(Throwable t) {
+			   t.printStackTrace();
+			   }
+		
+		int NRRRTotalPercent = Integer.valueOf(objGlLoadManager.getNewConstPercent())+Integer.valueOf(objGlLoadManager.getRoomAdditionsPercent())+Integer.valueOf(objGlLoadManager.getRemodelingPercent())+Integer.valueOf(objGlLoadManager.getRepairorServicePercent());
+	    
+		try {
+		   if(NRRRTotalPercent == 100) {
+			   sendKeysToTextField(driver,objectrepository.gettxtNewConstruction(),objGlLoadManager.getNewConstPercent(),"Enter New Construction Percentage");
+			   sendKeysToTextField(driver,objectrepository.gettxtRoomAdditionsPercent(),objGlLoadManager.getRoomAdditionsPercent(),"Enter Commercial Percentage");
+			   sendKeysToTextField(driver,objectrepository.gettxtRemodeling(),objGlLoadManager.getRemodelingPercent(),"Enter Resedential Percentage");
+			   sendKeysToTextField(driver,objectrepository.gettxtRepairorService(),objGlLoadManager.getRepairorServicePercent(),"Enter Resedential Percentage"); 
+		     }
+		   }
+		  catch(Throwable t) {
+			   t.printStackTrace();
+			   }
 		//AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
 		
 		buttonClick(driver,objectrepository.getrdoPerformContractYes(),10,"Click on Perform Contract as Yes");
@@ -888,14 +992,14 @@ public class GeneralLiability extends AutomationUtilities {
 		}
 		
 		buttonClick(driver,objectrepository.getrdoAgree(),10,"Click on Agree radio button");
-		//AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
+		buttonClick(driver,objectrepository.getbtnPrintSubmit(),50,"Click on Print & Submit Application");
 		
-		buttonClick(driver,objectrepository.getbtnPrintSubmit(),10,"Click on Print & Submit Application");
-		Thread.sleep(15000);
-		
+		waitforpageload(driver, 85);
+		Thread.sleep(5000);
 		AutomationUtilities.Traverse(driver,"Download Application Document");
 	    //AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
-	    buttonClick(driver,objectrepository.getGLMakePayment(),10,"Click on Make Payment");
+	   
+		buttonClick(driver,objectrepository.getGLMakePayment(),10,"Click on Make Payment");
 		
 	    System.out.println("Application Page have been completed Sucessfully");
 	    AutomationUtilities.LogSummary(LogPath,"Application Page have been completed Sucessfully");
@@ -938,10 +1042,15 @@ public class GeneralLiability extends AutomationUtilities {
 		}
 		
 		waitforpageload(driver, 85);
-		Thread.sleep(5000);
-		//AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
-		buttonClick(driver,objectrepository.getlnkDownloadEvidence(),10,"Clickon EOI Document");
+		AutomationUtilities.LogSummary(LogPath,"Policy Payment is completed successfully");
+	}
 		
+	public void ThankYouPage (LoadManager objGlLoadManager,WebDriver driver) throws InterruptedException, IOException, AWTException, UnsupportedFlavorException {
+		
+		waitforpageload(driver, 20);
+		Thread.sleep(10000);
+
+		buttonClick(driver,objectrepository.getlnkDownloadEvidence(),10,"Clickon EOI Document");
 		AutomationUtilities.Traverse(driver,"EOI Document");
 	    //AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
 		

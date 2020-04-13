@@ -2,6 +2,8 @@ package FSmokeSuit.FSmokeSuit;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -17,7 +19,7 @@ public class HomePage extends AutomationUtilities {
 		
 		public void SelectAgent(WebDriver driver,String sAgentName) throws InterruptedException, IOException 
 		{
-			waitforpageload(driver, 2);
+			//waitforpageload(driver, 2);
 			//Thread.sleep(2000);
 			buttonClick(driver,objectrepository.getSelectAgent(),10,"Agency Contact");
 			
@@ -37,7 +39,7 @@ public class HomePage extends AutomationUtilities {
 			//Thread.sleep(2000);
 			//buttonClick(driver,objectrepository.gettxtWCClosebtn(), 10, "Close button is saved sucessfully.");
 			
-			Thread.sleep(2000);
+			driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
 			if (sProductName.equalsIgnoreCase("GL")){
 				
 				buttonClick(driver, objectrepository.getbtnrdbGeneralLiability(),10,"GL Radio Button is clicked");

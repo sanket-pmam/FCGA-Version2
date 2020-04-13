@@ -2,6 +2,7 @@ package FSmokeSuit.FSmokeSuit;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -28,6 +29,11 @@ public class Underwriting extends AutomationUtilities {
 	public void UWChangeStatus (WebDriver driver,LoadManager objUWGLLoadManager) throws InterruptedException, IOException {
 		
 		waitforpageload(driver, 15);
+		
+		AutomationUtilities.sReferralReason = objectrepository.getUWReferralReason().getText();
+		AutomationUtilities.LogSummary(LogPath, "Referral Reason is : " +objectrepository.getUWReferralReason().getText());
+		//System.out.println(objectrepository.getUWReferralReason().getText());
+			
 		buttonClick(driver,objectrepository.getUWCurrentStatus(),10,"UW Current Status");
 		
 		if(objUWGLLoadManager.getUWQuoteStatus().equalsIgnoreCase("Accepted")) {
@@ -40,10 +46,10 @@ public class Underwriting extends AutomationUtilities {
 			buttonClick(driver,objectrepository.getUWInProgressStatus(),10,"UW In Progress Status");
 		}
 		
-		buttonClick(driver,objectrepository.getUWbtnReRate(),40,"UW Re Rate button");
+		buttonClick(driver,objectrepository.getUWbtnReRate(),60,"UW Re Rate button");
+		Thread.sleep(3000);
 		AutomationUtilities.LogSummary(LogPath, "Alert Message in PopUp : "+ objectrepository.getUWAlertMsgBox().getText());
-		Thread.sleep(2000);
-		buttonClick(driver,objectrepository.gettxtWCClosebtn(), 20, "Close button is saved sucessfully.");
+		buttonClick(driver,objectrepository.gettxtWCClosebtn(), 10, "Close button is saved sucessfully.");
 		
 		UWNotes(driver, objUWGLLoadManager.getUWNotes());
 		UWMessages(driver, objUWGLLoadManager.getUWMessages());
@@ -89,8 +95,15 @@ public void UWGLEditQuote (WebDriver driver,LoadManager objUWGLLoadManager) thro
 		
 		if(objUWGLLoadManager.getUWModifyRiskLPerm().equalsIgnoreCase("Yes")) {
 			
-			buttonClick(driver,objectrepository.getdpdCounty(),10,"Click on County");
-			EsendKeysToTextField(driver,objectrepository.gettxtUniquetextbox(),objUWGLLoadManager.getUWModifyCounty(),"County Name");
+			if(!objUWGLLoadManager.getUWModifyState().isBlank()) {
+			   buttonClick(driver,objectrepository.getdpdstate(),10,"Click on State");
+		       EsendKeysToTextField(driver,objectrepository.gettxtUniquetextbox(),objUWGLLoadManager.getUWModifyState(),"State Name");
+			}
+			
+			if(!objUWGLLoadManager.getUWModifyCounty().isBlank()) {
+			   buttonClick(driver,objectrepository.getdpdCounty(),10,"Click on County");
+			   EsendKeysToTextField(driver,objectrepository.gettxtUniquetextbox(),objUWGLLoadManager.getUWModifyCounty(),"County Name");
+			}
 			
 			if(!objUWGLLoadManager.getUWModifyBName().isBlank()) {
 				
@@ -159,7 +172,7 @@ public void UWGLEditQuote (WebDriver driver,LoadManager objUWGLLoadManager) thro
 		//System.out.println(objectrepository.getUWLblPage().getText());
 		
 		buttonClick(driver,objectrepository.getbtnsaveandcontinue(),10,"Click on Save and Continue");
-		Thread.sleep(1000);
+		driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
 		
 		}
 		
@@ -193,10 +206,7 @@ public void UWGLEditQuote (WebDriver driver,LoadManager objUWGLLoadManager) thro
 		  }
 		
 		buttonClick(driver,objectrepository.getUWBtnSave(),10,"Click on Save and Continue");
-		Thread.sleep(1000);
-	
-		AutomationUtilities.LogSummary(LogPath, "Referral Reason is : " +objectrepository.getUWReferralReason().getText());
-		System.out.println(objectrepository.getUWReferralReason().getText());
+		driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
 		
         if(objUWGLLoadManager.getUWRateType().equalsIgnoreCase("IRPM")) {
 			
@@ -218,9 +228,13 @@ public void UWGLEditQuote (WebDriver driver,LoadManager objUWGLLoadManager) thro
 public void UWclassPayroll(LoadManager objUWGLLoadManager, WebDriver driver) throws InterruptedException, IOException {
 	
 	AutomationUtilities.sClassCode = objUWGLLoadManager.getUWModifyMainClasscode();
+	AutomationUtilities.sSubClassCode = objUWGLLoadManager.getSubClassCode();
 	String[] ClassCode = objUWGLLoadManager.getClassCode().split("/");
 	String[] UWClassCode = objUWGLLoadManager.getUWModifyMainClasscode().split("/");
+	String[] SubClassCode = objUWGLLoadManager.getSubClassCode().split("/");
+	String[] UWSubClassCode = objUWGLLoadManager.getUWModifySubClasscode().split("/");
 	int classcodecount = UWClassCode.length;
+	int subclasscodecount = UWSubClassCode.length;
 	if(classcodecount > 1) {
 	int Eprecentage = 100/classcodecount;
 	for(int i=0;i<classcodecount;i++) {
@@ -261,31 +275,49 @@ public void UWclassPayroll(LoadManager objUWGLLoadManager, WebDriver driver) thr
 	}
 	
 	if(!objUWGLLoadManager.getUWModifySubClasscode().isEmpty()) {
-	
-	AutomationUtilities.sClassCode = objUWGLLoadManager.getUWModifyMainClasscode()+","+objUWGLLoadManager.getUWModifySubClasscode();
 		
-	if(!objUWGLLoadManager.getUWModifySubContractorGross().isBlank()) {
-	sendKeysToTextField(driver,objectrepository.getInSubcontractorCost(),objUWGLLoadManager.getUWModifySubContractorGross(),"Expected Sub Class Code Gross Amount");
-	//sendKeysToTextField(driver,objectrepository.getSubcontractorCostopdes(),"OK-Approved", "Sub Contractor Description");
-	}
+		AutomationUtilities.sClassCode = objUWGLLoadManager.getUWModifyMainClasscode()+","+objUWGLLoadManager.getUWModifySubClasscode();
+		if(!objUWGLLoadManager.getUWModifySubContractorGross().isBlank()) {
+			sendKeysToTextField(driver,objectrepository.getInSubcontractorCost(),objUWGLLoadManager.getUWModifySubContractorGross(),"Expected Sub Class Code Gross Amount");
+			sendKeysToTextField(driver,objectrepository.getSubcontractorCostopdes(),"OK-Approved", "Sub Contractor Description");
+			}
+		if(subclasscodecount > 1) {
+			
+			int Eprecentage = 100/subclasscodecount;
+			for(int i=0;i<subclasscodecount;i++) {
+
+				if(!SubClassCode[i].isEmpty()) {
+				driver.findElement(By.xpath("//td[@data-fieldid='"+SubClassCode [i]+"']//parent :: tr// following-sibling :: td/a[@id='aDeleteRow']")).click();
+				}
+				buttonClick(driver,objectrepository.getSubClasscodes(),10," Click Sub Class Code");
+				EsendKeysToTextField(driver,objectrepository.gettxtUniquetextbox(),UWSubClassCode [i],"Sub Class Codes");
+				
+                if(i == subclasscodecount-1) {
+					
+					Eprecentage = 100 - (Eprecentage*i);  
+				}
+                
+				buttonClick(driver,objectrepository.getbtnAddSubClassCode(),10,"Click Add Button");
+				sendKeysToTextField(driver,objectrepository.getSubClasscodePercentage(),Integer.toString(Eprecentage),"Percentage");
+			  }
+			}
+		else {
 	
-	driver.findElement(By.xpath("//td[@data-fieldid='"+objUWGLLoadManager.getSubClassCode()+"']//parent :: tr// following-sibling :: td/a[@id='aDeleteRow']")).click();
+	      driver.findElement(By.xpath("//td[@data-fieldid='"+objUWGLLoadManager.getSubClassCode()+"']//parent :: tr// following-sibling :: td/a[@id='aDeleteRow']")).click();
 	
-	buttonClick(driver,objectrepository.getSubClasscodes(),10," Click Sub Class Code");
-	EsendKeysToTextField(driver,objectrepository.gettxtUniquetextbox(),objUWGLLoadManager.getUWModifySubClasscode(),"Sub Class Codes");
+	      buttonClick(driver,objectrepository.getSubClasscodes(),10," Click Sub Class Code");
+	      EsendKeysToTextField(driver,objectrepository.gettxtUniquetextbox(),objUWGLLoadManager.getUWModifySubClasscode(),"Sub Class Codes");
 	
-	buttonClick(driver,objectrepository.getbtnAddSubClassCode(),10,"Click Add Button");
-	driver.findElement(By.xpath("//td[@data-fieldid='"+objUWGLLoadManager.getUWModifySubClasscode()+"']//parent :: tr// following-sibling :: td//input[@class='dynamicAddClassCode form-control'][@name='percentage']")).sendKeys("100");
-	//sendKeysToTextField(driver,objectrepository.getSubClasscodePercentage(),"100","Percentage");
-	//AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
-	AutomationUtilities.sClassCodeDesc = AutomationUtilities.sClassCodeDesc +"/"+ driver.findElement(By.xpath("//td[@data-fieldid='"+objUWGLLoadManager.getUWModifySubClasscode()+"']//parent :: tr// following-sibling :: td//b")).getText().toString();
-	
+	      buttonClick(driver,objectrepository.getbtnAddSubClassCode(),10,"Click Add Button");
+	      driver.findElement(By.xpath("//td[@data-fieldid='"+objUWGLLoadManager.getUWModifySubClasscode()+"']//parent :: tr// following-sibling :: td//input[@class='dynamicAddClassCode form-control'][@name='percentage']")).sendKeys("100");
+	      //AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
+	     AutomationUtilities.sClassCodeDesc = AutomationUtilities.sClassCodeDesc +"/"+ driver.findElement(By.xpath("//td[@data-fieldid='"+objUWGLLoadManager.getUWModifySubClasscode()+"']//parent :: tr// following-sibling :: td//b")).getText().toString();
+		}
 	} else if(!objUWGLLoadManager.getUWModifyUnSubContractorGross().isBlank()) {
 
 	sendKeysToTextField(driver,objectrepository.getUnSubcontractorCost(),objUWGLLoadManager.getUWModifyUnSubContractorGross(),"Expected Sub Class Code Gross Amount");
 	
 	} 
-	
 	
 	if(!objUWGLLoadManager.getUWModifyActiveOwner().isEmpty()) {
 	sendKeysToTextField(driver,objectrepository.gettxtActivePartner(),objUWGLLoadManager.getUWModifyActiveOwner(),"Active Owner");

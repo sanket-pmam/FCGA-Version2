@@ -296,6 +296,12 @@ public class ObjectRepository {
 	@FindBy(xpath = "//textarea[@id='txtGeneralRemarks']")
 	private WebElement txtGeneralRemarks;
 	
+	@FindBy(xpath = "//input[@id ='txtLicenseType']")
+	private WebElement txtLicenseType;
+	
+	@FindBy(xpath = "//input[@id ='txtLicenseNumber']")
+	private WebElement txtLicenseNumber;
+	
 	@FindBy(xpath = "//label[@for='rdoAgree']")
 	private WebElement rdoAgree;
 	
@@ -311,6 +317,21 @@ public class ObjectRepository {
 	//----
 	@FindBy(xpath = "//input[@id='txtIndustrial']")
 	private WebElement txtIndustrial;
+	
+	@FindBy(xpath = "//input[@id ='txtCommercial']")
+	private WebElement txtCommercial;
+	
+	@FindBy(xpath = "//input[@id ='txtResidential']")
+	private WebElement txtResidential;
+	
+	@FindBy(xpath = "//input[@id ='txtRoomAdditions']")
+	private WebElement txtRoomAdditionsPercent;
+	
+	@FindBy(xpath = "//input[@id ='txtRemodeling']")
+	private WebElement txtRemodeling;
+	
+	@FindBy(xpath = "//input[@id='txtRepaireOrService']")
+	private WebElement txtRepaireOrService;
 	
 	@FindBy(xpath = "//input[@id='txtNewConstruction']")
 	private WebElement txtNewConstruction;
@@ -1134,6 +1155,27 @@ public class ObjectRepository {
 		return txtIndustrial;
 	}
 	
+	public WebElement gettxtCommercial() {
+		return txtCommercial;
+	}
+	
+	public WebElement gettxtResidential() {
+		return txtResidential;
+	}
+	
+	public WebElement gettxtRoomAdditionsPercent() {
+		return txtRoomAdditionsPercent;
+	}
+	
+	public WebElement gettxtRemodeling() {
+		return txtRemodeling;
+	}
+
+	public WebElement gettxtRepairorService() {
+		return txtRepaireOrService;
+		
+	}
+	
 	public WebElement gettxtNewConstruction() {
 		return txtNewConstruction;
 	}
@@ -1540,6 +1582,14 @@ public class ObjectRepository {
 	
   public WebElement gettxtGeneralRemarks() {
 	  return txtGeneralRemarks;
+  }
+
+  public WebElement gettxtLicenseType() {
+	  return txtLicenseType;
+  }
+  
+  public WebElement gettxtLicenseNumber() {
+	  return txtLicenseNumber;
   }
   
   public WebElement getrdoAgree() {

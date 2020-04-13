@@ -77,6 +77,10 @@ public class AutomationUtilities {
    public static String OLDTCID;
    public static String IndustialQ="";
    public static int tcCount=0;
+   public static String AutmPDFpath;
+   public static String sAddress;
+   public static String SmartyStreet;
+   public static String sSubClassCode;
    
 	static Function<WebDriver, Boolean> documentWait = new Function<WebDriver, Boolean>() {
 		public Boolean apply(WebDriver driver) {
@@ -86,9 +90,6 @@ public class AutomationUtilities {
 		}
 	};
 	
-	
-	
-	
    public static void waitforpageload(WebDriver driver, int iTimeOut) {
 		//System.out.println("Wait for Page load......");
 		String Label = "";
@@ -97,7 +98,7 @@ public class AutomationUtilities {
 			Wait<WebDriver> waitforload = new FluentWait<WebDriver>(driver).withTimeout(Duration.ofSeconds(iTimeOut))
 					.pollingEvery(Duration.ofSeconds(iTimeOut)).ignoring(NoSuchElementException.class);
 			waitforload.until(documentWait);
-			driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		} catch (Exception ex) {
 			System.out.println("Error: " + Label + " " + ex.getMessage());
 		}
@@ -105,7 +106,7 @@ public class AutomationUtilities {
    
    public static void DownLoadPDF(WebDriver driver, String label) throws InterruptedException, AWTException, IOException {
 	   //System.out.println("Download PDF...");
-	   Thread.sleep(5000);
+	   driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 	  
 	   int xCoord = 500;
 	   int yCoord = 500;
@@ -120,7 +121,7 @@ public class AutomationUtilities {
                 System.out.println("Directory/Folder creation failed!!!");
             }
       } 
-	   	
+	  
 	   	rbt.mouseMove(xCoord, yCoord);
 //		rbt.keyPress(KeyEvent.VK_CONTROL);
 		rbt.mousePress(InputEvent.BUTTON3_DOWN_MASK);
@@ -140,7 +141,7 @@ public class AutomationUtilities {
 		rbt.keyRelease(KeyEvent.VK_HOME);
 
 		Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-		StringSelection stringSelection = new StringSelection(AutmPDFfile.getAbsolutePath()+"/Autm_");
+		StringSelection stringSelection = new StringSelection(AutmPDFpath+"\\");
 		clipboard.setContents(stringSelection, null);
 		
 		rbt.delay(5000);
@@ -163,7 +164,7 @@ public class AutomationUtilities {
 		String searchText = text;
 		System.out.println("Search Text..." +searchText);
 		element.click(); 
-		Thread.sleep(2000);
+		driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
 		List<WebElement> options = driver.findElements(By.tagName("li"));
 		for (WebElement option : options) {
 			if (option.getText().equals(searchText)) {
@@ -276,7 +277,7 @@ public class AutomationUtilities {
     	drawBorder(driver,element);
 	    element.sendKeys(Keys.chord(Keys.CONTROL, "a"), text);
 	    element.sendKeys(Keys.TAB);
-	    waitforpageload(driver,5);
+	    waitforpageload(driver,10);
 	    //AutomationUtilities.LogSummary(LogPath,"Current Label : "+label+" is completely working.");
 	    //System.out.println("Current Label : "+label+" is completely working.");
     }
@@ -544,6 +545,7 @@ public class AutomationUtilities {
 
    public static void Traverse(WebDriver driver,String pdfName) throws AWTException, InterruptedException, UnsupportedFlavorException, IOException {
 
+	 WebDriver pdriver = driver;
 	 String parentWindow= driver.getWindowHandle();
 	 Set<String> allWindows = driver.getWindowHandles();
 	 for(String curWindow : allWindows){
@@ -555,9 +557,9 @@ public class AutomationUtilities {
 	   }
      
 	 DownLoadPDF(driver,pdfName);
-	 Thread.sleep(3000);
+	 driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 	 driver.close();
-	 driver.switchTo().window(parentWindow);
+	 pdriver.switchTo().window(parentWindow);
 	 
      
     }
@@ -594,7 +596,9 @@ public class AutomationUtilities {
 	   	
     }
    
-    public static void ReportGeneration(String ReportPath, String TCSheetName, LoadManager objLoadManager, String testcaseid2, String product, String tcScenarios,String tcClassCode, String tcClassCodeDesc, String insuredname,String IndustialQ,String Reason, String quoteNo2, String policyNo2, String status,String starttime,String endtime) {
+    public static void ReportGeneration(String ReportPath, String TCSheetName, LoadManager objLoadManager, String testcaseid2, 
+    		String product, String tcScenarios,String tcClassCode, String tcClassCodeDesc, String insuredname,String IndustialQ,
+    		String Reason, String Address, String SmartyStreet, String quoteNo2, String policyNo2, String status,String starttime,String endtime) {
 	
 	AutomationUtilities.ReportExcelUpdate(ReportPath, TCSheetName,testcaseid2, testcaseid2, objLoadManager,
 			"TC ID");
@@ -612,6 +616,10 @@ public class AutomationUtilities {
 			"Industial Question Count");
 	AutomationUtilities.ReportExcelUpdate(ReportPath, TCSheetName,"0", Reason, objLoadManager,
 			"Referral Reason");
+	AutomationUtilities.ReportExcelUpdate(ReportPath, TCSheetName,"0", Address, objLoadManager,
+			"Insured Address");
+	AutomationUtilities.ReportExcelUpdate(ReportPath, TCSheetName,"0", SmartyStreet, objLoadManager,
+			"Smarty Street");
 	AutomationUtilities.ReportExcelUpdate(ReportPath, TCSheetName,"0", quoteNo2, objLoadManager,
 			"Quote No");
 	AutomationUtilities.ReportExcelUpdate(ReportPath, TCSheetName,"0", policyNo2, objLoadManager,
@@ -681,5 +689,17 @@ public class AutomationUtilities {
 		  }
 		}
 	}
+	
+	
+	public static boolean CheckElementPresent(WebElement XElement) {
+		boolean present = false;
+	try {
+		  XElement.isDisplayed();
+		  present = true;
+	   } catch (NoSuchElementException e) {
+	     present = false;
+	}
+	return present;
+ }
     
 }

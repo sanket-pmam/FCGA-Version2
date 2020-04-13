@@ -6,10 +6,19 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.logging.LogEntries;
+import org.openqa.selenium.logging.LogEntry;
+import org.openqa.selenium.logging.LogType;
+import org.openqa.selenium.logging.LoggingPreferences;
+import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -104,8 +113,8 @@ public class AutomationDriver {
 			AutomationUtilities.AutmSnapfile = new File(
 				TCSnapPath + "NewSnap_"+AutomationUtilities.testCaseID+"-"+ myFormatObj.format(myDateObj).toString());
 		    
-			AutomationUtilities.AutmPDFfile = new File(
-		    		 System.getProperty("user.dir") + "\\Test Report\\PDFFile\\TC-0"+AutomationUtilities.testCaseID+ myFormatObj.format(myDateObj).toString());
+			AutomationUtilities.AutmPDFpath = System.getProperty("user.dir") + "\\Test Report\\PDFFile\\TC-0"+AutomationUtilities.testCaseID+"_"+ myFormatObj.format(myDateObj);
+			AutomationUtilities.AutmPDFfile = new File(AutomationUtilities.AutmPDFpath.toString());
 
 		}
 		
@@ -121,6 +130,11 @@ public class AutomationDriver {
 			OldtcCount = AutomationUtilities.tcCount;
 			System.setProperty("webdriver.chrome.driver",System.getProperty("user.dir") + AutomationUtilities.getDataFromPropertiesFile("CHROME_DRIVER_PATH"));
 			
+			DesiredCapabilities caps = DesiredCapabilities.chrome();
+			LoggingPreferences logPrefs = new LoggingPreferences();
+		    logPrefs.enable(LogType.BROWSER, Level.ALL);
+		    caps.setCapability(CapabilityType.LOGGING_PREFS, logPrefs);
+		    
             ChromeOptions options = new ChromeOptions();
             objWebDriver = new ChromeDriver(options);
 
@@ -132,10 +146,7 @@ public class AutomationDriver {
 			Underwriting objunderwriting = new Underwriting(objWebDriver);
 			objWebDriver.manage().window().maximize();
 
-
 			objWebDriver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
-			//AutomationUtilities.Screenshot(TCSnapPath, TestCaseID);
-
 			objLoginPage.Agentlogin(objWebDriver);
 			//AutomationUtilities.Screenshot(TCSnapPath, TestCaseID);
 
@@ -143,7 +154,6 @@ public class AutomationDriver {
 			//AutomationUtilities.Screenshot(TCSnapPath, TestCaseID);
 
 			objhomepage.checkFramePopup(objWebDriver);
-			
 			objhomepage.CreateNewQuote(objWebDriver,objLoadManager.getProduct());
 			
 			
@@ -170,6 +180,7 @@ public class AutomationDriver {
 				objgeneralliability.WriteGLQuoteDetails (testcasePath,TCSheetName,objLoadManager);
 				objgeneralliability.Application(objLoadManager, objWebDriver);
 				objgeneralliability.PolicyIssue(objLoadManager, objWebDriver);
+				objgeneralliability.ThankYouPage(objLoadManager, objWebDriver);
 
 			} else {
 
@@ -188,7 +199,10 @@ public class AutomationDriver {
 			AutomationUtilities.ExcelUpdate(testcasePath, TCSheetName, "Pass", objLoadManager,"Status F/P");
 			
 			EndTime = myFormatObj.format(myDateObj).toString();
-			AutomationUtilities.ReportGeneration(TCReportPath,TCRPSHEETNAME,objLoadManager,objLoadManager.getTestCaseId(),Product,objLoadManager.getTCScenarios(),AutomationUtilities.sClassCode,AutomationUtilities.sClassCodeDesc,AutomationUtilities.sBusinessName,AutomationUtilities.IndustialQ,AutomationUtilities.sReferralReason,AutomationUtilities.QuoteNo,AutomationUtilities.PolicyNo,"Pass",StartTime,EndTime);
+			AutomationUtilities.ReportGeneration(TCReportPath,TCRPSHEETNAME,objLoadManager,objLoadManager.getTestCaseId(),Product,
+				objLoadManager.getTCScenarios(),AutomationUtilities.sClassCode,AutomationUtilities.sClassCodeDesc,AutomationUtilities.sBusinessName,
+				AutomationUtilities.IndustialQ,AutomationUtilities.sReferralReason,AutomationUtilities.sAddress,AutomationUtilities.SmartyStreet,  
+				AutomationUtilities.QuoteNo,AutomationUtilities.PolicyNo,"Pass",StartTime,EndTime);
 			StartTime = EndTime;
 			
 			objWebDriver.close();
@@ -203,11 +217,30 @@ public class AutomationDriver {
 				AutomationUtilities.AutmSnapfile = new File(
 						TCErrSnapPath + "ErrSnap_"+AutomationUtilities.testCaseID+"-"+ myFormatObj.format(myDateObj).toString());
 		
+				 LogEntries logEntries = objWebDriver.manage().logs().get(LogType.BROWSER);
+				 //LogEntries logEntries1 = objWebDriver.manage().logs().get(LogType.CLIENT);
+				// LogEntries logEntries2 = objWebDriver.manage().logs().get(LogType.DRIVER);
+				 //LogEntries logEntries3 = objWebDriver.manage().logs().get(LogType.SERVER);
+				 //LogEntries logEntries4 = objWebDriver.manage().logs().get(LogType.PERFORMANCE);
+			      
+				 if(!logEntries.toString().isEmpty()) {
+				 
+					 AutomationUtilities.LogSummary(AutomationUtilities.LogPath,"************ Browser Console Data ***************");
+					 
+					 for (LogEntry entry : logEntries) {
+						 String LogMessage = new Date(entry.getTimestamp()) + " " + entry.getLevel() + " " + entry.getMessage() + " " + entry.toString();
+						 AutomationUtilities.LogSummary(AutomationUtilities.LogPath,LogMessage);   
+						 System.out.println(LogMessage);
+			           } 
+				 }  
 			AutomationUtilities.Screenshot(TCErrSnapPath, TestCaseID, objWebDriver);
 			AutomationUtilities.ExcelUpdate(testcasePath, TCSheetName, "Fail", objLoadManager,"Status F/P");
 			
 			EndTime = myFormatObj.format(myDateObj).toString();
-			AutomationUtilities.ReportGeneration(TCReportPath,TCRPSHEETNAME,objLoadManager,objLoadManager.getTestCaseId(),Product,objLoadManager.getTCScenarios(),AutomationUtilities.sClassCode,AutomationUtilities.sClassCodeDesc,AutomationUtilities.sBusinessName,AutomationUtilities.IndustialQ,AutomationUtilities.sReferralReason,AutomationUtilities.QuoteNo,AutomationUtilities.PolicyNo,"Fail",StartTime,EndTime);
+			AutomationUtilities.ReportGeneration(TCReportPath,TCRPSHEETNAME,objLoadManager,objLoadManager.getTestCaseId(),Product,
+					objLoadManager.getTCScenarios(),AutomationUtilities.sClassCode,AutomationUtilities.sClassCodeDesc,AutomationUtilities.sBusinessName,
+					AutomationUtilities.IndustialQ,AutomationUtilities.sReferralReason,AutomationUtilities.sAddress,AutomationUtilities.SmartyStreet,  
+					AutomationUtilities.QuoteNo,AutomationUtilities.PolicyNo,"Fail",StartTime,EndTime);
 			StartTime = EndTime;
 			
 				objWebDriver.close();

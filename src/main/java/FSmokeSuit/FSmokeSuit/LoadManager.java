@@ -22,6 +22,20 @@ public class LoadManager implements Cloneable {
 		private String SEAddr;
 		private String SECity;
 		private String SEZip;
+		private String ProducerFee;
+		private String InspectorName;
+		private String LicenseType;
+		private String LicenseNumber;
+		private String IndustrialPercent;
+		private String CommercialPercent;
+		private String ResidentialPercent;
+		private String NewConstPercent;
+		private String RoomAdditionsPercent;
+		private String RemodelingPercent;
+		private String RepairorServicePercent;
+		private String DescriptionOfBusiness;
+		private String YearsInBusiness;
+		private String SubcontractorDesc;
 		private String AgentNotes;
 		private String AgentMessages;
 		private String UWModifyRiskLPerm;
@@ -40,6 +54,10 @@ public class LoadManager implements Cloneable {
 		private String UWModifySubContractorGross;
 		private String UWModifyUnSubContractorGross;
 		private String UWQuoteStatus;
+		private String UWReferralRemark;
+		private String UWModifyState;
+		private String UWModifyCity;
+		private String UWModifyZip;
 		private String UWNotes;
 		private String UWMessages;
 		private double TestCaseId;
@@ -1046,4 +1064,131 @@ public class LoadManager implements Cloneable {
 		public String getUWQuoteStatus(){
 			return UWQuoteStatus;
 		}
+
+		public void setUWReferralRemark(String sUWReferralRemark) {
+			UWReferralRemark = sUWReferralRemark;
+		}
+		public String getUWReferralRemark(){
+			return UWReferralRemark;
+		}
+
+		public void setUWModifyState(String sUWModifyState) {
+			UWModifyState = sUWModifyState;		
+		}
+		public String getUWModifyState(){
+			return UWModifyState;
+		}
+
+		public void setUWModifyCity(String sUWModifycity) {
+			UWModifyCity = sUWModifycity;		
+		}
+		public String getUWModifyCity(){
+			return UWModifyCity;
+		}
+
+		public void setUWModifyZip(String sUWModifyZip) {
+			UWModifyZip = sUWModifyZip;		
+		}
+		public String getUWModifyZip(){
+			return UWModifyZip;
+		}
+
+		public void setProducerFee(String sProducerFee) {
+			ProducerFee = sProducerFee;			
+		}
+		public String getProducerFee(){
+			return ProducerFee;
+		}
+
+		public void setInspectorName(String sInspectorName) {
+			InspectorName = sInspectorName;		
+		}
+		public String getInspectorName(){
+			return InspectorName;
+		}
+
+		public void setLicenseType(String sLicenseType) {
+			LicenseType = sLicenseType ;	
+		}
+		public String getLicenseType(){
+			return LicenseType;
+		}
+
+		public void setLicenseNumber(String sLicenseNumber) {
+			LicenseNumber = sLicenseNumber;
+		}
+		public String getLicenseNumber(){
+			return LicenseNumber;
+		}
+
+		public void setIndustrialPercent(String sIndustrialPercent) {
+			IndustrialPercent = sIndustrialPercent;			
+		}
+		public String getIndustrialPercent(){
+			return IndustrialPercent;
+		}
+		
+		public void setCommercialPercent(String sCommercialPercent) {
+			CommercialPercent = sCommercialPercent;		
+		}
+		public String getCommercialPercent(){
+			return CommercialPercent;
+		}
+		
+		public void setResidentialPercent(String sResidentialPercent) {
+			ResidentialPercent = sResidentialPercent;			
+		}
+		public String getResidentialPercent(){
+			return ResidentialPercent;
+		}
+		
+		public void setNewConstructionPercent(String sNewConstPercent) {
+			NewConstPercent = sNewConstPercent;			
+		}
+		public String getNewConstPercent(){
+			return NewConstPercent;
+		}
+		
+		public void setRoomAdditionsPercent(String sRoomAdditionsPercent) {
+			RoomAdditionsPercent = sRoomAdditionsPercent;			
+		}
+		public String getRoomAdditionsPercent(){
+			return RoomAdditionsPercent;
+		}
+		
+		public void setRemodelingPercent(String sRemodelingPercent) {
+			 RemodelingPercent = sRemodelingPercent;			
+		}
+		public String getRemodelingPercent(){
+			return RemodelingPercent;
+		}
+		
+		public void setRepairorServicePercent(String sRepairorServicePercent) {
+			RepairorServicePercent = sRepairorServicePercent;	
+		}
+		public String getRepairorServicePercent(){
+			return RepairorServicePercent;
+		}
+
+		public void setDescriptionOfBusiness(String sDescriptionOfBusiness) {
+			DescriptionOfBusiness = sDescriptionOfBusiness;			
+		}
+		public String getDescriptionOfBusiness(){
+			return DescriptionOfBusiness;
+		}
+
+		public void setYearsInBusiness(String sYearsInBusiness) {
+			YearsInBusiness = sYearsInBusiness;			
+		}
+		public String getYearsInBusiness(){
+			return YearsInBusiness;
+		}
+
+		public void setSubcontractorDesc(String sSubcontractorDesc) {
+			SubcontractorDesc = sSubcontractorDesc;
+		}
+		public String getSubcontractorDesc(){
+			return SubcontractorDesc;
+		}
+		
 	}
