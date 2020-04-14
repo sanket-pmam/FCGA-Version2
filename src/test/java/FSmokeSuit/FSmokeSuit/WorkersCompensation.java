@@ -8,6 +8,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -32,12 +33,47 @@ public class WorkersCompensation extends AutomationUtilities {
 		Calendar cal = Calendar.getInstance();
 		cal.add(Calendar.DATE, -15);
 
-		buttonClick(driver,objectrepository.getWCState(), 10, "Click on State");
-		EsendKeysToTextField(driver,objectrepository.gettxtUniquetextbox(), objWCLoadManager.getWCState(), "State Name");
-        
-		driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
-		sendKeysToTextField(driver,objectrepository.gettxtWCClassCodes(), objWCLoadManager.getWCClassCodeDesc(), "Class Code");
-		buttonClick(driver,objectrepository.getbtnWCContinue(), 10, "Click on Continue");
+		String States [] = objWCLoadManager.getWCState().split("/");
+		String ClassCodeDesc [] = objWCLoadManager.getWCClassCodeDesc().split("/");
+		int StatesCount =States.length;
+		int ClassCodeDescCount = ClassCodeDesc.length;
+		int iteration =0;
+		if(iteration > 1 ||ClassCodeDescCount > 1 ) {
+			
+			if(StatesCount > 1) {
+				
+			  for(int i=1;i<StatesCount;i++) {
+				
+				buttonClick(driver,objectrepository.getWCState(), 10, "Click on State");
+				EsendKeysToTextField(driver,objectrepository.gettxtUniquetextbox(),States[i], "State Name");
+			   }
+		}else {
+			
+		   buttonClick(driver,objectrepository.getWCState(), 10, "Click on State");
+		   EsendKeysToTextField(driver,objectrepository.gettxtUniquetextbox(), objWCLoadManager.getWCState(), "State Name");
+		}
+			if (ClassCodeDescCount > 1 ) {
+				for(int i=1;i<ClassCodeDescCount;i++) {
+					
+					driver.findElement(By.xpath("//input[@id='txtClassCodes"+i+"']")).sendKeys(ClassCodeDesc[i]);
+				}
+			} else {
+				sendKeysToTextField(driver,objectrepository.gettxtWCClassCodes(), objWCLoadManager.getWCClassCodeDesc(), "Class Code");
+			  }
+			buttonClick(driver,objectrepository.getbtnWCContinue(), 10, "Click on Continue");
+			iteration = iteration++;
+			
+			if(!(iteration == ClassCodeDescCount) ||!(iteration==StatesCount)) {
+				buttonClick(driver,objectrepository.getbtnWCAddClassCode(),10,"Add Class Code and State");
+			}
+		}else {
+			buttonClick(driver,objectrepository.getWCState(), 10, "Click on State");
+			EsendKeysToTextField(driver,objectrepository.gettxtUniquetextbox(), objWCLoadManager.getWCState(), "State Name");
+			driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+			sendKeysToTextField(driver,objectrepository.gettxtWCClassCodes(), objWCLoadManager.getWCClassCodeDesc(), "Class Code");
+			buttonClick(driver,objectrepository.getbtnWCContinue(), 10, "Click on Continue");
+		}
+
 		AutomationUtilities.sClassCode = objWCLoadManager.getWCClassCode();
 		AutomationUtilities.sClassCodeDesc = objWCLoadManager.getWCClassCodeDesc();
 		//AutomationUtilities.Screenshot(tcSnapPath, testCaseID);
@@ -53,16 +89,19 @@ public class WorkersCompensation extends AutomationUtilities {
 
 		buttonClick(driver,objectrepository.getdpdWCLegalEntity(), 10, "Click on Legal Entity");
 		EsendKeysToTextField(driver,objectrepository.gettxtUniquetextbox(), objWCLoadManager.getWCLegalEntity(), "Legal Entity");
-
-		//sendKeysToTextField(driver,objectrepository.gettxtWCDBAName(), AutomationUtilities.sBusinessName, "Agent Entered DBA Name as Same as Business Name");
+        sendKeysToTextField(driver,objectrepository.gettxtWCDBAName(), AutomationUtilities.sBusinessName+"DBA", "Agent Entered DBA Name as Same as Business Name");
 
 		sendKeysToTextField(driver,objectrepository.gettxtWCAddress1(), objWCLoadManager.getWCAddress1(),"Address1");
+		sendKeysToTextField(driver,objectrepository.gettxtWCAddress2(), objWCLoadManager.getWCAddress2(),"Address2");
 		sendKeysToTextField(driver,objectrepository.gettxtWCCity(), objWCLoadManager.getWCCity(),"City");
 		//AutomationUtilities.Screenshot(tcSnapPath, testCaseID);
 		
 		driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
-        if(objectrepository.getUseasis().isDisplayed()) {
-			buttonClick(driver,objectrepository.getUseasis(),10,"Click on Use as is");
+		 if(CheckElementPresent(objectrepository.getUseasis()) == true ) {
+				AutomationUtilities.SmartyStreet = "No";
+				buttonClick(driver,objectrepository.getUseasis(),10,"Click on Use as is");
+			}else {
+				AutomationUtilities.SmartyStreet = "Yes";
 			}
         
 		buttonClick(driver,objectrepository.getdpdAddressState(), 10, "Click on State");
@@ -73,24 +112,36 @@ public class WorkersCompensation extends AutomationUtilities {
 		//AutomationUtilities.Screenshot(tcSnapPath, testCaseID);
 
         if(objWCLoadManager.getTCScenarios().equalsIgnoreCase("Referral Flow")) {
-		
-        	String AddFEIN = AutomationUtilities.getRandomString(9);
-        	sendKeysToTextField(driver,objectrepository.gettxtWCAddinsuredName1(), objWCLoadManager.getWCAditionalInsured(),"Additional Insured Name");
-        	sendKeysToTextField(driver,objectrepository.gettxtWCFEINNo1(),AddFEIN,"Additional FEIN");
-		 }
-		
+			
+			String[] WCAdditionalInsured = objWCLoadManager.getWCAditionalInsured().split("/");
+			int AICount = WCAdditionalInsured.length;
+
+			if(AICount > 1) {
+
+			for(int i=1;i<AICount;i++) {
+				
+				String AddFEIN = AutomationUtilities.getRandomString(9);
+				driver.findElement(By.xpath("//input[@id='txtAddinsuredName"+i+"'")).sendKeys(WCAdditionalInsured[i]);
+				driver.findElement(By.xpath("//input[@id='txtFEINNo"+i+"'")).sendKeys(AddFEIN);
+			  }
+			}else {
+        	
+				String AddFEIN = AutomationUtilities.getRandomString(9);
+        	    sendKeysToTextField(driver,objectrepository.gettxtWCAddinsuredName1(), objWCLoadManager.getWCAditionalInsured(),"Additional Insured Name");
+        	    sendKeysToTextField(driver,objectrepository.gettxtWCFEINNo1(),AddFEIN,"Additional FEIN");
+		   }
+        }
+        
 		buttonClick(driver,objectrepository.getdpdWCEmployerLimit(), 10, "Click on EmployerLimit");
 		EsendKeysToTextField(driver,objectrepository.gettxtUniquetextbox(), objWCLoadManager.getWCEmployerLimit(),"Employer Limit");
 		sendKeysToTextField(driver,objectrepository.gettxtWCEffectiveDate(), dateFormat.format(date),"Effective date is been entered");
 		//AutomationUtilities.Screenshot(tcSnapPath, testCaseID);
 		
 		if (objWCLoadManager.getWCExpMod() != null) {
-			//System.out.println("Clcking Current Experience Mod radio button");
+			
 			WebElement element = objectrepository.getlblWCrdoCurrExpModYes();
-
 			JavascriptExecutor executor = (JavascriptExecutor) driver;
 			executor.executeScript("document.getElementById('rdoCurrExpModYes').click();", element);
-			//System.out.println("Radio button has been selected");
 			driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
 
 			sendKeysToTextField(driver,objectrepository.gettxtWCExpMod(), objWCLoadManager.getWCExpMod(), "Current Experience Mod is entered");
@@ -100,11 +151,31 @@ public class WorkersCompensation extends AutomationUtilities {
 			buttonClick(driver,objectrepository.getlblWCrdoCurrExpModNo(), 10, "Current Experience Mod is selected as No");
 		}
 
-		sendKeysToTextField(driver,objectrepository.gettxtWCFirstName(), objWCLoadManager.getWCFirstName(),"Owner/Officer First Name is been entered");
-		sendKeysToTextField(driver,objectrepository.gettxtWCLastName(), objWCLoadManager.getWCLastName(),"Owner/Officer Last Name is been entered");
-		sendKeysToTextField(driver,objectrepository.gettxtWCPerOwner(), objWCLoadManager.getWCPerOwner(),"Owner/Officer percentage is been entered");
-		//AutomationUtilities.Screenshot(tcSnapPath, testCaseID);
+		if(objWCLoadManager.getOwnerPermission().equalsIgnoreCase("Yes")) {
+			
+			if(Integer.valueOf(objWCLoadManager.getOwnerCount()) > 1) {
+				
+				String FristName[] = objWCLoadManager.getWCFirstName().split("/");
+				String LastName[] = objWCLoadManager.getWCLastName().split("/");
+				String OwnerPerct[] = objWCLoadManager.getWCPerOwner().split("/");
+						
+				for(int i=1;i<Integer.valueOf(objWCLoadManager.getOwnerCount());i++) {
+					
+					driver.findElement(By.xpath("//input[@id ='txtFirstName"+i+"']")).sendKeys(FristName[i]);
+					driver.findElement(By.xpath("//input[@id ='txtLastName"+i+"']")).sendKeys(LastName[i]);
+					driver.findElement(By.xpath("//input[@id ='txtPerOwner"+i+"']")).sendKeys(OwnerPerct[i]);
+				}
+				
+			}else {
+				
+				sendKeysToTextField(driver,objectrepository.gettxtWCFirstName(), objWCLoadManager.getWCFirstName(),"Owner/Officer First Name is been entered");
+				sendKeysToTextField(driver,objectrepository.gettxtWCLastName(), objWCLoadManager.getWCLastName(),"Owner/Officer Last Name is been entered");
+				sendKeysToTextField(driver,objectrepository.gettxtWCPerOwner(), objWCLoadManager.getWCPerOwner(),"Owner/Officer percentage is been entered");
+				//AutomationUtilities.Screenshot(tcSnapPath, testCaseID);
 
+			}
+		}
+		
 		if (objWCLoadManager.getWCInclude().equalsIgnoreCase("Yes")) {
 			buttonClick(driver,objectrepository.gettxtWCIncluderd(),10,"Include radio button is clicked");
 		} else {

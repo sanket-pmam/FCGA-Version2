@@ -36,8 +36,19 @@ public class LoadManager implements Cloneable {
 		private String DescriptionOfBusiness;
 		private String YearsInBusiness;
 		private String SubcontractorDesc;
+		private String OwnerPermission;
+		private String OwnerCount;
 		private String AgentNotes;
 		private String AgentMessages;
+		private String UWModifySEA;
+		private String UWModifySED;
+		private String UWModifySE;
+		private String UWModifyRLE;
+		private String UWModifyCHT;
+		private String UWModifyIF;
+		private String UWModifyIM;
+		private String UWModifyAI;
+		private String UWModifyWS;
 		private String UWModifyRiskLPerm;
 		private String UWModifyCounty;
 		private String UWModifyBName;
@@ -58,6 +69,19 @@ public class LoadManager implements Cloneable {
 		private String UWModifyState;
 		private String UWModifyCity;
 		private String UWModifyZip;
+		private String UWAICG2037;
+		private String UWAICG1019;
+		private String UWAICG2404;
+		private String UWAICG2012;
+		private String UWAICG2028;
+		private String UWAICG2029;
+		private String UWAICG2024;
+		private String UWAICG2005;
+		private String UWAICG2011;
+		private String UWAICG2007;
+		private String UWAICG2026;
+		private String UWAIFCG1001;
+		private String UWAICG2010;
 		private String UWNotes;
 		private String UWMessages;
 		private double TestCaseId;
@@ -1189,6 +1213,174 @@ public class LoadManager implements Cloneable {
 		}
 		public String getSubcontractorDesc(){
 			return SubcontractorDesc;
+		}
+
+		public void setOwnerPermission(String sOwnerPermission) {
+			OwnerPermission = sOwnerPermission;		
+		}
+		public String getOwnerPermission(){
+			return OwnerPermission;
+		}
+
+		public void setOwnerCount(String sOwnerCount) {
+			OwnerCount = sOwnerCount;
+		}
+		public String getOwnerCount(){
+			return OwnerCount;
+		}
+
+		public void setUWModifyAI(String sUWModifyAI) {
+			UWModifyAI = sUWModifyAI;
+		}
+		public String getUWModifyAI(){
+			return UWModifyAI;
+		}
+
+		public void setUWAIFCG1001(String sUWAIFCG1001) {
+			UWAIFCG1001 = sUWAIFCG1001;		
+		}
+		public String getUWAIFCG1001(){
+			return UWAIFCG1001;
+		}
+
+		public void setUWAICG2010(String sUWAICG2010) {
+			UWAICG2010 = sUWAICG2010;		
+		}
+		public String getUWAICG2010(){
+			return UWAICG2010;
+		}
+
+		public void setUWAICG2037(String sUWAICG2037) {
+			UWAICG2037 = sUWAICG2037;  			
+		}
+		public String getUWAICG2037(){
+			return UWAICG2037;
+		}
+
+		public void setUWAICG1019(String sUWAICG1019) {
+			UWAICG1019 = sUWAICG1019;			
+		}
+		public String getUWAICG1019(){
+			return UWAICG1019;
+		}
+
+		public void setUWAICG2404(String sUWAICG2404) {
+			UWAICG2404 = sUWAICG2404;			
+		}
+		public String getUWAICG2404(){
+			return UWAICG2404;
+		}
+		
+		public void setUWAICG2012(String sUWAICG2012) {
+			UWAICG2012 = sUWAICG2012; 			
+		}
+		public String getUWAICG2012(){
+			return UWAICG2012;
+		}
+		
+		public void setUWAICG2029(String sUWAICG2029) {
+			UWAICG2029 = sUWAICG2029;			
+		}
+		public String getUWAICG2029(){
+			return UWAICG2029;
+		}
+		
+		public void setUWAICG2028(String sUWAICG2028) {
+			UWAICG2028 = sUWAICG2028;			
+		}
+		public String getUWAICG2028(){
+			return UWAICG2028;
+		}
+		
+		public void setUWAICG2024(String sUWAICG2024) {
+			UWAICG2024 = sUWAICG2024;			
+		}
+		public String getUWAICG2024(){
+			return UWAICG2024;
+		}
+		
+		public void setUWAICG2005(String sUWAICG2005) {
+			UWAICG2005 = sUWAICG2005;			
+		}
+		public String getUWAICG2005(){
+			return UWAICG2005;
+		}
+		
+		public void setUWAICG2011(String sUWAICG2011) {
+			UWAICG2011 = sUWAICG2011;		
+		}
+		public String getUWAICG2011(){
+			return UWAICG2011;
+		}
+		
+		public void setUWAICG2007(String sUWAICG2007) {
+			UWAICG2007 = sUWAICG2007;			
+		}
+		public String getUWAICG2007(){
+			return UWAICG2007;
+		}
+
+		public void setUWAICG2026(String sUWAICG2026) {
+			UWAICG2026 = sUWAICG2026;			
+		}
+		public String getUWAICG2026(){
+			return UWAICG2026;
+		}
+
+		public void setUWModifyIM(String sUWModifyIM) {
+			UWModifyIM = sUWModifyIM;			
+		}
+		public String getUWModifyIM(){
+			return UWModifyIM;
+		}
+		
+		public void setUWModifyInstallationFloater(String sUWModifyIF) {
+			UWModifyIF = sUWModifyIF;
+		}
+		public String getUWModifyInstallationFloater(){
+			return UWModifyIF;
+		}
+		
+		public void setUWModifyContractorsHandTools(String sUWModifyCHT) {
+			UWModifyCHT = sUWModifyCHT;			
+		}
+		public String getUWModifyContractorsHandTools(){
+			return UWModifyCHT;
+		}
+		
+		public void setUWModifyRentedorLeasedEquipment(String sUWModifyRLE) {
+			UWModifyRLE = sUWModifyRLE;		
+		}
+		public String getUWModifyRentedorLeasedEquipment(){
+			return UWModifyRLE;
+		}
+		
+		public void setUWModifyScheduleEquipment(String sUWModifySE) {
+			UWModifySE = sUWModifySE;			
+		}
+		public String getUWModifyScheduleEquipment(){
+			return UWModifySE;
+		}
+		
+		public void setUWModifyScheduleEquipmentDescription(String sUWModifySED) {
+			UWModifySED = sUWModifySED;
+		}
+		public String getUWModifyScheduleEquipmentDescription(){
+			return UWModifySED;
+		}
+		
+		public void setUWModifyScheduleEquipmentAmount(String sUWModifySEA) {
+			UWModifySEA = sUWModifySEA; 			
+		}
+		public String getUWModifyScheduleEquipmentAmount(){
+			return UWModifySEA;
+		}
+
+		public void setUWModifyWS(String sUWModifyWS) {
+			UWModifyWS = sUWModifyWS;		
+		}
+		public String getUWModifyWS(){
+			return UWModifyWS;
 		}
 		
 	}

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
 public class Underwriting extends AutomationUtilities {
@@ -76,7 +77,7 @@ public class Underwriting extends AutomationUtilities {
 	
 public void UWGLEditQuote (WebDriver driver,LoadManager objUWGLLoadManager) throws InterruptedException, IOException {
 		
-	    waitforpageload(driver, 30);
+	    waitforpageload(driver, 245);
 		
 		buttonClick(driver,objectrepository.getUWGLEditQuote(),20,"Underwriting Edit Quote");
 
@@ -132,6 +133,27 @@ public void UWGLEditQuote (WebDriver driver,LoadManager objUWGLLoadManager) thro
 			EsendKeysToTextField(driver,objectrepository.gettxtUniquetextbox(),objUWGLLoadManager.getUWModifyDeductible(),"Deductible");
 		
 		  }
+		
+		if(objUWGLLoadManager.getUWModifyIM().equalsIgnoreCase("Yes")) {
+			
+			   buttonClick(driver,objectrepository.getrbInlandMarineYes(),10,"Inland Marine as Yes");
+        
+		} else {
+			
+         	buttonClick(driver,objectrepository.getrbInlandMarineNo(),10,"Inland Marine as No");
+          }
+		if(objUWGLLoadManager.getUWModifyAI().equalsIgnoreCase("Yes")) {
+		    buttonClick(driver,objectrepository.getrbAdditionalInsuredsYes(),10,"Additional Insurance as Yes");
+        } else {
+        	buttonClick(driver,objectrepository.getrbAdditionalInsuredsNo(),10,"Additional Insurance as No");
+        }
+	 
+	 
+	 if(objUWGLLoadManager.getUWModifyWS().equalsIgnoreCase("Yes")) {
+		   buttonClick(driver,objectrepository.getrbWaiversYes(),10,"Waivers as Yes");
+        } else {
+        	buttonClick(driver,objectrepository.getrbWaiversNo(),10,"Waivers as No");
+          }
 		}
 		buttonClick(driver,objectrepository.getbtnsaveandcontinue(),15,"Click on Save and Continue");
 		
@@ -155,6 +177,75 @@ public void UWGLEditQuote (WebDriver driver,LoadManager objUWGLLoadManager) thro
 			AutomationUtilities.LogSummary(LogPath, "Check Page Name: "+ objectrepository.getUWAdditionalInsured().getText());
 			//System.out.println(objectrepository.getUWAdditionalInsured().getText());
 			
+			if (objUWGLLoadManager.getUWModifyAI().equalsIgnoreCase("No")) {
+				if(objUWGLLoadManager.getUWModifyWS().equalsIgnoreCase("Yes")) {
+					
+					if(!objUWGLLoadManager.getAICG2404().equalsIgnoreCase("0")) {
+						sendKeysToTextField(driver,objectrepository.getrdCG2404(),objUWGLLoadManager.getUWAICG2404(),"Waiver of Surbogation");
+					   }
+				   }
+				}
+				
+				if (objUWGLLoadManager.getUWModifyAI().equalsIgnoreCase("Yes")) {
+					
+					if(objUWGLLoadManager.getUWAIFCG1001().equalsIgnoreCase("Yes")) {
+						
+						if(!(objUWGLLoadManager.getUWAIFCG1001().equalsIgnoreCase(objUWGLLoadManager.getAIFCG1001()))) {
+						
+							buttonClick(driver,objectrepository.getrdFCG1001(),10,"Click on FCG1001");
+					   }
+					}
+					if(!objUWGLLoadManager.getUWAICG2010().equalsIgnoreCase("0")) {
+						sendKeysToTextField(driver,objectrepository.getrdCG2010(),objUWGLLoadManager.getUWAICG2010(),"Enter on CG2010");
+					}
+					if(!objUWGLLoadManager.getUWAICG2037().equalsIgnoreCase("0")) {
+						sendKeysToTextField(driver,objectrepository.getrdCG2037(),objUWGLLoadManager.getUWAICG2037(),"Enter on CG2037");
+					}
+					if(!objUWGLLoadManager.getUWAICG1019().equalsIgnoreCase("0")) {
+						sendKeysToTextField(driver,objectrepository.getrdCG1019(),objUWGLLoadManager.getUWAICG1019(),"Enter on CG1019");
+					}
+					
+					if(objUWGLLoadManager.getWaivers().equalsIgnoreCase("Yes")) {
+						
+						if(!objUWGLLoadManager.getUWAICG2404().equalsIgnoreCase("0")) {
+							sendKeysToTextField(driver,objectrepository.getrdCG2404(),objUWGLLoadManager.getUWAICG2404(),"Waiver of Surbogation");
+						}
+					}
+					
+					if(!objUWGLLoadManager.getUWAICG2012().equalsIgnoreCase("0")) {
+						sendKeysToTextField(driver,objectrepository.getrdCG2012(),objUWGLLoadManager.getUWAICG2012(),"Enter on CG2012");
+					}
+					if(!objUWGLLoadManager.getUWAICG2029().equalsIgnoreCase("0")) {
+						sendKeysToTextField(driver,objectrepository.getrdCG2029(),objUWGLLoadManager.getUWAICG2029(),"Enter on CG2029");
+					}
+					if(!objUWGLLoadManager.getUWAICG2028().equalsIgnoreCase("0")) {
+						sendKeysToTextField(driver,objectrepository.getrdCG2028(),objUWGLLoadManager.getUWAICG2028(),"Enter on CG2028");
+					}
+					if(!objUWGLLoadManager.getUWAICG2024().equalsIgnoreCase("0")) {
+						sendKeysToTextField(driver,objectrepository.getrdCG2024(),objUWGLLoadManager.getUWAICG2024(),"Enter on CG2024");
+					}
+					if(!objUWGLLoadManager.getUWAICG2005().equalsIgnoreCase("0")) {
+						sendKeysToTextField(driver,objectrepository.getrdCG2005(),objUWGLLoadManager.getUWAICG2005(),"Enter on CG2005");
+					}
+					if(!objUWGLLoadManager.getUWAICG2011().equalsIgnoreCase("0")) {
+						sendKeysToTextField(driver,objectrepository.getrdCG2011(),objUWGLLoadManager.getUWAICG2011(),"Enter on CG2011");
+					}
+					if(!objUWGLLoadManager.getUWAICG2026().equalsIgnoreCase("0")) {
+						sendKeysToTextField(driver,objectrepository.getrdCG2026(),objUWGLLoadManager.getUWAICG2026(),"Enter on CG2026");
+					}
+					if(objUWGLLoadManager.getUWAICG2007().equalsIgnoreCase("Yes")) {
+						if(!(objUWGLLoadManager.getUWAICG2007().equalsIgnoreCase(objUWGLLoadManager.getUWAICG2007()))) {
+							
+						   buttonClick(driver,objectrepository.getrdCG2007(),10,"Enter on CG2007");
+					   }
+					}
+				} else {
+					
+					JavascriptExecutor js = (JavascriptExecutor) driver;
+					js.executeScript("window.scrollBy(0,1000)");
+					js.executeScript("window.scrollBy(0,1000)");
+				}
+			
 			buttonClick(driver,objectrepository.getbtnsaveandcontinue(),15,"Click on Save and Continue");
 
 			
@@ -170,6 +261,48 @@ public void UWGLEditQuote (WebDriver driver,LoadManager objUWGLLoadManager) thro
 			
 		AutomationUtilities.LogSummary(LogPath, "Check Page Name: "+ objectrepository.getUWLblPage().getText());
 		//System.out.println(objectrepository.getUWLblPage().getText());
+		
+		if(objUWGLLoadManager.getUWModifyIM().equalsIgnoreCase("Yes")) {
+			
+			String ElementNamexpath = "//td[@style= 'display:none'][@class='border-white']";
+	        for (int i =1; i<= GeneralLiability.LastQCount(driver,ElementNamexpath);i++) {
+	        	driver.findElement(By.xpath("//label[@for='radio-"+i+"']")).click(); // no button
+	        }
+	        
+	        //AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
+	        buttonClick(driver,objectrepository.getdpdinstallationfloater(),10,"Click on Installation Floater Drop down");
+	        EsendKeysToTextField(driver,objectrepository.gettxtUniquetextbox(),objUWGLLoadManager.getUWModifyInstallationFloater(),"Installation Floater have been entered");
+	        
+	        buttonClick(driver,objectrepository.getdpdContractorHandtools(),10,"Click on Contractor's Hand Tools Drop down");
+	        EsendKeysToTextField(driver,objectrepository.gettxtUniquetextbox(),objUWGLLoadManager.getUWModifyContractorsHandTools(),"Contractor's Hand Tools have been entered");
+	        
+	        buttonClick(driver,objectrepository.getdpdleasedequipment(),10,"Click on Leased Equipment Drop down");
+	        EsendKeysToTextField(driver,objectrepository.gettxtUniquetextbox(),objUWGLLoadManager.getUWModifyRentedorLeasedEquipment(),"Click on Leased Equipment Drop down");
+	       // AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
+	        
+	        
+	        if (objUWGLLoadManager.getUWModifyScheduleEquipment().equalsIgnoreCase("Yes") ) {
+	        	
+	        	String SEDesc [] = objUWGLLoadManager.getScheduleEquipmentDescription().split("/");
+	        	String SEAmount [] = objUWGLLoadManager.getScheduleEquipmentDescription().split("/");
+	        	int SEDescCount = SEDesc.length;
+	        	if(SEDescCount > 1) {
+	        	for (int i =1; i<=SEDescCount;i++) {
+	        		
+	        		buttonClick(driver,objectrepository.getbtnRemoveScheduleEquip(),20," Remove Schedule Equipment");
+	        		buttonClick(driver,objectrepository.getbtnScheduleEquip(),20,"Schedule Equipment");
+	        		driver.findElement(By.xpath("//td[contains(text(),"+i+")]//parent :: tr// following-sibling :: td//input[@class='form-control EquipmentTB ']")).sendKeys(SEDesc[i]);
+	        		driver.findElement(By.xpath("//td[contains(text(),"+i+")]//parent :: tr// following-sibling :: td//input[@name='txtACVLimit']")).sendKeys(SEAmount[i]);
+	        	  }
+	        	}else {
+	        		
+	        		buttonClick(driver,objectrepository.getbtnRemoveScheduleEquip(),20," Remove Schedule Equipment");
+		        	buttonClick(driver,objectrepository.getbtnScheduleEquip(),20," Add Schedule Equipment");
+		        	sendKeysToTextField(driver,objectrepository.gettxtScheduleEquipDesc(),objUWGLLoadManager.getUWModifyScheduleEquipmentDescription(),"Schedule Equipment Description");
+		        	sendKeysToTextField(driver,objectrepository.gettxtScheduleEquipAcount(),objUWGLLoadManager.getUWModifyScheduleEquipmentAmount(),"Schedule Equipment Amount" );
+		        }
+	        }
+		}
 		
 		buttonClick(driver,objectrepository.getbtnsaveandcontinue(),10,"Click on Save and Continue");
 		driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);

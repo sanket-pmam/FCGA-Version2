@@ -182,6 +182,9 @@ public class ObjectRepository {
 	@FindBy (xpath="//input[@id='btnAdd']")
 	public WebElement btn_ScheduleEquip;
 	
+	@FindBy (xpath="//label[@id='aDeleteRow']")
+	public WebElement btn_RemoveScheduleEquip;
+	
 	@FindBy (xpath="//input[@class='form-control EquipmentTB ']")
 	public WebElement txt_ScheduleEquipDesc;
 	
@@ -506,6 +509,9 @@ public class ObjectRepository {
 	
 	@FindBy (xpath="//input[@id='txtClassCodes1']")
 	public WebElement txtWCClassCodes;
+	
+	@FindBy (xpath="//input[@id='btnAddEligibility']")
+	public WebElement btnWCAddClassCode;
 	
 	@FindBy (xpath="//input[@id='btnContinue']")
 	public WebElement btnWCContinue;
@@ -1032,6 +1038,10 @@ public class ObjectRepository {
 		return txtWCClassCodes;
 	}
 	
+	public WebElement getbtnWCAddClassCode() {
+		return btnWCAddClassCode;
+	}
+	
 	public WebElement getbtnWCContinue() {
 		return btnWCContinue;
 	}
@@ -1520,6 +1530,10 @@ public class ObjectRepository {
   
   public WebElement getbtnScheduleEquip() {
 		return btn_ScheduleEquip;
+	}
+  
+  public WebElement getbtnRemoveScheduleEquip() {
+		return btn_RemoveScheduleEquip;
 	}
   
   public WebElement gettxtScheduleEquipDesc() {
