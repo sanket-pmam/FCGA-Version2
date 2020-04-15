@@ -189,9 +189,9 @@ public class AutomationDriver {
 				AutomationUtilities.ExcelUpdate(testcasePath, TCSheetName, AutomationUtilities.sBusinessName, objLoadManager,
 						"Insured Name");
 				objworkerscompensation.GeneralQuestions(objLoadManager,industrialq, objWebDriver);
-				//objworkerscompensation.Losses(objLoadManager, objWebDriver);
-				//objworkerscompensation.Application(objLoadManager, objWebDriver, AutomationUtilities.sBusinessName,objLoginPage,objunderwriting,objhomepage);
-				//objworkerscompensation.PolicyIssue(objLoadManager, objWebDriver);
+				objworkerscompensation.Losses(objLoadManager, objWebDriver);
+				objworkerscompensation.Application(objLoadManager, objWebDriver, AutomationUtilities.sBusinessName,objLoginPage,objunderwriting,objhomepage);
+				objworkerscompensation.PolicyIssue(objLoadManager, objWebDriver);
 				
 			}
 			

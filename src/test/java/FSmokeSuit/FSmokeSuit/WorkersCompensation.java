@@ -159,11 +159,16 @@ public class WorkersCompensation extends AutomationUtilities {
 				String LastName[] = objWCLoadManager.getWCLastName().split("/");
 				String OwnerPerct[] = objWCLoadManager.getWCPerOwner().split("/");
 						
-				for(int i=1;i<Integer.valueOf(objWCLoadManager.getOwnerCount());i++) {
+				for(int i=1;i<=Integer.valueOf(objWCLoadManager.getOwnerCount());i++) {
 					
 					driver.findElement(By.xpath("//input[@id ='txtFirstName"+i+"']")).sendKeys(FristName[i]);
 					driver.findElement(By.xpath("//input[@id ='txtLastName"+i+"']")).sendKeys(LastName[i]);
 					driver.findElement(By.xpath("//input[@id ='txtPerOwner"+i+"']")).sendKeys(OwnerPerct[i]);
+				  
+					if(i < Integer.valueOf(objWCLoadManager.getOwnerCount())) {
+						buttonClick(driver,objectrepository.getbtnWCAIButton(),10,"Additional Insured");
+					}
+					
 				}
 				
 			}else {

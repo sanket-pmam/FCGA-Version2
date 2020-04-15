@@ -185,10 +185,10 @@ public class ObjectRepository {
 	@FindBy (xpath="//label[@id='aDeleteRow']")
 	public WebElement btn_RemoveScheduleEquip;
 	
-	@FindBy (xpath="//input[@class='form-control EquipmentTB ']")
+	@FindBy (xpath="//tr[@data-schudleequipid='0']//input[@class='form-control EquipmentTB ']")
 	public WebElement txt_ScheduleEquipDesc;
 	
-	@FindBy (xpath="//input[@name='txtACVLimit']")
+	@FindBy (xpath="//tr[@data-schudleequipid='0']//input[@name='txtACVLimit']")
 	public WebElement txt_ScheduleEquipAcount;
 //--------	
 	@FindBy(xpath = "//label[@id='lblQuoteDate']")
@@ -561,6 +561,9 @@ public class ObjectRepository {
 	@FindBy (xpath="//input[@id ='txtExpMod']")
 	public WebElement txtWCExpMod;
 	
+	@FindBy (xpath="//input[@id='btnAddAnother' and @onclick='AddInsuredNameFEIN();']")
+	public WebElement btnWCAIButton;
+	
 	@FindBy (xpath="//input[@id ='txtFirstName1']")
 	public WebElement txtWCFirstName;
 	
@@ -836,6 +839,9 @@ public class ObjectRepository {
 	@FindBy (xpath="//input[@id='btnReRate']")
 	public WebElement UWbtnReRate;
 	
+	@FindBy (xpath="//button[@id='btnDeclineContinue']")
+	public WebElement UWbtnDeclineContinue;
+	
 	@FindBy (xpath="//div[@id ='dvQuoteDoc']//input[@id='btnExit_Common']")
 	public WebElement UWbtnExit;
 	
@@ -1108,6 +1114,9 @@ public class ObjectRepository {
 		return txtWCFirstName;
 	}
 	
+	public WebElement getbtnWCAIButton() {	
+	    return btnWCAIButton;
+	}   
 	public WebElement gettxtWCLastName() {
 		return txtWCLastName;
 	}
@@ -1952,6 +1961,9 @@ public class ObjectRepository {
   }
   public WebElement getUWbtnReRate() {
 	  return UWbtnReRate;
+  }
+  public WebElement getUWbtnDeclineContinue() {
+      return UWbtnDeclineContinue;
   }
   public WebElement getUWbtnExit() {
 	  return UWbtnExit;

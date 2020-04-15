@@ -22,9 +22,9 @@ public class Underwriting extends AutomationUtilities {
 		 waitforpageload(driver, 15);
 		 sendKeysToTextField(driver,objectrepository.gettxtUWSearch(),AutomationUtilities.sBusinessName,"Business Name is searched");
 		 buttonClick(driver,objectrepository.getbtnSearch(),10,"Search Record");
-		 waitforpageload(driver, 15);
+		 waitforpageload(driver, 25);
 		 driver.findElement(By.xpath("//a[contains(text(),'"+AutomationUtilities.sBusinessName+"')]")).click();
-
+		 waitforpageload(driver, 15);
 	}
 	
 	public void UWChangeStatus (WebDriver driver,LoadManager objUWGLLoadManager) throws InterruptedException, IOException {
@@ -49,6 +49,15 @@ public class Underwriting extends AutomationUtilities {
 		
 		buttonClick(driver,objectrepository.getUWbtnReRate(),60,"UW Re Rate button");
 		Thread.sleep(3000);
+		if(objUWGLLoadManager.getUWQuoteStatus().equalsIgnoreCase("Declined")) {
+			
+			String DeclineXpath ="//label[@name ='lblDeclineReasonCheck']";
+			for (int i =0; i<GeneralLiability.LastQCount(driver,DeclineXpath)-1;i++) {
+				
+				driver.findElement(By.xpath("//label[@id='lblDeclineReasonCheck"+i+"1']")).click();
+			}
+			buttonClick(driver,objectrepository.getUWbtnDeclineContinue(),60,"UW Decline button");
+		}
 		AutomationUtilities.LogSummary(LogPath, "Alert Message in PopUp : "+ objectrepository.getUWAlertMsgBox().getText());
 		buttonClick(driver,objectrepository.gettxtWCClosebtn(), 10, "Close button is saved sucessfully.");
 		
@@ -77,7 +86,8 @@ public class Underwriting extends AutomationUtilities {
 	
 public void UWGLEditQuote (WebDriver driver,LoadManager objUWGLLoadManager) throws InterruptedException, IOException {
 		
-	    waitforpageload(driver, 245);
+	    waitforpageload(driver, 70);
+		//Thread.sleep(3000);
 		
 		buttonClick(driver,objectrepository.getUWGLEditQuote(),20,"Underwriting Edit Quote");
 
@@ -291,6 +301,7 @@ public void UWGLEditQuote (WebDriver driver,LoadManager objUWGLLoadManager) thro
 	        		
 	        		buttonClick(driver,objectrepository.getbtnRemoveScheduleEquip(),20," Remove Schedule Equipment");
 	        		buttonClick(driver,objectrepository.getbtnScheduleEquip(),20,"Schedule Equipment");
+	        		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 	        		driver.findElement(By.xpath("//td[contains(text(),"+i+")]//parent :: tr// following-sibling :: td//input[@class='form-control EquipmentTB ']")).sendKeys(SEDesc[i]);
 	        		driver.findElement(By.xpath("//td[contains(text(),"+i+")]//parent :: tr// following-sibling :: td//input[@name='txtACVLimit']")).sendKeys(SEAmount[i]);
 	        	  }
@@ -298,6 +309,7 @@ public void UWGLEditQuote (WebDriver driver,LoadManager objUWGLLoadManager) thro
 	        		
 	        		buttonClick(driver,objectrepository.getbtnRemoveScheduleEquip(),20," Remove Schedule Equipment");
 		        	buttonClick(driver,objectrepository.getbtnScheduleEquip(),20," Add Schedule Equipment");
+		        	driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 		        	sendKeysToTextField(driver,objectrepository.gettxtScheduleEquipDesc(),objUWGLLoadManager.getUWModifyScheduleEquipmentDescription(),"Schedule Equipment Description");
 		        	sendKeysToTextField(driver,objectrepository.gettxtScheduleEquipAcount(),objUWGLLoadManager.getUWModifyScheduleEquipmentAmount(),"Schedule Equipment Amount" );
 		        }

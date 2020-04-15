@@ -81,7 +81,9 @@ public class AutomationUtilities {
    public static String sAddress;
    public static String SmartyStreet;
    public static String sSubClassCode;
-   
+   public static String InputAIForms;
+   public static String InputWSForms;
+	
 	static Function<WebDriver, Boolean> documentWait = new Function<WebDriver, Boolean>() {
 		public Boolean apply(WebDriver driver) {
 			return (Boolean) ((JavascriptExecutor) driver).executeScript("return document.readyState=='complete'")
@@ -89,6 +91,7 @@ public class AutomationUtilities {
 					: false;
 		}
 	};
+
 	
    public static void waitforpageload(WebDriver driver, int iTimeOut) {
 		//System.out.println("Wait for Page load......");

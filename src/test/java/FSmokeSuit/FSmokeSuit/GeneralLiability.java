@@ -582,13 +582,15 @@ public class GeneralLiability extends AutomationUtilities {
      
      //AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
      buttonClick(driver,objectrepository.getbtn_ICSavebutton(),20,"Click on Save Insurance Company");
-     driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+     driver.manage().timeouts().implicitlyWait(25, TimeUnit.SECONDS);
+     Thread.sleep(3000);
 	 buttonClick(driver,objectrepository.getbtn_CloseProducerFee(),10,"Click on Button Close");
 	 driver.manage().timeouts().implicitlyWait(35, TimeUnit.SECONDS);
 	 
 	 AutomationUtilities.QuoteNo = objectrepository.getlbl_QuoteNo().getText();
 	 //System.out.println("Quote No: "+ objectrepository.getlbl_QuoteNo().getText());
      AutomationUtilities.LogSummary(LogPath,"Quote No: "+ objectrepository.getlbl_QuoteNo().getText());
+     //driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
      //AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
      
 	 buttonClick(driver,objectrepository.getbtn_Appbutton(),10,"Click on Application Button");
@@ -704,8 +706,68 @@ public class GeneralLiability extends AutomationUtilities {
         	}
 			
 		}		
-        
+        	
+       if(objGlLoadManager.getTCScenarios().equalsIgnoreCase("Referral Flow")) {
+    	   
+    	    AutomationUtilities.InputAIForms = objGlLoadManager.getUWModifyAI(); 
+    	    AutomationUtilities.InputWSForms = objGlLoadManager.getUWModifyWS(); 
+    	    
+       }else {
+    	   
+    	   AutomationUtilities.InputAIForms = objGlLoadManager.getAI(); 
+    	   AutomationUtilities.InputWSForms = objGlLoadManager.getWaivers();  
+       }
+       
+       if(AutomationUtilities.InputAIForms.equalsIgnoreCase("No") || AutomationUtilities.InputWSForms.equalsIgnoreCase("Yes")) {
+    	   
+    	   if(!(objGlLoadManager.getAICG2404().equalsIgnoreCase("0")) || !(objGlLoadManager.getUWAICG2404().equalsIgnoreCase("0"))) {
 
+    		      if(!objGlLoadManager.getUWAICG2404().isBlank()) {
+    		    	  
+    		    	  if(Integer.valueOf(objGlLoadManager.getUWAICG2404())> 1) {
+    						
+    		  	    	for(int i =1;i<=Integer.valueOf(objGlLoadManager.getUWAICG2404());i++) {
+    		  				
+    		  				driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2404_"+i+"']")).sendKeys("CG2404_"+i);
+    		  				driver.findElement(By.xpath("//input[@id='txtAddress1CG2404_"+i+"']")).sendKeys(objGlLoadManager.getFristAddressline());
+    		  				driver.findElement(By.xpath("//input[@id='txtAddress2CG2404_"+i+"']")).sendKeys(objGlLoadManager.getSecAddressline());
+    		  				driver.findElement(By.xpath("//input[@id='txtCityCG2404_"+i+"']")).sendKeys(objGlLoadManager.getLocationCity());
+    		  				driver.findElement(By.xpath("//input[@id='txtZipCodeCG2404_"+i+"']")).sendKeys(objGlLoadManager.getLocationZipCode());
+    		  			}
+    		  		  } else {
+    		  			
+    		  			    driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2404']")).sendKeys("CG2404");
+    		  				driver.findElement(By.xpath("//input[@id='txtAddress1CG2404']")).sendKeys(objGlLoadManager.getFristAddressline());
+    		  				driver.findElement(By.xpath("//input[@id='txtAddress2CG2404']")).sendKeys(objGlLoadManager.getSecAddressline());
+    		  				driver.findElement(By.xpath("//input[@id='txtCityCG2404']")).sendKeys(objGlLoadManager.getLocationCity());
+    		  				driver.findElement(By.xpath("//input[@id='txtZipCodeCG2404']")).sendKeys(objGlLoadManager.getLocationZipCode());
+    		  			}
+    		      } else if(!objGlLoadManager.getAICG2404().isBlank()) {
+    		    	  
+    		    	if(Integer.valueOf(objGlLoadManager.getAICG2404())> 1) {
+    					
+    		    	for(int i =1;i<=Integer.valueOf(objGlLoadManager.getAICG2404());i++) {
+    					
+    					driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2404_"+i+"']")).sendKeys("CG2404_"+i);
+    					driver.findElement(By.xpath("//input[@id='txtAddress1CG2404_"+i+"']")).sendKeys(objGlLoadManager.getFristAddressline());
+    					driver.findElement(By.xpath("//input[@id='txtAddress2CG2404_"+i+"']")).sendKeys(objGlLoadManager.getSecAddressline());
+    					driver.findElement(By.xpath("//input[@id='txtCityCG2404_"+i+"']")).sendKeys(objGlLoadManager.getLocationCity());
+    					driver.findElement(By.xpath("//input[@id='txtZipCodeCG2404_"+i+"']")).sendKeys(objGlLoadManager.getLocationZipCode());
+    				}
+    			  } else {
+    				
+    				    driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2404']")).sendKeys("CG2404");
+    					driver.findElement(By.xpath("//input[@id='txtAddress1CG2404']")).sendKeys(objGlLoadManager.getFristAddressline());
+    					driver.findElement(By.xpath("//input[@id='txtAddress2CG2404']")).sendKeys(objGlLoadManager.getSecAddressline());
+    					driver.findElement(By.xpath("//input[@id='txtCityCG2404']")).sendKeys(objGlLoadManager.getLocationCity());
+    					driver.findElement(By.xpath("//input[@id='txtZipCodeCG2404']")).sendKeys(objGlLoadManager.getLocationZipCode());
+    				}
+    		      }
+    		    }
+       }
+       
+       if(AutomationUtilities.InputAIForms.equalsIgnoreCase("Yes")) {
+    	   
 		if(!(objGlLoadManager.getAICG2010().equalsIgnoreCase("0")) ||!(objGlLoadManager.getUWAICG2010().equalsIgnoreCase("0")) ) {
 			
 			if(!objGlLoadManager.getUWAICG2010().isBlank()) {
@@ -844,6 +906,7 @@ public class GeneralLiability extends AutomationUtilities {
 			}
 		}
 			
+		if(AutomationUtilities.InputWSForms.equalsIgnoreCase("Yes")){
 	    if(!(objGlLoadManager.getAICG2404().equalsIgnoreCase("0")) || !(objGlLoadManager.getUWAICG2404().equalsIgnoreCase("0"))) {
 
 	      if(!objGlLoadManager.getUWAICG2404().isBlank()) {
@@ -888,6 +951,7 @@ public class GeneralLiability extends AutomationUtilities {
 			}
 	      }
 	    }
+	   }
 		if(!(objGlLoadManager.getAICG2012().equalsIgnoreCase("0")) || !(objGlLoadManager.getAICG2012().equalsIgnoreCase("0"))) {
 		  
 			if(!objGlLoadManager.getUWAICG2404().isBlank()) {
@@ -1198,7 +1262,7 @@ public class GeneralLiability extends AutomationUtilities {
 			}
 		}
 
-        
+      }
 		sendKeysToTextField(driver,objectrepository.gettxtGeneralRemarks(),objGlLoadManager.getAgentNotes(),"Enter Notes and Remarks");
 		//AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
 		  
