@@ -465,10 +465,78 @@ public void UWclassPayroll(LoadManager objUWGLLoadManager, WebDriver driver) thr
 	
 	} 
 	
-	if(!objUWGLLoadManager.getUWModifyActiveOwner().isEmpty()) {
-	sendKeysToTextField(driver,objectrepository.gettxtActivePartner(),objUWGLLoadManager.getUWModifyActiveOwner(),"Active Owner");
-	}
-	
+	if(!objUWGLLoadManager.getUWModifyAdministrativeEmployee().isBlank()) {
+		
+        if(objUWGLLoadManager.getUWModifyAdministrativeEmployee().length() == 3) {
+				
+     	    int i=0;
+     	    String AdminEmp [] = objUWGLLoadManager.getUWModifyAdministrativeEmployee().split("/");
+			sendKeysToTextField(driver,objectrepository.gettxtFTAdminEmp(),AdminEmp[i],"Administrative Employee");
+			sendKeysToTextField(driver,objectrepository.gettxtPTAdminEmp(),AdminEmp[i+1],"Administrative Employee");
+
+	        }else if(objUWGLLoadManager.getUWModifyAdministrativeEmployee().length() == 1) {
+				
+				sendKeysToTextField(driver,objectrepository.gettxtFTAdminEmp(),objUWGLLoadManager.getUWModifyAdministrativeEmployee(),"Administrative Employee");	
+
+			}
+        
+		sendKeysToTextField(driver,objectrepository.gettotAdmPayroll(),objUWGLLoadManager.getUWModifyAdministrativeEmployeeGrossAtm(),"Administrative Amount");
+		
+		}
+		
+		if(!objUWGLLoadManager.getUWModifySalesEmployee().isBlank()) {
+        
+         if(objUWGLLoadManager.getUWModifySalesEmployee().length() == 3) {
+     	   
+     	   int i=0;
+     	   String SalesEmp[] = objUWGLLoadManager.getUWModifySalesEmployee().split("/");
+            sendKeysToTextField(driver,objectrepository.gettxtFTSalesEmp(),SalesEmp[i],"Sales Employee");
+            sendKeysToTextField(driver,objectrepository.gettxtPTSalesEmp(),SalesEmp[i+1],"Sales Employee");
+            
+         }else if(objUWGLLoadManager.getUWModifySalesEmployee().length() == 1) {
+				
+				sendKeysToTextField(driver,objectrepository.gettxtFTSalesEmp(),objUWGLLoadManager.getUWModifySalesEmployee(),"Sales Employee");	
+				
+			}
+         
+         sendKeysToTextField(driver,objectrepository.gettotSalesPayroll(),objUWGLLoadManager.getUWModifySalesEmployeeGrossAtm(),"Sales Amount");
+         
+		}
+		
+		if(!objUWGLLoadManager.getUWModifyActiveOwner().isBlank()) {
+            
+			if(objUWGLLoadManager.getUWModifyActiveOwner().length() == 3) {
+				
+				int i =0;
+				String ActiveOwner[] = objUWGLLoadManager.getUWModifyActiveOwner().split("/");
+				sendKeysToTextField(driver,objectrepository.gettxtFTActivePartner(),ActiveOwner[i],"Active Owner");
+				sendKeysToTextField(driver,objectrepository.gettxtPTActivePartner(),ActiveOwner[i+1],"Active Owner");
+				
+			}else if(objUWGLLoadManager.getUWModifyActiveOwner().length() == 1) {
+				
+				sendKeysToTextField(driver,objectrepository.gettxtFTActivePartner(),objUWGLLoadManager.getUWModifyActiveOwner(),"Active Owner");	
+				
+			}
+		}
+			
+     if(!objUWGLLoadManager.getUWModifyOtherEmployees().isBlank()) {
+     	
+     	if(objUWGLLoadManager.getUWModifyOtherEmployees().length() == 3) {
+				
+         	int i =0;
+         	String OtherEmp[] = objUWGLLoadManager.getUWModifyOtherEmployees().split("/");
+				sendKeysToTextField(driver,objectrepository.gettxtFTOtherEmp(),OtherEmp[i],"Other Employee");
+				sendKeysToTextField(driver,objectrepository.gettxtPTOtherEmp(),OtherEmp[i+1],"Other Employee");
+				
+			}else if(objUWGLLoadManager.getUWModifyOtherEmployees().length() == 1) {
+				
+				sendKeysToTextField(driver,objectrepository.gettxtFTOtherEmp(),objUWGLLoadManager.getUWModifyOtherEmployees(),"Other Employee");	
+				
+			}
+         
+     	  sendKeysToTextField(driver,objectrepository.gettotOtherPayroll(),objUWGLLoadManager.getUWModifyOtherEmployeesGrossAtm(),"Sales Amount");
+     	
+		}
 }
 
    

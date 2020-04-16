@@ -118,11 +118,15 @@ public class WorkersCompensation extends AutomationUtilities {
 
 			if(AICount > 1) {
 
-			for(int i=1;i<AICount;i++) {
+			for(int i=1;i<=AICount;i++) {
 				
 				String AddFEIN = AutomationUtilities.getRandomString(9);
-				driver.findElement(By.xpath("//input[@id='txtAddinsuredName"+i+"'")).sendKeys(WCAdditionalInsured[i]);
+				driver.findElement(By.xpath("//input[@id='txtAddinsuredName"+i+"'")).sendKeys(WCAdditionalInsured[i-1]);
 				driver.findElement(By.xpath("//input[@id='txtFEINNo"+i+"'")).sendKeys(AddFEIN);
+				
+				if(i<AICount) {
+					buttonClick(driver,objectrepository.getbtnWCAIButton(),10,"Additional Insured");
+				}
 			  }
 			}else {
         	
@@ -158,15 +162,16 @@ public class WorkersCompensation extends AutomationUtilities {
 				String FristName[] = objWCLoadManager.getWCFirstName().split("/");
 				String LastName[] = objWCLoadManager.getWCLastName().split("/");
 				String OwnerPerct[] = objWCLoadManager.getWCPerOwner().split("/");
-						
-				for(int i=1;i<=Integer.valueOf(objWCLoadManager.getOwnerCount());i++) {
+				int OwnerCount = Integer.valueOf(objWCLoadManager.getOwnerCount());
+				
+				for(int i=1;i<=OwnerCount;i++) {
 					
-					driver.findElement(By.xpath("//input[@id ='txtFirstName"+i+"']")).sendKeys(FristName[i]);
-					driver.findElement(By.xpath("//input[@id ='txtLastName"+i+"']")).sendKeys(LastName[i]);
-					driver.findElement(By.xpath("//input[@id ='txtPerOwner"+i+"']")).sendKeys(OwnerPerct[i]);
+					driver.findElement(By.xpath("//input[@id ='txtFirstName"+i+"']")).sendKeys(FristName[i-1]);
+					driver.findElement(By.xpath("//input[@id ='txtLastName"+i+"']")).sendKeys(LastName[i-1]);
+					driver.findElement(By.xpath("//input[@id ='txtPerOwner"+i+"']")).sendKeys(OwnerPerct[i-1]);
 				  
-					if(i < Integer.valueOf(objWCLoadManager.getOwnerCount())) {
-						buttonClick(driver,objectrepository.getbtnWCAIButton(),10,"Additional Insured");
+					if(i < OwnerCount) {
+						buttonClick(driver,objectrepository.getbtnWCOWButton(),10,"Owner/Officer");
 					}
 					if (objWCLoadManager.getWCInclude().equalsIgnoreCase("Yes")) {
 						
@@ -207,9 +212,9 @@ public class WorkersCompensation extends AutomationUtilities {
 			
 			for(int i=1;i<ClassCodeDescCount;i++) {
 				
-				driver.findElement(By.xpath("//input[@id='txtFTEmployee"+i+"']")).sendKeys(WCFTEmployee[i]);
-				driver.findElement(By.xpath("//input[@id='txtPTEmployee"+i+"']")).sendKeys(WCPTEmployee[i]);
-				driver.findElement(By.xpath("//input[@id='txtGrossannualPayroll"+i+"']")).sendKeys(WCGrossannualPayroll[i]);
+				driver.findElement(By.xpath("//input[@id='txtFTEmployee"+i+"']")).sendKeys(WCFTEmployee[i-1]);
+				driver.findElement(By.xpath("//input[@id='txtPTEmployee"+i+"']")).sendKeys(WCPTEmployee[i-1]);
+				driver.findElement(By.xpath("//input[@id='txtGrossannualPayroll"+i+"']")).sendKeys(WCGrossannualPayroll[i-1]);
 				
 			}
 		}else {

@@ -44,6 +44,18 @@ public class LoadManager implements Cloneable {
 		private String WCproofofWCCov;
 		private String WCUninsuredSC;
 		private String WCBusinessDesc;
+		private String AdministrativeEmp;
+        private String AdministrativeEmpGrossAtm;
+        private String SalesEmployees;
+        private String SalesEmployeesGA;
+        private String OtherEmp;
+        private String OtherEmpGrossAtm;
+        private String UWModifyAdministrativeEmp;
+        private String UWModifyAdministrativeEmpGrossAtm;
+        private String UWModifySalesEmployees;
+        private String UWModifySalesEmployeesGrossAtm;
+        private String UWModifyOtherEmployees;
+        private String UWModifyOtherEmployeesGA;
 		private String AgentNotes;
 		private String AgentMessages;
 		private String UWModifySEA;
@@ -114,7 +126,7 @@ public class LoadManager implements Cloneable {
 		private String ProjectAgregate;
 		private double ExpectedGrossReceipts;
 		private String TypeofCompany;
-		private double ActiveOwner;
+		private String ActiveOwner;
 		private double SubContractorGrossReciepts;
 		private String UnSubContractorGrossReciepts;
 		private String InstallationFloater;
@@ -328,11 +340,11 @@ public class LoadManager implements Cloneable {
 		public String getExpectedGrossReceipts() {
 			return Double.toString(Math.round(ExpectedGrossReceipts));	
 		}
-		public void setActiveOwner(double activeowner) {
+		public void setActiveOwner(String activeowner) {
 			ActiveOwner = activeowner;
 		}
 		public String getActiveOwner() {
-			return String.valueOf(Math.round(ActiveOwner));		
+			return ActiveOwner;		
 		}
 		public void setTypeofCompany(String typeofcompany) {
 			TypeofCompany = typeofcompany;
@@ -1431,4 +1443,88 @@ public class LoadManager implements Cloneable {
 			return WCBusinessDesc;
 		}
 
+		public void setAdministrativeEmployee(String sAdministrativeEmp) {
+			AdministrativeEmp = sAdministrativeEmp;		
+		}
+		public String getAdministrativeEmployee(){
+			return AdministrativeEmp;
+		}
+		
+		public void setAdministrativeEmployeeGrossAtm(String sAdministrativeEmpGrossAtm) {
+			AdministrativeEmpGrossAtm = sAdministrativeEmpGrossAtm;		
+		}
+		public String getAdministrativeEmployeeGrossAtm(){
+			return AdministrativeEmpGrossAtm;
+		}
+		
+		public void setSalesEmployees(String sSalesEmployees) {
+			SalesEmployees = sSalesEmployees;			
+		}
+		public String getSalesEmployees(){
+			return SalesEmployees;
+		}
+		
+		public void setSalesEmployeesGrossAtm(String sSalesEmployeesGA) {
+			SalesEmployeesGA = sSalesEmployeesGA;
+		}
+		public String getSalesEmployeesGrossAtm(){
+			return SalesEmployeesGA;
+		}
+		
+		public void setOtherEmployees(String sOtherEmp) {
+			OtherEmp = sOtherEmp;			
+		}
+		public String getOtherEmployees(){
+			return OtherEmp;
+		}
+		
+		public void setOtherEmployeesGrossAtm(String sOtherEmpGrossAtm) {
+			OtherEmpGrossAtm = sOtherEmpGrossAtm;			
+		}
+		public String getOtherEmpGrossAtm(){
+			return OtherEmpGrossAtm;
+		}
+		
+		public void setUWModifyAdministrativeEmployee(String sUWModifyAdministrativeEmp) {
+			UWModifyAdministrativeEmp = sUWModifyAdministrativeEmp;		
+		}
+		public String getUWModifyAdministrativeEmployee(){
+			return UWModifyAdministrativeEmp;
+		}
+		
+		public void setUWModifyAdministrativeEmployeeGrossAtm(String sUWModifyAdministrativeEmpGrossAtm) {
+			  UWModifyAdministrativeEmpGrossAtm	 = sUWModifyAdministrativeEmpGrossAtm;		
+		}
+		public String getUWModifyAdministrativeEmployeeGrossAtm(){
+			return UWModifyAdministrativeEmpGrossAtm;
+		}
+		
+		public void setUWModifySalesEmployees(String sUWModifySalesEmployees) {
+			UWModifySalesEmployees = sUWModifySalesEmployees;			
+		}
+		public String getUWModifySalesEmployee(){
+			return UWModifySalesEmployees;
+		}
+		
+		public void setUWModifySalesEmployeesGrossAtm(String sUWModifySalesEmployeesGrossAtm) {
+			 UWModifySalesEmployeesGrossAtm = sUWModifySalesEmployeesGrossAtm;			
+		}
+		public String getUWModifySalesEmployeeGrossAtm(){
+			return UWModifySalesEmployeesGrossAtm;
+		}
+		
+		public void setUWModifyOtherEmployees(String sUWModifyOtherEmployees) {
+			UWModifyOtherEmployees = sUWModifyOtherEmployees;			
+		}
+		public String getUWModifyOtherEmployees(){
+			return UWModifyOtherEmployees;
+		}
+		
+		public void setUWModifyOtherEmployeesGrossAtm(String sUWModifyOtherEmployeesGA) {
+			UWModifyOtherEmployeesGA = sUWModifyOtherEmployeesGA;			
+		}
+		public String getUWModifyOtherEmployeesGrossAtm(){
+			return UWModifyOtherEmployeesGA;
+		}
+		
 	}

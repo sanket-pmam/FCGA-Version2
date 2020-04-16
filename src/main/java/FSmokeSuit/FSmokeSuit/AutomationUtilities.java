@@ -164,14 +164,14 @@ public class AutomationUtilities {
  
 	public void selectDropdownlitag(WebDriver driver, WebElement element, String text, String sLabel) throws IOException, InterruptedException {
 		
-		String searchText = text;
-		System.out.println("Search Text..." +searchText);
+		//String searchText = text;
+		//System.out.println("Search Text..." +searchText);
 		element.click(); 
 		driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
 		List<WebElement> options = driver.findElements(By.tagName("li"));
 		for (WebElement option : options) {
-			if (option.getText().equals(searchText)) {
-				System.out.println("Search Text is true" + searchText);
+			if (option.getText().equals(text)) {
+				//System.out.println("Search Text is true" + searchText);
 				option.click();
 				break;
 			}
@@ -180,7 +180,7 @@ public class AutomationUtilities {
    public void selectDropdownByText(WebElement element, String text,String sLabel) throws IOException {
 		
 	   try {		
-			System.out.println("Drop Down Fucntion has been called");
+			//System.out.println("Drop Down Fucntion has been called");
 			Select select = new Select(element);
 			select.selectByVisibleText(text);
 		}
@@ -197,13 +197,13 @@ public class AutomationUtilities {
    public static void checkCheckBox(WebDriver driver, WebElement element, int iTimeOutSeconds,
 			String label) throws IOException {
 		try {
-			System.out.println("Checkbox Function has been called");
-			System.out.println("Driver" + driver);
+			//System.out.println("Checkbox Function has been called");
+			//System.out.println("Driver" + driver);
 			((JavascriptExecutor) driver).executeScript("arguments[0].click()", element);
 			AutomationUtilities.LogSummary("pass", label + " is clicked");
 		} catch (Exception e) {
 			// TODO: handle exception
-			System.out.println("fail :- " + label + "Element cannot be clicked due to" + e.getMessage());
+			//System.out.println("fail :- " + label + "Element cannot be clicked due to" + e.getMessage());
 			AutomationUtilities.LogSummary("fail", label + " cannot be clicked due to" + e.getMessage());
 		}
 
@@ -222,7 +222,7 @@ public class AutomationUtilities {
 		} catch (Exception e) {
 			
 			AutomationUtilities.LogSummary(LogPath," : "+label+" is not working due to" + e.getMessage());
-			System.out.println(label+" is not working due to" + e.getMessage());
+			//System.out.println(label+" is not working due to" + e.getMessage());
 		}
 	}
 
@@ -230,8 +230,9 @@ public class AutomationUtilities {
    public static void drawBorder(WebDriver driver,WebElement element ) throws InterruptedException {		
 		
 	   if (driver instanceof JavascriptExecutor) {
-	        ((JavascriptExecutor)driver).executeScript("arguments[0].style.border='6.5px solid rgb(0, 230, 0)'", element);	        
-		}
+	        //((JavascriptExecutor)driver).executeScript("arguments[0].style.border='6.5px solid rgb(0, 230, 0)'", element);
+		   ((JavascriptExecutor)driver).executeScript("arguments[0].setAttribute('style', 'background: Yellow; border: 6.5px solid red;');",element);
+	   }
 	    }
    
 

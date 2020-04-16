@@ -111,9 +111,9 @@ public class AutomationDriver {
 		if(!AutomationUtilities.OLDTCID.equalsIgnoreCase(AutomationUtilities.testCaseID)) {
 			
 			AutomationUtilities.AutmSnapfile = new File(
-				TCSnapPath + "NewSnap_"+AutomationUtilities.testCaseID+"-"+ myFormatObj.format(myDateObj).toString());
+				TCSnapPath + "NewSnap_"+Product+"_TC_"+AutomationUtilities.testCaseID+"-"+ myFormatObj.format(myDateObj).toString());
 		    
-			AutomationUtilities.AutmPDFpath = System.getProperty("user.dir") + "\\Test Report\\PDFFile\\TC-0"+AutomationUtilities.testCaseID+"_"+ myFormatObj.format(myDateObj);
+			AutomationUtilities.AutmPDFpath = System.getProperty("user.dir") + "\\Test Report\\PDFFile\\"+Product+"_TC-0"+AutomationUtilities.testCaseID+"_"+ myFormatObj.format(myDateObj);
 			AutomationUtilities.AutmPDFfile = new File(AutomationUtilities.AutmPDFpath.toString());
 
 		}
@@ -215,7 +215,7 @@ public class AutomationDriver {
 				t.printStackTrace();
 				
 				AutomationUtilities.AutmSnapfile = new File(
-						TCErrSnapPath + "ErrSnap_"+AutomationUtilities.testCaseID+"-"+ myFormatObj.format(myDateObj).toString());
+						TCErrSnapPath + "ErrSnap_"+Product+"_TC_"+AutomationUtilities.testCaseID+"-"+ myFormatObj.format(myDateObj).toString());
 		
 				 LogEntries logEntries = objWebDriver.manage().logs().get(LogType.BROWSER);
 				 //LogEntries logEntries1 = objWebDriver.manage().logs().get(LogType.CLIENT);

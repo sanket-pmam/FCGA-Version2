@@ -162,8 +162,38 @@ public class ObjectRepository {
 	public WebElement SubClasscodePercentage;
 
 	@FindBy (xpath="//input[@id='fullPartners']")
-	public WebElement txtActivePartner;
+	public WebElement txtFTActivePartner;
 
+	@FindBy (xpath="//input[@id='fullAdmEmp']")
+	public WebElement txtFTAdminEmp;
+	
+	@FindBy (xpath="//input[@id='fullSalesEmp']")
+	public WebElement txtFTSalesEmp;
+	
+	@FindBy (xpath="//input[@id='fullOtherEmp']")
+	public WebElement txtFTOtherEmp;
+	
+	@FindBy (xpath="//input[@id='partPartners']")
+	public WebElement txtPTActivePartner;
+	
+	@FindBy (xpath="//input[@id='partAdmEmp']")
+	public WebElement txtPTAdminEmp;
+
+	@FindBy (xpath="//input[@id='partSalesEmp']")
+	public WebElement txtPTSalesEmp;
+	
+	@FindBy (xpath="//input[@id='partOtherEmp']")
+	public WebElement txtPTOtherEmp;
+	
+	@FindBy (xpath="//input[@id='totAdmPayroll']")
+	public WebElement totAdmPayroll;
+			
+	@FindBy (xpath="//input[@id='totSalesPayroll']")
+	public WebElement totSalesPayroll;
+
+	@FindBy (xpath="//input[@id='totOtherPayroll']")
+	public WebElement totOtherPayroll;
+	
 	@FindBy (xpath="//span[@id='select2-ddACVLimitFloater-container']")
 	public WebElement dpdinstallationfloater;
 					
@@ -609,6 +639,9 @@ public class ObjectRepository {
 	@FindBy (xpath="//input[@id='txtUnInsuredSubcontract']")
 	public WebElement WCtxtUnInsuredSubcontract;
 	
+	@FindBy (xpath="//input[@id='btnAddAnother' and @onclick='AddOwnerOfficer();']")
+	public WebElement btnWCOWButton;
+	
 	@FindBy (xpath="//input[@id='txttypeofworkSubcontract']")
 	public WebElement WCtxttypeofworkSubcontract;
 	
@@ -730,13 +763,16 @@ public class ObjectRepository {
 	@FindBy (xpath="//input[@id='IQradio-22']")
 	public WebElement rdIQuestion_15;
 	
-//	Losses Page elemnet
+//	Losses Page element
 	
 	@FindBy (xpath="//span[@id='select2-ddlHadCoverage2020-container']")
 	public WebElement gethadCoverage;
 	
-	@FindBy (xpath="//input[@id='radioN2020']")
-	public WebElement rdAnyLosses;
+	@FindBy (xpath="//label[@for='radioN2020']")
+	public WebElement rdAnyLossesNo;
+	
+	@FindBy (xpath="//label[@for='radioY2020']")
+	public WebElement rdAnyLossesYes;
 	
 	@FindBy (xpath="//input[@id='BtnSubmit']")
 	public WebElement btnSubmit;
@@ -1566,10 +1602,49 @@ public class ObjectRepository {
 		return SubClasscodePercentage;
 	}
 
-  public WebElement gettxtActivePartner() {
-		return txtActivePartner;
+  public WebElement gettxtFTActivePartner() {
+		return txtFTActivePartner;
 	}
 
+  public WebElement gettxtFTAdminEmp() {
+		return txtFTAdminEmp;
+	}
+  
+  public WebElement gettxtPTAdminEmp() {
+		return txtPTAdminEmp;
+	}
+
+  public WebElement gettxtFTSalesEmp() {
+		return txtFTSalesEmp;
+	}
+
+  public WebElement gettxtPTSalesEmp() {
+		return txtPTSalesEmp;
+	}
+  
+  public WebElement gettxtFTOtherEmp() {
+		return txtFTOtherEmp;
+	}
+
+  public WebElement gettxtPTOtherEmp() {
+		return txtPTOtherEmp;
+	}
+  public WebElement gettxtPTActivePartner(){
+	  return txtPTActivePartner;
+  }
+  
+  public WebElement gettotAdmPayroll(){
+	  return totAdmPayroll;
+  }
+  
+  public WebElement gettotSalesPayroll(){
+	  return totSalesPayroll;
+  }
+  
+  public WebElement gettotOtherPayroll(){
+	  return totOtherPayroll;
+  }
+  
   public WebElement getdpdinstallationfloater() {
 		return dpdinstallationfloater;
 	}
@@ -1857,8 +1932,11 @@ public class ObjectRepository {
   public WebElement gethadCoverage() {
 	  return gethadCoverage;
   }
-  public WebElement rdAnyLosses() {
-	  return rdAnyLosses;
+  public WebElement rdAnyLossesYes() {
+	  return rdAnyLossesYes;
+  }
+  public WebElement rdAnyLossesNo() {
+	  return rdAnyLossesNo;
   }
   public WebElement btnSubmit() {
 	  return btnSubmit;
@@ -2095,6 +2173,10 @@ public WebElement getrdCG2026() {
 
 public WebElement getWCtxtUnInsuredSubcontract() {
 	return WCtxtUnInsuredSubcontract;
+}
+
+public WebElement getbtnWCOWButton() {
+	return btnWCOWButton;
 }
 
 }

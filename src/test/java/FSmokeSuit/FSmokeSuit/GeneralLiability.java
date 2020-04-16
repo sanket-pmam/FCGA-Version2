@@ -258,8 +258,76 @@ public class GeneralLiability extends AutomationUtilities {
 			sendKeysToTextField(driver,objectrepository.getUnSubcontractorCost(),objGlLoadManager.getUnSubContractorGrossReciepts(),"Expected Sub Class Code Gross Amount");
 			}
 			
-			sendKeysToTextField(driver,objectrepository.gettxtActivePartner(),objGlLoadManager.getActiveOwner(),"Active Owner");
+			if(!objGlLoadManager.getAdministrativeEmployee().isBlank()) {
 			
+               if(objGlLoadManager.getAdministrativeEmployee().length() == 3) {
+					
+            	    int i=0;
+            	    String AdminEmp [] = objGlLoadManager.getAdministrativeEmployee().split("/");
+					sendKeysToTextField(driver,objectrepository.gettxtFTAdminEmp(),AdminEmp[i],"Administrative Employee");
+					sendKeysToTextField(driver,objectrepository.gettxtPTAdminEmp(),AdminEmp[i+1],"Administrative Employee");
+				
+		        }else if(objGlLoadManager.getAdministrativeEmployee().length() == 1) {
+					
+					sendKeysToTextField(driver,objectrepository.gettxtFTAdminEmp(),objGlLoadManager.getAdministrativeEmployee(),"Administrative Employee");	
+				
+				}
+               
+				sendKeysToTextField(driver,objectrepository.gettotAdmPayroll(),objGlLoadManager.getAdministrativeEmployeeGrossAtm(),"Administrative Amount");
+				
+			}
+			
+			if(!objGlLoadManager.getSalesEmployees().isBlank()) {
+               
+                if(objGlLoadManager.getSalesEmployees().length() == 3) {
+            	   
+            	   int i=0;
+            	   String SalesEmp[] = objGlLoadManager.getSalesEmployees().split("/");
+	               sendKeysToTextField(driver,objectrepository.gettxtFTSalesEmp(),SalesEmp[i],"Sales Employee");
+	               sendKeysToTextField(driver,objectrepository.gettxtPTSalesEmp(),SalesEmp[i+1],"Sales Employee");
+	               
+                }else if(objGlLoadManager.getSalesEmployees().length() == 1) {
+					
+					sendKeysToTextField(driver,objectrepository.gettxtFTSalesEmp(),objGlLoadManager.getSalesEmployees(),"Sales Employee");	
+					
+				}
+			
+                sendKeysToTextField(driver,objectrepository.gettotSalesPayroll(),objGlLoadManager.getSalesEmployeesGrossAtm(),"Sales Employee");
+			}
+			
+			if(!objGlLoadManager.getActiveOwner().isBlank()) {
+	               
+				if(objGlLoadManager.getActiveOwner().length() == 3) {
+					
+					int i =0;
+					String ActiveOwner[] = objGlLoadManager.getActiveOwner().split("/");
+					sendKeysToTextField(driver,objectrepository.gettxtFTActivePartner(),ActiveOwner[i],"Active Owner");
+					sendKeysToTextField(driver,objectrepository.gettxtPTActivePartner(),ActiveOwner[i+1],"Active Owner");
+					
+				}else if(objGlLoadManager.getActiveOwner().length() == 1) {
+					
+					sendKeysToTextField(driver,objectrepository.gettxtFTActivePartner(),objGlLoadManager.getActiveOwner(),"Active Owner");	
+					
+				}
+			}
+				
+            if(!objGlLoadManager.getOtherEmployees().isBlank()) {
+            	
+            	if(objGlLoadManager.getOtherEmployees().length() == 3) {
+					
+                	int i =0;
+                	String OtherEmp[] = objGlLoadManager.getOtherEmployees().split("/");
+					sendKeysToTextField(driver,objectrepository.gettxtFTOtherEmp(),OtherEmp[i],"Other Employee");
+					sendKeysToTextField(driver,objectrepository.gettxtPTOtherEmp(),OtherEmp[i+1],"Other Employee");
+					
+				}else if(objGlLoadManager.getOtherEmployees().length() == 1) {
+					
+					sendKeysToTextField(driver,objectrepository.gettxtFTOtherEmp(),objGlLoadManager.getOtherEmployees(),"Other Employee");	
+					
+				}
+                
+            	sendKeysToTextField(driver,objectrepository.gettotOtherPayroll(),objGlLoadManager.getOtherEmpGrossAtm(),"Sales Employee");	
+			}
 			
 			//AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
 			
