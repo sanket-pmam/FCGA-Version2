@@ -583,13 +583,15 @@ public class GeneralLiability extends AutomationUtilities {
      //AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
      buttonClick(driver,objectrepository.getbtn_ICSavebutton(),20,"Click on Save Insurance Company");
      driver.manage().timeouts().implicitlyWait(25, TimeUnit.SECONDS);
-     Thread.sleep(3000);
+     Thread.sleep(5000);
 	 buttonClick(driver,objectrepository.getbtn_CloseProducerFee(),10,"Click on Button Close");
 	 driver.manage().timeouts().implicitlyWait(35, TimeUnit.SECONDS);
 	 
+	 Thread.sleep(5000);
 	 AutomationUtilities.QuoteNo = objectrepository.getlbl_QuoteNo().getText();
+	 AutomationUtilities.LogSummary(LogPath,"Quote No: "+ objectrepository.getlbl_QuoteNo().getText());
 	 //System.out.println("Quote No: "+ objectrepository.getlbl_QuoteNo().getText());
-     AutomationUtilities.LogSummary(LogPath,"Quote No: "+ objectrepository.getlbl_QuoteNo().getText());
+     
      //driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
      //AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
      

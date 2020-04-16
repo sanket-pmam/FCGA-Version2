@@ -38,6 +38,12 @@ public class LoadManager implements Cloneable {
 		private String SubcontractorDesc;
 		private String OwnerPermission;
 		private String OwnerCount;
+		private String WCInsuredSC;
+		private String WCTypeofWork;
+		private String WCworkperformed;
+		private String WCproofofWCCov;
+		private String WCUninsuredSC;
+		private String WCBusinessDesc;
 		private String AgentNotes;
 		private String AgentMessages;
 		private String UWModifySEA;
@@ -1382,5 +1388,47 @@ public class LoadManager implements Cloneable {
 		public String getUWModifyWS(){
 			return UWModifyWS;
 		}
-		
+
+		public void setWCInsuredSubContractor(String sWCInsuredSC) {
+			WCInsuredSC	= sWCInsuredSC;	
+		}
+		public String getWCInsuredSubContractor(){
+			return WCInsuredSC;
+		}
+
+		public void setWCTypeofWork(String sWCTypeofWork) {
+			WCTypeofWork = sWCTypeofWork;			
+		}
+		public String getWCTypeofWork(){
+			return WCTypeofWork;
+		}
+
+		public void setWCworkperformed(String sWCworkperformed) {
+			WCworkperformed = sWCworkperformed;		
+		}
+		public String getWCworkperformed(){
+			return WCworkperformed;
+		}
+
+		public void setWCproofofWCcoverage(String sWCproofofWCCov) {
+			WCproofofWCCov = sWCproofofWCCov;			
+		}
+		public String getWCproofofWCCov(){
+			return WCproofofWCCov;
+		}
+
+		public void setWCUninsuredSubcontractor(String sWCUninsuredSC) {
+			WCUninsuredSC = sWCUninsuredSC;		
+		}
+		public String getWCUnInsuredSubcontractor(){
+			return WCUninsuredSC;
+		}
+
+		public void setWCBusinessDescription(String sWCBusinessDesc) {
+			WCBusinessDesc = sWCBusinessDesc; 			
+		}
+		public String getWCBusinessDescription(){
+			return WCBusinessDesc;
+		}
+
 	}

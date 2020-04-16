@@ -603,8 +603,29 @@ public class ObjectRepository {
 	@FindBy (xpath="//input[@id='txtAOCode1']")
 	public WebElement WCtxtInOwnClassCode;
 	
+	@FindBy (xpath="//input[@id='txtInsuredSubcontract']")
+	public WebElement WCtxtInsuredSubcontract;
+	
+	@FindBy (xpath="//input[@id='txtUnInsuredSubcontract']")
+	public WebElement WCtxtUnInsuredSubcontract;
+	
+	@FindBy (xpath="//input[@id='txttypeofworkSubcontract']")
+	public WebElement WCtxttypeofworkSubcontract;
+	
 	@FindBy (xpath="//input[@id='txtAOFTEmp1']")
 	public WebElement txtOWWCFTEmployee;
+	
+	@FindBy (xpath="//label[@for ='rdoRequireCertificatesWCYes']")
+	public WebElement rdWCworkperformedYes;
+	
+	@FindBy (xpath="//label[@for ='rdoWCCoverageYes']")
+	public WebElement rdoWCCoverageYes;
+	
+	@FindBy (xpath="//label[@for ='rdoWCCoverageNo']")
+	public WebElement rdoWCCoverageNo;
+	
+	@FindBy (xpath="//label[@for ='rdoRequireCertificatesWCNo']")
+	public WebElement rdWCworkperformedNo;
 	
 	@FindBy (xpath="//input[@id='txtAOGross1']")
 	public WebElement txtOWWCGross;
@@ -1024,6 +1045,30 @@ public class ObjectRepository {
 	public WebElement getWCtxtInOwnClassCode() {
 		return WCtxtInOwnClassCode;
 	}
+	
+	public WebElement getWCtxtInsuredSubcontract() {
+		return WCtxtInsuredSubcontract;
+	}
+	
+	public WebElement getWCtxttypeofworkSubcontract() {
+	    return WCtxttypeofworkSubcontract;
+	}
+	
+	public WebElement getWCrdWCworkperformedYes() {
+		return rdWCworkperformedYes;
+	}
+	
+	public WebElement getWCrdoWCCoverageYes() {
+		return rdoWCCoverageYes;
+	}
+	
+	public WebElement getWCrdoWCCoverageNo() {
+		return rdoWCCoverageNo;
+	}
+	public WebElement getWCrdWCworkperformedNo() {
+		return rdWCworkperformedNo;
+	}
+	
 	public WebElement getWCtxtPolicyNumber() {
 		return WCtxtPolicyNumber;
 	}
@@ -2046,6 +2091,10 @@ public class ObjectRepository {
 
 public WebElement getrdCG2026() {
 	return rdCG2026;
+}
+
+public WebElement getWCtxtUnInsuredSubcontract() {
+	return WCtxtUnInsuredSubcontract;
 }
 
 }

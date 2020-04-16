@@ -168,6 +168,14 @@ public class WorkersCompensation extends AutomationUtilities {
 					if(i < Integer.valueOf(objWCLoadManager.getOwnerCount())) {
 						buttonClick(driver,objectrepository.getbtnWCAIButton(),10,"Additional Insured");
 					}
+					if (objWCLoadManager.getWCInclude().equalsIgnoreCase("Yes")) {
+						
+						driver.findElement(By.xpath("//input[@id='radio"+i+"']")).click();
+
+					} else {
+						
+						driver.findElement(By.xpath("//input[@id='radios"+i+"']")).click();
+					}
 					
 				}
 				
@@ -178,21 +186,40 @@ public class WorkersCompensation extends AutomationUtilities {
 				sendKeysToTextField(driver,objectrepository.gettxtWCPerOwner(), objWCLoadManager.getWCPerOwner(),"Owner/Officer percentage is been entered");
 				//AutomationUtilities.Screenshot(tcSnapPath, testCaseID);
 
+				if (objWCLoadManager.getWCInclude().equalsIgnoreCase("Yes")) {
+					
+					buttonClick(driver,objectrepository.gettxtWCIncluderd(),10,"Include radio button is clicked");
+				
+				} else {
+					
+					buttonClick(driver,objectrepository.gettxtWCExcluderd(), 10, "Exclude radio button is clicked");
+				}
 			}
 		}
 		
-		if (objWCLoadManager.getWCInclude().equalsIgnoreCase("Yes")) {
-			buttonClick(driver,objectrepository.gettxtWCIncluderd(),10,"Include radio button is clicked");
-		} else {
-			buttonClick(driver,objectrepository.gettxtWCExcluderd(), 10, "Exclude radio button is clicked");
-		}
-
-		sendKeysToTextField(driver,objectrepository.gettxtWCdesc(), "XYZ", "Description is been entered");
+		sendKeysToTextField(driver,objectrepository.gettxtWCdesc(), objWCLoadManager.getWCBusinessDescription(), "Description is been entered");
+		
+		if (ClassCodeDescCount > 1 ) {
+			
+			String WCFTEmployee[] = objWCLoadManager.getWCFTEmployee().split("/");
+			String WCPTEmployee[] = objWCLoadManager.getWCPTEmployee().split("/");
+			String WCGrossannualPayroll[] = objWCLoadManager.getWCGrossannualPayroll().split("/");
+			
+			for(int i=1;i<ClassCodeDescCount;i++) {
+				
+				driver.findElement(By.xpath("//input[@id='txtFTEmployee"+i+"']")).sendKeys(WCFTEmployee[i]);
+				driver.findElement(By.xpath("//input[@id='txtPTEmployee"+i+"']")).sendKeys(WCPTEmployee[i]);
+				driver.findElement(By.xpath("//input[@id='txtGrossannualPayroll"+i+"']")).sendKeys(WCGrossannualPayroll[i]);
+				
+			}
+		}else {
+				
 		sendKeysToTextField(driver,objectrepository.gettxtWCFTEmployee(), objWCLoadManager.getWCFTEmployee(),"Full time Employee is been entered");
 		sendKeysToTextField(driver,objectrepository.gettxtWCPTEmployee(), objWCLoadManager.getWCPTEmployee(),"Part time Employee is been entered");
 		sendKeysToTextField(driver,objectrepository.gettxtWCGrossannualPayroll(), objWCLoadManager.getWCGrossannualPayroll(),"Gross Annual Payroll is been entered");
 		//AutomationUtilities.Screenshot(tcSnapPath, testCaseID);
-		
+			
+		}
 		if (objWCLoadManager.getWCInclude().equalsIgnoreCase("Yes")) {
 			
 		sendKeysToTextField(driver,objectrepository.getWCtxtInOwnClassCode(), objWCLoadManager.getWCClassCode(), "Include Owner Class code is been entered");
@@ -202,6 +229,40 @@ public class WorkersCompensation extends AutomationUtilities {
 		//AutomationUtilities.Screenshot(tcSnapPath, testCaseID);
 		}
 		
+		if(!objWCLoadManager.getWCInsuredSubContractor().isBlank()) {
+			
+			sendKeysToTextField(driver,objectrepository.getWCtxtInsuredSubcontract(), objWCLoadManager.getWCInsuredSubContractor(), "Include Owner Class code is been entered");
+			driver.manage().timeouts().implicitlyWait(12, TimeUnit.SECONDS);
+			sendKeysToTextField(driver,objectrepository.getWCtxttypeofworkSubcontract(), objWCLoadManager.getWCTypeofWork(), "Type of Work is been entered");
+			
+			if(objWCLoadManager.getWCworkperformed().equalsIgnoreCase("Yes")) {
+				
+				buttonClick(driver,objectrepository.getWCrdWCworkperformedYes(), 10,"Worked Performed");
+			
+			}else {
+			 
+			   buttonClick(driver,objectrepository.getWCrdWCworkperformedNo(), 10, "Worked Performed");		
+			}
+		   
+            if(objWCLoadManager.getWCproofofWCCov().equalsIgnoreCase("Yes")) {
+				
+				buttonClick(driver,objectrepository.getWCrdoWCCoverageYes(), 10,"WC Coverage");
+			
+			}else {
+			 
+			   buttonClick(driver,objectrepository.getWCrdoWCCoverageNo(), 10, "WC Coverage");		
+			}
+		
+		
+		
+		
+		
+		} else if (!objWCLoadManager.getWCUnInsuredSubcontractor().isBlank()) {
+			
+			sendKeysToTextField(driver,objectrepository.getWCtxtUnInsuredSubcontract(), objWCLoadManager.getWCUnInsuredSubcontractor(), "Include Owner Class code is been entered");
+		}
+		
+		Thread.sleep(3000);
 		buttonClick(driver,objectrepository.getBtnWCNext(), 05, "Next button is saved sucessfully.");
 		//AutomationUtilities.Screenshot(tcSnapPath, testCaseID);
 		

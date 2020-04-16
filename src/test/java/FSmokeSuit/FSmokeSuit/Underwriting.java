@@ -48,7 +48,7 @@ public class Underwriting extends AutomationUtilities {
 		}
 		
 		buttonClick(driver,objectrepository.getUWbtnReRate(),60,"UW Re Rate button");
-		Thread.sleep(3000);
+
 		if(objUWGLLoadManager.getUWQuoteStatus().equalsIgnoreCase("Declined")) {
 			
 			String DeclineXpath ="//label[@name ='lblDeclineReasonCheck']";
@@ -58,6 +58,7 @@ public class Underwriting extends AutomationUtilities {
 			}
 			buttonClick(driver,objectrepository.getUWbtnDeclineContinue(),60,"UW Decline button");
 		}
+		Thread.sleep(5000);
 		AutomationUtilities.LogSummary(LogPath, "Alert Message in PopUp : "+ objectrepository.getUWAlertMsgBox().getText());
 		buttonClick(driver,objectrepository.gettxtWCClosebtn(), 10, "Close button is saved sucessfully.");
 		
