@@ -562,7 +562,7 @@ public class AutomationUtilities {
 	   }
      
 	 DownLoadPDF(driver,pdfName);
-	 driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+	 Thread.sleep(2000);
 	 driver.close();
 	 pdriver.switchTo().window(parentWindow);
 	 

@@ -192,7 +192,7 @@ public class AutomationDriver {
 				objworkerscompensation.Losses(objLoadManager, objWebDriver);
 				objworkerscompensation.Application(objLoadManager, objWebDriver, AutomationUtilities.sBusinessName,objLoginPage,objunderwriting,objhomepage);
 				objworkerscompensation.PolicyIssue(objLoadManager, objWebDriver);
-				
+				objworkerscompensation.ThankYouPage(objLoadManager, objWebDriver);
 			}
 			
 			AutomationUtilities.ExcelUpdate(testcasePath, TCSheetName, AutomationUtilities.PolicyNo, objLoadManager,"Policy No.");

@@ -56,6 +56,7 @@ public class LoadManager implements Cloneable {
         private String WCTotalIncurred;
         private String WCNotes;
         private String WCMessages;
+        private String ActionMessages;
         private String OtherEmpGrossAtm;
         private String UWModifyAdministrativeEmp;
         private String UWModifyAdministrativeEmpGrossAtm;
@@ -1581,5 +1582,12 @@ public class LoadManager implements Cloneable {
 		}
 		public String getWCMessages(){
 			return WCMessages;
+		}
+
+		public void setActionMessages(String sActionMessages) {
+			ActionMessages = sActionMessages;		
+		}
+		public String getActionMessages(){
+			return ActionMessages;
 		}
 	}

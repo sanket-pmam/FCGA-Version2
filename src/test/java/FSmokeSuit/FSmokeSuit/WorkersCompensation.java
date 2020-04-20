@@ -449,9 +449,10 @@ public class WorkersCompensation extends AutomationUtilities {
 		if(objWCLoadManager.getTCScenarios().equalsIgnoreCase("Referral Flow")) {
 			
 			buttonClick(driver,objectrepository.getWCMakePayment(),10,"Click on Make Payment");
+			waitforpageload(driver, 30);
 			AutomationUtilities.LogSummary(LogPath, "Read Referral Text : "+objectrepository.getWCReferralText().getText());
 			//AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
-			Thread.sleep(3000);
+			Thread.sleep(6000);
 			buttonClick(driver,objectrepository.getWCBacktoRecord(),10,"Back to Record");
 			objhomepage.checkFramePopup(driver);
 			objWCloginpage.AgentSignOut (driver);
@@ -476,22 +477,24 @@ public class WorkersCompensation extends AutomationUtilities {
 		
 		}
 		
-		driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
-		buttonClick(driver,objectrepository.getbtnWCDownloadQuote(),10,"Quote Document");
+		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		buttonClick(driver,objectrepository.getbtnWCDownloadQuote(),20,"Quote Document");
+		Thread.sleep(2000);
 		AutomationUtilities.Traverse(driver,"Quote Document");
 	   // System.out.println("Download WC Quote Document is clicked sucessfully");
 	    //AutomationUtilities.LogSummary(LogPath,"Download WC Quote Document is clicked successfully");
 	     
 		
 		buttonClick(driver,objectrepository.getbtnWCDownloadRatingWorksheet(),50,"Rating Document");
-		driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		buttonClick(driver,objectrepository.getlnkWCCondensedRatingWorksheet(),15,"Condensed Rating Worksheet");
 		AutomationUtilities.Traverse(driver,"Rating Document");
+		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		buttonClick(driver,objectrepository.gettxtAppClosebtn(),10,"Close Condensed Rating Worksheet");
 	    //System.out.println("Download WC Rating Document is clicked successfully");
 	    //AutomationUtilities.LogSummary(LogPath,"Download WC Rating Document is clicked successfully");
 		
-		driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 	    buttonClick(driver,objectrepository.getbtnWCDownloadApplication(),10,"Application Document");
 	    AutomationUtilities.Traverse(driver,"Application Document");
 	   // System.out.println("Download WC Application Document is clicked sucessfully");
@@ -541,13 +544,17 @@ public class WorkersCompensation extends AutomationUtilities {
 			
 			buttonClick(driver,objectrepository.getWCclkPremiumFinancePayment(),10,"Click on Premium Finance Issue Policy");
 		}
+     }	
 		
 		//AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
 		
-		waitforpageload(driver, 35);
+     public void ThankYouPage (LoadManager objWCLoadManager,WebDriver driver) throws IOException, InterruptedException, AWTException, UnsupportedFlavorException {
+		waitforpageload(driver, 30);
 		
-		/////
-		/////
+		driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+	    buttonClick(driver,objectrepository.getbtnWCDownloadBinder(),10,"Binder Document");
+	    AutomationUtilities.Traverse(driver,"Binder Document");
+		
 		
 		AutomationUtilities.PolicyNo =objectrepository.getWCtxtPolicyNumber().getText() ;
 		//AutomationUtilities.Screenshot(tcSnapPath,testCaseID);

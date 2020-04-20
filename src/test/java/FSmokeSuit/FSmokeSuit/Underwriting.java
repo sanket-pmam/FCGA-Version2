@@ -49,7 +49,7 @@ public class Underwriting extends AutomationUtilities {
 		
 		buttonClick(driver,objectrepository.getUWbtnReRate(),60,"UW Re Rate button");
 
-		if(objUWGLLoadManager.getUWQuoteStatus().equalsIgnoreCase("Declined")) {
+		if(objUWGLLoadManager.getProduct().equalsIgnoreCase("GL") && objUWGLLoadManager.getUWQuoteStatus().equalsIgnoreCase("Declined")) {
 			
 			String DeclineXpath ="//label[@name ='lblDeclineReasonCheck']";
 			for (int i =0; i<GeneralLiability.LastQCount(driver,DeclineXpath)-1;i++) {
@@ -57,11 +57,12 @@ public class Underwriting extends AutomationUtilities {
 				driver.findElement(By.xpath("//label[@id='lblDeclineReasonCheck"+i+"1']")).click();
 			}
 			buttonClick(driver,objectrepository.getUWbtnDeclineContinue(),60,"UW Decline button");
-		}
+		  }
+
 		Thread.sleep(5000);
 		AutomationUtilities.LogSummary(LogPath, "Alert Message in PopUp : "+ objectrepository.getUWAlertMsgBox().getText());
 		buttonClick(driver,objectrepository.gettxtWCClosebtn(), 10, "Close button is saved sucessfully.");
-		
+		Thread.sleep(2000);
 		UWNotes(driver, objUWGLLoadManager.getUWNotes());
 		UWMessages(driver, objUWGLLoadManager.getUWMessages());
 		
@@ -78,7 +79,7 @@ public class Underwriting extends AutomationUtilities {
 		waitforpageload(driver, 5);
 		sendKeysToTextField(driver,objectrepository.gettxtAgentSearch(),AutomationUtilities.sBusinessName,"Frist Name");
 		buttonClick(driver,objectrepository.getbtnSearch(),20,"Search Record");
-		AutomationUtilities.ActionMessages(driver,objectrepository,"Thanks");
+		AutomationUtilities.ActionMessages(driver,objectrepository,objUWGLLoadManager.getActionMessages());
 		buttonClick(driver,objectrepository.getbtnAction(),10,"Action");
 		buttonClick(driver,objectrepository.getbtnEditQuote(),10,"Edit Quote");
 		waitforpageload(driver, 30);

@@ -863,6 +863,9 @@ public class ObjectRepository {
 	@FindBy (xpath="//input[@id='btnDownloadApplication']")
 	public WebElement btnWCDownloadApplication;
 	
+	@FindBy (xpath="//a[@id='lnkDownloadBinder']")
+	public WebElement btnWCDownloadBinder;
+	
 	@FindBy (xpath="//a[@id='lnkCondensedRatingWorksheet']")
 	public WebElement lnkWCCondensedRatingWorksheet;
 	
@@ -2076,7 +2079,7 @@ public class ObjectRepository {
   }
   
   public WebElement getWCBacktoRecord() {
-	  return WCReferralText;
+	  return WCBacktoRecord;
   }
   
   
@@ -2208,6 +2211,10 @@ public WebElement getWCtxtUnInsuredSubcontract() {
 
 public WebElement getbtnWCOWButton() {
 	return btnWCOWButton;
+}
+
+public WebElement getbtnWCDownloadBinder() {
+	return btnWCDownloadBinder;
 }
 
 }
