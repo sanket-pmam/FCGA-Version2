@@ -4,10 +4,10 @@ import java.awt.AWTException;
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -369,10 +369,28 @@ public class WorkersCompensation extends AutomationUtilities {
 
 		waitforpageload(driver, 5);
 		
-		selectDropdownlitag(driver, objectrepository.gethadCoverage(), "Yes", "Had a coverage Yes/No");
-		javascriptExecutorClick(driver, objectrepository.rdAnyLosses(), "Any Losses Yes/No");
-
-		sendKeysToTextField(driver,objectrepository.gettxtLossCarrier(), "Test", "Loss Page Carrier");
+		selectDropdownlitag(driver, objectrepository.gethadCoverage(), objWCLoadManager.getWChadCoverage(), "Had a coverage Yes/No");
+		
+		if(objWCLoadManager.getWChadCoverage().equalsIgnoreCase("Yes")) {
+			
+			sendKeysToTextField(driver,objectrepository.gettxtLossCarrier(), objWCLoadManager.getWCCarierName(), "Loss Page Carrier");
+		}
+		
+		if(objWCLoadManager.getWCAnyLosses().equalsIgnoreCase("Yes")){
+			
+			javascriptExecutorClick(driver, objectrepository.rdAnyLossesYes(), "Any Losses Yes/No");
+			sendKeysToTextField(driver,objectrepository.gettxtWCclaims(), objWCLoadManager.getWCClaims(), "Claim No.");
+			sendKeysToTextField(driver,objectrepository.gettxtWCincurred(), objWCLoadManager.getWCTotalIncurred(), "Total Incurred");
+			
+		}else {
+			
+			javascriptExecutorClick(driver, objectrepository.rdAnyLossesNo(), "Any Losses Yes/No");
+		}
+		
+		sendKeysToTextField(driver,objectrepository.gettxtWCNotes(), objWCLoadManager.getWCNotes(), "Notes");
+		AutomationUtilities.AgentMessages(driver,objectrepository, objWCLoadManager.getWCMessages());
+        
+		
 		buttonClick(driver,objectrepository.btnSubmit(), 10, "Submit Losses");
 
 		//System.out.println("Losses Page has been completed");
@@ -382,52 +400,49 @@ public class WorkersCompensation extends AutomationUtilities {
 	public void Application(LoadManager objWCLoadManager, WebDriver driver, String sBusinessNameValue,LoginPage objWCloginpage,Underwriting objWCunderwriting,HomePage objhomepage) throws IOException, InterruptedException, AWTException, UnsupportedFlavorException {
 
 		waitforpageload(driver, 15);
-
-		WebElement selWCNameInsured_element = objectrepository.getselWCNameInsured();
-		selWCNameInsured_element.click();
-
-		WebElement WCNameInsuredtxt_element = objectrepository.getWCNameInsuredtxt();
-		WCNameInsuredtxt_element.click();
-
-		driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
-		//AutomationUtilities.Screenshot(tcSnapPath, testCaseID);
-
-		selectDropdownlitag(driver, objectrepository.getWCApplicationRelationsip(), "Primary", "Relaionship");
-		sendKeysToTextField(driver,objectrepository.getWAppliactionCAddress1(), objWCLoadManager.getWCAddress1(),"WC Application Address");
-		sendKeysToTextField(driver,objectrepository.getWAppliactionCity(), objWCLoadManager.getWCCity(), "WC Application City");
-		buttonClick(driver,objectrepository.getWAppliactionState(), 10, "WC Application State drop down");
-		driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
-		EsendKeysToTextField(driver,objectrepository.gettxtUniquetextbox(), objWCLoadManager.getWCState(), "State Name");
-		sendKeysToTextField(driver,objectrepository.getWCAppliactionZipcode(), objWCLoadManager.getWCZipCode(),"WC Application Zipcode");
-		buttonClick(driver,objectrepository.getWAppliactionAddLoact(), 10, "Add Location button");
-		System.out.println("First Address has been added successfully....!");
+ 
+		int count = 1;
+		buttonClick(driver,objectrepository.getselWCNameInsured(), 10, "WC Name Insured");
+		int InsuredNameCount = driver.findElements(By.xpath("//li[contains(@id,'select2-ddlInsuredName-result')]")).size();
+		ArrayList<String> WCNameInsured = new ArrayList<String>();
 		
-
+		for (int i=0;i<InsuredNameCount;i++) {
+			
+			WCNameInsured.add(driver.findElement(By.xpath("//li[contains(@id,'select2-ddlInsuredName-result')]["+count+"]")).getText());
+			count = count+1;
+		}
 		
-		//Adding Second Address
-		driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
-		selectDropdownlitag(driver, objectrepository.getselWCNameInsured(),  objWCLoadManager.getWCFirstName() +" "+ objWCLoadManager.getWCLastName(), "Name Insured");
-		selectDropdownlitag(driver, objectrepository.getWCApplicationRelationsip(), "Primary", "Relaionship");
-		sendKeysToTextField(driver,objectrepository.getWAppliactionCAddress1(), objWCLoadManager.getWCAddress1(),"WC Application Address");
-		sendKeysToTextField(driver,objectrepository.getWAppliactionCity(), objWCLoadManager.getWCCity(), "WC Application City"); 
-		buttonClick(driver,objectrepository.getWAppliactionState(), 10, "WC Application State drop down");
-		driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
-		EsendKeysToTextField(driver,objectrepository.gettxtUniquetextbox(), objWCLoadManager.getWCState(), "State Name"); 
-		sendKeysToTextField(driver,objectrepository.getWCAppliactionZipcode(), objWCLoadManager.getWCZipCode(),"WC Application Zipcode"); 
-		buttonClick(driver,objectrepository.getWAppliactionAddLoact(), 10, "Add Location button");
-		System.out.println("Second Address has been added successfully....!");
-		//AutomationUtilities.Screenshot(tcSnapPath, testCaseID);
+		buttonClick(driver,objectrepository.getselWCNameInsured(), 10, "WC Name Insured");
+		AutomationUtilities.LogSummary(LogPath,"Total Insured Name are : "+WCNameInsured);
 		
+		for (int i=1;i<InsuredNameCount;i++) {
+			
+			Thread.sleep(2000);
+			buttonClick(driver,objectrepository.getselWCNameInsured(), 10, "WC Name Insured");
+			EsendKeysToTextField(driver,objectrepository.gettxtUniquetextbox(),WCNameInsured.get(i),"Insured Name");
+			
+			selectDropdownlitag(driver, objectrepository.getWCApplicationRelationsip(), "Primary", "Relaionship");
+			sendKeysToTextField(driver,objectrepository.getWCApplicationFullTimeE(), objWCLoadManager.getWCFTEmployee(),"WC Application Address");
+			sendKeysToTextField(driver,objectrepository.getWCApplicationPartTimeE(), objWCLoadManager.getWCPTEmployee(),"WC Application Address");
+			
+			sendKeysToTextField(driver,objectrepository.getWAppliactionCAddress1(), objWCLoadManager.getWCAddress1(),"WC Application Address");
+			sendKeysToTextField(driver,objectrepository.getWAppliactionCAddress2(), objWCLoadManager.getWCAddress2(),"WC Application Address");
+			sendKeysToTextField(driver,objectrepository.getWAppliactionCity(), objWCLoadManager.getWCCity(), "WC Application City");
+			
+			buttonClick(driver,objectrepository.getWAppliactionState(), 10, "WC Application State drop down");
+			EsendKeysToTextField(driver,objectrepository.gettxtUniquetextbox(), objWCLoadManager.getWCState(), "State Name");
+			sendKeysToTextField(driver,objectrepository.getWCAppliactionZipcode(), objWCLoadManager.getWCZipCode(),"WC Application Zipcode");
+			
+			buttonClick(driver,objectrepository.getWAppliactionAddLoact(), 10, "Add Location button");
+		}
 		//Main insured Contact information
-		sendKeysToTextField(driver,objectrepository.getWCconatactName(), objWCLoadManager.getWCFirstName(), "Contact infromation Name");
+		sendKeysToTextField(driver,objectrepository.getWCconatactName(), AutomationUtilities.sBusinessName, "Contact infromation Name");
 		sendKeysToTextField(driver,objectrepository.getWCcontactPhone(), objWCLoadManager.getWCcontactPhone(), "Contact infromation Phone Number");
 		sendKeysToTextField(driver,objectrepository.getWCcontactEmail(), objWCLoadManager.getWCcontactEmail(), "Contact infromation Email");
-		buttonClick(driver,objectrepository.getWCconatactMailingAddress(), 10, "Add Location button");
-		driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
-		EsendKeysToTextField(driver,objectrepository.gettxtUniquetextbox(),objWCLoadManager.getWCAddress1(),"Contact Address");
-		//AutomationUtilities.Screenshot(tcSnapPath, testCaseID);
 		
-		driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+		buttonClick(driver,objectrepository.getWCconatactMailingAddress(), 10, "Add Location button");
+		EsendKeysToTextField(driver,objectrepository.gettxtUniquetextbox(),objWCLoadManager.getWCAddress1(),"Contact Address");
+		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		buttonClick(driver,objectrepository.getWCAgreebtn(),20,"Click on Agree Button");
 		//AutomationUtilities.Screenshot(tcSnapPath, testCaseID);
 		
@@ -436,7 +451,7 @@ public class WorkersCompensation extends AutomationUtilities {
 			buttonClick(driver,objectrepository.getWCMakePayment(),10,"Click on Make Payment");
 			AutomationUtilities.LogSummary(LogPath, "Read Referral Text : "+objectrepository.getWCReferralText().getText());
 			//AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
-			
+			Thread.sleep(3000);
 			buttonClick(driver,objectrepository.getWCBacktoRecord(),10,"Back to Record");
 			objhomepage.checkFramePopup(driver);
 			objWCloginpage.AgentSignOut (driver);

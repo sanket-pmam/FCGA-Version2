@@ -49,6 +49,13 @@ public class LoadManager implements Cloneable {
         private String SalesEmployees;
         private String SalesEmployeesGA;
         private String OtherEmp;
+        private String WChadCoverage;
+        private String WCCarierName;
+        private String WCAnyLosses;
+        private String WCClaims;
+        private String WCTotalIncurred;
+        private String WCNotes;
+        private String WCMessages;
         private String OtherEmpGrossAtm;
         private String UWModifyAdministrativeEmp;
         private String UWModifyAdministrativeEmpGrossAtm;
@@ -1526,5 +1533,53 @@ public class LoadManager implements Cloneable {
 		public String getUWModifyOtherEmployeesGrossAtm(){
 			return UWModifyOtherEmployeesGA;
 		}
+
+		public void setWChadCoverage(String sWChadCoverage) {
+			WChadCoverage = sWChadCoverage;  			
+		}
+		public String getWChadCoverage(){
+			return WChadCoverage;
+		}
 		
+		public void setWCCarierName(String sWCCarierName) {
+			 WCCarierName = sWCCarierName;			
+		}
+		public String getWCCarierName(){
+			return WCCarierName;
+		}
+		
+		public void setWCAnyLosses(String sWCAnyLosses) {
+			WCAnyLosses = sWCAnyLosses;			
+		}
+		public String getWCAnyLosses(){
+			return WCAnyLosses;
+		}
+		
+		public void setWCClaims(String sWCClaims) {
+			WCClaims = sWCClaims;			
+		}
+		public String getWCClaims(){
+			return WCClaims;
+		}
+		
+		public void setWCTotalIncurred(String sWCTotalIncurred) {
+			WCTotalIncurred = sWCTotalIncurred;			
+		}
+		public String getWCTotalIncurred(){
+			return WCTotalIncurred;
+		}
+
+		public void setWCNotes(String sWCNotes) {
+			WCNotes = sWCNotes;
+		}
+		public String getWCNotes(){
+			return WCNotes;
+		}
+
+		public void setWCMessages(String sWCMessages) {
+			WCMessages = sWCMessages; 			
+		}
+		public String getWCMessages(){
+			return WCMessages;
+		}
 	}

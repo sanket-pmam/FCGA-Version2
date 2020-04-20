@@ -31,7 +31,7 @@ sendKeysToTextField(driver, objectrepository.getInpUserNameLogin(), sUserName,
 		"Username");
 sendKeysToTextField(driver, objectrepository.getInpPasswordLogin(), sPassword,
 		"Password");
-buttonClick(driver,objectrepository.getBtnLogin(), 10, "Login");
+buttonClick(driver,objectrepository.getBtnLogin(),5, "Login");
 
 AutomationUtilities.LogSummary(LogPath,"Agent Log In is done Sucessfully");
 

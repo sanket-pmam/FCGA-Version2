@@ -306,16 +306,23 @@ return testCaseData;
 	                	case 33:  dataObj.setWCproofofWCcoverage(cellObj.getStringCellValue()); break;
 	                	case 34:  dataObj.setWCUninsuredSubcontractor(cellObj.getStringCellValue()); break;
 	                	case 35:  dataObj.setWCBusinessDescription(cellObj.getStringCellValue()); break;
-	                	case 36:  dataObj.setWCcontactEmail(cellObj.getStringCellValue()); break;
-	                	case 37:  dataObj.setWCcontactPhone(cellObj.getStringCellValue()); break;
-	                	case 38:  dataObj.setPaymentOption(cellObj.getStringCellValue()); break;
-	                	case 39:  dataObj.setDepositPaymentMethod(cellObj.getStringCellValue()); break;
+	                	case 36:  dataObj.setWChadCoverage(cellObj.getStringCellValue()); break;
+	                	case 37:  dataObj.setWCCarierName(cellObj.getStringCellValue()); break;
+	                	case 38:  dataObj.setWCAnyLosses(cellObj.getStringCellValue()); break;
+	                	case 39:  dataObj.setWCClaims(cellObj.getStringCellValue()); break;
+	                	case 40:  dataObj.setWCTotalIncurred(cellObj.getStringCellValue()); break;
+	                	case 41:  dataObj.setWCNotes(cellObj.getStringCellValue()); break;
+	                	case 42:  dataObj.setWCMessages(cellObj.getStringCellValue()); break;
+	                	case 43:  dataObj.setWCcontactEmail(cellObj.getStringCellValue()); break;
+	                	case 44:  dataObj.setWCcontactPhone(cellObj.getStringCellValue()); break;
+	                	case 45:  dataObj.setPaymentOption(cellObj.getStringCellValue()); break;
+	                	case 46:  dataObj.setDepositPaymentMethod(cellObj.getStringCellValue()); break;
 	                	//-----------------------------------------------------
 	                	
-	                	case 40:  dataObj.setScriptStatus(cellObj.getStringCellValue()); break;   
-	                	case 41:  dataObj.setInsuredName(cellObj.getStringCellValue()); break;
-	                	case 42:  dataObj.setReferralReason(cellObj.getStringCellValue()); break;
-	                	case 43:  dataObj.setPolicyNo(cellObj.getStringCellValue()); break;
+	                	case 47:  dataObj.setScriptStatus(cellObj.getStringCellValue()); break;   
+	                	case 48:  dataObj.setInsuredName(cellObj.getStringCellValue()); break;
+	                	case 49:  dataObj.setReferralReason(cellObj.getStringCellValue()); break;
+	                	case 50:  dataObj.setPolicyNo(cellObj.getStringCellValue()); break;
 	                	
 	                	
 	                	}	                	

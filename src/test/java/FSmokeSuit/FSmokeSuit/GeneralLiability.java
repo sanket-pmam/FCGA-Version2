@@ -360,7 +360,7 @@ public class GeneralLiability extends AutomationUtilities {
 			//AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
 			//Thread.sleep(3000);
 			
-			AutomationUtilities.GLMessages(driver,objectrepository, objGlLoadManager.getAgentMessages());
+			AutomationUtilities.AgentMessages(driver,objectrepository, objGlLoadManager.getAgentMessages());
 			JavascriptExecutor js = (JavascriptExecutor) driver;
 			
 			//Thread.sleep(2000);

@@ -778,19 +778,37 @@ public class ObjectRepository {
 	public WebElement btnSubmit;
 	
 	@FindBy (xpath="//input[@id='carrier0']")
-	public WebElement gettxtLossCarrier;
+	public WebElement txtLossCarrier;
 	
-	@FindBy (xpath="//span[@id='select2-ddlInsuredName-container']")
+	@FindBy (xpath="//input[@id='claims0']")
+	public WebElement txtWCclaims;
+	
+	@FindBy (xpath="//input[@id='incurred0']")
+	public WebElement txtWCincurred;
+	
+	@FindBy (xpath="//span[@aria-labelledby='select2-ddlInsuredName-container']")
 	public WebElement selWCNameInsured;
 	
 	@FindBy (xpath="//ul[@id='select2-ddlInsuredName-results']")
 	public WebElement WCNameInsuredresult;
 	
+	@FindBy (xpath="//textarea[@id='txtNote']")
+	public WebElement txtWCNotes;
+	
 	@FindBy (xpath="//span[@id='select2-ddlRelationship-container']")
 	public WebElement WCApplicationRelationsip;
 	
+	@FindBy (xpath="//input[@id='txtLocationFTEE']")
+	public WebElement WCApplicationFT;
+	
+	@FindBy (xpath="//input[@id='txtLocationPTEE']")
+	public WebElement WCApplicationPT;
+	
 	@FindBy (xpath="//input[@id='txtLocationAddress1']")
 	public WebElement WAppliactionCAddress1;
+
+	@FindBy (xpath="//input[@id='txtLocationAddress2']")
+	public WebElement WAppliactionCAddress2;
 	
 	@FindBy (xpath="//input[@id='txtLocationCity']")
 	public WebElement WCAppliactionCity;
@@ -1942,25 +1960,38 @@ public class ObjectRepository {
 	  return btnSubmit;
   }
   public WebElement gettxtLossCarrier() {
-	  return gettxtLossCarrier;
+	  return txtLossCarrier;
   }
-  
+  public WebElement gettxtWCclaims() {
+	  return txtWCclaims;
+  }
   public WebElement getselWCNameInsured() {
 	  return selWCNameInsured;
   }
-  
+  public WebElement gettxtWCincurred() {
+	  return txtWCincurred;
+  }
+  public WebElement gettxtWCNotes() {
+	  return txtWCNotes;
+  }
   public WebElement getWCNameInsuredresult() {
 	  return WCNameInsuredresult;
   }
-  
-  
   public WebElement getWCApplicationRelationsip() {
 	  return WCApplicationRelationsip;
+  }
+  public WebElement getWCApplicationFullTimeE() {
+	  return WCApplicationFT;
+  }
+  public WebElement getWCApplicationPartTimeE() {
+	  return WCApplicationPT;
   }
   public WebElement getWAppliactionCAddress1() {
 	  return WAppliactionCAddress1;
   }
-  
+  public WebElement getWAppliactionCAddress2() {
+	  return WAppliactionCAddress2;
+  }
   public WebElement getWAppliactionCity() {
 	  return WCAppliactionCity;
   }

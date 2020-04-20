@@ -21,7 +21,7 @@ public class HomePage extends AutomationUtilities {
 		{
 			//waitforpageload(driver, 2);
 			//Thread.sleep(2000);
-			buttonClick(driver,objectrepository.getSelectAgent(),10,"Agency Contact");
+			buttonClick(driver,objectrepository.getSelectAgent(),5,"Agency Contact");
 			
 			EsendKeysToTextField(driver,objectrepository.getSearchAgent(), sAgentName,"AgentName");
 			

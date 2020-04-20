@@ -166,6 +166,7 @@ public class AutomationUtilities {
 		
 		//String searchText = text;
 		//System.out.println("Search Text..." +searchText);
+		drawBorder(driver,element);
 		element.click(); 
 		driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
 		List<WebElement> options = driver.findElements(By.tagName("li"));
@@ -213,7 +214,7 @@ public class AutomationUtilities {
 	public static void javascriptExecutorClick(WebDriver driver, WebElement element, String label) throws IOException {
 
 		try {
-
+			drawBorder(driver,element);
 			Actions actionsTwo = new Actions(driver);
 			JavascriptExecutor jseTwo = (JavascriptExecutor) driver;
 			actionsTwo.moveToElement(element).click();
@@ -231,7 +232,7 @@ public class AutomationUtilities {
 		
 	   if (driver instanceof JavascriptExecutor) {
 	        //((JavascriptExecutor)driver).executeScript("arguments[0].style.border='6.5px solid rgb(0, 230, 0)'", element);
-		   ((JavascriptExecutor)driver).executeScript("arguments[0].setAttribute('style', 'background: Yellow; border: 6.5px solid red;');",element);
+		   ((JavascriptExecutor)driver).executeScript("arguments[0].setAttribute('style', 'background: Tan; border: 6.5px solid red;');",element);
 	   }
 	    }
    
@@ -662,7 +663,7 @@ public class AutomationUtilities {
 	    }
 	}
 
-    public static void GLMessages(WebDriver driver,ObjectRepository objectrepository, String AGMessage) throws InterruptedException, IOException
+    public static void AgentMessages(WebDriver driver,ObjectRepository objectrepository, String AGMessage) throws InterruptedException, IOException
     {
     	buttonClick(driver,objectrepository.getGLMessages(),5,"Notes");
     	sendKeysToTextField(driver,objectrepository.getGLtxtNote(),AGMessage,"Notes messages test");
