@@ -19,7 +19,7 @@ public class WorkersCompensation extends AutomationUtilities {
 	public static WebDriver driver = null;
 	public static ObjectRepository objectrepository = null;
 	public static String sBusinessName;
-
+	public static String ClassCode;
 	public WorkersCompensation(WebDriver driver) {
 
 		objectrepository = ObjectRepository.getInstance(driver);
@@ -60,7 +60,7 @@ public class WorkersCompensation extends AutomationUtilities {
 			} else {
 				sendKeysToTextField(driver,objectrepository.gettxtWCClassCodes(), objWCLoadManager.getWCClassCodeDesc(), "Class Code");
 			  }
-			buttonClick(driver,objectrepository.getbtnWCContinue(), 10, "Click on Continue");
+			buttonClick(driver,objectrepository.getbtnWCContinue(), 5, "Click on Continue");
 			iteration = iteration++;
 			
 			if(!(iteration == ClassCodeDescCount) ||!(iteration==StatesCount)) {
@@ -71,7 +71,7 @@ public class WorkersCompensation extends AutomationUtilities {
 			EsendKeysToTextField(driver,objectrepository.gettxtUniquetextbox(), objWCLoadManager.getWCState(), "State Name");
 			driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 			sendKeysToTextField(driver,objectrepository.gettxtWCClassCodes(), objWCLoadManager.getWCClassCodeDesc(), "Class Code");
-			buttonClick(driver,objectrepository.getbtnWCContinue(), 10, "Click on Continue");
+			buttonClick(driver,objectrepository.getbtnWCContinue(), 5, "Click on Continue");
 		}
 
 		AutomationUtilities.sClassCode = objWCLoadManager.getWCClassCode();
@@ -89,7 +89,7 @@ public class WorkersCompensation extends AutomationUtilities {
 
 		buttonClick(driver,objectrepository.getdpdWCLegalEntity(), 10, "Click on Legal Entity");
 		EsendKeysToTextField(driver,objectrepository.gettxtUniquetextbox(), objWCLoadManager.getWCLegalEntity(), "Legal Entity");
-        sendKeysToTextField(driver,objectrepository.gettxtWCDBAName(), AutomationUtilities.sBusinessName+"DBA", "Agent Entered DBA Name as Same as Business Name");
+        sendKeysToTextField(driver,objectrepository.gettxtWCDBAName(), objWCLoadManager.getWCDBAName(), "Agent Entered DBA Name as Same as Business Name");
 
 		sendKeysToTextField(driver,objectrepository.gettxtWCAddress1(), objWCLoadManager.getWCAddress1(),"Address1");
 		sendKeysToTextField(driver,objectrepository.gettxtWCAddress2(), objWCLoadManager.getWCAddress2(),"Address2");
@@ -111,7 +111,7 @@ public class WorkersCompensation extends AutomationUtilities {
 		buttonClick(driver,objectrepository.gettxtWCAddress2(), 10, "Click on Address 2");
 		//AutomationUtilities.Screenshot(tcSnapPath, testCaseID);
 
-        if(objWCLoadManager.getTCScenarios().equalsIgnoreCase("Referral Flow")) {
+        if(!objWCLoadManager.getWCAditionalInsured().equalsIgnoreCase("")) {
 			
 			String[] WCAdditionalInsured = objWCLoadManager.getWCAditionalInsured().split("/");
 			int AICount = WCAdditionalInsured.length;
@@ -209,6 +209,9 @@ public class WorkersCompensation extends AutomationUtilities {
 			String WCFTEmployee[] = objWCLoadManager.getWCFTEmployee().split("/");
 			String WCPTEmployee[] = objWCLoadManager.getWCPTEmployee().split("/");
 			String WCGrossannualPayroll[] = objWCLoadManager.getWCGrossannualPayroll().split("/");
+			String WCClassCode [] = objWCLoadManager.getWCClassCode().split("/");
+			String Payroll = WCGrossannualPayroll[0];
+			ClassCode = WCClassCode[0];
 			
 			for(int i=1;i<ClassCodeDescCount;i++) {
 				
@@ -216,13 +219,20 @@ public class WorkersCompensation extends AutomationUtilities {
 				driver.findElement(By.xpath("//input[@id='txtPTEmployee"+i+"']")).sendKeys(WCPTEmployee[i-1]);
 				driver.findElement(By.xpath("//input[@id='txtGrossannualPayroll"+i+"']")).sendKeys(WCGrossannualPayroll[i-1]);
 				
+			  if (Integer.valueOf(Payroll) < Integer.valueOf(WCGrossannualPayroll[i])) {
+				  
+				  Payroll = WCGrossannualPayroll[i];
+				  ClassCode = WCClassCode[i];
+			  }
+				
 			}
 		}else {
 				
-		sendKeysToTextField(driver,objectrepository.gettxtWCFTEmployee(), objWCLoadManager.getWCFTEmployee(),"Full time Employee is been entered");
-		sendKeysToTextField(driver,objectrepository.gettxtWCPTEmployee(), objWCLoadManager.getWCPTEmployee(),"Part time Employee is been entered");
-		sendKeysToTextField(driver,objectrepository.gettxtWCGrossannualPayroll(), objWCLoadManager.getWCGrossannualPayroll(),"Gross Annual Payroll is been entered");
-		//AutomationUtilities.Screenshot(tcSnapPath, testCaseID);
+		  sendKeysToTextField(driver,objectrepository.gettxtWCFTEmployee(), objWCLoadManager.getWCFTEmployee(),"Full time Employee is been entered");
+		  sendKeysToTextField(driver,objectrepository.gettxtWCPTEmployee(), objWCLoadManager.getWCPTEmployee(),"Part time Employee is been entered");
+		  sendKeysToTextField(driver,objectrepository.gettxtWCGrossannualPayroll(), objWCLoadManager.getWCGrossannualPayroll(),"Gross Annual Payroll is been entered");
+		  ClassCode = objWCLoadManager.getWCClassCode();
+		  //AutomationUtilities.Screenshot(tcSnapPath, testCaseID);
 			
 		}
 		if (objWCLoadManager.getWCInclude().equalsIgnoreCase("Yes")) {
@@ -305,7 +315,7 @@ public class WorkersCompensation extends AutomationUtilities {
 	public void GeneralQuestions(LoadManager objWCLoadManager,WCIndustrialQ industrialq ,WebDriver driver) throws IOException, InterruptedException, AWTException {
 		
 		waitforpageload(driver, 15);
-		String ClassCode = objWCLoadManager.getWCClassCode();
+		//String ClassCode = objWCLoadManager.getWCClassCode();
 		/*String ReferalReason = driver.findElement(By.xpath("//input[@id='hdnReferralObject']")).getAttribute("value");
 		if(ReferalReason.isEmpty()) {
 			AutomationUtilities.LogSummary(LogPath, "No Referral Reason Found");
@@ -397,11 +407,12 @@ public class WorkersCompensation extends AutomationUtilities {
 		AutomationUtilities.LogSummary(LogPath, "Losses Page has been completed");
 	}
 
-	public void Application(LoadManager objWCLoadManager, WebDriver driver, String sBusinessNameValue,LoginPage objWCloginpage,Underwriting objWCunderwriting,HomePage objhomepage) throws IOException, InterruptedException, AWTException, UnsupportedFlavorException {
+	public void Application(LoadManager objWCLoadManager, WebDriver driver, String sBusinessNameValue,LoginPage objWCloginpage,Underwriting objWCunderwriting,HomePage objhomepage,WCIndustrialQ industrialq) throws IOException, InterruptedException, AWTException, UnsupportedFlavorException {
 
 		waitforpageload(driver, 15);
  
 		int count = 1;
+		int icount =1;
 		buttonClick(driver,objectrepository.getselWCNameInsured(), 10, "WC Name Insured");
 		int InsuredNameCount = driver.findElements(By.xpath("//li[contains(@id,'select2-ddlInsuredName-result')]")).size();
 		ArrayList<String> WCNameInsured = new ArrayList<String>();
@@ -415,9 +426,13 @@ public class WorkersCompensation extends AutomationUtilities {
 		buttonClick(driver,objectrepository.getselWCNameInsured(), 10, "WC Name Insured");
 		AutomationUtilities.LogSummary(LogPath,"Total Insured Name are : "+WCNameInsured);
 		
-		for (int i=1;i<InsuredNameCount;i++) {
+		if(!objWCLoadManager.getWCDBAName().equalsIgnoreCase("")) {
+			icount =2;
+		}
+		
+		for (int i= icount;i<InsuredNameCount;i++) {
 			
-			Thread.sleep(2000);
+			Thread.sleep(3000);
 			buttonClick(driver,objectrepository.getselWCNameInsured(), 10, "WC Name Insured");
 			EsendKeysToTextField(driver,objectrepository.gettxtUniquetextbox(),WCNameInsured.get(i),"Insured Name");
 			
@@ -460,6 +475,11 @@ public class WorkersCompensation extends AutomationUtilities {
 	    	//AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
 			
 	    	objWCunderwriting.UnderwritingSearch(driver);
+	    	
+	    	 if(objWCLoadManager.getUWPermission().equalsIgnoreCase("Yes")) {
+	    		 objWCunderwriting.UWWCEditQuote(driver,objWCLoadManager,industrialq);
+	    	 }
+	    	 
 	    	objWCunderwriting.UWChangeStatus(driver,objWCLoadManager);
 	    	//AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
 	    	 
@@ -479,30 +499,32 @@ public class WorkersCompensation extends AutomationUtilities {
 		
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		buttonClick(driver,objectrepository.getbtnWCDownloadQuote(),20,"Quote Document");
-		Thread.sleep(2000);
+		Thread.sleep(3000);
 		AutomationUtilities.Traverse(driver,"Quote Document");
 	   // System.out.println("Download WC Quote Document is clicked sucessfully");
 	    //AutomationUtilities.LogSummary(LogPath,"Download WC Quote Document is clicked successfully");
 	     
 		
 		buttonClick(driver,objectrepository.getbtnWCDownloadRatingWorksheet(),50,"Rating Document");
-		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		buttonClick(driver,objectrepository.getlnkWCCondensedRatingWorksheet(),15,"Condensed Rating Worksheet");
+		Thread.sleep(3000);
 		AutomationUtilities.Traverse(driver,"Rating Document");
-		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		buttonClick(driver,objectrepository.gettxtAppClosebtn(),10,"Close Condensed Rating Worksheet");
 	    //System.out.println("Download WC Rating Document is clicked successfully");
 	    //AutomationUtilities.LogSummary(LogPath,"Download WC Rating Document is clicked successfully");
 		
-		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	    buttonClick(driver,objectrepository.getbtnWCDownloadApplication(),10,"Application Document");
+	    Thread.sleep(1000);
 	    AutomationUtilities.Traverse(driver,"Application Document");
 	   // System.out.println("Download WC Application Document is clicked sucessfully");
 	   // AutomationUtilities.LogSummary(LogPath,"Download WC Application Document is clicked successfully");
 		
-		
+		Thread.sleep(2000);
 		buttonClick(driver,objectrepository.getWCMakePayment(),10,"Click on Make Payment");
-		
+		waitforpageload(driver, 65);
 		System.out.println("Application Screen have been completed Sucessfully");
 		AutomationUtilities.LogSummary(LogPath,"Application Screen have been completed Sucessfully");	
 		
@@ -528,6 +550,7 @@ public class WorkersCompensation extends AutomationUtilities {
 		//System.out.println("PaymentOption is:>>>>>" +objWCLoadManager.getPaymentOption());
 		AutomationUtilities.ClickPaymentOptions(driver,objectrepository,objWCLoadManager.getPaymentOption());
 		
+		Thread.sleep(2000);
 		buttonClick(driver,objectrepository.getdpddepositpaymentmethod(),10,"Click on Deposit Payment Method");
 		EsendKeysToTextField(driver,objectrepository.gettxtUniquetextbox(),objWCLoadManager.getDepositPaymentMethod(),"Deposit Payment Method");
 		//AutomationUtilities.Screenshot(tcSnapPath,testCaseID);

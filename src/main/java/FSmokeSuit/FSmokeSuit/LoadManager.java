@@ -111,6 +111,43 @@ public class LoadManager implements Cloneable {
 		private String UWNotes;
 		private String UWMessages;
 		private double TestCaseId;
+		private String UWPermission;
+		private String WCUWModifyBusinessName;
+		private String WCUWModifyDBAName;
+		private String WCUWModifyCity;
+		private String WCUWModifyState;
+		private String WCUWModifyClassCode;
+		private String WCUWModifyClassCodeDesc;
+		private String WCUWModifyClassCodeColor;
+		private String WCUWModifyLegalEntity;
+		private String WCUWModifyAddressState;
+		private String WCUWModifyAddress1;
+		private String WCUWModifyAddress2;
+		private String WCUWModifyZipCode;
+		private String WCUWModifyAditionalInsured;
+		private String WCUWModifyEmployerLimit;
+		private String WCUWModifyExpMod;
+		private String UWModifyOwnerPermission;
+		private String UWModifyOwnerCount;
+		private String WCUWModifyFirstName;
+		private String WCUWModifyLastName;
+		private String WCUWModifyPerOwner;
+		private String WCUWModifyInclude;
+		private String WCUWModifyFTEmployee;
+		private String WCUWModifyPTEmployee;
+		private String WCUWModifyGrossannualPayroll;
+		private String WCUWModifyOwnGrossannualPayroll;
+		private String WCUWModifyInsuredSubContractor;
+		private String WCUWModifyTypeofWork;
+		private String WCUWModifyworkperformed;
+		private String WCUWModifyproofofWCcoverage;
+		private String WCUWModifyUninsuredSubcontractor;
+		private String WCUWModifyBusinessDescription;
+		private String WCUWModifyhadCoverage;
+		private String WCUWModifyCarierName;
+		private String WCUWModifyAnyLosses;
+		private String WCUWModifyClaims;
+		private String WCUWModifyTotalIncurred;
 		private String Product;
 		private String State;
 		private String County;
@@ -1589,5 +1626,263 @@ public class LoadManager implements Cloneable {
 		}
 		public String getActionMessages(){
 			return ActionMessages;
+		}
+
+		public void setUWPermission(String sUWPermission) {
+			UWPermission = sUWPermission;		
+		}
+		public String getUWPermission(){
+			return UWPermission;
+		}
+		
+		public void setWCUWModifyBusinessName(String sWCUWModifyBusinessName) {
+			WCUWModifyBusinessName	= sWCUWModifyBusinessName;		
+		}
+		public String getWCUWModifyBusinessName(){
+			return WCUWModifyBusinessName;
+		}
+		
+		public void setWCUWModifyDBAName(String sWCUWModifyDBAName) {
+			WCUWModifyDBAName = sWCUWModifyDBAName;			
+		}
+		public String getWCUWModifyDBAName(){
+			return WCUWModifyDBAName;
+		}
+		
+		public void setWCUWModifyCity(String sWCUWModifyCity) {
+			WCUWModifyCity	= sWCUWModifyCity;		
+		}
+		public String getWCUWModifyCity(){
+			return WCUWModifyCity;
+		}
+		
+		public void setWCUWModifyState(String sWCUWModifyState) {
+			WCUWModifyState = sWCUWModifyState;
+		}
+		public String getWCUWModifyState(){
+			return WCUWModifyState;
+		}
+		
+		public void setWCUWModifyClassCode(String sWCUWModifyClassCode) {
+			WCUWModifyClassCode	= sWCUWModifyClassCode;
+		}
+		public String getWCUWModifyClassCode(){
+			return WCUWModifyClassCode;
+		}
+		
+		public void setWCUWModifyClassCodeDesc(String sWCUWModifyClassCodeDesc) {
+			WCUWModifyClassCodeDesc	= sWCUWModifyClassCodeDesc;	
+		}
+		public String getWCUWModifyClassCodeDesc(){
+			return WCUWModifyClassCodeDesc;
+		}
+		
+		public void setWCUWModifyClassCodeColor(String sWCUWModifyClassCodeColor) {
+			WCUWModifyClassCodeColor = sWCUWModifyClassCodeColor;
+		}
+		public String getWCUWModifyClassCodeColor(){
+			return WCUWModifyClassCodeColor;
+		}
+		
+		public void setWCUWModifyLegalEntity(String sWCUWModifyLegalEntity) {
+			WCUWModifyLegalEntity = sWCUWModifyLegalEntity;			
+		}
+		public String getWCUWModifyLegalEntity(){
+			return WCUWModifyLegalEntity;
+		}
+		
+		public void setWCUWModifyAddressState(String sWCUWModifyAddressState) {
+			WCUWModifyAddressState = sWCUWModifyAddressState;
+		}
+		public String getWCUWModifyAddressState(){
+			return WCUWModifyAddressState;
+		}
+		
+		public void setWCUWModifyAddress1(String sWCUWModifyAddress1) {
+			WCUWModifyAddress1 = sWCUWModifyAddress1;			
+		}
+		public String getWCUWModifyAddress1(){
+			return WCUWModifyAddress1;
+		}
+		
+		public void setWCUWModifyAddress2(String sWCUWModifyAddress2) {
+			WCUWModifyAddress2 = sWCUWModifyAddress2;			
+		}
+		public String getWCUWModifyAddress2(){
+			return WCUWModifyAddress2;
+		}
+		
+		public void setWCUWModifyZipCode(String sWCUWModifyZipCode) {
+			WCUWModifyZipCode = sWCUWModifyZipCode;		
+		}
+		public String getWCUWModifyZipCode(){
+			return WCUWModifyZipCode;
+		}
+		public void setWCUWModifyAditionalInsured(String sWCUWModifyAditionalInsured) {
+			WCUWModifyAditionalInsured = sWCUWModifyAditionalInsured; 			
+		}
+		public String getWCUWModifyAditionalInsured(){
+			return WCUWModifyAditionalInsured;
+		}
+		
+		public void setWCUWModifyEmployerLimit(String sWCUWModifyEmployerLimit) {
+			WCUWModifyEmployerLimit	= sWCUWModifyEmployerLimit;
+		}
+		public String getWCUWModifyEmployerLimit(){
+			return WCUWModifyEmployerLimit;
+		}
+		
+		public void setWCUWModifyExpMod(String sWCUWModifyExpMod) {
+			WCUWModifyExpMod = sWCUWModifyExpMod;	
+		}
+		public String getWCUWModifyExpMod(){
+			return WCUWModifyExpMod;
+		}
+		
+		public void setUWModifyOwnerPermission(String sUWModifyOwnerPermission) {
+			UWModifyOwnerPermission = sUWModifyOwnerPermission;			
+		}
+		public String getUWModifyOwnerPermission(){
+			return UWModifyOwnerPermission;
+		}
+
+		public void setUWModifyOwnerCount(String sUWModifyOwnerCount) {
+			UWModifyOwnerCount	= sUWModifyOwnerCount;	
+		}
+		public String getUWModifyOwnerCount(){
+			return UWModifyOwnerCount;
+		}
+		
+		public void setWCUWModifyFirstName(String sWCUWModifyFirstName) {
+			WCUWModifyFirstName = sWCUWModifyFirstName;			
+		}
+		public String getWCUWModifyFirstName(){
+			return WCUWModifyFirstName;
+		}
+		
+		public void setWCUWModifyLastName(String sWCUWModifyLastName) {
+			WCUWModifyLastName = sWCUWModifyLastName;			
+		}
+		public String getWCUWModifyLastName(){
+			return WCUWModifyLastName;
+		}
+		
+		public void setWCUWModifyPerOwner(String sWCUWModifyPerOwner) {
+			WCUWModifyPerOwner = sWCUWModifyPerOwner;		
+		}
+		public String getWCUWModifyPerOwner(){
+			return WCUWModifyPerOwner;
+		}
+		
+		public void setWCUWModifyInclude(String sWCUWModifyInclude) {
+			WCUWModifyInclude = sWCUWModifyInclude;			
+		}
+		public String getWCUWModifyInclude(){
+			return WCUWModifyInclude;
+		}
+
+		public void setWCUWModifyFTEmployee(String sWCUWModifyFTEmployee) {
+			WCUWModifyFTEmployee = sWCUWModifyFTEmployee;			
+		}
+		public String getWCUWModifyFTEmployee(){
+			return WCUWModifyFTEmployee;
+		}
+		
+		public void setWCUWModifyPTEmployee(String sWCUWModifyPTEmployee) {
+			WCUWModifyPTEmployee = sWCUWModifyPTEmployee;			
+		}
+		public String getWCUWModifyPTEmployee(){
+			return WCUWModifyPTEmployee;
+		}
+		
+		public void setWCUWModifyGrossannualPayroll(String sWCUWModifyGrossannualPayroll) {
+			WCUWModifyGrossannualPayroll = sWCUWModifyGrossannualPayroll;			
+		}
+		public String getWCUWModifyGrossannualPayroll(){
+			return WCUWModifyGrossannualPayroll;
+		}
+		
+		public void setWCUWModifyOwnGrossannualPayroll(String sWCUWModifyOwnGrossannualPayroll) {
+			WCUWModifyOwnGrossannualPayroll = sWCUWModifyOwnGrossannualPayroll;			
+		}
+		public String getWCUWModifyOwnGrossannualPayroll(){
+			return WCUWModifyOwnGrossannualPayroll;
+		}
+		
+		public void setWCUWModifyInsuredSubContractor(String sWCUWModifyInsuredSubContractor) {
+			WCUWModifyInsuredSubContractor = sWCUWModifyInsuredSubContractor;			
+		}
+		public String getWCUWModifyInsuredSubContractor(){
+			return WCUWModifyInsuredSubContractor;
+		}
+
+		public void setWCUWModifyTypeofWork(String sWCUWModifyTypeofWork) {
+			WCUWModifyTypeofWork = sWCUWModifyTypeofWork;			
+		}
+		public String getWCUWModifyTypeofWork(){
+			return WCUWModifyTypeofWork;
+		}
+		
+		public void setWCUWModifyworkperformed(String sWCUWModifyworkperformed) {
+			WCUWModifyworkperformed = sWCUWModifyworkperformed;			
+		}
+		public String getWCUWModifyworkperformed(){
+			return WCUWModifyworkperformed;
+		}
+		
+		public void setWCUWModifyproofofWCcoverage(String sWCUWModifyproofofWCcoverage) {
+		   WCUWModifyproofofWCcoverage	= sWCUWModifyproofofWCcoverage;		
+		}
+		public String getWCUWModifyproofofWCcoverage(){
+			return WCUWModifyproofofWCcoverage;
+		}
+		
+		public void setWCUWModifyUninsuredSubcontractor(String sWCUWModifyUninsuredSubcontractor) {
+			WCUWModifyUninsuredSubcontractor = sWCUWModifyUninsuredSubcontractor;			
+		}
+		public String getWCUWModifyUninsuredSubcontractor(){
+			return WCUWModifyUninsuredSubcontractor;
+		}
+		
+		public void setWCUWModifyBusinessDescription(String sWCUWModifyBusinessDescription) {
+			WCUWModifyBusinessDescription = sWCUWModifyBusinessDescription;			
+		}
+		public String getWCUWModifyBusinessDescription(){
+			return WCUWModifyBusinessDescription;
+		}
+		
+		public void setWCUWModifyhadCoverage(String sWCUWModifyhadCoverage) {
+			WCUWModifyhadCoverage = sWCUWModifyhadCoverage;		
+		}
+		public String getWCUWModifyhadCoverage(){
+			return WCUWModifyhadCoverage;
+		}
+		
+		public void setWCUWModifyCarierName(String sWCUWModifyCarierName) {
+			WCUWModifyCarierName = sWCUWModifyCarierName;			
+		}
+		public String getWCUWModifyCarierName(){
+			return WCUWModifyCarierName;
+		}
+		
+		public void setWCUWModifyAnyLosses(String sWCUWModifyAnyLosses) {
+			WCUWModifyAnyLosses = sWCUWModifyAnyLosses; 			
+		}
+		public String getWCUWModifyAnyLosses(){
+			return WCUWModifyAnyLosses;
+		}
+		
+		public void setWCUWModifyClaims(String sWCUWModifyClaims) {
+			WCUWModifyClaims = sWCUWModifyClaims;			
+		}
+		public String getWCUWModifyClaims(){
+			return WCUWModifyClaims;
+		}
+		
+		public void setWCUWModifyTotalIncurred(String sWCUWModifyTotalIncurred) {
+			WCUWModifyTotalIncurred = sWCUWModifyTotalIncurred;			
+		}
+		public String getWCUWModifyTotalIncurred(){
+			return WCUWModifyTotalIncurred;
 		}
 	}

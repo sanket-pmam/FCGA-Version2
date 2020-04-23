@@ -1,16 +1,23 @@
 package FSmokeSuit.FSmokeSuit;
 
+import java.awt.AWTException;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 public class Underwriting extends AutomationUtilities {
 	
 	public ObjectRepository objectrepository = null;
+	public static String ClassCode;
 
 	public Underwriting(WebDriver driver)
 	{		
@@ -541,6 +548,392 @@ public void UWclassPayroll(LoadManager objUWGLLoadManager, WebDriver driver) thr
 }
 
    
+public void UWWCEditQuote (WebDriver driver,LoadManager objUWWCLoadManager, WCIndustrialQ industrialq) throws IOException, InterruptedException, AWTException {
+	
+	 waitforpageload(driver, 70);
+		//Thread.sleep(3000);
+		
+		buttonClick(driver,objectrepository.getUWWCEditQuote(),20,"Underwriting Edit Quote");
+
+	//----------- Business Summary -------------
+	AutomationUtilities.LogSummary(LogPath, "Check Page Name: "+ objectrepository.getUWLblPage().getText());
+	//System.out.println(objectrepository.getUWLblPage().getText());
+	
+	UWBusinessSummary(objUWWCLoadManager,driver);
+	
+	Thread.sleep(3000);
+	buttonClick(driver,objectrepository.getBtnWCNext(), 05, "Next button is saved sucessfully.");
+	//AutomationUtilities.Screenshot(tcSnapPath, testCaseID);
+	
+	//----------- Questions ------------------
+	
+	AutomationUtilities.LogSummary(LogPath, "Check Page Name: "+ objectrepository.getUWLblPage().getText());
+	//System.out.println(objectrepository.getUWLblPage().getText());
+	
+	if( !objUWWCLoadManager.getWCClassCode().equalsIgnoreCase(objUWWCLoadManager.getWCUWModifyClassCode())){
+		
+		industrialq.CheckWCIndustrialQ (ClassCode,driver);
+	}
+	
+	Thread.sleep(3000);
+	buttonClick(driver,objectrepository.getBtnWCNext(), 05, "Next button is saved sucessfully.");
+	//AutomationUtilities.Screenshot(tcSnapPath, testCaseID);
+	
+	//----------- Losses ------------------
+	
+	AutomationUtilities.LogSummary(LogPath, "Check Page Name: "+ objectrepository.getUWLblPage().getText());
+	//System.out.println(objectrepository.getUWLblPage().getText());
+	
+	selectDropdownlitag(driver, objectrepository.gethadCoverage(), objUWWCLoadManager.getWCUWModifyhadCoverage(), "Had a coverage Yes/No");
+	
+	if(objUWWCLoadManager.getWCUWModifyhadCoverage().equalsIgnoreCase("Yes")) {
+		
+		sendKeysToTextField(driver,objectrepository.gettxtLossCarrier(), objUWWCLoadManager.getWCUWModifyCarierName(), "Loss Page Carrier");
+	}
+	
+	if(objUWWCLoadManager.getWCUWModifyAnyLosses().equalsIgnoreCase("Yes")){
+		
+		javascriptExecutorClick(driver, objectrepository.rdAnyLossesYes(), "Any Losses Yes/No");
+		sendKeysToTextField(driver,objectrepository.gettxtWCclaims(), objUWWCLoadManager.getWCUWModifyClaims(), "Claim No.");
+		sendKeysToTextField(driver,objectrepository.gettxtWCincurred(), objUWWCLoadManager.getWCUWModifyTotalIncurred(), "Total Incurred");
+		
+	}else {
+		
+		javascriptExecutorClick(driver, objectrepository.rdAnyLossesNo(), "Any Losses Yes/No");
+	}
+	
+	Thread.sleep(3000);	
+	buttonClick(driver,objectrepository.btnSubmit(), 10, "Submit Losses");
+	
+	//------------ Application -------------
+	
+	AutomationUtilities.LogSummary(LogPath, "Check Page Name: "+ objectrepository.getUWLblPage().getText());
+	//System.out.println(objectrepository.getUWLblPage().getText());
+	
+	
+	Thread.sleep(3000);
+	
+	buttonClick(driver,objectrepository.getUWWCBtnSave(),10,"Click on Save and Continue");
+	driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
+	Thread.sleep(3000);
+	
+    if(objUWWCLoadManager.getUWRateType().equalsIgnoreCase("IRPM")) {
+		
+		sendKeysToTextField(driver,objectrepository.gettxtUWIRPM(),objUWWCLoadManager.getUWModifiedRates(),"IRPM");
+		
+	}else if(objUWWCLoadManager.getUWRateType().equalsIgnoreCase("CTR")){
+		
+		buttonClick(driver,objectrepository.getchkConsentToRate(),10,"CTR");
+		sendKeysToTextField(driver,objectrepository.gettxtUWIRPMCTR(),objUWWCLoadManager.getUWModifiedRates(),"CTR");
+	} else {
+		
+		AutomationUtilities.LogSummary(LogPath, "IRPM Value is not getting Changed");
+		System.out.println("IRPM Value is not getting Changed");
+	}
+
+}
+
+
+public void UWBusinessSummary(LoadManager objUWWCLoadManager, WebDriver driver)
+		throws InterruptedException, IOException, AWTException {
+
+	SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+	Date date = new Date();
+	Calendar cal = Calendar.getInstance();
+	cal.add(Calendar.DATE, -15);
+
+	String States [] = objUWWCLoadManager.getWCUWModifyState().split("/");
+	String ClassCodeDesc [] = objUWWCLoadManager.getWCUWModifyClassCodeDesc().split("/");
+	int StatesCount =States.length;
+	int ClassCodeDescCount = ClassCodeDesc.length;
+	int iteration =0;
+	if(iteration > 1 ||ClassCodeDescCount > 1 ) {
+		
+		if(StatesCount > 1) {
+			
+		  for(int i=1;i<StatesCount;i++) {
+			
+			buttonClick(driver,objectrepository.getbtnWCClear(), 30, "Click on WC Clear");
+			buttonClick(driver,objectrepository.getWCState(), 10, "Click on State");
+			EsendKeysToTextField(driver,objectrepository.gettxtUniquetextbox(),States[i], "State Name");
+		   }
+	}else {
+		
+		buttonClick(driver,objectrepository.getbtnWCClear(), 30, "Click on WC Clear");	
+	    buttonClick(driver,objectrepository.getWCState(), 10, "Click on State");
+	    EsendKeysToTextField(driver,objectrepository.gettxtUniquetextbox(), objUWWCLoadManager.getWCUWModifyState(), "State Name");
+	}
+		if (ClassCodeDescCount > 1 ) {
+			for(int i=1;i<ClassCodeDescCount;i++) {
+				
+				driver.findElement(By.xpath("//input[@id='txtClassCodes"+i+"']")).sendKeys(ClassCodeDesc[i]);
+			}
+		} else {
+			sendKeysToTextField(driver,objectrepository.gettxtWCClassCodes(), objUWWCLoadManager.getWCUWModifyClassCodeDesc(), "Class Code");
+		  }
+		buttonClick(driver,objectrepository.getbtnWCContinue(), 10, "Click on Continue");
+		iteration = iteration++;
+		
+		if(!(iteration == ClassCodeDescCount) ||!(iteration==StatesCount)) {
+			buttonClick(driver,objectrepository.getbtnWCAddClassCode(),10,"Add Class Code and State");
+		}
+	}else {
+		buttonClick(driver,objectrepository.getWCState(), 10, "Click on State");
+		EsendKeysToTextField(driver,objectrepository.gettxtUniquetextbox(), objUWWCLoadManager.getWCUWModifyState(), "State Name");
+		driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+		sendKeysToTextField(driver,objectrepository.gettxtWCClassCodes(), objUWWCLoadManager.getWCUWModifyClassCodeDesc(), "Class Code");
+		buttonClick(driver,objectrepository.getbtnWCContinue(), 10, "Click on Continue");
+	}
+
+	AutomationUtilities.sClassCode = objUWWCLoadManager.getWCUWModifyClassCode();
+	AutomationUtilities.sClassCodeDesc = objUWWCLoadManager.getWCUWModifyClassCodeDesc();
+	//AutomationUtilities.Screenshot(tcSnapPath, testCaseID);
+
+	if(!objUWWCLoadManager.getWCUWModifyBusinessName().equalsIgnoreCase("")) {
+	  
+		AutomationUtilities.sBusinessName =	objUWWCLoadManager.getWCUWModifyBusinessName();
+		sendKeysToTextField(driver,objectrepository.gettxtWCBussInsuredName(), AutomationUtilities.sBusinessName, "Business Name");
+		System.out.println("Insured Name / Business Name is : " + AutomationUtilities.sBusinessName);
+		AutomationUtilities.LogSummary(LogPath, "Insured Name / Business Name is : " + AutomationUtilities.sBusinessName);
+
+	}
+
+	if (!objUWWCLoadManager.getWCUWModifyLegalEntity().equalsIgnoreCase("")) {
+		
+	    buttonClick(driver,objectrepository.getdpdWCLegalEntity(), 10, "Click on Legal Entity");
+	    EsendKeysToTextField(driver,objectrepository.gettxtUniquetextbox(), objUWWCLoadManager.getWCUWModifyLegalEntity(), "Legal Entity");
+        
+	}
+	
+	if(!objUWWCLoadManager.getWCUWModifyDBAName().equalsIgnoreCase("")) {
+	
+		sendKeysToTextField(driver,objectrepository.gettxtWCDBAName(), objUWWCLoadManager.getWCUWModifyDBAName(), "Agent Entered DBA Name as Same as Business Name");
+	}
+	
+	if(!objUWWCLoadManager.getWCUWModifyAddress1().equalsIgnoreCase("")) {
+	
+		sendKeysToTextField(driver,objectrepository.gettxtWCAddress1(), objUWWCLoadManager.getWCUWModifyAddress1(),"Address1");
+	}
+	
+	if(!objUWWCLoadManager.getWCUWModifyAddress2().equalsIgnoreCase("")) {
+		
+	    sendKeysToTextField(driver,objectrepository.gettxtWCAddress2(), objUWWCLoadManager.getWCUWModifyAddress2(),"Address2");
+	}
+	
+	if(!objUWWCLoadManager.getWCUWModifyCity().equalsIgnoreCase("")) {
+	   
+		sendKeysToTextField(driver,objectrepository.gettxtWCCity(), objUWWCLoadManager.getWCUWModifyCity(),"City");
+	    //AutomationUtilities.Screenshot(tcSnapPath, testCaseID);
+	}
+	/*driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+	 if(CheckElementPresent(objectrepository.getUseasis()) == true ) {
+			AutomationUtilities.SmartyStreet = "No";
+			buttonClick(driver,objectrepository.getUseasis(),10,"Click on Use as is");
+		}else {
+			AutomationUtilities.SmartyStreet = "Yes";
+		}*/
+    
+	 if(!objUWWCLoadManager.getWCUWModifyAddressState().equalsIgnoreCase("")) {
+	    
+		 buttonClick(driver,objectrepository.getdpdAddressState(), 10, "Click on State");
+	     sendKeysToTextField(driver,objectrepository.gettxtUniquetextbox(), objUWWCLoadManager.getWCUWModifyAddressState(),"AddressState");
+	 }
+	
+	 if(!objUWWCLoadManager.getWCUWModifyZipCode().equalsIgnoreCase("")) {
+	   
+		 sendKeysToTextField(driver,objectrepository.gettxtWCZipCode(), objUWWCLoadManager.getWCUWModifyZipCode(),"Zipcode");
+	 }
+	
+	//sendKeysToTextField(driver,objectrepository.gettxtWCDateBussinessStart(), dateFormat.format(cal.getTime()),"Bussiness Start Date is entered");
+	buttonClick(driver,objectrepository.gettxtWCAddress2(), 10, "Click on Address 2");
+	//AutomationUtilities.Screenshot(tcSnapPath, testCaseID);
+
+    if(!objUWWCLoadManager.getWCUWModifyAditionalInsured().equalsIgnoreCase("")) {
+		
+		String[] WCAdditionalInsured = objUWWCLoadManager.getWCUWModifyAditionalInsured().split("/");
+		int AICount = WCAdditionalInsured.length;
+
+		if(AICount > 1) {
+
+		for(int i=1;i<=AICount;i++) {
+			
+			String AddFEIN = AutomationUtilities.getRandomString(9);
+			driver.findElement(By.xpath("//input[@id='txtAddinsuredName"+i+"'")).sendKeys(WCAdditionalInsured[i-1]);
+			driver.findElement(By.xpath("//input[@id='txtFEINNo"+i+"'")).sendKeys(AddFEIN);
+			
+			if(i<AICount) {
+				buttonClick(driver,objectrepository.getbtnWCAIButton(),10,"Additional Insured");
+			}
+		  }
+		}else {
+    	
+			String AddFEIN = AutomationUtilities.getRandomString(9);
+    	    sendKeysToTextField(driver,objectrepository.gettxtWCAddinsuredName1(), objUWWCLoadManager.getWCUWModifyAditionalInsured(),"Additional Insured Name");
+    	    sendKeysToTextField(driver,objectrepository.gettxtWCFEINNo1(),AddFEIN,"Additional FEIN");
+	   }
+    }
+    
+	if(!objUWWCLoadManager.getWCUWModifyEmployerLimit().equalsIgnoreCase("")) {
+    
+    buttonClick(driver,objectrepository.getdpdWCEmployerLimit(), 10, "Click on EmployerLimit");
+	EsendKeysToTextField(driver,objectrepository.gettxtUniquetextbox(), objUWWCLoadManager.getWCUWModifyEmployerLimit(),"Employer Limit");
+	sendKeysToTextField(driver,objectrepository.gettxtWCEffectiveDate(), dateFormat.format(date),"Effective date is been entered");
+	//AutomationUtilities.Screenshot(tcSnapPath, testCaseID);
+	
+	}
+	
+	if (objUWWCLoadManager.getWCUWModifyExpMod() != null) {
+		
+		WebElement element = objectrepository.getlblWCrdoCurrExpModYes();
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		executor.executeScript("document.getElementById('rdoCurrExpModYes').click();", element);
+		driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+
+		sendKeysToTextField(driver,objectrepository.gettxtWCExpMod(), objUWWCLoadManager.getWCExpMod(), "Current Experience Mod is entered");
+
+	} else {
+
+		buttonClick(driver,objectrepository.getlblWCrdoCurrExpModNo(), 10, "Current Experience Mod is selected as No");
+	}
+
+	if(objUWWCLoadManager.getUWModifyOwnerPermission().equalsIgnoreCase("Yes")) {
+		
+		if(Integer.valueOf(objUWWCLoadManager.getUWModifyOwnerCount()) > 1) {
+			
+			String FristName[] = objUWWCLoadManager.getWCUWModifyFirstName().split("/");
+			String LastName[] = objUWWCLoadManager.getWCUWModifyLastName().split("/");
+			String OwnerPerct[] = objUWWCLoadManager.getWCUWModifyPerOwner().split("/");
+			int OwnerCount = Integer.valueOf(objUWWCLoadManager.getUWModifyOwnerCount());
+			
+			
+			for(int i=1;i<=OwnerCount;i++) {
+				
+				driver.findElement(By.xpath("//input[@id ='txtFirstName"+i+"']")).sendKeys(Keys.chord(Keys.CONTROL, "a"),FristName[i-1]);
+				driver.findElement(By.xpath("//input[@id ='txtLastName"+i+"']")).sendKeys(Keys.chord(Keys.CONTROL, "a"),LastName[i-1]);
+				driver.findElement(By.xpath("//input[@id ='txtPerOwner"+i+"']")).sendKeys(Keys.chord(Keys.CONTROL, "a"),OwnerPerct[i-1]);
+			  
+				if(i < OwnerCount && Integer.valueOf(objUWWCLoadManager.getOwnerCount()) < Integer.valueOf(objUWWCLoadManager.getUWModifyOwnerCount())) {
+					buttonClick(driver,objectrepository.getbtnWCOWButton(),10,"Owner/Officer");
+				}
+				
+				if (!objUWWCLoadManager.getWCUWModifyInclude().equalsIgnoreCase(objUWWCLoadManager.getWCInclude())) {
+					
+				   if (objUWWCLoadManager.getWCUWModifyInclude().equalsIgnoreCase("Yes")) {
+					
+					   driver.findElement(By.xpath("//input[@id='radio"+i+"']")).click();
+
+				    } else {
+					
+					    driver.findElement(By.xpath("//input[@id='radios"+i+"']")).click();
+				    }
+				}
+			}
+			
+		}else {
+			
+			sendKeysToTextField(driver,objectrepository.gettxtWCFirstName(), objUWWCLoadManager.getWCUWModifyFirstName(),"Owner/Officer First Name is been entered");
+			sendKeysToTextField(driver,objectrepository.gettxtWCLastName(), objUWWCLoadManager.getWCUWModifyLastName(),"Owner/Officer Last Name is been entered");
+			sendKeysToTextField(driver,objectrepository.gettxtWCPerOwner(), objUWWCLoadManager.getWCUWModifyPerOwner(),"Owner/Officer percentage is been entered");
+			//AutomationUtilities.Screenshot(tcSnapPath, testCaseID);
+
+			if (objUWWCLoadManager.getWCUWModifyInclude().equalsIgnoreCase("Yes")) {
+				
+				buttonClick(driver,objectrepository.gettxtWCIncluderd(),10,"Include radio button is clicked");
+			
+			} else {
+				
+				buttonClick(driver,objectrepository.gettxtWCExcluderd(), 10, "Exclude radio button is clicked");
+			}
+		}
+	}
+	
+	if(!objUWWCLoadManager.getWCUWModifyBusinessDescription().equalsIgnoreCase("")) {
+		
+		sendKeysToTextField(driver,objectrepository.gettxtWCdesc(), objUWWCLoadManager.getWCUWModifyBusinessDescription(), "Description is been entered");
+	}
+	
+	
+	if (ClassCodeDescCount > 1 ) {
+		
+		String WCFTEmployee[] = objUWWCLoadManager.getWCUWModifyFTEmployee().split("/");
+		String WCPTEmployee[] = objUWWCLoadManager.getWCUWModifyPTEmployee().split("/");
+		String WCGrossannualPayroll[] = objUWWCLoadManager.getWCUWModifyGrossannualPayroll().split("/");
+		String WCClassCode [] = objUWWCLoadManager.getWCClassCode().split("/");
+		String Payroll = WCGrossannualPayroll[0];
+		ClassCode = WCClassCode[0];
+		
+		for(int i=1;i<ClassCodeDescCount;i++) {
+			
+			driver.findElement(By.xpath("//input[@id='txtFTEmployee"+i+"']")).sendKeys(WCFTEmployee[i-1]);
+			driver.findElement(By.xpath("//input[@id='txtPTEmployee"+i+"']")).sendKeys(WCPTEmployee[i-1]);
+			driver.findElement(By.xpath("//input[@id='txtGrossannualPayroll"+i+"']")).sendKeys(WCGrossannualPayroll[i-1]);
+			
+			if (Integer.valueOf(Payroll) < Integer.valueOf(WCGrossannualPayroll[i])) {
+				  
+				  Payroll = WCGrossannualPayroll[i];
+				  ClassCode = WCClassCode[i];
+			  }	
+		}
+	}else {
+			
+	sendKeysToTextField(driver,objectrepository.gettxtWCFTEmployee(), objUWWCLoadManager.getWCUWModifyFTEmployee(),"Full time Employee is been entered");
+	sendKeysToTextField(driver,objectrepository.gettxtWCPTEmployee(), objUWWCLoadManager.getWCUWModifyPTEmployee(),"Part time Employee is been entered");
+	sendKeysToTextField(driver,objectrepository.gettxtWCGrossannualPayroll(), objUWWCLoadManager.getWCUWModifyGrossannualPayroll(),"Gross Annual Payroll is been entered");
+	ClassCode = objUWWCLoadManager.getWCClassCode();
+	//AutomationUtilities.Screenshot(tcSnapPath, testCaseID);
+		
+	}
+	if (objUWWCLoadManager.getWCUWModifyInclude().equalsIgnoreCase("Yes")) {
+		
+	sendKeysToTextField(driver,objectrepository.getWCtxtInOwnClassCode(), objUWWCLoadManager.getWCUWModifyClassCode(), "Include Owner Class code is been entered");
+	buttonClick(driver,objectrepository.gettxtOWWCFTEmployee(), 10, "Owner WC FT Employee button is clicked");
+	sendKeysToTextField(driver,objectrepository.gettxtOWWCFTEmployee(), objUWWCLoadManager.getWCUWModifyFTEmployee(), "Owner FT Employee is been entered");
+	sendKeysToTextField(driver,objectrepository.gettxtOWWCGross(), objUWWCLoadManager.getWCUWModifyOwnGrossannualPayroll(), "Owner FT Employee is been entered");
+	//AutomationUtilities.Screenshot(tcSnapPath, testCaseID);
+	}
+	
+	if(!objUWWCLoadManager.getWCUWModifyInsuredSubContractor().isBlank()) {
+		
+		sendKeysToTextField(driver,objectrepository.getWCtxtInsuredSubcontract(), objUWWCLoadManager.getWCUWModifyInsuredSubContractor(), "Include Owner Class code is been entered");
+		driver.manage().timeouts().implicitlyWait(12, TimeUnit.SECONDS);
+		sendKeysToTextField(driver,objectrepository.getWCtxttypeofworkSubcontract(), objUWWCLoadManager.getWCUWModifyTypeofWork(), "Type of Work is been entered");
+		
+		if(objUWWCLoadManager.getWCUWModifyworkperformed().equalsIgnoreCase("Yes")) {
+			
+			buttonClick(driver,objectrepository.getWCrdWCworkperformedYes(), 10,"Worked Performed");
+		
+		}else {
+		 
+		   buttonClick(driver,objectrepository.getWCrdWCworkperformedNo(), 10, "Worked Performed");		
+		}
+	   
+        if(objUWWCLoadManager.getWCUWModifyproofofWCcoverage().equalsIgnoreCase("Yes")) {
+			
+			buttonClick(driver,objectrepository.getWCrdoWCCoverageYes(), 10,"WC Coverage");
+		
+		}else {
+		 
+		   buttonClick(driver,objectrepository.getWCrdoWCCoverageNo(), 10, "WC Coverage");		
+		}
+	
+	} else if (!objUWWCLoadManager.getWCUWModifyUninsuredSubcontractor().isBlank()) {
+		
+		sendKeysToTextField(driver,objectrepository.getWCtxtUnInsuredSubcontract(), objUWWCLoadManager.getWCUWModifyUninsuredSubcontractor(), "Include Owner Class code is been entered");
+	}
+	
+	//Thread.sleep(3000);
+	//buttonClick(driver,objectrepository.getBtnWCNext(), 05, "Next button is saved sucessfully.");
+	//AutomationUtilities.Screenshot(tcSnapPath, testCaseID);
+	
+	/*if(CheckElementPresent(objectrepository.getUseasis()) == true ) {
+		buttonClick(driver,objectrepository.getUseasis(),10,"Click on Use as is");
+		}*/
+
+	//System.out.println("Business Summary have been completed Successfully");
+	//AutomationUtilities.LogSummary(LogPath, "Business Summary have been completed Successfully");
+}
+
+
 public void UWNotes(WebDriver driver, String NotesMessage) throws InterruptedException, IOException 
 {
 	buttonClick(driver,objectrepository.getUWNotes(),10,"Notes");

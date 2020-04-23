@@ -537,6 +537,9 @@ public class ObjectRepository {
 	@FindBy (xpath="//span[@id='select2-ddlState1-container']")
 	public WebElement WCState;
 	
+	@FindBy (xpath="//input[@id='btnClearEligibility']")
+	public WebElement btnWCClear;
+	
 	@FindBy (xpath="//input[@id='txtClassCodes1']")
 	public WebElement txtWCClassCodes;
 	
@@ -929,6 +932,9 @@ public class ObjectRepository {
 	@FindBy (xpath="//button[@id='GLEditQuote']")
 	public WebElement UWGLEditQuote;
 
+	@FindBy (xpath="//button[@id='WCEditQuote']")
+	public WebElement UWWCEditQuote;
+	
 	@FindBy (xpath="//label[@id='LblPage']")
 	public WebElement UWLblPage;
 	
@@ -940,6 +946,9 @@ public class ObjectRepository {
 	
 	@FindBy (xpath="//input[@id='BtnCSPSave']")
 	public WebElement UWBtnSave;
+	
+	@FindBy (xpath="//input[@id='BtnAppSave']")
+	public WebElement UWWCBtnSave;
 	
 	@FindBy (xpath="//div[@id='pgBody']/h1")
 	public WebElement UWAdditionalInsured;
@@ -1140,6 +1149,10 @@ public class ObjectRepository {
 	
 	public WebElement getWCState() {
 		return WCState;
+	}
+	
+	public WebElement getbtnWCClear() {
+		return btnWCClear;
 	}
 	
 	public WebElement gettxtWCClassCodes() {
@@ -2131,6 +2144,9 @@ public class ObjectRepository {
   public WebElement getUWGLEditQuote() {
 	  return UWGLEditQuote;
   }
+  public WebElement getUWWCEditQuote() {
+	  return UWWCEditQuote;
+  }
   public WebElement getUWLblPage() {
 	  return UWLblPage;
   }
@@ -2139,6 +2155,9 @@ public class ObjectRepository {
   }
   public WebElement getUWBtnSave() {
 	  return UWBtnSave;
+  }
+  public WebElement getUWWCBtnSave() {
+	  return UWWCBtnSave;
   }
   public WebElement getUWAdditionalInsured() {
 	  return UWAdditionalInsured;
