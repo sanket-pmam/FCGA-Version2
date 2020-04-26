@@ -547,7 +547,7 @@ public class WorkersCompensation extends AutomationUtilities {
 		//AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
 		/*************NEW CODE ENDS**************/
 		
-		//System.out.println("PaymentOption is:>>>>>" +objWCLoadManager.getPaymentOption());
+		System.out.println("PaymentOption is:>>>>>" +objWCLoadManager.getPaymentOption());
 		AutomationUtilities.ClickPaymentOptions(driver,objectrepository,objWCLoadManager.getPaymentOption());
 		
 		Thread.sleep(2000);
