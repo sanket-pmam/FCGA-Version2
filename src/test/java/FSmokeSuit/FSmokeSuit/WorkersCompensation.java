@@ -107,6 +107,10 @@ public class WorkersCompensation extends AutomationUtilities {
 		buttonClick(driver,objectrepository.getdpdAddressState(), 10, "Click on State");
 		sendKeysToTextField(driver,objectrepository.gettxtUniquetextbox(), objWCLoadManager.getWCAddressState(),"AddressState");
 		sendKeysToTextField(driver,objectrepository.gettxtWCZipCode(), objWCLoadManager.getWCZipCode(),"Zipcode");
+		
+		AutomationUtilities.sAddress = objWCLoadManager.getWCAddress1()+","+objWCLoadManager.getWCAddress2()+","+objWCLoadManager.getWCCity()+","+objWCLoadManager.getWCAddressState()+","+objWCLoadManager.getWCZipCode();
+		
+		
 		sendKeysToTextField(driver,objectrepository.gettxtWCDateBussinessStart(), dateFormat.format(cal.getTime()),"Bussiness Start Date is entered");
 		buttonClick(driver,objectrepository.gettxtWCAddress2(), 10, "Click on Address 2");
 		//AutomationUtilities.Screenshot(tcSnapPath, testCaseID);
@@ -507,6 +511,7 @@ public class WorkersCompensation extends AutomationUtilities {
 		
 		buttonClick(driver,objectrepository.getbtnWCDownloadRatingWorksheet(),50,"Rating Document");
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		Thread.sleep(3000);
 		buttonClick(driver,objectrepository.getlnkWCCondensedRatingWorksheet(),15,"Condensed Rating Worksheet");
 		Thread.sleep(3000);
 		AutomationUtilities.Traverse(driver,"Rating Document");

@@ -65,7 +65,7 @@ public class AutomationDriver {
 			Product = AutomationUtilities.getDataFromPropertiesFile("Product");
 
 			AutomationUtilities.copyFileUsingStream(TCR,TCN);
-			AutomationUtilities.LogPath = TCLogPath + "NewLog_" + myFormatObj.format(myDateObj).toString() + ".txt";
+			AutomationUtilities.LogPath = TCLogPath +"NewLog_"+Product+"-"+ myFormatObj.format(myDateObj).toString() + ".txt";
 			TCLogPath = AutomationUtilities.LogPath;
 
 			ArrayList<LoadManager> TestCasesNo;
@@ -205,7 +205,10 @@ public class AutomationDriver {
 				objLoadManager.getTCScenarios(),AutomationUtilities.sClassCode,AutomationUtilities.sClassCodeDesc,AutomationUtilities.sBusinessName,
 				AutomationUtilities.IndustialQ,AutomationUtilities.sReferralReason,AutomationUtilities.sAddress,AutomationUtilities.SmartyStreet,  
 				AutomationUtilities.QuoteNo,AutomationUtilities.PolicyNo,"Pass",StartTime,EndTime);
+			
 			StartTime = EndTime;
+			AutomationUtilities.sReferralReason = "";
+			AutomationUtilities.IndustialQ = "";
 			
 			objWebDriver.close();
      		objWebDriver.quit();
@@ -243,9 +246,12 @@ public class AutomationDriver {
 					objLoadManager.getTCScenarios(),AutomationUtilities.sClassCode,AutomationUtilities.sClassCodeDesc,AutomationUtilities.sBusinessName,
 					AutomationUtilities.IndustialQ,AutomationUtilities.sReferralReason,AutomationUtilities.sAddress,AutomationUtilities.SmartyStreet,  
 					AutomationUtilities.QuoteNo,AutomationUtilities.PolicyNo,"Fail",StartTime,EndTime);
-			StartTime = EndTime;
 			
-				objWebDriver.close();
+			StartTime = EndTime;
+			AutomationUtilities.sReferralReason = "";
+			AutomationUtilities.IndustialQ = "";
+				
+			    objWebDriver.close();
 	     		objWebDriver.quit();
 	     		objWebDriver = null;
 

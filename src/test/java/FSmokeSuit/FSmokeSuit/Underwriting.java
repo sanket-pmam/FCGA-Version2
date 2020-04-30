@@ -364,8 +364,8 @@ public void UWGLEditQuote (WebDriver driver,LoadManager objUWGLLoadManager) thro
 		
         if(objUWGLLoadManager.getUWRateType().equalsIgnoreCase("IRPM")) {
 			
-			sendKeysToTextField(driver,objectrepository.gettxtUWIRPM(),objUWGLLoadManager.getUWModifiedRates(),"IRPM");
-			
+			  sendKeysToTextField(driver,objectrepository.gettxtUWIRPM(),objUWGLLoadManager.getUWModifiedRates(),"IRPM");
+        	
 		}else if(objUWGLLoadManager.getUWRateType().equalsIgnoreCase("CTR")){
 			
 			buttonClick(driver,objectrepository.getchkConsentToRate(),10,"CTR");
@@ -619,8 +619,28 @@ public void UWWCEditQuote (WebDriver driver,LoadManager objUWWCLoadManager, WCIn
 	
     if(objUWWCLoadManager.getUWRateType().equalsIgnoreCase("IRPM")) {
 		
-		sendKeysToTextField(driver,objectrepository.gettxtUWIRPM(),objUWWCLoadManager.getUWModifiedRates(),"IRPM");
+    	String States [] = objUWWCLoadManager.getWCState().split("/");
+		int StatesCount =States.length;
 		
+		if(StatesCount > 1) {
+		for (int i=1; i<=StatesCount; i++) {
+			
+			switch (States[i]) {
+			
+			case "Florida": 
+				driver.findElement(By.xpath("//tr[@data-val='FL']//input[@id='txtIRPM0']")).sendKeys(Keys.chord(Keys.CONTROL, "a"), objUWWCLoadManager.getUWModifiedRates());
+			    break;
+			    
+			case "Alabama": 
+				driver.findElement(By.xpath("//tr[@data-val='AL']//input[@id='txtIRPM0']")).sendKeys(Keys.chord(Keys.CONTROL, "a"), objUWWCLoadManager.getUWModifiedRates());
+			    break;
+			}
+		  }
+		}else {
+		
+			sendKeysToTextField(driver,objectrepository.gettxtUWWCIRPM(),objUWWCLoadManager.getUWModifiedRates(),"IRPM");
+		}
+	
 	}else if(objUWWCLoadManager.getUWRateType().equalsIgnoreCase("CTR")){
 		
 		buttonClick(driver,objectrepository.getchkConsentToRate(),10,"CTR");

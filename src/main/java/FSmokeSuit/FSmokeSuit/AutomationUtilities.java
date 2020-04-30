@@ -158,6 +158,7 @@ public class AutomationUtilities {
 		rbt.keyPress(KeyEvent.VK_ENTER);
 		rbt.keyRelease(KeyEvent.VK_ENTER);
 		
+		rbt.delay(2000);
 		 //AutomationUtilities.LogSummary(LogPath,"Current Label : "+label+" is completely working.");
 		
    }
@@ -549,8 +550,7 @@ public class AutomationUtilities {
    }
 
    public static void Traverse(WebDriver driver,String pdfName) throws AWTException, InterruptedException, UnsupportedFlavorException, IOException {
-
-	 WebDriver pdriver = driver;
+	 
 	 String parentWindow= driver.getWindowHandle();
 	 Set<String> allWindows = driver.getWindowHandles();
 	 for(String curWindow : allWindows){
@@ -562,10 +562,9 @@ public class AutomationUtilities {
 	   }
      
 	 DownLoadPDF(driver,pdfName);
-	 Thread.sleep(2000);
 	 driver.close();
-	 pdriver.switchTo().window(parentWindow);
-	 
+	 driver.switchTo().window(parentWindow);
+	 Thread.sleep(3000);
      
     }
 
