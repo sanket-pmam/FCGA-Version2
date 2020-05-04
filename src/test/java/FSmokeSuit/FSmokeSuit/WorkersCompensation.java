@@ -411,7 +411,7 @@ public class WorkersCompensation extends AutomationUtilities {
 		AutomationUtilities.LogSummary(LogPath, "Losses Page has been completed");
 	}
 
-	public void Application(LoadManager objWCLoadManager, WebDriver driver, String sBusinessNameValue,LoginPage objWCloginpage,Underwriting objWCunderwriting,HomePage objhomepage,WCIndustrialQ industrialq) throws IOException, InterruptedException, AWTException, UnsupportedFlavorException {
+	public void Application(LoadManager objWCLoadManager, WebDriver driver, String sBusinessNameValue,LoginPage objWCloginpage,Underwriting objWCunderwriting,HomePage objhomepage,WCIndustrialQ industrialq, String testcasePath) throws IOException, InterruptedException, AWTException, UnsupportedFlavorException {
 
 		waitforpageload(driver, 15);
  
@@ -481,7 +481,7 @@ public class WorkersCompensation extends AutomationUtilities {
 	    	objWCunderwriting.UnderwritingSearch(driver);
 	    	
 	    	 if(objWCLoadManager.getUWPermission().equalsIgnoreCase("Yes")) {
-	    		 objWCunderwriting.UWWCEditQuote(driver,objWCLoadManager,industrialq);
+	    		 objWCunderwriting.UWWCEditQuote(driver,objWCLoadManager,industrialq,testcasePath);
 	    	 }
 	    	 
 	    	objWCunderwriting.UWChangeStatus(driver,objWCLoadManager);

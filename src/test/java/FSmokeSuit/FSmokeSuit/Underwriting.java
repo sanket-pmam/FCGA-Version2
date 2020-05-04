@@ -548,7 +548,7 @@ public void UWclassPayroll(LoadManager objUWGLLoadManager, WebDriver driver) thr
 }
 
    
-public void UWWCEditQuote (WebDriver driver,LoadManager objUWWCLoadManager, WCIndustrialQ industrialq) throws IOException, InterruptedException, AWTException {
+public void UWWCEditQuote (WebDriver driver,LoadManager objUWWCLoadManager, WCIndustrialQ industrialq,String testcasePath) throws IOException, InterruptedException, AWTException {
 	
 	 waitforpageload(driver, 70);
 		//Thread.sleep(3000);
@@ -625,16 +625,9 @@ public void UWWCEditQuote (WebDriver driver,LoadManager objUWWCLoadManager, WCIn
 		if(StatesCount > 1) {
 		for (int i=1; i<=StatesCount; i++) {
 			
-			switch (States[i]) {
-			
-			case "Florida": 
-				driver.findElement(By.xpath("//tr[@data-val='FL']//input[@id='txtIRPM0']")).sendKeys(Keys.chord(Keys.CONTROL, "a"), objUWWCLoadManager.getUWModifiedRates());
-			    break;
-			    
-			case "Alabama": 
-				driver.findElement(By.xpath("//tr[@data-val='AL']//input[@id='txtIRPM0']")).sendKeys(Keys.chord(Keys.CONTROL, "a"), objUWWCLoadManager.getUWModifiedRates());
-			    break;
-			}
+			String State = ReadStateAbbreviations (testcasePath,"State Abbr",States[i],"US State"); 
+			driver.findElement(By.xpath("//tr[@data-val='"+State+"']//input[@id='txtIRPM0']")).sendKeys(Keys.chord(Keys.CONTROL, "a"), objUWWCLoadManager.getUWModifiedRates());
+			   
 		  }
 		}else {
 		

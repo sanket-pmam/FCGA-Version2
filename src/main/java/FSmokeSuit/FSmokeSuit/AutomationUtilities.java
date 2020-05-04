@@ -444,6 +444,62 @@ public class AutomationUtilities {
         } 
      }
 
+    public static String ReadStateAbbreviations (String testcasePath,String tcSheetName,String Data,String ColName ) {
+    	
+    	File file =    new File(testcasePath);
+    	String Output ="";
+
+        try {
+           
+            FileInputStream fis = new FileInputStream(file);
+    	    XSSFWorkbook wb = new XSSFWorkbook(fis);
+    	    XSSFSheet sheet = wb.getSheet(tcSheetName);
+    	    XSSFRow headerRow = sheet.getRow(0);			      
+            Row rowObj=sheet.getRow(0);
+    	    String result = "";
+    	    int resultCol = -1;
+    	    
+    	    for (Cell cell : headerRow){
+    	        result = cell.getStringCellValue();
+    	        if (result.equals(ColName)){
+    	            resultCol = cell.getColumnIndex();
+    	            break;
+    	         }
+    	    }
+    	    if (resultCol == -1){
+    	        System.out.println("Searched Collumn is not found in sheet");
+    	    } 
+          	        	
+    	    while(result.equalsIgnoreCase("US State")){
+    	    	
+    	    	for(int rowNum=1;rowNum<=sheet.getLastRowNum();rowNum++) {
+    	        	rowObj=sheet.getRow(rowNum);
+    	        	Cell cellObj=rowObj.getCell(resultCol);
+    				Cell cellObj1=rowObj.getCell(resultCol+1);
+    	        	
+    	        	if(cellObj.getStringCellValue().equalsIgnoreCase(Data)) {
+    	        		
+    	        		Output = cellObj1.getStringCellValue();
+    	        		break;
+    	        		
+    	            } 	
+    	       }
+    	     result="xxx";
+    	     fis.close();
+    		 wb.close();  
+    	     wb=null;
+    		 fis=null;
+    		 
+            }
+    	    
+          }
+        catch (IOException e) {
+            System.out.println("Test data file not found");
+            }
+	
+		return Output; 
+        
+    }
 
    public static void ExcelUpdate (String testcasePath,String tcSheetName,String Data, LoadManager objLoadManager, String ColName ) {
 	

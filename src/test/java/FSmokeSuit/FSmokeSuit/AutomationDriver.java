@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -73,8 +72,7 @@ public class AutomationDriver {
 			TCSheetName = TCSheetName + "_" + Product;
 			AutomationUtilities.LogSummary(TCLogPath, "Sheet Name : " + TCSheetName);
 			AutomationUtilities.LogSummary(TCLogPath, "Product:" + Product);
-			
-			
+					
 		  if (TCSheetName.contains("GL")) {
 				TestCasesNo = ExcelUtil.excelGetAllData_GL(testcasePath, TCSheetName, 1, 0);
 			} else {
@@ -192,7 +190,7 @@ public class AutomationDriver {
 						"Insured Name");
 				objworkerscompensation.GeneralQuestions(objLoadManager,industrialq, objWebDriver);
 				objworkerscompensation.Losses(objLoadManager, objWebDriver);
-				objworkerscompensation.Application(objLoadManager, objWebDriver, AutomationUtilities.sBusinessName,objLoginPage,objunderwriting,objhomepage,industrialq);
+				objworkerscompensation.Application(objLoadManager, objWebDriver, AutomationUtilities.sBusinessName,objLoginPage,objunderwriting,objhomepage,industrialq,testcasePath);
 				objworkerscompensation.PolicyIssue(objLoadManager, objWebDriver);
 				objworkerscompensation.ThankYouPage(objLoadManager, objWebDriver);
 			}
@@ -212,6 +210,7 @@ public class AutomationDriver {
 			
 			objWebDriver.close();
      		objWebDriver.quit();
+     		//Runtime.getRuntime().exec("taskkill /F /IM chromedriver.exe /T");
      		objWebDriver = null;
 			
 
@@ -253,6 +252,7 @@ public class AutomationDriver {
 				
 			    objWebDriver.close();
 	     		objWebDriver.quit();
+	     		//Runtime.getRuntime().exec("taskkill /F /IM chromedriver.exe /T");
 	     		objWebDriver = null;
 
 		} finally {
@@ -260,6 +260,7 @@ public class AutomationDriver {
 
 				objWebDriver.close();
     			objWebDriver.quit();
+    			//Runtime.getRuntime().exec("taskkill /F /IM chromedriver.exe /T");
     			objWebDriver = null;
 			}
 		}
