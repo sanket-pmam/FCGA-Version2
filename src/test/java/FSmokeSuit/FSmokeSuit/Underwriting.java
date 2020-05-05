@@ -655,6 +655,7 @@ public void UWBusinessSummary(LoadManager objUWWCLoadManager, WebDriver driver)
 	Calendar cal = Calendar.getInstance();
 	cal.add(Calendar.DATE, -15);
 
+	
 	String States [] = objUWWCLoadManager.getWCUWModifyState().split("/");
 	String ClassCodeDesc [] = objUWWCLoadManager.getWCUWModifyClassCodeDesc().split("/");
 	int StatesCount =States.length;
@@ -663,8 +664,7 @@ public void UWBusinessSummary(LoadManager objUWWCLoadManager, WebDriver driver)
 	if(iteration > 1 ||ClassCodeDescCount > 1 ) {
 		
 		if(StatesCount > 1) {
-			
-		  for(int i=1;i<StatesCount;i++) {
+		  for(int i=1;i<=StatesCount;i++) {
 			
 			buttonClick(driver,objectrepository.getbtnWCClear(), 30, "Click on WC Clear");
 			buttonClick(driver,objectrepository.getWCState(), 10, "Click on State");

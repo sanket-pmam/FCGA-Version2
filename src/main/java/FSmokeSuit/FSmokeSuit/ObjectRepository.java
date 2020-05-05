@@ -347,6 +347,8 @@ public class ObjectRepository {
 	@FindBy(xpath = "//a[contains(text(),'Use as is')]")
 	private WebElement Useasis;
 
+	@FindBy(xpath = "//button[@id='btnDecContinue']")
+	private WebElement btnDecContinue;
 	//----
 	@FindBy(xpath = "//input[@id='txtIndustrial']")
 	private WebElement txtIndustrial;
@@ -1353,9 +1355,15 @@ public class ObjectRepository {
 	public WebElement gettxtSMZip() {
 	   return txtSMZip;
 	}  
+	
 	public WebElement getUseasis() {
 		return Useasis;
 	}
+	
+	public WebElement getbtnDecContinue() {
+		return btnDecContinue;
+	}
+	
 	public WebElement gettxtInspectionContact() {
 		return txtInspectionContact;
 	}

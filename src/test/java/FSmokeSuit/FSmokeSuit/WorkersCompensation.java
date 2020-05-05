@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -42,30 +43,33 @@ public class WorkersCompensation extends AutomationUtilities {
 			
 			if(StatesCount > 1) {
 				
-			  for(int i=1;i<StatesCount;i++) {
+			  for(int i=1;i<=StatesCount;i++) {
 				
-				buttonClick(driver,objectrepository.getWCState(), 10, "Click on State");
-				EsendKeysToTextField(driver,objectrepository.gettxtUniquetextbox(),States[i], "State Name");
+				driver.findElement(By.xpath("//span[@id='select2-ddlState"+i+"-container']")).click();
+				EsendKeysToTextField(driver,objectrepository.gettxtUniquetextbox(),States[i-1], "State Name");
+				
+			   if(!(i==StatesCount)) {
+				buttonClick(driver,objectrepository.getbtnWCAddClassCode(), 10, "Click on Add State");
 			   }
+			}  
 		}else {
 			
 		   buttonClick(driver,objectrepository.getWCState(), 10, "Click on State");
 		   EsendKeysToTextField(driver,objectrepository.gettxtUniquetextbox(), objWCLoadManager.getWCState(), "State Name");
 		}
 			if (ClassCodeDescCount > 1 ) {
-				for(int i=1;i<ClassCodeDescCount;i++) {
+				for(int i=1;i<=ClassCodeDescCount;i++) {
 					
-					driver.findElement(By.xpath("//input[@id='txtClassCodes"+i+"']")).sendKeys(ClassCodeDesc[i]);
+					driver.findElement(By.xpath("//input[@id='txtClassCodes"+i+"']")).sendKeys(Keys.chord(Keys.CONTROL, "a"),ClassCodeDesc[i-1]);
+					driver.findElement(By.xpath("//input[@id='txtClassCodes"+i+"']")).sendKeys(Keys.TAB);
+					buttonClick(driver,objectrepository.getbtnWCContinue(), 5, "Click on Continue");
 				}
 			} else {
 				sendKeysToTextField(driver,objectrepository.gettxtWCClassCodes(), objWCLoadManager.getWCClassCodeDesc(), "Class Code");
-			  }
-			buttonClick(driver,objectrepository.getbtnWCContinue(), 5, "Click on Continue");
-			iteration = iteration++;
-			
-			if(!(iteration == ClassCodeDescCount) ||!(iteration==StatesCount)) {
-				buttonClick(driver,objectrepository.getbtnWCAddClassCode(),10,"Add Class Code and State");
+				buttonClick(driver,objectrepository.getbtnWCContinue(), 5, "Click on Continue");
 			}
+			
+			iteration = iteration++;
 		}else {
 			buttonClick(driver,objectrepository.getWCState(), 10, "Click on State");
 			EsendKeysToTextField(driver,objectrepository.gettxtUniquetextbox(), objWCLoadManager.getWCState(), "State Name");
@@ -125,7 +129,7 @@ public class WorkersCompensation extends AutomationUtilities {
 			for(int i=1;i<=AICount;i++) {
 				
 				String AddFEIN = AutomationUtilities.getRandomString(9);
-				driver.findElement(By.xpath("//input[@id='txtAddinsuredName"+i+"'")).sendKeys(WCAdditionalInsured[i-1]);
+				driver.findElement(By.xpath("//input[@id='txtAddinsuredName"+i+"'")).sendKeys(Keys.chord(Keys.CONTROL, "a"),WCAdditionalInsured[i-1]);
 				driver.findElement(By.xpath("//input[@id='txtFEINNo"+i+"'")).sendKeys(AddFEIN);
 				
 				if(i<AICount) {
@@ -170,9 +174,9 @@ public class WorkersCompensation extends AutomationUtilities {
 				
 				for(int i=1;i<=OwnerCount;i++) {
 					
-					driver.findElement(By.xpath("//input[@id ='txtFirstName"+i+"']")).sendKeys(FristName[i-1]);
-					driver.findElement(By.xpath("//input[@id ='txtLastName"+i+"']")).sendKeys(LastName[i-1]);
-					driver.findElement(By.xpath("//input[@id ='txtPerOwner"+i+"']")).sendKeys(OwnerPerct[i-1]);
+					driver.findElement(By.xpath("//input[@id ='txtFirstName"+i+"']")).sendKeys(Keys.chord(Keys.CONTROL, "a"),FristName[i-1]);
+					driver.findElement(By.xpath("//input[@id ='txtLastName"+i+"']")).sendKeys(Keys.chord(Keys.CONTROL, "a"),LastName[i-1]);
+					driver.findElement(By.xpath("//input[@id ='txtPerOwner"+i+"']")).sendKeys(Keys.chord(Keys.CONTROL, "a"),OwnerPerct[i-1]);
 				  
 					if(i < OwnerCount) {
 						buttonClick(driver,objectrepository.getbtnWCOWButton(),10,"Owner/Officer");
@@ -217,16 +221,16 @@ public class WorkersCompensation extends AutomationUtilities {
 			String Payroll = WCGrossannualPayroll[0];
 			ClassCode = WCClassCode[0];
 			
-			for(int i=1;i<ClassCodeDescCount;i++) {
+			for(int i=1;i<=ClassCodeDescCount;i++) {
 				
-				driver.findElement(By.xpath("//input[@id='txtFTEmployee"+i+"']")).sendKeys(WCFTEmployee[i-1]);
-				driver.findElement(By.xpath("//input[@id='txtPTEmployee"+i+"']")).sendKeys(WCPTEmployee[i-1]);
-				driver.findElement(By.xpath("//input[@id='txtGrossannualPayroll"+i+"']")).sendKeys(WCGrossannualPayroll[i-1]);
+				driver.findElement(By.xpath("//input[@id='txtFTEmployee"+i+"']")).sendKeys(Keys.chord(Keys.CONTROL, "a"),WCFTEmployee[i-1]);
+				driver.findElement(By.xpath("//input[@id='txtPTEmployee"+i+"']")).sendKeys(Keys.chord(Keys.CONTROL, "a"),WCPTEmployee[i-1]);
+				driver.findElement(By.xpath("//input[@id='txtGrossannualPayroll"+i+"']")).sendKeys(Keys.chord(Keys.CONTROL, "a"),WCGrossannualPayroll[i-1]);
 				
-			  if (Integer.valueOf(Payroll) < Integer.valueOf(WCGrossannualPayroll[i])) {
+			  if (Integer.valueOf(Payroll) < Integer.valueOf(WCGrossannualPayroll[i-1])) {
 				  
-				  Payroll = WCGrossannualPayroll[i];
-				  ClassCode = WCClassCode[i];
+				  Payroll = WCGrossannualPayroll[i-1];
+				  ClassCode = WCClassCode[i-1];
 			  }
 				
 			}
@@ -272,10 +276,6 @@ public class WorkersCompensation extends AutomationUtilities {
 			   buttonClick(driver,objectrepository.getWCrdoWCCoverageNo(), 10, "WC Coverage");		
 			}
 		
-		
-		
-		
-		
 		} else if (!objWCLoadManager.getWCUnInsuredSubcontractor().isBlank()) {
 			
 			sendKeysToTextField(driver,objectrepository.getWCtxtUnInsuredSubcontract(), objWCLoadManager.getWCUnInsuredSubcontractor(), "Include Owner Class code is been entered");
@@ -283,12 +283,18 @@ public class WorkersCompensation extends AutomationUtilities {
 		
 		Thread.sleep(3000);
 		buttonClick(driver,objectrepository.getBtnWCNext(), 05, "Next button is saved sucessfully.");
+		Thread.sleep(3000);
 		//AutomationUtilities.Screenshot(tcSnapPath, testCaseID);
 		
 		if(CheckElementPresent(objectrepository.getUseasis()) == true ) {
 		//if(objectrepository.getUseasis().isDisplayed()) {
 			buttonClick(driver,objectrepository.getUseasis(),10,"Click on Use as is");
 			}
+		
+		if(CheckElementPresent(objectrepository.getbtnDecContinue()) == true ) {
+			//if(objectrepository.getUseasis().isDisplayed()) {
+				buttonClick(driver,objectrepository.getbtnDecContinue(),10,"Click on Decline Continue Button");
+				}
 		
 		//Thread.sleep(5000);
 		//System.out.println("System is showing validation message for DBA -- " + objectrepository.gettxtWCDBANameerror().getText());
@@ -449,7 +455,8 @@ public class WorkersCompensation extends AutomationUtilities {
 			sendKeysToTextField(driver,objectrepository.getWAppliactionCity(), objWCLoadManager.getWCCity(), "WC Application City");
 			
 			buttonClick(driver,objectrepository.getWAppliactionState(), 10, "WC Application State drop down");
-			EsendKeysToTextField(driver,objectrepository.gettxtUniquetextbox(), objWCLoadManager.getWCState(), "State Name");
+			String States [] = objWCLoadManager.getWCState().split("/");
+			EsendKeysToTextField(driver,objectrepository.gettxtUniquetextbox(), States[0], "State Name");
 			sendKeysToTextField(driver,objectrepository.getWCAppliactionZipcode(), objWCLoadManager.getWCZipCode(),"WC Application Zipcode");
 			
 			buttonClick(driver,objectrepository.getWAppliactionAddLoact(), 10, "Add Location button");
