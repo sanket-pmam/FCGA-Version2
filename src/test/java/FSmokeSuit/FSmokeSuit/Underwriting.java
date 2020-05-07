@@ -187,11 +187,12 @@ public void UWGLEditQuote (WebDriver driver,LoadManager objUWGLLoadManager) thro
 	 }
 		
 		buttonClick(driver,objectrepository.getbtnsaveandcontinue(),10,"Click on Save and Continue");
-	
+	    Thread.sleep(4000);
+	    
 	//------------- Additional Insured ----------
 		
-		if (objUWGLLoadManager.getAI().equalsIgnoreCase("Yes")
-				|| objUWGLLoadManager.getWaivers().equalsIgnoreCase("Yes")) {
+		if (objUWGLLoadManager.getUWModifyAI().equalsIgnoreCase("Yes")
+				|| objUWGLLoadManager.getUWModifyWS().equalsIgnoreCase("Yes")) {
 			
 			AutomationUtilities.LogSummary(LogPath, "Check Page Name: "+ objectrepository.getUWAdditionalInsured().getText());
 			//System.out.println(objectrepository.getUWAdditionalInsured().getText());

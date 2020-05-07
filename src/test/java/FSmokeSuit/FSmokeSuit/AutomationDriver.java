@@ -210,7 +210,6 @@ public class AutomationDriver {
 			
 			objWebDriver.close();
      		objWebDriver.quit();
-     		//Runtime.getRuntime().exec("taskkill /F /IM chromedriver.exe /T");
      		objWebDriver = null;
 			
 
@@ -252,7 +251,6 @@ public class AutomationDriver {
 				
 			    objWebDriver.close();
 	     		objWebDriver.quit();
-	     		//Runtime.getRuntime().exec("taskkill /F /IM chromedriver.exe /T");
 	     		objWebDriver = null;
 
 		} finally {
@@ -260,7 +258,7 @@ public class AutomationDriver {
 
 				objWebDriver.close();
     			objWebDriver.quit();
-    			//Runtime.getRuntime().exec("taskkill /F /IM chromedriver.exe /T");
+    			Runtime.getRuntime().exec("taskkill /F /IM ChromeDriver.exe");
     			objWebDriver = null;
 			}
 		}
