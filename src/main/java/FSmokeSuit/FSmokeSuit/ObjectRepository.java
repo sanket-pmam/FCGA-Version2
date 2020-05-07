@@ -347,6 +347,9 @@ public class ObjectRepository {
 	@FindBy(xpath = "//a[contains(text(),'Use as is')]")
 	private WebElement Useasis;
 
+	@FindBy(xpath = "//label[@id='LblDecline']/li/text()")
+	private WebElement WCDeclineReason;
+	
 	@FindBy(xpath = "//button[@id='btnDecContinue']")
 	private WebElement btnDecContinue;
 	//----
@@ -1358,6 +1361,10 @@ public class ObjectRepository {
 	
 	public WebElement getUseasis() {
 		return Useasis;
+	}
+	
+	public WebElement getWCDeclineReason() {
+		return WCDeclineReason;
 	}
 	
 	public WebElement getbtnDecContinue() {

@@ -291,8 +291,9 @@ public class WorkersCompensation extends AutomationUtilities {
 			buttonClick(driver,objectrepository.getUseasis(),10,"Click on Use as is");
 			}
 		
-		if(CheckElementPresent(objectrepository.getbtnDecContinue()) == true ) {
-			//if(objectrepository.getUseasis().isDisplayed()) {
+		if(CheckElementPresent(objectrepository.getWCDeclineReason()) == true ) {
+			    
+			    AutomationUtilities.DeclineReason = objectrepository.getWCDeclineReason().getText();
 				buttonClick(driver,objectrepository.getbtnDecContinue(),10,"Click on Decline Continue Button");
 				}
 		

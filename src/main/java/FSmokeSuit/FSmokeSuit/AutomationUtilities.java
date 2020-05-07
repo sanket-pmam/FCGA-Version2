@@ -83,7 +83,8 @@ public class AutomationUtilities {
    public static String sSubClassCode;
    public static String InputAIForms;
    public static String InputWSForms;
-	
+   public static String DeclineReason;
+   
 	static Function<WebDriver, Boolean> documentWait = new Function<WebDriver, Boolean>() {
 		public Boolean apply(WebDriver driver) {
 			return (Boolean) ((JavascriptExecutor) driver).executeScript("return document.readyState=='complete'")
@@ -91,6 +92,7 @@ public class AutomationUtilities {
 					: false;
 		}
 	};
+	
 
 	
    public static void waitforpageload(WebDriver driver, int iTimeOut) {
@@ -574,7 +576,7 @@ public class AutomationUtilities {
 	        //return;
 	    }   
 
-	    for(int count = 1;count<=sheet.getLastRowNum();count++){
+	    for(int count =1;count<=sheet.getLastRowNum();count++){
 	    	 
 	    	if(count == Integer.valueOf(testcaseid2)){
 	    		

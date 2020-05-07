@@ -245,6 +245,7 @@ public class AutomationDriver {
 					AutomationUtilities.IndustialQ,AutomationUtilities.sReferralReason,AutomationUtilities.sAddress,AutomationUtilities.SmartyStreet,  
 					AutomationUtilities.QuoteNo,AutomationUtilities.PolicyNo,"Fail",StartTime,EndTime);
 			
+			
 			StartTime = EndTime;
 			AutomationUtilities.sReferralReason = "";
 			AutomationUtilities.IndustialQ = "";
