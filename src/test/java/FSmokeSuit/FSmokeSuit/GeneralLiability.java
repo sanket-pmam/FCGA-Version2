@@ -717,6 +717,8 @@ public class GeneralLiability extends AutomationUtilities {
 			AutomationUtilities.SmartyStreet = "Yes";
 		}
 		
+        Thread.sleep(3000);
+        
 		sendKeysToTextField(driver,objectrepository.gettxtBusinessPhone(),objGlLoadManager.getBusinessPhone(),"Enter Business Phone Number");
 		sendKeysToTextField(driver,objectrepository.gettxtBusinessEmail(),objGlLoadManager.getBusinessEmail(),"Enter Business Emails");
 

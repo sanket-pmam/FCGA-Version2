@@ -127,10 +127,12 @@ public class AutomationUtilities {
             }
       } 
 	  
+	   	rbt.delay(3000);
 	   	rbt.mouseMove(xCoord, yCoord);
 //		rbt.keyPress(KeyEvent.VK_CONTROL);
 		rbt.mousePress(InputEvent.BUTTON3_DOWN_MASK);
 		rbt.mouseRelease(InputEvent.BUTTON3_DOWN_MASK);
+		
 		rbt.delay(3000);
 		rbt.keyPress(KeyEvent.VK_DOWN);
 		rbt.keyRelease(KeyEvent.VK_DOWN);
@@ -625,6 +627,25 @@ public class AutomationUtilities {
 	 Thread.sleep(3000);
      
     }
+   
+   public static void OnlineTraverse(WebDriver driver,String pdfName) throws AWTException, InterruptedException, UnsupportedFlavorException, IOException {
+		 
+		 String parentWindow= driver.getWindowHandle();
+		 Set<String> allWindows = driver.getWindowHandles();
+		 for(String curWindow : allWindows){
+		     driver.switchTo().window(curWindow);
+		     
+		     if(driver.getCurrentUrl().toString().toLowerCase().contains("invoicecloud")) {
+	        	 break;
+	        	 } 	   
+		   }
+	     
+		 
+		 driver.close();
+		 driver.switchTo().window(parentWindow);
+		 Thread.sleep(3000);
+	     
+	    }
 
    public static void ClickPaymentOptions(WebDriver driver,ObjectRepository objectrepository, String PaymentOption) throws InterruptedException, IOException {
 	

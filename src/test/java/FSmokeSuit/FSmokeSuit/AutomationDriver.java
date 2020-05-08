@@ -3,6 +3,8 @@ package FSmokeSuit.FSmokeSuit;
 import java.awt.AWTException;
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -215,12 +217,17 @@ public class AutomationDriver {
 
 		} catch (Throwable t) {
 			
-				t.printStackTrace();
+			StringWriter errors = new StringWriter();
+			t.printStackTrace(new PrintWriter(errors));
+			t.printStackTrace();
 				
 				AutomationUtilities.AutmSnapfile = new File(
 						TCErrSnapPath + "ErrSnap_"+Product+"_TC_"+AutomationUtilities.testCaseID+"-"+ myFormatObj.format(myDateObj).toString());
-		
-				 LogEntries logEntries = objWebDriver.manage().logs().get(LogType.BROWSER);
+				
+				AutomationUtilities.LogSummary(AutomationUtilities.LogPath,"************ Execptions in Console ***************");
+				AutomationUtilities.LogSummary(AutomationUtilities.LogPath, "Exeception is : "+ errors.toString());
+				
+				LogEntries logEntries = objWebDriver.manage().logs().get(LogType.BROWSER);
 				 //LogEntries logEntries1 = objWebDriver.manage().logs().get(LogType.CLIENT);
 				// LogEntries logEntries2 = objWebDriver.manage().logs().get(LogType.DRIVER);
 				 //LogEntries logEntries3 = objWebDriver.manage().logs().get(LogType.SERVER);

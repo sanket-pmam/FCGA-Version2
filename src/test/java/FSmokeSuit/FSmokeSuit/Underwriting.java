@@ -40,7 +40,7 @@ public class Underwriting extends AutomationUtilities {
 		
 		AutomationUtilities.sReferralReason = objectrepository.getUWReferralReason().getText();
 		AutomationUtilities.LogSummary(LogPath, "Referral Reason is : " +objectrepository.getUWReferralReason().getText());
-		//System.out.println(objectrepository.getUWReferralReason().getText());
+		System.out.println(objUWGLLoadManager.getUWQuoteStatus());
 			
 		buttonClick(driver,objectrepository.getUWCurrentStatus(),10,"UW Current Status");
 		
