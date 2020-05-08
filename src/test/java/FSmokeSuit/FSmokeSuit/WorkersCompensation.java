@@ -587,6 +587,9 @@ public class WorkersCompensation extends AutomationUtilities {
      public void ThankYouPage (LoadManager objWCLoadManager,WebDriver driver) throws IOException, InterruptedException, AWTException, UnsupportedFlavorException {
 		waitforpageload(driver, 30);
 		
+		if(objWCLoadManager.getDepositPaymentMethod().equalsIgnoreCase("Online")) {
+			
+		}
 		driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
 	    buttonClick(driver,objectrepository.getbtnWCDownloadBinder(),10,"Binder Document");
 	    AutomationUtilities.Traverse(driver,"Binder Document");
