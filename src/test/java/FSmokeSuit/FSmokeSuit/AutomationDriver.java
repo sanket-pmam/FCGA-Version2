@@ -61,6 +61,8 @@ public class AutomationDriver {
 			TCTempletReportPath = System.getProperty("user.dir") +AutomationUtilities.getDataFromPropertiesFile("REPORT_PATH");
 			TCReportPath = System.getProperty("user.dir") +AutomationUtilities.getDataFromPropertiesFile("NEWREPORT_PATH")+ "Report_" + myFormatObj.format(myDateObj).toString() +".xlsx";
 			TCRPSHEETNAME = AutomationUtilities.getDataFromPropertiesFile("RPSHEETNAME");
+			AutomationUtilities.SpecialChar = AutomationUtilities.getDataFromPropertiesFile("SpecialChar");
+			
 			File TCR = new File(TCTempletReportPath);
 			File TCN = new File(TCReportPath);
 			Product = AutomationUtilities.getDataFromPropertiesFile("Product");
@@ -191,10 +193,10 @@ public class AutomationDriver {
 				AutomationUtilities.ExcelUpdate(testcasePath, TCSheetName, AutomationUtilities.sBusinessName, objLoadManager,
 						"Insured Name");
 				objworkerscompensation.GeneralQuestions(objLoadManager,industrialq, objWebDriver);
-				objworkerscompensation.Losses(objLoadManager, objWebDriver);
-				objworkerscompensation.Application(objLoadManager, objWebDriver, AutomationUtilities.sBusinessName,objLoginPage,objunderwriting,objhomepage,industrialq,testcasePath);
-				objworkerscompensation.PolicyIssue(objLoadManager, objWebDriver);
-				objworkerscompensation.ThankYouPage(objLoadManager, objWebDriver);
+				//objworkerscompensation.Losses(objLoadManager, objWebDriver);
+				//objworkerscompensation.Application(objLoadManager, objWebDriver, AutomationUtilities.sBusinessName,objLoginPage,objunderwriting,objhomepage,industrialq,testcasePath);
+				//objworkerscompensation.PolicyIssue(objLoadManager, objWebDriver);
+				//objworkerscompensation.ThankYouPage(objLoadManager, objWebDriver);
 			}
 			
 			AutomationUtilities.ExcelUpdate(testcasePath, TCSheetName, AutomationUtilities.PolicyNo, objLoadManager,"Policy No.");

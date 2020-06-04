@@ -102,12 +102,12 @@ public class GeneralLiability extends AutomationUtilities {
 						
 				if(objGlLoadManager.getGLFristName().equalsIgnoreCase("")) {
 					
-					AutomationUtilities.sBusinessName = "FCGA AUTM-" + AutomationUtilities.getRandomString(9);
+					AutomationUtilities.sBusinessName = "FCGA AUTM-" +AutomationUtilities.SpecialChar+AutomationUtilities.getRandomString(9);
 					sendKeysToTextField(driver,objectrepository.gettxtBusinessName(),AutomationUtilities.sBusinessName,"Business Name");
 					
-					if(sBusinessName.isEmpty()) {
+					if(objGlLoadManager.getPaymentOption().equalsIgnoreCase("Yes")){
 						
-					sIFristName = "FCGA AUTM";
+					sIFristName = "FCGA AUTM "+AutomationUtilities.SpecialChar;
 					sendKeysToTextField(driver,objectrepository.gettxtIndividualFirstName(),sIFristName,"Frist Name");
 					
 					sILastName = "A"+AutomationUtilities.getRandomString (9);
@@ -222,7 +222,7 @@ public class GeneralLiability extends AutomationUtilities {
 			
 			AutomationUtilities.sClassCode = objGlLoadManager.getClassCode()+","+objGlLoadManager.getSubClassCode();
 			sendKeysToTextField(driver,objectrepository.getInSubcontractorCost(),objGlLoadManager.getSubContractorGrossReciepts(),"Expected Sub Class Code Gross Amount");
-			sendKeysToTextField(driver,objectrepository.getSubcontractorCostopdes(),objGlLoadManager.getSubcontractorDesc(), "Sub Contractor Description");
+			sendKeysToTextField(driver,objectrepository.getSubcontractorCostopdes(),objGlLoadManager.getSubcontractorDesc()+AutomationUtilities.SpecialChar, "Sub Contractor Description");
 			
 			if(subclasscodecount > 1) {
 				
@@ -458,13 +458,13 @@ public class GeneralLiability extends AutomationUtilities {
 	        	if(SEDescCount > 1) {
 	        	for (int i =1; i<=SEDescCount;i++) {
 	        		buttonClick(driver,objectrepository.getbtnScheduleEquip(),20,"Schedule Equipment");
-	        		driver.findElement(By.xpath("//td[contains(text(),"+i+")]//parent :: tr// following-sibling :: td//input[@class='form-control EquipmentTB ']")).sendKeys(SEDesc[i]);
-	        		driver.findElement(By.xpath("//td[contains(text(),"+i+")]//parent :: tr// following-sibling :: td//input[@name='txtACVLimit']")).sendKeys(SEAmount[i]);
+	        		driver.findElement(By.xpath("//td[contains(text(),"+i+")]//parent :: tr// following-sibling :: td//input[@class='form-control EquipmentTB ']")).sendKeys(SEDesc[i]+AutomationUtilities.SpecialChar);
+	        		driver.findElement(By.xpath("//td[contains(text(),"+i+")]//parent :: tr// following-sibling :: td//input[@name='txtACVLimit']")).sendKeys(SEAmount[i]+AutomationUtilities.SpecialChar);
 	        	  }
 	        	}else {
 	        		
 	        	   buttonClick(driver,objectrepository.getbtnScheduleEquip(),20,"Schedule Equipment");
-	        	   sendKeysToTextField(driver,objectrepository.gettxtScheduleEquipDesc(),objGlLoadManager.getScheduleEquipmentDescription(),"Schedule Equipment Description");
+	        	   sendKeysToTextField(driver,objectrepository.gettxtScheduleEquipDesc(),objGlLoadManager.getScheduleEquipmentDescription()+AutomationUtilities.SpecialChar,"Schedule Equipment Description");
 	        	   sendKeysToTextField(driver,objectrepository.gettxtScheduleEquipAcount(),objGlLoadManager.getScheduleEquipmentAmount(),"Schedule Equipment Amount" );
 	           }
 	        }
@@ -738,7 +738,7 @@ public class GeneralLiability extends AutomationUtilities {
 				
 				for(int i =1;i<=Integer.valueOf(objGlLoadManager.getLocationAgregate());i++) {
 					
-					driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2504_"+i+"']")).sendKeys("CG2504_"+i);
+					driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2504_"+i+"']")).sendKeys("CG2504_"+i+AutomationUtilities.SpecialChar);
 					driver.findElement(By.xpath("//input[@id='txtAddress1CG2504_"+i+"']")).sendKeys(objGlLoadManager.getFristAddressline());
 					driver.findElement(By.xpath("//input[@id='txtAddress2CG2504_"+i+"']")).sendKeys(objGlLoadManager.getSecAddressline());
 					driver.findElement(By.xpath("//input[@id='txtCityCG2504_"+i+"']")).sendKeys(objGlLoadManager.getLocationCity());
@@ -746,7 +746,7 @@ public class GeneralLiability extends AutomationUtilities {
 				}
 			} else {
 				
-				driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2504']")).sendKeys("CG2504");
+				driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2504']")).sendKeys("CG2504"+AutomationUtilities.SpecialChar);
 				driver.findElement(By.xpath("//input[@id='txtAddress1CG2504']")).sendKeys(objGlLoadManager.getFristAddressline());
 				driver.findElement(By.xpath("//input[@id='txtAddress2CG2504']")).sendKeys(objGlLoadManager.getSecAddressline());
 				driver.findElement(By.xpath("//input[@id='txtCityCG2504']")).sendKeys(objGlLoadManager.getLocationCity());
@@ -761,7 +761,7 @@ public class GeneralLiability extends AutomationUtilities {
         		
         		for(int i =1;i<=Integer.valueOf(objGlLoadManager.getProjectAgregate());i++) {
     				
-    				driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2503_"+i+"']")).sendKeys("CG2503_"+i);
+    				driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2503_"+i+"']")).sendKeys("CG2503_"+i+AutomationUtilities.SpecialChar);
     				driver.findElement(By.xpath("//input[@id='txtAddress1CG2503_"+i+"']")).sendKeys(objGlLoadManager.getFristAddressline());
     				driver.findElement(By.xpath("//input[@id='txtAddress2CG2503_"+i+"']")).sendKeys(objGlLoadManager.getSecAddressline());
     				driver.findElement(By.xpath("//input[@id='txtCityCG2503_"+i+"']")).sendKeys(objGlLoadManager.getLocationCity());
@@ -769,7 +769,7 @@ public class GeneralLiability extends AutomationUtilities {
     			}
         	} else {
         		
-        		driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2503']")).sendKeys("CG2503");
+        		driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2503']")).sendKeys("CG2503"+AutomationUtilities.SpecialChar);
 				driver.findElement(By.xpath("//input[@id='txtAddress1CG2503']")).sendKeys(objGlLoadManager.getFristAddressline());
 				driver.findElement(By.xpath("//input[@id='txtAddress2CG2503']")).sendKeys(objGlLoadManager.getSecAddressline());
 				driver.findElement(By.xpath("//input[@id='txtCityCG2503']")).sendKeys(objGlLoadManager.getLocationCity());
@@ -800,7 +800,7 @@ public class GeneralLiability extends AutomationUtilities {
     						
     		  	    	for(int i =1;i<=Integer.valueOf(objGlLoadManager.getUWAICG2404());i++) {
     		  				
-    		  				driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2404_"+i+"']")).sendKeys("CG2404_"+i);
+    		  				driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2404_"+i+"']")).sendKeys("CG2404_"+i+AutomationUtilities.SpecialChar);
     		  				driver.findElement(By.xpath("//input[@id='txtAddress1CG2404_"+i+"']")).sendKeys(objGlLoadManager.getFristAddressline());
     		  				driver.findElement(By.xpath("//input[@id='txtAddress2CG2404_"+i+"']")).sendKeys(objGlLoadManager.getSecAddressline());
     		  				driver.findElement(By.xpath("//input[@id='txtCityCG2404_"+i+"']")).sendKeys(objGlLoadManager.getLocationCity());
@@ -808,7 +808,7 @@ public class GeneralLiability extends AutomationUtilities {
     		  			}
     		  		  } else {
     		  			
-    		  			    driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2404']")).sendKeys("CG2404");
+    		  			    driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2404']")).sendKeys("CG2404"+AutomationUtilities.SpecialChar);
     		  				driver.findElement(By.xpath("//input[@id='txtAddress1CG2404']")).sendKeys(objGlLoadManager.getFristAddressline());
     		  				driver.findElement(By.xpath("//input[@id='txtAddress2CG2404']")).sendKeys(objGlLoadManager.getSecAddressline());
     		  				driver.findElement(By.xpath("//input[@id='txtCityCG2404']")).sendKeys(objGlLoadManager.getLocationCity());
@@ -820,7 +820,7 @@ public class GeneralLiability extends AutomationUtilities {
     					
     		    	for(int i =1;i<=Integer.valueOf(objGlLoadManager.getAICG2404());i++) {
     					
-    					driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2404_"+i+"']")).sendKeys("CG2404_"+i);
+    					driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2404_"+i+"']")).sendKeys("CG2404_"+i+AutomationUtilities.SpecialChar);
     					driver.findElement(By.xpath("//input[@id='txtAddress1CG2404_"+i+"']")).sendKeys(objGlLoadManager.getFristAddressline());
     					driver.findElement(By.xpath("//input[@id='txtAddress2CG2404_"+i+"']")).sendKeys(objGlLoadManager.getSecAddressline());
     					driver.findElement(By.xpath("//input[@id='txtCityCG2404_"+i+"']")).sendKeys(objGlLoadManager.getLocationCity());
@@ -828,7 +828,7 @@ public class GeneralLiability extends AutomationUtilities {
     				}
     			  } else {
     				
-    				    driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2404']")).sendKeys("CG2404");
+    				    driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2404']")).sendKeys("CG2404"+AutomationUtilities.SpecialChar);
     					driver.findElement(By.xpath("//input[@id='txtAddress1CG2404']")).sendKeys(objGlLoadManager.getFristAddressline());
     					driver.findElement(By.xpath("//input[@id='txtAddress2CG2404']")).sendKeys(objGlLoadManager.getSecAddressline());
     					driver.findElement(By.xpath("//input[@id='txtCityCG2404']")).sendKeys(objGlLoadManager.getLocationCity());
@@ -848,7 +848,7 @@ public class GeneralLiability extends AutomationUtilities {
 					
 					for(int i =1;i<=Integer.valueOf(objGlLoadManager.getUWAICG2010());i++) {
 						
-						driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2010_"+i+"']")).sendKeys("CG2010_"+i);
+						driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2010_"+i+"']")).sendKeys("CG2010_"+i+AutomationUtilities.SpecialChar);
 						driver.findElement(By.xpath("//input[@id='txtAddress1CG2010_"+i+"']")).sendKeys(objGlLoadManager.getFristAddressline());
 						driver.findElement(By.xpath("//input[@id='txtAddress2CG2010_"+i+"']")).sendKeys(objGlLoadManager.getSecAddressline());
 						driver.findElement(By.xpath("//input[@id='txtCityCG2010_"+i+"']")).sendKeys(objGlLoadManager.getLocationCity());
@@ -856,7 +856,7 @@ public class GeneralLiability extends AutomationUtilities {
 					}
 				} else {
 					
-					driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2010']")).sendKeys("CG2010");
+					driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2010']")).sendKeys("CG2010"+AutomationUtilities.SpecialChar);
 					driver.findElement(By.xpath("//input[@id='txtAddress1CG2010']")).sendKeys(objGlLoadManager.getFristAddressline());
 					driver.findElement(By.xpath("//input[@id='txtAddress2CG2010']")).sendKeys(objGlLoadManager.getSecAddressline());
 					driver.findElement(By.xpath("//input[@id='txtCityCG2010']")).sendKeys(objGlLoadManager.getLocationCity());
@@ -869,7 +869,7 @@ public class GeneralLiability extends AutomationUtilities {
 				
 				for(int i =1;i<=Integer.valueOf(objGlLoadManager.getAICG2010());i++) {
 					
-					driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2010_"+i+"']")).sendKeys("CG2010_"+i);
+					driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2010_"+i+"']")).sendKeys("CG2010_"+i+AutomationUtilities.SpecialChar);
 					driver.findElement(By.xpath("//input[@id='txtAddress1CG2010_"+i+"']")).sendKeys(objGlLoadManager.getFristAddressline());
 					driver.findElement(By.xpath("//input[@id='txtAddress2CG2010_"+i+"']")).sendKeys(objGlLoadManager.getSecAddressline());
 					driver.findElement(By.xpath("//input[@id='txtCityCG2010_"+i+"']")).sendKeys(objGlLoadManager.getLocationCity());
@@ -877,7 +877,7 @@ public class GeneralLiability extends AutomationUtilities {
 				}
 			} else {
 				
-				driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2010']")).sendKeys("CG2010");
+				driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2010']")).sendKeys("CG2010"+AutomationUtilities.SpecialChar);
 				driver.findElement(By.xpath("//input[@id='txtAddress1CG2010']")).sendKeys(objGlLoadManager.getFristAddressline());
 				driver.findElement(By.xpath("//input[@id='txtAddress2CG2010']")).sendKeys(objGlLoadManager.getSecAddressline());
 				driver.findElement(By.xpath("//input[@id='txtCityCG2010']")).sendKeys(objGlLoadManager.getLocationCity());
@@ -894,7 +894,7 @@ public class GeneralLiability extends AutomationUtilities {
 					
 					for(int i =1;i<=Integer.valueOf(objGlLoadManager.getUWAICG2037());i++) {
 						
-						driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2037_"+i+"']")).sendKeys("CG2037_"+i);
+						driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2037_"+i+"']")).sendKeys("CG2037_"+i+AutomationUtilities.SpecialChar);
 						driver.findElement(By.xpath("//input[@id='txtAddress1CG2037_"+i+"']")).sendKeys(objGlLoadManager.getFristAddressline());
 						driver.findElement(By.xpath("//input[@id='txtAddress2CG2037_"+i+"']")).sendKeys(objGlLoadManager.getSecAddressline());
 						driver.findElement(By.xpath("//input[@id='txtCityCG2037_"+i+"']")).sendKeys(objGlLoadManager.getLocationCity());
@@ -902,7 +902,7 @@ public class GeneralLiability extends AutomationUtilities {
 					}
 				}else {
 					
-					driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2037']")).sendKeys("CG2037");
+					driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2037']")).sendKeys("CG2037"+AutomationUtilities.SpecialChar);
 					driver.findElement(By.xpath("//input[@id='txtAddress1CG2037']")).sendKeys(objGlLoadManager.getFristAddressline());
 					driver.findElement(By.xpath("//input[@id='txtAddress2CG2037']")).sendKeys(objGlLoadManager.getSecAddressline());
 					driver.findElement(By.xpath("//input[@id='txtCityCG2037']")).sendKeys(objGlLoadManager.getLocationCity());
@@ -916,7 +916,7 @@ public class GeneralLiability extends AutomationUtilities {
 				
 				for(int i =1;i<=Integer.valueOf(objGlLoadManager.getAICG2037());i++) {
 					
-					driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2037_"+i+"']")).sendKeys("CG2037_"+i);
+					driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2037_"+i+"']")).sendKeys("CG2037_"+i+AutomationUtilities.SpecialChar);
 					driver.findElement(By.xpath("//input[@id='txtAddress1CG2037_"+i+"']")).sendKeys(objGlLoadManager.getFristAddressline());
 					driver.findElement(By.xpath("//input[@id='txtAddress2CG2037_"+i+"']")).sendKeys(objGlLoadManager.getSecAddressline());
 					driver.findElement(By.xpath("//input[@id='txtCityCG2037_"+i+"']")).sendKeys(objGlLoadManager.getLocationCity());
@@ -924,7 +924,7 @@ public class GeneralLiability extends AutomationUtilities {
 				}
 			}else {
 				
-				driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2037']")).sendKeys("CG2037");
+				driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2037']")).sendKeys("CG2037"+AutomationUtilities.SpecialChar);
 				driver.findElement(By.xpath("//input[@id='txtAddress1CG2037']")).sendKeys(objGlLoadManager.getFristAddressline());
 				driver.findElement(By.xpath("//input[@id='txtAddress2CG2037']")).sendKeys(objGlLoadManager.getSecAddressline());
 				driver.findElement(By.xpath("//input[@id='txtCityCG2037']")).sendKeys(objGlLoadManager.getLocationCity());
@@ -939,7 +939,7 @@ public class GeneralLiability extends AutomationUtilities {
 					
 					for(int i =1;i<=Integer.valueOf(objGlLoadManager.getUWAICG1019());i++) {
 						
-						driver.findElement(By.xpath("//input[@id='txtCompanyNameFCG1019_"+i+"']")).sendKeys("CG1019_"+i);
+						driver.findElement(By.xpath("//input[@id='txtCompanyNameFCG1019_"+i+"']")).sendKeys("CG1019_"+i+AutomationUtilities.SpecialChar);
 						driver.findElement(By.xpath("//input[@id='txtAddress1FCG1019_"+i+"']")).sendKeys(objGlLoadManager.getFristAddressline());
 						driver.findElement(By.xpath("//input[@id='txtAddress2FCG1019_"+i+"']")).sendKeys(objGlLoadManager.getSecAddressline());
 						driver.findElement(By.xpath("//input[@id='txtCityFCG1019_"+i+"']")).sendKeys(objGlLoadManager.getLocationCity());
@@ -947,7 +947,7 @@ public class GeneralLiability extends AutomationUtilities {
 					}
 				} else {
 					
-					driver.findElement(By.xpath("//input[@id='txtCompanyNameFCG1019']")).sendKeys("CG1019");
+					driver.findElement(By.xpath("//input[@id='txtCompanyNameFCG1019']")).sendKeys("CG1019"+AutomationUtilities.SpecialChar);
 					driver.findElement(By.xpath("//input[@id='txtAddress1FCG1019']")).sendKeys(objGlLoadManager.getFristAddressline());
 					driver.findElement(By.xpath("//input[@id='txtAddress2FCG1019']")).sendKeys(objGlLoadManager.getSecAddressline());
 					driver.findElement(By.xpath("//input[@id='txtCityFCG1019']")).sendKeys(objGlLoadManager.getLocationCity());
@@ -960,7 +960,7 @@ public class GeneralLiability extends AutomationUtilities {
 				
 				        for(int i =1;i<=Integer.valueOf(objGlLoadManager.getAICG1019());i++) {
 					
-					     driver.findElement(By.xpath("//input[@id='txtCompanyNameFCG1019_"+i+"']")).sendKeys("CG1019_"+i);
+					     driver.findElement(By.xpath("//input[@id='txtCompanyNameFCG1019_"+i+"']")).sendKeys("CG1019_"+i+AutomationUtilities.SpecialChar);
 					     driver.findElement(By.xpath("//input[@id='txtAddress1FCG1019_"+i+"']")).sendKeys(objGlLoadManager.getFristAddressline());
 					     driver.findElement(By.xpath("//input[@id='txtAddress2FCG1019_"+i+"']")).sendKeys(objGlLoadManager.getSecAddressline());
 					     driver.findElement(By.xpath("//input[@id='txtCityFCG1019_"+i+"']")).sendKeys(objGlLoadManager.getLocationCity());
@@ -968,7 +968,7 @@ public class GeneralLiability extends AutomationUtilities {
 				      }
 			       } else {
 				
-				driver.findElement(By.xpath("//input[@id='txtCompanyNameFCG1019']")).sendKeys("CG1019");
+				driver.findElement(By.xpath("//input[@id='txtCompanyNameFCG1019']")).sendKeys("CG1019"+AutomationUtilities.SpecialChar);
 				driver.findElement(By.xpath("//input[@id='txtAddress1FCG1019']")).sendKeys(objGlLoadManager.getFristAddressline());
 				driver.findElement(By.xpath("//input[@id='txtAddress2FCG1019']")).sendKeys(objGlLoadManager.getSecAddressline());
 				driver.findElement(By.xpath("//input[@id='txtCityFCG1019']")).sendKeys(objGlLoadManager.getLocationCity());
@@ -987,7 +987,7 @@ public class GeneralLiability extends AutomationUtilities {
 					
 	  	    	for(int i =1;i<=Integer.valueOf(objGlLoadManager.getUWAICG2404());i++) {
 	  				
-	  				driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2404_"+i+"']")).sendKeys("CG2404_"+i);
+	  				driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2404_"+i+"']")).sendKeys("CG2404_"+i+AutomationUtilities.SpecialChar);
 	  				driver.findElement(By.xpath("//input[@id='txtAddress1CG2404_"+i+"']")).sendKeys(objGlLoadManager.getFristAddressline());
 	  				driver.findElement(By.xpath("//input[@id='txtAddress2CG2404_"+i+"']")).sendKeys(objGlLoadManager.getSecAddressline());
 	  				driver.findElement(By.xpath("//input[@id='txtCityCG2404_"+i+"']")).sendKeys(objGlLoadManager.getLocationCity());
@@ -995,7 +995,7 @@ public class GeneralLiability extends AutomationUtilities {
 	  			}
 	  		  } else {
 	  			
-	  			    driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2404']")).sendKeys("CG2404");
+	  			    driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2404']")).sendKeys("CG2404"+AutomationUtilities.SpecialChar);
 	  				driver.findElement(By.xpath("//input[@id='txtAddress1CG2404']")).sendKeys(objGlLoadManager.getFristAddressline());
 	  				driver.findElement(By.xpath("//input[@id='txtAddress2CG2404']")).sendKeys(objGlLoadManager.getSecAddressline());
 	  				driver.findElement(By.xpath("//input[@id='txtCityCG2404']")).sendKeys(objGlLoadManager.getLocationCity());
@@ -1007,7 +1007,7 @@ public class GeneralLiability extends AutomationUtilities {
 				
 	    	for(int i =1;i<=Integer.valueOf(objGlLoadManager.getAICG2404());i++) {
 				
-				driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2404_"+i+"']")).sendKeys("CG2404_"+i);
+				driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2404_"+i+"']")).sendKeys("CG2404_"+i+AutomationUtilities.SpecialChar);
 				driver.findElement(By.xpath("//input[@id='txtAddress1CG2404_"+i+"']")).sendKeys(objGlLoadManager.getFristAddressline());
 				driver.findElement(By.xpath("//input[@id='txtAddress2CG2404_"+i+"']")).sendKeys(objGlLoadManager.getSecAddressline());
 				driver.findElement(By.xpath("//input[@id='txtCityCG2404_"+i+"']")).sendKeys(objGlLoadManager.getLocationCity());
@@ -1015,7 +1015,7 @@ public class GeneralLiability extends AutomationUtilities {
 			}
 		  } else {
 			
-			    driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2404']")).sendKeys("CG2404");
+			    driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2404']")).sendKeys("CG2404"+AutomationUtilities.SpecialChar);
 				driver.findElement(By.xpath("//input[@id='txtAddress1CG2404']")).sendKeys(objGlLoadManager.getFristAddressline());
 				driver.findElement(By.xpath("//input[@id='txtAddress2CG2404']")).sendKeys(objGlLoadManager.getSecAddressline());
 				driver.findElement(By.xpath("//input[@id='txtCityCG2404']")).sendKeys(objGlLoadManager.getLocationCity());
@@ -1032,7 +1032,7 @@ public class GeneralLiability extends AutomationUtilities {
 					
 			    	for(int i =1;i<=Integer.valueOf(objGlLoadManager.getUWAICG2012());i++) {
 						
-						driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2012_"+i+"']")).sendKeys("CG2012_"+i);
+						driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2012_"+i+"']")).sendKeys("CG2012_"+i+AutomationUtilities.SpecialChar);
 						driver.findElement(By.xpath("//input[@id='txtAddress1CG2012_"+i+"']")).sendKeys(objGlLoadManager.getFristAddressline());
 						driver.findElement(By.xpath("//input[@id='txtAddress2CG2012_"+i+"']")).sendKeys(objGlLoadManager.getSecAddressline());
 						driver.findElement(By.xpath("//input[@id='txtCityCG2012_"+i+"']")).sendKeys(objGlLoadManager.getLocationCity());
@@ -1040,7 +1040,7 @@ public class GeneralLiability extends AutomationUtilities {
 					}
 				  } else {
 					
-					    driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2012']")).sendKeys("CG2012");
+					    driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2012']")).sendKeys("CG2012"+AutomationUtilities.SpecialChar);
 						driver.findElement(By.xpath("//input[@id='txtAddress1CG2012']")).sendKeys(objGlLoadManager.getFristAddressline());
 						driver.findElement(By.xpath("//input[@id='txtAddress2CG2012']")).sendKeys(objGlLoadManager.getSecAddressline());
 						driver.findElement(By.xpath("//input[@id='txtCityCG2012']")).sendKeys(objGlLoadManager.getLocationCity());
@@ -1053,7 +1053,7 @@ public class GeneralLiability extends AutomationUtilities {
 				
 		    	for(int i =1;i<=Integer.valueOf(objGlLoadManager.getAICG2012());i++) {
 					
-					driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2012_"+i+"']")).sendKeys("CG2012_"+i);
+					driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2012_"+i+"']")).sendKeys("CG2012_"+i+AutomationUtilities.SpecialChar);
 					driver.findElement(By.xpath("//input[@id='txtAddress1CG2012_"+i+"']")).sendKeys(objGlLoadManager.getFristAddressline());
 					driver.findElement(By.xpath("//input[@id='txtAddress2CG2012_"+i+"']")).sendKeys(objGlLoadManager.getSecAddressline());
 					driver.findElement(By.xpath("//input[@id='txtCityCG2012_"+i+"']")).sendKeys(objGlLoadManager.getLocationCity());
@@ -1061,7 +1061,7 @@ public class GeneralLiability extends AutomationUtilities {
 				}
 			  } else {
 				
-				    driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2012']")).sendKeys("CG2012");
+				    driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2012']")).sendKeys("CG2012"+AutomationUtilities.SpecialChar);
 					driver.findElement(By.xpath("//input[@id='txtAddress1CG2012']")).sendKeys(objGlLoadManager.getFristAddressline());
 					driver.findElement(By.xpath("//input[@id='txtAddress2CG2012']")).sendKeys(objGlLoadManager.getSecAddressline());
 					driver.findElement(By.xpath("//input[@id='txtCityCG2012']")).sendKeys(objGlLoadManager.getLocationCity());
@@ -1077,7 +1077,7 @@ public class GeneralLiability extends AutomationUtilities {
 					
 			    	  for(int i =1;i<=Integer.valueOf(objGlLoadManager.getAICG2029());i++) {
 						
-						driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2029_"+i+"']")).sendKeys("CG2029_"+i);
+						driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2029_"+i+"']")).sendKeys("CG2029_"+i+AutomationUtilities.SpecialChar);
 						driver.findElement(By.xpath("//input[@id='txtAddress1CG2029_"+i+"']")).sendKeys(objGlLoadManager.getFristAddressline());
 						driver.findElement(By.xpath("//input[@id='txtAddress2CG2029_"+i+"']")).sendKeys(objGlLoadManager.getSecAddressline());
 						driver.findElement(By.xpath("//input[@id='txtCityCG2029_"+i+"']")).sendKeys(objGlLoadManager.getLocationCity());
@@ -1085,7 +1085,7 @@ public class GeneralLiability extends AutomationUtilities {
 					}
 				  } else {
 					
-					    driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2029']")).sendKeys("CG2029");
+					    driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2029']")).sendKeys("CG2029"+AutomationUtilities.SpecialChar);
 						driver.findElement(By.xpath("//input[@id='txtAddress1CG2029']")).sendKeys(objGlLoadManager.getFristAddressline());
 						driver.findElement(By.xpath("//input[@id='txtAddress2CG2029']")).sendKeys(objGlLoadManager.getSecAddressline());
 						driver.findElement(By.xpath("//input[@id='txtCityCG2029']")).sendKeys(objGlLoadManager.getLocationCity());
@@ -1097,7 +1097,7 @@ public class GeneralLiability extends AutomationUtilities {
 				
 		    	  for(int i =1;i<=Integer.valueOf(objGlLoadManager.getAICG2029());i++) {
 					
-					driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2029_"+i+"']")).sendKeys("CG2029_"+i);
+					driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2029_"+i+"']")).sendKeys("CG2029_"+i+AutomationUtilities.SpecialChar);
 					driver.findElement(By.xpath("//input[@id='txtAddress1CG2029_"+i+"']")).sendKeys(objGlLoadManager.getFristAddressline());
 					driver.findElement(By.xpath("//input[@id='txtAddress2CG2029_"+i+"']")).sendKeys(objGlLoadManager.getSecAddressline());
 					driver.findElement(By.xpath("//input[@id='txtCityCG2029_"+i+"']")).sendKeys(objGlLoadManager.getLocationCity());
@@ -1105,7 +1105,7 @@ public class GeneralLiability extends AutomationUtilities {
 				}
 			  } else {
 				
-				    driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2029']")).sendKeys("CG2029");
+				    driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2029']")).sendKeys("CG2029"+AutomationUtilities.SpecialChar);
 					driver.findElement(By.xpath("//input[@id='txtAddress1CG2029']")).sendKeys(objGlLoadManager.getFristAddressline());
 					driver.findElement(By.xpath("//input[@id='txtAddress2CG2029']")).sendKeys(objGlLoadManager.getSecAddressline());
 					driver.findElement(By.xpath("//input[@id='txtCityCG2029']")).sendKeys(objGlLoadManager.getLocationCity());
@@ -1121,7 +1121,7 @@ public class GeneralLiability extends AutomationUtilities {
 					
 			    	  for(int i =1;i<=Integer.valueOf(objGlLoadManager.getAICG2028());i++) {
 						
-						driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2028_"+i+"']")).sendKeys("CG2028_"+i);
+						driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2028_"+i+"']")).sendKeys("CG2028_"+i+AutomationUtilities.SpecialChar);
 						driver.findElement(By.xpath("//input[@id='txtAddress1CG2028_"+i+"']")).sendKeys(objGlLoadManager.getFristAddressline());
 						driver.findElement(By.xpath("//input[@id='txtAddress2CG2028_"+i+"']")).sendKeys(objGlLoadManager.getSecAddressline());
 						driver.findElement(By.xpath("//input[@id='txtCityCG2028_"+i+"']")).sendKeys(objGlLoadManager.getLocationCity());
@@ -1141,7 +1141,7 @@ public class GeneralLiability extends AutomationUtilities {
 				
 		    	  for(int i =1;i<=Integer.valueOf(objGlLoadManager.getAICG2028());i++) {
 					
-					driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2028_"+i+"']")).sendKeys("CG2028_"+i);
+					driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2028_"+i+"']")).sendKeys("CG2028_"+i+AutomationUtilities.SpecialChar);
 					driver.findElement(By.xpath("//input[@id='txtAddress1CG2028_"+i+"']")).sendKeys(objGlLoadManager.getFristAddressline());
 					driver.findElement(By.xpath("//input[@id='txtAddress2CG2028_"+i+"']")).sendKeys(objGlLoadManager.getSecAddressline());
 					driver.findElement(By.xpath("//input[@id='txtCityCG2028_"+i+"']")).sendKeys(objGlLoadManager.getLocationCity());
@@ -1165,7 +1165,7 @@ public class GeneralLiability extends AutomationUtilities {
 					
 			    	  for(int i =1;i<=Integer.valueOf(objGlLoadManager.getUWAICG2024());i++) {
 						
-						driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2024_"+i+"']")).sendKeys("CG2024_"+i);
+						driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2024_"+i+"']")).sendKeys("CG2024_"+i+AutomationUtilities.SpecialChar);
 						driver.findElement(By.xpath("//input[@id='txtAddress1CG2024_"+i+"']")).sendKeys(objGlLoadManager.getFristAddressline());
 						driver.findElement(By.xpath("//input[@id='txtAddress2CG2024_"+i+"']")).sendKeys(objGlLoadManager.getSecAddressline());
 						driver.findElement(By.xpath("//input[@id='txtCityCG2024_"+i+"']")).sendKeys(objGlLoadManager.getLocationCity());
@@ -1173,7 +1173,7 @@ public class GeneralLiability extends AutomationUtilities {
 					}
 				  } else {
 					
-					    driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2024']")).sendKeys("CG2024");
+					    driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2024']")).sendKeys("CG2024"+AutomationUtilities.SpecialChar);
 						driver.findElement(By.xpath("//input[@id='txtAddress1CG2024']")).sendKeys(objGlLoadManager.getFristAddressline());
 						driver.findElement(By.xpath("//input[@id='txtAddress2CG2024']")).sendKeys(objGlLoadManager.getSecAddressline());
 						driver.findElement(By.xpath("//input[@id='txtCityCG2024']")).sendKeys(objGlLoadManager.getLocationCity());
@@ -1185,7 +1185,7 @@ public class GeneralLiability extends AutomationUtilities {
 				
 		    	    for(int i =1;i<=Integer.valueOf(objGlLoadManager.getAICG2024());i++) {
 					
-					driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2024_"+i+"']")).sendKeys("CG2024_"+i);
+					driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2024_"+i+"']")).sendKeys("CG2024_"+i+AutomationUtilities.SpecialChar);
 					driver.findElement(By.xpath("//input[@id='txtAddress1CG2024_"+i+"']")).sendKeys(objGlLoadManager.getFristAddressline());
 					driver.findElement(By.xpath("//input[@id='txtAddress2CG2024_"+i+"']")).sendKeys(objGlLoadManager.getSecAddressline());
 					driver.findElement(By.xpath("//input[@id='txtCityCG2024_"+i+"']")).sendKeys(objGlLoadManager.getLocationCity());
@@ -1193,7 +1193,7 @@ public class GeneralLiability extends AutomationUtilities {
 				}
 			  } else {
 				
-				    driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2024']")).sendKeys("CG2024");
+				    driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2024']")).sendKeys("CG2024"+AutomationUtilities.SpecialChar);
 					driver.findElement(By.xpath("//input[@id='txtAddress1CG2024']")).sendKeys(objGlLoadManager.getFristAddressline());
 					driver.findElement(By.xpath("//input[@id='txtAddress2CG2024']")).sendKeys(objGlLoadManager.getSecAddressline());
 					driver.findElement(By.xpath("//input[@id='txtCityCG2024']")).sendKeys(objGlLoadManager.getLocationCity());
@@ -1208,7 +1208,7 @@ public class GeneralLiability extends AutomationUtilities {
 					
 			    	  for(int i =1;i<=Integer.valueOf(objGlLoadManager.getUWAICG2005());i++) {
 						
-						driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2005_"+i+"']")).sendKeys("CG2005_"+i);
+						driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2005_"+i+"']")).sendKeys("CG2005_"+i+AutomationUtilities.SpecialChar);
 						driver.findElement(By.xpath("//input[@id='txtAddress1CG2005_"+i+"']")).sendKeys(objGlLoadManager.getFristAddressline());
 						driver.findElement(By.xpath("//input[@id='txtAddress2CG2005_"+i+"']")).sendKeys(objGlLoadManager.getSecAddressline());
 						driver.findElement(By.xpath("//input[@id='txtCityCG2005_"+i+"']")).sendKeys(objGlLoadManager.getLocationCity());
@@ -1216,7 +1216,7 @@ public class GeneralLiability extends AutomationUtilities {
 					}
 				  } else {
 					
-					    driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2005']")).sendKeys("CG2005");
+					    driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2005']")).sendKeys("CG2005"+AutomationUtilities.SpecialChar);
 						driver.findElement(By.xpath("//input[@id='txtAddress1CG2005']")).sendKeys(objGlLoadManager.getFristAddressline());
 						driver.findElement(By.xpath("//input[@id='txtAddress2CG2005']")).sendKeys(objGlLoadManager.getSecAddressline());
 						driver.findElement(By.xpath("//input[@id='txtCityCG2005']")).sendKeys(objGlLoadManager.getLocationCity());
@@ -1229,7 +1229,7 @@ public class GeneralLiability extends AutomationUtilities {
 				
 		    	  for(int i =1;i<=Integer.valueOf(objGlLoadManager.getAICG2005());i++) {
 					
-					driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2005_"+i+"']")).sendKeys("CG2005_"+i);
+					driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2005_"+i+"']")).sendKeys("CG2005_"+i+AutomationUtilities.SpecialChar);
 					driver.findElement(By.xpath("//input[@id='txtAddress1CG2005_"+i+"']")).sendKeys(objGlLoadManager.getFristAddressline());
 					driver.findElement(By.xpath("//input[@id='txtAddress2CG2005_"+i+"']")).sendKeys(objGlLoadManager.getSecAddressline());
 					driver.findElement(By.xpath("//input[@id='txtCityCG2005_"+i+"']")).sendKeys(objGlLoadManager.getLocationCity());
@@ -1237,7 +1237,7 @@ public class GeneralLiability extends AutomationUtilities {
 				}
 			  } else {
 				
-				    driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2005']")).sendKeys("CG2005");
+				    driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2005']")).sendKeys("CG2005"+AutomationUtilities.SpecialChar);
 					driver.findElement(By.xpath("//input[@id='txtAddress1CG2005']")).sendKeys(objGlLoadManager.getFristAddressline());
 					driver.findElement(By.xpath("//input[@id='txtAddress2CG2005']")).sendKeys(objGlLoadManager.getSecAddressline());
 					driver.findElement(By.xpath("//input[@id='txtCityCG2005']")).sendKeys(objGlLoadManager.getLocationCity());
@@ -1253,7 +1253,7 @@ public class GeneralLiability extends AutomationUtilities {
 					
 			    	  for(int i =1;i<=Integer.valueOf(objGlLoadManager.getUWAICG2011());i++) {
 						
-						driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2011_"+i+"']")).sendKeys("CG2011_"+i);
+						driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2011_"+i+"']")).sendKeys("CG2011_"+i+AutomationUtilities.SpecialChar);
 						driver.findElement(By.xpath("//input[@id='txtAddress1CG2011_"+i+"']")).sendKeys(objGlLoadManager.getFristAddressline());
 						driver.findElement(By.xpath("//input[@id='txtAddress2CG2011_"+i+"']")).sendKeys(objGlLoadManager.getSecAddressline());
 						driver.findElement(By.xpath("//input[@id='txtCityCG2011_"+i+"']")).sendKeys(objGlLoadManager.getLocationCity());
@@ -1261,7 +1261,7 @@ public class GeneralLiability extends AutomationUtilities {
 					}
 				  } else {
 					
-					    driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2011']")).sendKeys("CG2011");
+					    driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2011']")).sendKeys("CG2011"+AutomationUtilities.SpecialChar);
 						driver.findElement(By.xpath("//input[@id='txtAddress1CG2011']")).sendKeys(objGlLoadManager.getFristAddressline());
 						driver.findElement(By.xpath("//input[@id='txtAddress2CG2011']")).sendKeys(objGlLoadManager.getSecAddressline());
 						driver.findElement(By.xpath("//input[@id='txtCityCG2011']")).sendKeys(objGlLoadManager.getLocationCity());
@@ -1273,7 +1273,7 @@ public class GeneralLiability extends AutomationUtilities {
 				
 		    	  for(int i =1;i<=Integer.valueOf(objGlLoadManager.getAICG2011());i++) {
 					
-					driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2011_"+i+"']")).sendKeys("CG2011_"+i);
+					driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2011_"+i+"']")).sendKeys("CG2011_"+i+AutomationUtilities.SpecialChar);
 					driver.findElement(By.xpath("//input[@id='txtAddress1CG2011_"+i+"']")).sendKeys(objGlLoadManager.getFristAddressline());
 					driver.findElement(By.xpath("//input[@id='txtAddress2CG2011_"+i+"']")).sendKeys(objGlLoadManager.getSecAddressline());
 					driver.findElement(By.xpath("//input[@id='txtCityCG2011_"+i+"']")).sendKeys(objGlLoadManager.getLocationCity());
@@ -1281,7 +1281,7 @@ public class GeneralLiability extends AutomationUtilities {
 				}
 			  } else {
 				
-				    driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2011']")).sendKeys("CG2011");
+				    driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2011']")).sendKeys("CG2011"+AutomationUtilities.SpecialChar);
 					driver.findElement(By.xpath("//input[@id='txtAddress1CG2011']")).sendKeys(objGlLoadManager.getFristAddressline());
 					driver.findElement(By.xpath("//input[@id='txtAddress2CG2011']")).sendKeys(objGlLoadManager.getSecAddressline());
 					driver.findElement(By.xpath("//input[@id='txtCityCG2011']")).sendKeys(objGlLoadManager.getLocationCity());
@@ -1297,7 +1297,7 @@ public class GeneralLiability extends AutomationUtilities {
 					
 			    	  for(int i =1;i<=Integer.valueOf(objGlLoadManager.getUWAICG2026());i++) {
 						
-						driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2026_"+i+"']")).sendKeys("CG2011_"+i);
+						driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2026_"+i+"']")).sendKeys("CG2011_"+i+AutomationUtilities.SpecialChar);
 						driver.findElement(By.xpath("//input[@id='txtAddress1CG2026_"+i+"']")).sendKeys(objGlLoadManager.getFristAddressline());
 						driver.findElement(By.xpath("//input[@id='txtAddress2CG2026_"+i+"']")).sendKeys(objGlLoadManager.getSecAddressline());
 						driver.findElement(By.xpath("//input[@id='txtCityCG2026_"+i+"']")).sendKeys(objGlLoadManager.getLocationCity());
@@ -1305,7 +1305,7 @@ public class GeneralLiability extends AutomationUtilities {
 					}
 				  } else {
 					
-					    driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2026']")).sendKeys("CG2011");
+					    driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2026']")).sendKeys("CG2011"+AutomationUtilities.SpecialChar);
 						driver.findElement(By.xpath("//input[@id='txtAddress1CG2026']")).sendKeys(objGlLoadManager.getFristAddressline());
 						driver.findElement(By.xpath("//input[@id='txtAddress2CG2026']")).sendKeys(objGlLoadManager.getSecAddressline());
 						driver.findElement(By.xpath("//input[@id='txtCityCG2026']")).sendKeys(objGlLoadManager.getLocationCity());
@@ -1317,7 +1317,7 @@ public class GeneralLiability extends AutomationUtilities {
 				
 		    	  for(int i =1;i<=Integer.valueOf(objGlLoadManager.getAICG2026());i++) {
 					
-					driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2026_"+i+"']")).sendKeys("CG2011_"+i);
+					driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2026_"+i+"']")).sendKeys("CG2011_"+i+AutomationUtilities.SpecialChar);
 					driver.findElement(By.xpath("//input[@id='txtAddress1CG2026_"+i+"']")).sendKeys(objGlLoadManager.getFristAddressline());
 					driver.findElement(By.xpath("//input[@id='txtAddress2CG2026_"+i+"']")).sendKeys(objGlLoadManager.getSecAddressline());
 					driver.findElement(By.xpath("//input[@id='txtCityCG2026_"+i+"']")).sendKeys(objGlLoadManager.getLocationCity());
@@ -1325,7 +1325,7 @@ public class GeneralLiability extends AutomationUtilities {
 				}
 			  } else {
 				
-				    driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2026']")).sendKeys("CG2011");
+				    driver.findElement(By.xpath("//input[@id='txtCompanyNameCG2026']")).sendKeys("CG2011"+AutomationUtilities.SpecialChar);
 					driver.findElement(By.xpath("//input[@id='txtAddress1CG2026']")).sendKeys(objGlLoadManager.getFristAddressline());
 					driver.findElement(By.xpath("//input[@id='txtAddress2CG2026']")).sendKeys(objGlLoadManager.getSecAddressline());
 					driver.findElement(By.xpath("//input[@id='txtCityCG2026']")).sendKeys(objGlLoadManager.getLocationCity());
@@ -1340,7 +1340,7 @@ public class GeneralLiability extends AutomationUtilities {
 		  
 		
 		sendKeysToTextField(driver,objectrepository.gettxtLicenseType(),objGlLoadManager.getLicenseType(),"License Type");
-		sendKeysToTextField(driver,objectrepository.gettxtLicenseNumber(),objGlLoadManager.getLicenseNumber(),"License Number");
+		sendKeysToTextField(driver,objectrepository.gettxtLicenseNumber(),objGlLoadManager.getLicenseNumber()+AutomationUtilities.SpecialChar,"License Number");
 		
 		int ICRTotalPercent = Integer.valueOf(objGlLoadManager.getIndustrialPercent())+Integer.valueOf(objGlLoadManager.getCommercialPercent())+Integer.valueOf(objGlLoadManager.getResidentialPercent());
 		
@@ -1452,6 +1452,10 @@ public class GeneralLiability extends AutomationUtilities {
 		waitforpageload(driver, 20);
 		Thread.sleep(10000);
 
+		if(objGlLoadManager.getDepositPaymentMethod().equalsIgnoreCase("Online")) {
+			AutomationUtilities.OnlineTraverse (driver,objectrepository,objGlLoadManager.getCreditCardNumber(),objGlLoadManager.getCVVNumber(),objGlLoadManager.getBusinessEmail(),"Invoice");
+		}
+		
 		buttonClick(driver,objectrepository.getlnkDownloadEvidence(),10,"Clickon EOI Document");
 		AutomationUtilities.Traverse(driver,"EOI Document");
 	    //AutomationUtilities.Screenshot(tcSnapPath,testCaseID);

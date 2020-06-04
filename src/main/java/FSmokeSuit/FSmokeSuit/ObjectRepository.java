@@ -417,6 +417,26 @@ public class ObjectRepository {
 	@FindBy (xpath="//input[@value='MAKE PAYMENT & ISSUE']")
 	private WebElement GLMakePayment;
 	
+	@FindBy (xpath="//a[contains(text(),'Proceed To Checkout')]")
+	private WebElement PTCheckout;
+	
+	@FindBy (xpath="//a[contains(text(),'Continue to Payment Information')]")
+	private WebElement CTPaymentInformation;
+	
+	@FindBy (xpath="//input[@placeholder ='Card number']")
+	private WebElement txtCardNumber;
+	
+	@FindBy (xpath="//input[@placeholder ='CVV']")
+	private WebElement txtCVVNumber;
+	
+	@FindBy (xpath="//input[@placeholder ='Email Address']")
+	private WebElement txtEmailAddress;
+	
+	@FindBy (xpath="//a[contains(text(),'Continue to Review Payment']")
+	private WebElement CTReviewPayment;
+	
+	@FindBy (xpath="//a[contains(text(),'Process Payment']")
+	private WebElement ProcessPayment;
 	// --------- AI ------------
 	
 	@FindBy (xpath="//div[@id='FCG1001']/label")
@@ -2249,6 +2269,34 @@ public WebElement getbtnWCOWButton() {
 
 public WebElement getbtnWCDownloadBinder() {
 	return btnWCDownloadBinder;
+}
+
+public WebElement getbtnPTCheckout() {
+	return PTCheckout;
+}
+
+public WebElement getbtnCTPaymentInformation() {
+	return CTPaymentInformation;
+}
+
+public WebElement gettxtCardNumber() {
+	return txtCardNumber;
+}
+
+public WebElement gettxtCVVNumber() {
+	return txtCVVNumber;
+}
+
+public WebElement gettxtEmailAddress() {
+	return txtEmailAddress;
+}
+
+public WebElement getCTReviewPayment() {
+	return CTReviewPayment;
+}
+
+public WebElement getProcessPayment() {
+	return ProcessPayment;
 }
 
 }

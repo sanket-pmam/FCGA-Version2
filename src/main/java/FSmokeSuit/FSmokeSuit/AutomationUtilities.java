@@ -84,6 +84,7 @@ public class AutomationUtilities {
    public static String InputAIForms;
    public static String InputWSForms;
    public static String DeclineReason;
+   public static String SpecialChar;
    
 	static Function<WebDriver, Boolean> documentWait = new Function<WebDriver, Boolean>() {
 		public Boolean apply(WebDriver driver) {
@@ -93,7 +94,6 @@ public class AutomationUtilities {
 		}
 	};
 	
-
 	
    public static void waitforpageload(WebDriver driver, int iTimeOut) {
 		//System.out.println("Wait for Page load......");
@@ -628,7 +628,7 @@ public class AutomationUtilities {
      
     }
    
-   public static void OnlineTraverse(WebDriver driver,String pdfName) throws AWTException, InterruptedException, UnsupportedFlavorException, IOException {
+   public static void OnlineTraverse(WebDriver driver,ObjectRepository objectrepository,String CardNumber, String CVVNumber, String EmailID,String pdfName) throws AWTException, InterruptedException, UnsupportedFlavorException, IOException {
 		 
 		 String parentWindow= driver.getWindowHandle();
 		 Set<String> allWindows = driver.getWindowHandles();
@@ -639,7 +639,15 @@ public class AutomationUtilities {
 	        	 break;
 	        	 } 	   
 		   }
-	     
+		
+		 buttonClick(driver, objectrepository.getbtnPTCheckout(),10, "Click on CheckOut");
+		 buttonClick(driver, objectrepository.getbtnCTPaymentInformation(),10, "Click on Payment Information");
+		 
+		 sendKeysToTextField(driver,objectrepository.gettxtCardNumber(),"4111111111111111","Enter Card Number");//CardNumber
+		 sendKeysToTextField(driver,objectrepository.gettxtCVVNumber(),"123","Enter CVV Number");//CVVNumber
+		 sendKeysToTextField(driver,objectrepository.gettxtEmailAddress(),EmailID, "Enter Email ID");
+		 buttonClick(driver, objectrepository.getCTReviewPayment(),10,"Enter Review Payment");
+		 buttonClick(driver, objectrepository.getProcessPayment(),10,"Enter Process Payment");
 		 
 		 driver.close();
 		 driver.switchTo().window(parentWindow);

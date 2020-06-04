@@ -148,6 +148,10 @@ public class LoadManager implements Cloneable {
 		private String WCUWModifyAnyLosses;
 		private String WCUWModifyClaims;
 		private String WCUWModifyTotalIncurred;
+		private String PermFristLastName;
+		private String UWModifyPremFLName;
+		private String CreditCardNumber;
+		private String CVVNumber;
 		private String Product;
 		private String State;
 		private String County;
@@ -1885,4 +1889,33 @@ public class LoadManager implements Cloneable {
 		public String getWCUWModifyTotalIncurred(){
 			return WCUWModifyTotalIncurred;
 		}
+
+		public void setPermFristLastName(String sPermFristLastName) {
+			PermFristLastName = sPermFristLastName;
+		}
+		public String getPermFristLastName(){
+			return PermFristLastName;
+		}
+
+		public void setUWModifyPremFLName(String sUWModifyPremFLName) {
+			UWModifyPremFLName = sUWModifyPremFLName;			
+		}
+		public String getUWModifyPremFLName(){
+			return UWModifyPremFLName;
+		}
+
+		public void setCreditCardNumber(String sCreditCardNmber) {
+			CreditCardNumber= sCreditCardNmber;
+		}
+		public String getCreditCardNumber(){
+			return CreditCardNumber;
+		}
+
+		public void setCVVNumber(String sCVVNumber) {
+			CVVNumber = sCVVNumber; 			
+		}
+		public String getCVVNumber(){
+			return CVVNumber;
+		}
+
 	}
