@@ -376,6 +376,11 @@ public void UWGLEditQuote (WebDriver driver,LoadManager objUWGLLoadManager) thro
 			AutomationUtilities.LogSummary(LogPath, "IRPM Value is not getting Changed");
 			System.out.println("IRPM Value is not getting Changed");
 		}
+        
+        if(objUWGLLoadManager.getIncludeExcess().equalsIgnoreCase("No")) {
+        	
+        	buttonClick(driver,objectrepository.getchkAllowExcess(),10,"Allow Excess");
+        }
 		
 	}
 

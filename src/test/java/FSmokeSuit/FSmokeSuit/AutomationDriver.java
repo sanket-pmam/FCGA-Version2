@@ -158,12 +158,13 @@ public class AutomationDriver {
 			//AutomationUtilities.Screenshot(TCSnapPath, TestCaseID);
 
 			objhomepage.checkFramePopup(objWebDriver);
-			objhomepage.CreateNewQuote(objWebDriver,objLoadManager.getProduct());
+			
+			objhomepage.CreateNewQuote(objWebDriver,objLoadManager);
 			
 			
 			if (objLoadManager.getProduct().contains("GL")) {
 
-				objgeneralliability.GatekepeerQuestion(objWebDriver);
+				objgeneralliability.GatekepeerQuestion(objLoadManager,objWebDriver);
 				objgeneralliability.Risklevel(objLoadManager,objWebDriver);
 				objgeneralliability.classPayroll(objLoadManager, objWebDriver);
 
@@ -209,8 +210,6 @@ public class AutomationDriver {
 				AutomationUtilities.QuoteNo,AutomationUtilities.PolicyNo,"Pass",StartTime,EndTime);
 			
 			StartTime = EndTime;
-			AutomationUtilities.sReferralReason = "";
-			AutomationUtilities.IndustialQ = "";
 			
 			objWebDriver.close();
      		objWebDriver.quit();
@@ -242,7 +241,7 @@ public class AutomationDriver {
 					 for (LogEntry entry : logEntries) {
 						 String LogMessage = new Date(entry.getTimestamp()) + " " + entry.getLevel() + " " + entry.getMessage() + " " + entry.toString();
 						 AutomationUtilities.LogSummary(AutomationUtilities.LogPath,LogMessage);   
-						 System.out.println(LogMessage);
+						 //System.out.println(LogMessage);
 			           } 
 				 }  
 			AutomationUtilities.Screenshot(TCErrSnapPath, TestCaseID, objWebDriver);
@@ -254,10 +253,7 @@ public class AutomationDriver {
 					AutomationUtilities.IndustialQ,AutomationUtilities.sReferralReason,AutomationUtilities.sAddress,AutomationUtilities.SmartyStreet,  
 					AutomationUtilities.QuoteNo,AutomationUtilities.PolicyNo,"Fail",StartTime,EndTime);
 			
-			
 			StartTime = EndTime;
-			AutomationUtilities.sReferralReason = "";
-			AutomationUtilities.IndustialQ = "";
 				
 			    objWebDriver.close();
 	     		objWebDriver.quit();

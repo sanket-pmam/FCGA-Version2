@@ -722,9 +722,24 @@ public class AutomationUtilities {
 	AutomationUtilities.ReportExcelUpdate(ReportPath, TCSheetName,"0", endtime, objLoadManager,
 			"End Time");
 	
+	AutomationUtilities.AutomationUtilitiesVariableValueClear();
+	
     }
     
-    static void copyFileUsingStream(File source, File dest)  {
+    private static void AutomationUtilitiesVariableValueClear() {
+	
+    	AutomationUtilities.sClassCode = "";
+    	AutomationUtilities.sClassCodeDesc = "";
+    	AutomationUtilities.sBusinessName = "";
+		AutomationUtilities.IndustialQ="";
+		AutomationUtilities.sReferralReason="";
+		AutomationUtilities.sAddress="";
+		AutomationUtilities.SmartyStreet="";  
+		AutomationUtilities.QuoteNo="";
+		AutomationUtilities.PolicyNo ="";
+	}
+
+	static void copyFileUsingStream(File source, File dest)  {
 	    InputStream is = null;
 	    OutputStream os = null;
 	    File F1 = dest;

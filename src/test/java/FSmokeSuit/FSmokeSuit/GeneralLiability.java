@@ -43,7 +43,7 @@ public class GeneralLiability extends AutomationUtilities {
         return lastQ ;
      }
 	
-	public void GatekepeerQuestion(WebDriver driver) throws InterruptedException, IOException, AWTException {
+	public void GatekepeerQuestion(LoadManager objGlLoadManager,WebDriver driver) throws InterruptedException, IOException, AWTException {
 		
 		/*for (int i =1; i<=LastQCount(driver,ElementNamexpath);i++) {
     	
@@ -59,6 +59,12 @@ public class GeneralLiability extends AutomationUtilities {
        
        Thread.sleep(1000);
        buttonClick(driver,objectrepository.gettxtWCClosebtn(), 10, "Close button is saved sucessfully.");*/
+		
+		if(objGlLoadManager.getChkConvertPolicy().equalsIgnoreCase("Yes")) {
+			
+			buttonClick(driver,objectrepository.getbtnsaveandcontinue(),5,"Click on Save and Continue");
+			
+		}else {
 
     for (int j =1; j<=LastQCount(driver,ElementNamexpath);j++) {
     	if(j==LastQCount(driver,ElementNamexpath)-1)	{
@@ -75,6 +81,7 @@ public class GeneralLiability extends AutomationUtilities {
     
     System.out.println("Gatekeeper Question have been completed Sucessfully");
     AutomationUtilities.LogSummary(LogPath,"Gatekeeper Question have been completed Sucessfully");
+		}
 	
   }
 	
@@ -584,7 +591,7 @@ public class GeneralLiability extends AutomationUtilities {
 			//AutomationUtilities.Screenshot(tcSnapPath,testCaseID)
      }
 
-     buttonClick(driver,objectrepository.getlnk_DownloadFWCIQuote(),30,"Click on FWCI Quote Link");
+     /*buttonClick(driver,objectrepository.getlnk_DownloadFWCIQuote(),30,"Click on FWCI Quote Link");
      AutomationUtilities.Traverse(driver,"FWCI Quote Doc");
      System.out.println("Download FWCI Quote Document is clicked sucessfully");
      AutomationUtilities.LogSummary(LogPath,"Download FWCI Quote Document is clicked sucessfully");
@@ -592,7 +599,7 @@ public class GeneralLiability extends AutomationUtilities {
      buttonClick(driver,objectrepository.getlnk_DownloadCBQuote(),10,"Click on CB Quote Link");
      AutomationUtilities.Traverse(driver,"CB Quote Doc");
      System.out.println("Download CB Quote Document is clicked sucessfully");
-     AutomationUtilities.LogSummary(LogPath,"Download CB Quote Document is clicked successfully");
+     AutomationUtilities.LogSummary(LogPath,"Download CB Quote Document is clicked successfully");*/
      
      System.out.println("FWCI Premium: "+ objectrepository.getlbl_FWCIPremium().getText());
      AutomationUtilities.LogSummary(LogPath,"FWCI Premium: "+ objectrepository.getlbl_FWCIPremium().getText());
@@ -634,6 +641,27 @@ public class GeneralLiability extends AutomationUtilities {
    
      }
      
+     if(!objGlLoadManager.getIncludeExcess().equalsIgnoreCase("No")) {
+    	 if(objGlLoadManager.getMExcess().equalsIgnoreCase("No Excess")) {
+    		 
+    		 buttonClick(driver,objectrepository.getrd_NoExcess(),10,"Click on No Excess Option");
+    		 
+    	 }else if (objGlLoadManager.getMExcess().equalsIgnoreCase("$1M Excess")){
+    		 
+    		 buttonClick(driver,objectrepository.getrd_OneMExcess(),10,"Click on $1M Excess Option");
+    		 
+    	 }else if (objGlLoadManager.getMExcess().equalsIgnoreCase("$2M Excess")){
+    		 
+    		 buttonClick(driver,objectrepository.getrd_TwoMExcess(),10,"Click on $2M Excess Option");
+    		 
+    	 }else if (objGlLoadManager.getMExcess().equalsIgnoreCase("$3M Excess")){
+    		 
+    		 buttonClick(driver,objectrepository.getrd_ThreeMExcess(),10,"Click on $3M Excess Option");
+    		 
+    	 }
+     }
+     
+     
      if(objGlLoadManager.getTypeofCompany().equalsIgnoreCase("FWCI")) {
     	 
     	 buttonClick(driver,objectrepository.getrdo_FWCIbutton(),10,"Click on FWCI Insurance Company");
@@ -648,10 +676,13 @@ public class GeneralLiability extends AutomationUtilities {
          
      }
      
-     //AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
-     buttonClick(driver,objectrepository.getbtn_ICSavebutton(),20,"Click on Save Insurance Company");
      driver.manage().timeouts().implicitlyWait(25, TimeUnit.SECONDS);
      Thread.sleep(5000);
+    
+     //AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
+     buttonClick(driver,objectrepository.getbtn_ICSavebutton(),20,"Click on Save Insurance Company");
+     
+     Thread.sleep(6000);
 	 buttonClick(driver,objectrepository.getbtn_CloseProducerFee(),10,"Click on Button Close");
 	 driver.manage().timeouts().implicitlyWait(35, TimeUnit.SECONDS);
 	 
@@ -659,6 +690,12 @@ public class GeneralLiability extends AutomationUtilities {
 	 AutomationUtilities.QuoteNo = objectrepository.getlbl_QuoteNo().getText();
 	 AutomationUtilities.LogSummary(LogPath,"Quote No: "+ objectrepository.getlbl_QuoteNo().getText());
 	 //System.out.println("Quote No: "+ objectrepository.getlbl_QuoteNo().getText());
+     
+	 
+	 buttonClick(driver,objectrepository.getbtnDownloadQuote(),10,"Click on CB Quote Link");
+     AutomationUtilities.Traverse(driver,"CB Quote Doc");
+     System.out.println("Download CB Quote Document is clicked sucessfully");
+     AutomationUtilities.LogSummary(LogPath,"Download CB Quote Document is clicked successfully");
      
      //driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
      //AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
@@ -1394,10 +1431,10 @@ public class GeneralLiability extends AutomationUtilities {
 		}
 		
 		buttonClick(driver,objectrepository.getrdoAgree(),10,"Click on Agree radio button");
-		buttonClick(driver,objectrepository.getbtnPrintSubmit(),50,"Click on Print & Submit Application");
+		buttonClick(driver,objectrepository.getbtnPrintSubmit(),80,"Click on Print & Submit Application");
 		
-		waitforpageload(driver, 85);
-		Thread.sleep(5000);
+		waitforpageload(driver, 105);
+		Thread.sleep(7000);
 		AutomationUtilities.Traverse(driver,"Download Application Document");
 	    //AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
 	   

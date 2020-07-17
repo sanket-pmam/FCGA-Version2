@@ -78,7 +78,8 @@ public class WorkersCompensation extends AutomationUtilities {
 			sendKeysToTextField(driver,objectrepository.gettxtWCClassCodes(), objWCLoadManager.getWCClassCodeDesc(), "Class Code");
 			buttonClick(driver,objectrepository.getbtnWCContinue(), 5, "Click on Continue");
 		}
-
+		
+		AutomationUtilities.Screenshot(tcSnapPath, testCaseID,driver);
 		AutomationUtilities.sClassCode = objWCLoadManager.getWCClassCode();
 		AutomationUtilities.sClassCodeDesc = objWCLoadManager.getWCClassCodeDesc();
 		//AutomationUtilities.Screenshot(tcSnapPath, testCaseID);
@@ -359,6 +360,7 @@ public class WorkersCompensation extends AutomationUtilities {
         System.out.println("Industrial Question Count is : "+IndustialQ);
         AutomationUtilities.LogSummary(LogPath, "Industrial Question Count is : "+IndustialQ);
         AutomationUtilities.IndustialQ =String.valueOf(IndustialQ);
+        AutomationUtilities.Screenshot(tcSnapPath, testCaseID,driver);
         /* AutomationUtilities.Screenshot(tcSnapPath, testCaseID,driver);
         
 		checkCheckBox(driver, objectrepository.chkBedding(), 2, "Bedding Plants");

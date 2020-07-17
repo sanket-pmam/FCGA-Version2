@@ -152,6 +152,9 @@ public class LoadManager implements Cloneable {
 		private String UWModifyPremFLName;
 		private String CreditCardNumber;
 		private String CVVNumber;
+		private String IncludeExcess;
+		private String MExcess;
+		private String ChkConvertPolicy;
 		private String Product;
 		private String State;
 		private String County;
@@ -1916,6 +1919,28 @@ public class LoadManager implements Cloneable {
 		}
 		public String getCVVNumber(){
 			return CVVNumber;
+		}
+
+		public void setIncludeExcess(String sIncludeExcess) {
+			IncludeExcess = sIncludeExcess;	
+		}
+		public String getIncludeExcess(){
+			return IncludeExcess;
+		}
+
+		public void setMExcess(String sMExcess) {
+			MExcess = sMExcess;	
+		}
+		public String getMExcess(){
+			return MExcess;
+		}
+
+		public void setChkConvertPolicy(String sChkConvertPolicy) {
+			ChkConvertPolicy = sChkConvertPolicy;
+		}
+		
+		public String getChkConvertPolicy(){
+			return ChkConvertPolicy;
 		}
 
 	}

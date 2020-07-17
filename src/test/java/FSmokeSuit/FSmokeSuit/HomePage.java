@@ -29,9 +29,16 @@ public class HomePage extends AutomationUtilities {
 		    AutomationUtilities.LogSummary(LogPath,"Agent Name is selected Sucessfully");
 		}
 		
-		public void CreateNewQuote (WebDriver driver,String sProductName) throws InterruptedException, IOException 
+		public void CreateNewQuote (WebDriver driver,LoadManager objGlLoadManager) throws InterruptedException, IOException 
 		{
 			
+			if (objGlLoadManager.getChkConvertPolicy().equalsIgnoreCase("Yes")){
+				
+				buttonClick(driver,objectrepository.getdrpTypeofRecord(),10,"Type of Record");
+				buttonClick(driver,objectrepository.getdrpTypeofRecordP(),10,"Type of Record");
+				
+			}else {
+				
 			buttonClick(driver,objectrepository.getbtnNewQuote(),10,"New Quote Button is clicked");
 			String sRandomNumber = AutomationUtilities.getRandomString (9);
 			
@@ -40,7 +47,7 @@ public class HomePage extends AutomationUtilities {
 			//buttonClick(driver,objectrepository.gettxtWCClosebtn(), 10, "Close button is saved sucessfully.");
 			
 			driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
-			if (sProductName.equalsIgnoreCase("GL")){
+			if (objGlLoadManager.getProduct().equalsIgnoreCase("GL")){
 				
 				buttonClick(driver, objectrepository.getbtnrdbGeneralLiability(),10,"GL Radio Button is clicked");
 				//System.out.println("Selecting GL Radio Button");
@@ -58,6 +65,7 @@ public class HomePage extends AutomationUtilities {
 			
 		    buttonClick(driver,objectrepository.getbtnHContinue(), 10, "Continue Button is clicked");
 		    AutomationUtilities.LogSummary(LogPath,"New Quote is going to be created");
+			}
 		}
 		
 		public void checkFramePopup(WebDriver driver) throws InterruptedException, IOException{

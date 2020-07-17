@@ -33,6 +33,11 @@ public class ObjectRepository {
 	@FindBy(xpath = "//span[@class='selection']")
 	private WebElement dd_SelectAgent; 
 	
+	@FindBy(xpath = "//select[@id='drpType']")
+	private WebElement drpTypeofRecord;
+	
+	@FindBy(xpath = "//select[@id='drpType']//option[@value='P']")
+	private WebElement drpTypeofRecordP;
 	
 	@FindBy(xpath = "//button[@id='btnContinue']")
 	private WebElement btnContinue; 
@@ -236,10 +241,10 @@ public class ObjectRepository {
 	@FindBy(xpath = "//input[@id='txtProducerFee']")
 	private WebElement txt_ProducerFee;
 	
-	@FindBy(xpath = "//span[@id='lblFWCIPremium']")
+	@FindBy(xpath = "//span[@id='lblFWCIGLPremOutExCov']")
 	private WebElement lbl_FWCIPremium;
 	
-	@FindBy(xpath = "//span[@id='lblCBPremium']")
+	@FindBy(xpath = "//span[@id='lblCBGLPremOutExCov']")
 	private WebElement lbl_CBPremium;
 	
 	@FindBy(xpath = "//span[@id='lblFWCIMGAPolicyFee']")
@@ -260,10 +265,22 @@ public class ObjectRepository {
 	@FindBy(xpath = "//span[@id='lblCBTotalPremium']")
 	private WebElement lbl_CBTotalPremium;
 	
-	@FindBy(xpath = "//label[@for='rdoFWCI']")
+	@FindBy(xpath = "//label[@for='radio_None']")
+	private WebElement rd_NoExcess;
+	
+	@FindBy(xpath = "//label[@for='radio_1M']")
+	private WebElement rd_OneMExcess;
+	
+	@FindBy(xpath = "//label[@for='radio_2M']")
+	private WebElement rd_TwoMExcess;
+	
+	@FindBy(xpath = "//label[@for='radio_3M']")
+	private WebElement rd_ThreeMExcess;
+	
+	@FindBy(xpath = "//label[@for='rdoFWCIxs']")
 	private WebElement rdo_FWCIbutton;
 
-	@FindBy(xpath = "//label[@for='rdoClearBlue']")
+	@FindBy(xpath = "//label[@for='rdoClearBluexs']")
 	private WebElement rdo_CBbutton;
 	
 	@FindBy(xpath = "//input[@id='btnSave']")
@@ -281,8 +298,9 @@ public class ObjectRepository {
 	@FindBy(xpath = "//input[@id='lnkDownloadFWCIQuote']")
 	private WebElement lnk_DownloadFWCIQuote;
 	
-	@FindBy(xpath = "//input[@id='lnkDownloadCBQuote']")
-	private WebElement lnk_DownloadCBQuote;
+	//@FindBy(xpath = "//input[@id='lnkDownloadCBQuote']")
+	@FindBy(xpath = "//input[@id='btnDownloadQuote']")
+	private WebElement btnDownloadQuote;
 
 	@FindBy(xpath = "//label[@id='lblQuoteNo']")
 	private WebElement lbl_QuoteNo;
@@ -990,6 +1008,9 @@ public class ObjectRepository {
 	@FindBy (xpath="//input[@id='txtIRPMCTR']")
 	public WebElement txtUWIRPMCTR;
 	
+	@FindBy (xpath="//label[@for='chkAllowExcess']")
+	public WebElement chkAllowExcess;
+	
 	@FindBy (xpath="//label[@for='chkConsentToRate']")
 	public WebElement chkConsentToRate;
 	
@@ -1398,8 +1419,8 @@ public class ObjectRepository {
 		return lnk_DownloadFWCIQuote;
 	}
 	
-	public WebElement getlnk_DownloadCBQuote() {
-		return lnk_DownloadCBQuote;
+	public WebElement getbtnDownloadQuote() {
+		return btnDownloadQuote;
 	}
 	
 	public WebElement getlbl_QuoteNo() {
@@ -1464,6 +1485,21 @@ public class ObjectRepository {
 		return lbl_CBTotalPremium;
 	}
 	
+	public WebElement getrd_NoExcess() {
+	    return rd_NoExcess;
+	}
+	
+	public WebElement getrd_OneMExcess() {
+	    return rd_OneMExcess;
+	}
+	
+	public WebElement getrd_TwoMExcess() {
+	    return rd_TwoMExcess;
+	}
+	
+	public WebElement getrd_ThreeMExcess() {
+	    return rd_ThreeMExcess;
+	}
 	public WebElement getrdo_FWCIbutton() {
 		return rdo_FWCIbutton;
 	}
@@ -2215,6 +2251,10 @@ public class ObjectRepository {
   public WebElement getiframeCancelButton() {
 	  return iframeCancelButton;
   }
+  
+  public WebElement getchkAllowExcess() {
+	  return chkAllowExcess;
+  }
 
   //------------------AI GL -------------------------------------
   
@@ -2297,6 +2337,14 @@ public WebElement getCTReviewPayment() {
 
 public WebElement getProcessPayment() {
 	return ProcessPayment;
+}
+
+public WebElement getdrpTypeofRecord() {
+	return drpTypeofRecord;
+}
+
+public WebElement getdrpTypeofRecordP() {
+	return drpTypeofRecordP;
 }
 
 }
