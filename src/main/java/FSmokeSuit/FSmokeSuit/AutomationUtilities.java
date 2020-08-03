@@ -237,7 +237,7 @@ public class AutomationUtilities {
 		
 	   if (driver instanceof JavascriptExecutor) {
 	        //((JavascriptExecutor)driver).executeScript("arguments[0].style.border='6.5px solid rgb(0, 230, 0)'", element);
-		   ((JavascriptExecutor)driver).executeScript("arguments[0].setAttribute('style', 'background: Tan; border: 6.5px solid red;');",element);
+		   ((JavascriptExecutor)driver).executeScript("arguments[0].setAttribute('style', 'background: None; border: 4.5px solid red;');",element);
 	   }
 	    }
    
@@ -640,14 +640,14 @@ public class AutomationUtilities {
 	        	 } 	   
 		   }
 		
-		 buttonClick(driver, objectrepository.getbtnPTCheckout(),10, "Click on CheckOut");
-		 buttonClick(driver, objectrepository.getbtnCTPaymentInformation(),10, "Click on Payment Information");
+		 //buttonClick(driver, objectrepository.getbtnPTCheckout(),10, "Click on CheckOut");
+		 //buttonClick(driver, objectrepository.getbtnCTPaymentInformation(),10, "Click on Payment Information");
 		 
-		 sendKeysToTextField(driver,objectrepository.gettxtCardNumber(),"4111111111111111","Enter Card Number");//CardNumber
-		 sendKeysToTextField(driver,objectrepository.gettxtCVVNumber(),"123","Enter CVV Number");//CVVNumber
-		 sendKeysToTextField(driver,objectrepository.gettxtEmailAddress(),EmailID, "Enter Email ID");
-		 buttonClick(driver, objectrepository.getCTReviewPayment(),10,"Enter Review Payment");
-		 buttonClick(driver, objectrepository.getProcessPayment(),10,"Enter Process Payment");
+		 //sendKeysToTextField(driver,objectrepository.gettxtCardNumber(),"4111111111111111","Enter Card Number");//CardNumber
+		 //sendKeysToTextField(driver,objectrepository.gettxtCVVNumber(),"123","Enter CVV Number");//CVVNumber
+		 //sendKeysToTextField(driver,objectrepository.gettxtEmailAddress(),EmailID, "Enter Email ID");
+		 //buttonClick(driver, objectrepository.getCTReviewPayment(),10,"Enter Review Payment");
+		 //buttonClick(driver, objectrepository.getProcessPayment(),10,"Enter Process Payment");
 		 
 		 driver.close();
 		 driver.switchTo().window(parentWindow);

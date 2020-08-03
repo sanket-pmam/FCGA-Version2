@@ -503,7 +503,7 @@ public class WorkersCompensation extends AutomationUtilities {
 	    	 objWCloginpage.Agentlogin(driver);
 	    	 //AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
 	    	 
-	    	 objhomepage.SelectAgent(driver,objWCLoadManager.getAgentName()); 
+	    	 objhomepage.SelectAgent(driver,objWCLoadManager); 
 			 //AutomationUtilities.Screenshot(tcSnapPath, testCaseID);
 				
 	    	 objhomepage.checkFramePopup(driver);

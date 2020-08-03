@@ -17,25 +17,27 @@ public class HomePage extends AutomationUtilities {
 			objectrepository = ObjectRepository.getInstance(driver);
 		}
 		
-		public void SelectAgent(WebDriver driver,String sAgentName) throws InterruptedException, IOException 
+		public void SelectAgent(WebDriver driver,LoadManager objLoadManager) throws InterruptedException, IOException 
 		{
 			//waitforpageload(driver, 2);
 			//Thread.sleep(2000);
 			buttonClick(driver,objectrepository.getSelectAgent(),5,"Agency Contact");
 			
-			EsendKeysToTextField(driver,objectrepository.getSearchAgent(), sAgentName,"AgentName");
+			EsendKeysToTextField(driver,objectrepository.getSearchAgent(), objLoadManager.getAgentName(),"AgentName");
 			
 		    buttonClick(driver,objectrepository.getbtnContinue(), 10, "Continue Button");
 		    AutomationUtilities.LogSummary(LogPath,"Agent Name is selected Sucessfully");
 		}
 		
-		public void CreateNewQuote (WebDriver driver,LoadManager objGlLoadManager) throws InterruptedException, IOException 
+		public void CreateNewQuote (WebDriver driver,LoadManager objGlLoadManager,Underwriting objGLunderwriting) throws InterruptedException, IOException 
 		{
 			
 			if (objGlLoadManager.getChkConvertPolicy().equalsIgnoreCase("Yes")){
 				
 				buttonClick(driver,objectrepository.getdrpTypeofRecord(),10,"Type of Record");
 				buttonClick(driver,objectrepository.getdrpTypeofRecordP(),10,"Type of Record");
+				
+				objGLunderwriting.AgentSearch (driver,objGlLoadManager);
 				
 			}else {
 				

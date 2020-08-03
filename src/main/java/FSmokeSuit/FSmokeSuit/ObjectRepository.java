@@ -39,6 +39,9 @@ public class ObjectRepository {
 	@FindBy(xpath = "//select[@id='drpType']//option[@value='P']")
 	private WebElement drpTypeofRecordP;
 	
+	@FindBy (xpath="//a[contains(text(),'Convert Policy')]")
+	private WebElement btnConvertPolicy;
+	
 	@FindBy(xpath = "//button[@id='btnContinue']")
 	private WebElement btnContinue; 
 	
@@ -2345,6 +2348,10 @@ public WebElement getdrpTypeofRecord() {
 
 public WebElement getdrpTypeofRecordP() {
 	return drpTypeofRecordP;
+}
+
+public WebElement getbtnConvertPolicy() {
+	return btnConvertPolicy;
 }
 
 }

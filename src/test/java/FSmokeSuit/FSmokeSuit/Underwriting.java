@@ -81,14 +81,18 @@ public class Underwriting extends AutomationUtilities {
 	
 	}
 	
-	public void AgentSearch (WebDriver driver,LoadManager objUWGLLoadManager) throws InterruptedException, IOException {
+public void AgentSearch (WebDriver driver,LoadManager objUWGLLoadManager) throws InterruptedException, IOException {
 		
 		waitforpageload(driver, 5);
 		sendKeysToTextField(driver,objectrepository.gettxtAgentSearch(),AutomationUtilities.sBusinessName,"Frist Name");
 		buttonClick(driver,objectrepository.getbtnSearch(),20,"Search Record");
 		AutomationUtilities.ActionMessages(driver,objectrepository,objUWGLLoadManager.getActionMessages());
 		buttonClick(driver,objectrepository.getbtnAction(),10,"Action");
-		buttonClick(driver,objectrepository.getbtnEditQuote(),10,"Edit Quote");
+		if(objUWGLLoadManager.getChkConvertPolicy().equalsIgnoreCase("Yes")){
+			buttonClick(driver,objectrepository.getbtnConvertPolicy(),10,"Convert Policy");
+		}else {
+		   buttonClick(driver,objectrepository.getbtnEditQuote(),10,"Edit Quote");
+		}
 		waitforpageload(driver, 30);
 
 }

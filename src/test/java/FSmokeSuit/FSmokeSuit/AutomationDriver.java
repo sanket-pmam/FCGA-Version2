@@ -152,15 +152,10 @@ public class AutomationDriver {
 
 			objWebDriver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
 			objLoginPage.Agentlogin(objWebDriver);
-			//AutomationUtilities.Screenshot(TCSnapPath, TestCaseID);
-
-			objhomepage.SelectAgent(objWebDriver,objLoadManager.getAgentName());
-			//AutomationUtilities.Screenshot(TCSnapPath, TestCaseID);
+			objhomepage.SelectAgent(objWebDriver,objLoadManager);
 
 			objhomepage.checkFramePopup(objWebDriver);
-			
-			objhomepage.CreateNewQuote(objWebDriver,objLoadManager);
-			
+			objhomepage.CreateNewQuote(objWebDriver,objLoadManager,objunderwriting);
 			
 			if (objLoadManager.getProduct().contains("GL")) {
 

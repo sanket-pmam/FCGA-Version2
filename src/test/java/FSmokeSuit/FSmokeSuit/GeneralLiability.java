@@ -504,8 +504,8 @@ public class GeneralLiability extends AutomationUtilities {
 	        		Qvalue[1] = Qvalue[1].replaceFirst(" ","");
 	        		QuestionArray.add(Qvalue[1]);
 	        
-	        		AutomationUtilities.CheckDuplicateQuestions(QuestionArray,Qvalue[1]);
-	        		AutomationUtilities.ReadWriteClassSpecificQuestion (testcasePath,"TD_CSQ",i,AutomationUtilities.tcCount,Qvalue[1],LogPath,"Primary Underwriting Question (Expected)" );
+	        		//AutomationUtilities.CheckDuplicateQuestions(QuestionArray,Qvalue[1]);
+	        		//AutomationUtilities.ReadWriteClassSpecificQuestion (testcasePath,"TD_CSQ",i,AutomationUtilities.tcCount,Qvalue[1],LogPath,"Primary Underwriting Question (Expected)" );
 	        		driver.findElement(By.xpath("//tr[@class='visibleTr']//td[contains(text(),'Question')]//parent :: tr// following-sibling :: td//input[contains(@name,'question"+QClassSpecACount+"')]//parent :: div//label[starts-with(@for,'radio-')]")).click(); // no button
 	        	}
 		  }	
@@ -546,7 +546,7 @@ public class GeneralLiability extends AutomationUtilities {
     	 objGLloginpage.Agentlogin(driver);
     	// AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
     	 
-    	 objhomepage.SelectAgent(driver,objGlLoadManager.getAgentName()); 
+    	 objhomepage.SelectAgent(driver,objGlLoadManager); 
 		// AutomationUtilities.Screenshot(tcSnapPath, testCaseID);
 		
     	 objhomepage.checkFramePopup(driver);
@@ -641,26 +641,45 @@ public class GeneralLiability extends AutomationUtilities {
    
      }
      
-     if(!objGlLoadManager.getIncludeExcess().equalsIgnoreCase("No")) {
-    	 if(objGlLoadManager.getMExcess().equalsIgnoreCase("No Excess")) {
-    		 
-    		 buttonClick(driver,objectrepository.getrd_NoExcess(),10,"Click on No Excess Option");
-    		 
-    	 }else if (objGlLoadManager.getMExcess().equalsIgnoreCase("$1M Excess")){
-    		 
+     if(objGlLoadManager.getTCScenarios().equalsIgnoreCase("Referral Flow")) { 
+    	 if(objGlLoadManager.getUWModifyLL().equalsIgnoreCase("$1,000,000/$2,000,000")){
+           if(!objGlLoadManager.getIncludeExcess().equalsIgnoreCase("No")) {
+    	    if(objGlLoadManager.getMExcess().equalsIgnoreCase("No Excess")) {
+    		  buttonClick(driver,objectrepository.getrd_NoExcess(),10,"Click on No Excess Option");
+    	   }else if (objGlLoadManager.getMExcess().equalsIgnoreCase("$1M Excess")){
     		 buttonClick(driver,objectrepository.getrd_OneMExcess(),10,"Click on $1M Excess Option");
-    		 
     	 }else if (objGlLoadManager.getMExcess().equalsIgnoreCase("$2M Excess")){
-    		 
     		 buttonClick(driver,objectrepository.getrd_TwoMExcess(),10,"Click on $2M Excess Option");
-    		 
     	 }else if (objGlLoadManager.getMExcess().equalsIgnoreCase("$3M Excess")){
-    		 
     		 buttonClick(driver,objectrepository.getrd_ThreeMExcess(),10,"Click on $3M Excess Option");
-    		 
+    	   }
+         }
+       }else if(objGlLoadManager.getUWModifyLL().isBlank()) {
+    	   if(objGlLoadManager.getLiabilityLimit().equalsIgnoreCase("$1,000,000/$2,000,000")){
+               if(!objGlLoadManager.getIncludeExcess().equalsIgnoreCase("No")) {
+        	    if(objGlLoadManager.getMExcess().equalsIgnoreCase("No Excess")) {
+        		  buttonClick(driver,objectrepository.getrd_NoExcess(),10,"Click on No Excess Option");
+        	   }else if (objGlLoadManager.getMExcess().equalsIgnoreCase("$1M Excess")){
+        		 buttonClick(driver,objectrepository.getrd_OneMExcess(),10,"Click on $1M Excess Option");
+        	 }else if (objGlLoadManager.getMExcess().equalsIgnoreCase("$2M Excess")){
+        		 buttonClick(driver,objectrepository.getrd_TwoMExcess(),10,"Click on $2M Excess Option");
+        	 }else if (objGlLoadManager.getMExcess().equalsIgnoreCase("$3M Excess")){
+        		 buttonClick(driver,objectrepository.getrd_ThreeMExcess(),10,"Click on $3M Excess Option");
+        	   }
+             }
+           }
+         }
+       } else if(objGlLoadManager.getLiabilityLimit().equalsIgnoreCase("$1,000,000/$2,000,000")) {
+     	    if(objGlLoadManager.getMExcess().equalsIgnoreCase("No Excess")) {
+     		  buttonClick(driver,objectrepository.getrd_NoExcess(),10,"Click on No Excess Option");
+     	   }else if (objGlLoadManager.getMExcess().equalsIgnoreCase("$1M Excess")){
+     		 buttonClick(driver,objectrepository.getrd_OneMExcess(),10,"Click on $1M Excess Option");
+     	 }else if (objGlLoadManager.getMExcess().equalsIgnoreCase("$2M Excess")){
+     		 buttonClick(driver,objectrepository.getrd_TwoMExcess(),10,"Click on $2M Excess Option");
+     	 }else if (objGlLoadManager.getMExcess().equalsIgnoreCase("$3M Excess")){
+     		 buttonClick(driver,objectrepository.getrd_ThreeMExcess(),10,"Click on $3M Excess Option");
+     	   }
     	 }
-     }
-     
      
      if(objGlLoadManager.getTypeofCompany().equalsIgnoreCase("FWCI")) {
     	 
@@ -684,9 +703,8 @@ public class GeneralLiability extends AutomationUtilities {
      
      Thread.sleep(6000);
 	 buttonClick(driver,objectrepository.getbtn_CloseProducerFee(),10,"Click on Button Close");
-	 driver.manage().timeouts().implicitlyWait(35, TimeUnit.SECONDS);
+	 driver.manage().timeouts().implicitlyWait(18, TimeUnit.SECONDS);
 	 
-	 Thread.sleep(5000);
 	 AutomationUtilities.QuoteNo = objectrepository.getlbl_QuoteNo().getText();
 	 AutomationUtilities.LogSummary(LogPath,"Quote No: "+ objectrepository.getlbl_QuoteNo().getText());
 	 //System.out.println("Quote No: "+ objectrepository.getlbl_QuoteNo().getText());

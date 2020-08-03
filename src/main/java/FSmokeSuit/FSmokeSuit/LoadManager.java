@@ -155,6 +155,7 @@ public class LoadManager implements Cloneable {
 		private String IncludeExcess;
 		private String MExcess;
 		private String ChkConvertPolicy;
+		private String ConvertPolicyNo;
 		private String Product;
 		private String State;
 		private String County;
@@ -1941,6 +1942,13 @@ public class LoadManager implements Cloneable {
 		
 		public String getChkConvertPolicy(){
 			return ChkConvertPolicy;
+		}
+
+		public void setConvertPolicyNo(String sConvertPolicyNo) {
+			ConvertPolicyNo = sConvertPolicyNo;
+		}
+		public String getConvertPolicy(){
+			return ConvertPolicyNo;
 		}
 
 	}

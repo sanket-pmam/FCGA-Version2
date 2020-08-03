@@ -189,18 +189,19 @@ public class ExcelUtil {
                 	case 138: dataObj.setUWReferralRemark(cellObj.getStringCellValue()); break;
                 	case 139: dataObj.setIncludeExcess(cellObj.getStringCellValue()); break;
                 	case 140: dataObj.setChkConvertPolicy(cellObj.getStringCellValue()); break;
-                	case 141: dataObj.setActionMessages(cellObj.getStringCellValue()); break;
-                	case 142: dataObj.setPaymentOption(cellObj.getStringCellValue()); break;
-                	case 143: dataObj.setDepositPaymentMethod(cellObj.getStringCellValue()); break;
-                	case 144: dataObj.setCreditCardNumber(cellObj.getStringCellValue()); break;
-                	case 145: dataObj.setCVVNumber(cellObj.getStringCellValue()); break;
+                	case 141: dataObj.setConvertPolicyNo(cellObj.getStringCellValue()); break;
+                	case 142: dataObj.setActionMessages(cellObj.getStringCellValue()); break;
+                	case 143: dataObj.setPaymentOption(cellObj.getStringCellValue()); break;
+                	case 144: dataObj.setDepositPaymentMethod(cellObj.getStringCellValue()); break;
+                	case 145: dataObj.setCreditCardNumber(cellObj.getStringCellValue()); break;
+                	case 146: dataObj.setCVVNumber(cellObj.getStringCellValue()); break;
                 	
                 	//-----------------------------------------------------------------
                 	
-                	case 146: dataObj.setScriptStatus(cellObj.getStringCellValue()); break;   
-                	case 147: dataObj.setInsuredName(cellObj.getStringCellValue()); break;
-                	case 148: dataObj.setQuoteDate(cellObj.getStringCellValue()); break;
-                	case 149: dataObj.setQuoteNo(cellObj.getStringCellValue()); break;
+                	case 147: dataObj.setScriptStatus(cellObj.getStringCellValue()); break;   
+                	case 148: dataObj.setInsuredName(cellObj.getStringCellValue()); break;
+                	case 149: dataObj.setQuoteDate(cellObj.getStringCellValue()); break;
+                	case 150: dataObj.setQuoteNo(cellObj.getStringCellValue()); break;
                 	case 151: dataObj.setCountyCode(cellObj.getStringCellValue()); break;
                 	case 152: dataObj.setFWCIPremium(cellObj.getStringCellValue()); break;
                 	case 153: dataObj.setFWCIMGAPolicyFee(cellObj.getStringCellValue()); break;
