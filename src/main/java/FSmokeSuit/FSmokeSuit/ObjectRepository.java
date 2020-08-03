@@ -557,6 +557,9 @@ public class ObjectRepository {
 	@FindBy(xpath = "//label[@id='lblNumber']")
 	private WebElement txtPolicyNumber;
 	
+	@FindBy(xpath = "//label[@id='lblxsNumber']")
+	private WebElement txtXSPolicyNumber;
+	
 	@FindBy(xpath = "//a[contains(text(),'PRINT EVIDENCE OF INSURANCE')]")
 	private WebElement lnkDownloadEvidence;
 	
@@ -1333,6 +1336,9 @@ public class ObjectRepository {
 	}
 	public WebElement gettxtPolicyNumber() {
 		return txtPolicyNumber;
+	}
+	public WebElement gettxtXSPolicyNumber() {
+		return txtXSPolicyNumber;
 	}
 	public WebElement gettxtIndustrial() {
 		return txtIndustrial;

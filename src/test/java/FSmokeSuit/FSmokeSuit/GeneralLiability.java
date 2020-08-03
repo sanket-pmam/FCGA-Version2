@@ -1517,7 +1517,9 @@ public class GeneralLiability extends AutomationUtilities {
 		
 		
 		AutomationUtilities.PolicyNo =objectrepository.gettxtPolicyNumber().getText() ;
+		AutomationUtilities.XSPolicyNo =objectrepository.gettxtXSPolicyNumber().getText() ;
 		AutomationUtilities.LogSummary(LogPath,"GL Policy Number :"+AutomationUtilities.PolicyNo);
+		AutomationUtilities.LogSummary(LogPath,"XS Policy Number :"+AutomationUtilities.XSPolicyNo);
 		AutomationUtilities.LogSummary(LogPath,"Policy Issuance is completed successfully");
 	}
 	

@@ -61,6 +61,7 @@ public class AutomationUtilities {
    public static String tcSnapPath;
    public static String QuoteNo = "";
    public static String PolicyNo= "";
+   public static String XSPolicyNo = "";
    public static WebDriverWait wait=null;
    public static Robot rbt;
    public static String sBusinessName;
@@ -689,7 +690,7 @@ public class AutomationUtilities {
    
     public static void ReportGeneration(String ReportPath, String TCSheetName, LoadManager objLoadManager, String testcaseid2, 
     		String product, String tcScenarios,String tcClassCode, String tcClassCodeDesc, String insuredname,String IndustialQ,
-    		String Reason, String Address, String SmartyStreet, String quoteNo2, String policyNo2, String status,String starttime,String endtime) {
+    		String Reason, String Address, String SmartyStreet, String quoteNo2, String policyNo2, String XSpolicyNo2,String status,String starttime,String endtime) {
 	
 	AutomationUtilities.ReportExcelUpdate(ReportPath, TCSheetName,testcaseid2, testcaseid2, objLoadManager,
 			"TC ID");
@@ -714,7 +715,9 @@ public class AutomationUtilities {
 	AutomationUtilities.ReportExcelUpdate(ReportPath, TCSheetName,"0", quoteNo2, objLoadManager,
 			"Quote No");
 	AutomationUtilities.ReportExcelUpdate(ReportPath, TCSheetName,"0", policyNo2, objLoadManager,
-			"Policy No");
+			"GL/WC Policy No");
+	AutomationUtilities.ReportExcelUpdate(ReportPath, TCSheetName,"0", XSpolicyNo2, objLoadManager,
+			"XS Policy No");
 	AutomationUtilities.ReportExcelUpdate(ReportPath, TCSheetName,"0", status, objLoadManager,
 			"Status");
 	AutomationUtilities.ReportExcelUpdate(ReportPath, TCSheetName,"0", starttime, objLoadManager,

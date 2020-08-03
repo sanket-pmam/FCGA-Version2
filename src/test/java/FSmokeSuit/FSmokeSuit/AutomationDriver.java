@@ -202,7 +202,7 @@ public class AutomationDriver {
 			AutomationUtilities.ReportGeneration(TCReportPath,TCRPSHEETNAME,objLoadManager,objLoadManager.getTestCaseId(),Product,
 				objLoadManager.getTCScenarios(),AutomationUtilities.sClassCode,AutomationUtilities.sClassCodeDesc,AutomationUtilities.sBusinessName,
 				AutomationUtilities.IndustialQ,AutomationUtilities.sReferralReason,AutomationUtilities.sAddress,AutomationUtilities.SmartyStreet,  
-				AutomationUtilities.QuoteNo,AutomationUtilities.PolicyNo,"Pass",StartTime,EndTime);
+				AutomationUtilities.QuoteNo,AutomationUtilities.PolicyNo,AutomationUtilities.XSPolicyNo,"Pass",StartTime,EndTime);
 			
 			StartTime = EndTime;
 			
@@ -246,7 +246,7 @@ public class AutomationDriver {
 			AutomationUtilities.ReportGeneration(TCReportPath,TCRPSHEETNAME,objLoadManager,objLoadManager.getTestCaseId(),Product,
 					objLoadManager.getTCScenarios(),AutomationUtilities.sClassCode,AutomationUtilities.sClassCodeDesc,AutomationUtilities.sBusinessName,
 					AutomationUtilities.IndustialQ,AutomationUtilities.sReferralReason,AutomationUtilities.sAddress,AutomationUtilities.SmartyStreet,  
-					AutomationUtilities.QuoteNo,AutomationUtilities.PolicyNo,"Fail",StartTime,EndTime);
+					AutomationUtilities.QuoteNo,AutomationUtilities.PolicyNo,AutomationUtilities.XSPolicyNo,"Fail",StartTime,EndTime);
 			
 			StartTime = EndTime;
 				
