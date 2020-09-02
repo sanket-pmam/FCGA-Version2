@@ -155,7 +155,7 @@ public class AutomationDriver {
 			objhomepage.SelectAgent(objWebDriver,objLoadManager);
 
 			objhomepage.checkFramePopup(objWebDriver);
-			objhomepage.CreateNewQuote(objWebDriver,objLoadManager,objunderwriting);
+			objhomepage.CreateNewQuote(objWebDriver,objLoadManager,objunderwriting,Product);
 			
 			if (objLoadManager.getProduct().contains("GL")) {
 
@@ -176,11 +176,12 @@ public class AutomationDriver {
 				}
 
 				objgeneralliability.ClassSpecificQues(objWebDriver,testcasePath, "No");
-				objgeneralliability.Quote(objLoadManager,objLoginPage,objunderwriting,objhomepage,objWebDriver);
+				objgeneralliability.Quote(objLoadManager,objLoginPage,objunderwriting,objhomepage,"Quote",objWebDriver);
 				objgeneralliability.WriteGLQuoteDetails (testcasePath,TCSheetName,objLoadManager);
 				objgeneralliability.Application(objLoadManager, objWebDriver);
 				objgeneralliability.PolicyIssue(objLoadManager, objWebDriver);
 				objgeneralliability.ThankYouPage(objLoadManager, objWebDriver);
+				objgeneralliability.GLPolicySummary(objLoadManager,objunderwriting,"Policy",objWebDriver);
 
 			} else {
 
@@ -190,7 +191,7 @@ public class AutomationDriver {
 						"Insured Name");
 				objworkerscompensation.GeneralQuestions(objLoadManager,industrialq, objWebDriver);
 				//objworkerscompensation.Losses(objLoadManager, objWebDriver);
-				//objworkerscompensation.Application(objLoadManager, objWebDriver, AutomationUtilities.sBusinessName,objLoginPage,objunderwriting,objhomepage,industrialq,testcasePath);
+				//objworkerscompensation.Application(objLoadManager, objWebDriver, AutomationUtilities.sBusinessName,"Quote",objLoginPage,objunderwriting,objhomepage,industrialq,testcasePath);
 				//objworkerscompensation.PolicyIssue(objLoadManager, objWebDriver);
 				//objworkerscompensation.ThankYouPage(objLoadManager, objWebDriver);
 			}
@@ -201,8 +202,9 @@ public class AutomationDriver {
 			EndTime = myFormatObj.format(myDateObj).toString();
 			AutomationUtilities.ReportGeneration(TCReportPath,TCRPSHEETNAME,objLoadManager,objLoadManager.getTestCaseId(),Product,
 				objLoadManager.getTCScenarios(),AutomationUtilities.sClassCode,AutomationUtilities.sClassCodeDesc,AutomationUtilities.sBusinessName,
-				AutomationUtilities.IndustialQ,AutomationUtilities.sReferralReason,AutomationUtilities.sAddress,AutomationUtilities.SmartyStreet,  
-				AutomationUtilities.QuoteNo,AutomationUtilities.PolicyNo,AutomationUtilities.XSPolicyNo,"Pass",StartTime,EndTime);
+				AutomationUtilities.IndustialQ,AutomationUtilities.ClassCodeSTP,AutomationUtilities.sReferralReason,AutomationUtilities.sAddress,AutomationUtilities.SmartyStreet,  
+				AutomationUtilities.QuoteNo,AutomationUtilities.QuoteInsuranceName,AutomationUtilities.INSStatus,AutomationUtilities.PolicyNo,AutomationUtilities.XSPolicyNo,AutomationUtilities.GLInsuranceCompany,AutomationUtilities.XSInsuranceCompany,"Pass",
+				StartTime,EndTime);
 			
 			StartTime = EndTime;
 			
@@ -245,8 +247,9 @@ public class AutomationDriver {
 			EndTime = myFormatObj.format(myDateObj).toString();
 			AutomationUtilities.ReportGeneration(TCReportPath,TCRPSHEETNAME,objLoadManager,objLoadManager.getTestCaseId(),Product,
 					objLoadManager.getTCScenarios(),AutomationUtilities.sClassCode,AutomationUtilities.sClassCodeDesc,AutomationUtilities.sBusinessName,
-					AutomationUtilities.IndustialQ,AutomationUtilities.sReferralReason,AutomationUtilities.sAddress,AutomationUtilities.SmartyStreet,  
-					AutomationUtilities.QuoteNo,AutomationUtilities.PolicyNo,AutomationUtilities.XSPolicyNo,"Fail",StartTime,EndTime);
+					AutomationUtilities.IndustialQ,AutomationUtilities.ClassCodeSTP,AutomationUtilities.sReferralReason,AutomationUtilities.sAddress,AutomationUtilities.SmartyStreet,  
+					AutomationUtilities.QuoteNo,AutomationUtilities.QuoteInsuranceName,AutomationUtilities.INSStatus,AutomationUtilities.PolicyNo,AutomationUtilities.XSPolicyNo,
+					AutomationUtilities.GLInsuranceCompany,AutomationUtilities.XSInsuranceCompany,"Fail",StartTime,EndTime);
 			
 			StartTime = EndTime;
 				

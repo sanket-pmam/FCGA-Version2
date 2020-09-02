@@ -81,17 +81,40 @@ public class Underwriting extends AutomationUtilities {
 	
 	}
 	
-public void AgentSearch (WebDriver driver,LoadManager objUWGLLoadManager) throws InterruptedException, IOException {
+public void AgentSearch (WebDriver driver,LoadManager objUWGLLoadManager, String recordtype) throws InterruptedException, IOException {
 		
 		waitforpageload(driver, 5);
-		sendKeysToTextField(driver,objectrepository.gettxtAgentSearch(),AutomationUtilities.sBusinessName,"Frist Name");
-		buttonClick(driver,objectrepository.getbtnSearch(),20,"Search Record");
-		AutomationUtilities.ActionMessages(driver,objectrepository,objUWGLLoadManager.getActionMessages());
-		buttonClick(driver,objectrepository.getbtnAction(),10,"Action");
-		if(objUWGLLoadManager.getChkConvertPolicy().equalsIgnoreCase("Yes")){
+		
+		if (recordtype == "Policy") {
+			
+			sendKeysToTextField(driver,objectrepository.gettxtAgentSearch(),AutomationUtilities.PolicyNo,"Frist Name");
+			buttonClick(driver,objectrepository.getbtnSearch(),20,"Search Record");
+			buttonClick(driver,objectrepository.getPolicySummaryLink(),20,"Policy Summary");
+			AutomationUtilities.GLInsuranceCompany = objectrepository.getInsuranceCompanyName().getText();
+			
+			if(!AutomationUtilities.XSPolicyNo.isBlank()) {
+				
+				sendKeysToTextField(driver,objectrepository.gettxtAgentSearch(),AutomationUtilities.XSPolicyNo,"Frist Name");
+				buttonClick(driver,objectrepository.getbtnSearch(),20,"Search Record");
+				buttonClick(driver,objectrepository.getPolicySummaryLink(),20,"Policy Summary");
+				AutomationUtilities.XSInsuranceCompany = objectrepository.getInsuranceCompanyName().getText();
+				
+			}
+			
+		}else if (recordtype == "Quote") {
+			
+			sendKeysToTextField(driver,objectrepository.gettxtAgentSearch(),AutomationUtilities.sBusinessName,"Frist Name");
+			buttonClick(driver,objectrepository.getbtnSearch(),20,"Search Record");
+		    AutomationUtilities.ActionMessages(driver,objectrepository,objUWGLLoadManager.getActionMessages());
+		    buttonClick(driver,objectrepository.getbtnAction(),10,"Action");
+		    buttonClick(driver,objectrepository.getbtnEditQuote(),10,"Edit Quote");
+		    
+		}else if(objUWGLLoadManager.getChkConvertPolicy().equalsIgnoreCase("Yes")){
+			sendKeysToTextField(driver,objectrepository.gettxtAgentSearch(),AutomationUtilities.sBusinessName,"Frist Name");
+			buttonClick(driver,objectrepository.getbtnSearch(),20,"Search Record");
+		    AutomationUtilities.ActionMessages(driver,objectrepository,objUWGLLoadManager.getActionMessages());
+		    buttonClick(driver,objectrepository.getbtnAction(),10,"Action");
 			buttonClick(driver,objectrepository.getbtnConvertPolicy(),10,"Convert Policy");
-		}else {
-		   buttonClick(driver,objectrepository.getbtnEditQuote(),10,"Edit Quote");
 		}
 		waitforpageload(driver, 30);
 

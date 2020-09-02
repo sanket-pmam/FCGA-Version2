@@ -64,6 +64,15 @@ public class ObjectRepository {
 	@FindBy(xpath = "//button[@id='BtnSave']")
 	private WebElement btnHContinue;
 	
+	@FindBy(xpath = "//a[@id='lnkRecords']")
+	private WebElement lnkRecords;
+	
+	@FindBy(xpath = "//select[@id='drpType']")
+	private WebElement RecordsdrpType;
+	
+	@FindBy(xpath = "//select[@id='drpType']/option[@value='P']")
+	private WebElement RecordsdrpPolicy;
+	
 	@FindBy (xpath="//input[starts-with(@value,'SAVE')]")
 	public WebElement btnsaveandcontinue;
 
@@ -932,6 +941,12 @@ public class ObjectRepository {
 	
 	@FindBy (xpath="//input[@id='txtSearch']")
 	public WebElement txtAgentSearch;
+	
+	@FindBy (xpath="//table[@id='tblAccount']/tbody/tr/td[2]/a")
+	public WebElement PolicySummaryLink;
+	
+	@FindBy (xpath="//label[@id='lblInsuranceCompany']")
+	public WebElement InsuranceCompanyName;
 	
 	@FindBy (xpath="//input[@id='btnSearch']")
 	public WebElement btnSearch;
@@ -2167,6 +2182,14 @@ public class ObjectRepository {
 	  return txtAgentSearch;
   }
   
+  public WebElement getPolicySummaryLink() {
+      return PolicySummaryLink;
+  }
+  
+  public WebElement getInsuranceCompanyName() {
+    return InsuranceCompanyName;
+  }
+  
   public WebElement getWCReferralText() {
 	  return WCReferralText;
   }
@@ -2360,4 +2383,15 @@ public WebElement getbtnConvertPolicy() {
 	return btnConvertPolicy;
 }
 
+public WebElement getlnkRecords() {
+	return lnkRecords;
+}
+
+public WebElement getRecordsdrpType() {
+	return RecordsdrpType;
+}
+
+public WebElement getRecordsdrpPolicy() {
+	return RecordsdrpPolicy;
+}
 }

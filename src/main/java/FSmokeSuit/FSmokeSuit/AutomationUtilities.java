@@ -86,7 +86,12 @@ public class AutomationUtilities {
    public static String InputWSForms;
    public static String DeclineReason;
    public static String SpecialChar;
-   
+   public static String ClassCodeSTP;
+   public static String GLInsuranceCompany;
+   public static String XSInsuranceCompany;
+   public static String QuoteInsuranceName;
+   public static String INSStatus;
+	
 	static Function<WebDriver, Boolean> documentWait = new Function<WebDriver, Boolean>() {
 		public Boolean apply(WebDriver driver) {
 			return (Boolean) ((JavascriptExecutor) driver).executeScript("return document.readyState=='complete'")
@@ -94,6 +99,10 @@ public class AutomationUtilities {
 					: false;
 		}
 	};
+	
+	
+
+	
 	
 	
    public static void waitforpageload(WebDriver driver, int iTimeOut) {
@@ -690,7 +699,8 @@ public class AutomationUtilities {
    
     public static void ReportGeneration(String ReportPath, String TCSheetName, LoadManager objLoadManager, String testcaseid2, 
     		String product, String tcScenarios,String tcClassCode, String tcClassCodeDesc, String insuredname,String IndustialQ,
-    		String Reason, String Address, String SmartyStreet, String quoteNo2, String policyNo2, String XSpolicyNo2,String status,String starttime,String endtime) {
+    		String CCStp,String Reason, String Address, String SmartyStreet, String quoteNo2, String QuoteIName, String INSStatus,
+    		String policyNo2, String XSpolicyNo2,String GLICompany, String XSICompany, String status,String starttime,String endtime) {
 	
 	AutomationUtilities.ReportExcelUpdate(ReportPath, TCSheetName,testcaseid2, testcaseid2, objLoadManager,
 			"TC ID");
@@ -706,6 +716,8 @@ public class AutomationUtilities {
 			"Insured Name");
 	AutomationUtilities.ReportExcelUpdate(ReportPath, TCSheetName,"0", IndustialQ, objLoadManager,
 			"Industial Question Count");
+	AutomationUtilities.ReportExcelUpdate(ReportPath, TCSheetName,"0", CCStp, objLoadManager,
+			"Class Code STP");
 	AutomationUtilities.ReportExcelUpdate(ReportPath, TCSheetName,"0", Reason, objLoadManager,
 			"Referral Reason");
 	AutomationUtilities.ReportExcelUpdate(ReportPath, TCSheetName,"0", Address, objLoadManager,
@@ -714,10 +726,18 @@ public class AutomationUtilities {
 			"Smarty Street");
 	AutomationUtilities.ReportExcelUpdate(ReportPath, TCSheetName,"0", quoteNo2, objLoadManager,
 			"Quote No");
+	AutomationUtilities.ReportExcelUpdate(ReportPath, TCSheetName,"0", QuoteIName, objLoadManager,
+			"Quote Insurance Company Name");
+	AutomationUtilities.ReportExcelUpdate(ReportPath, TCSheetName,"0", INSStatus, objLoadManager,
+			"Quote Insurance Company Status");
 	AutomationUtilities.ReportExcelUpdate(ReportPath, TCSheetName,"0", policyNo2, objLoadManager,
 			"GL/WC Policy No");
 	AutomationUtilities.ReportExcelUpdate(ReportPath, TCSheetName,"0", XSpolicyNo2, objLoadManager,
 			"XS Policy No");
+	AutomationUtilities.ReportExcelUpdate(ReportPath, TCSheetName,"0", GLICompany, objLoadManager,
+			"GL/WC Insurance Company Name");
+	AutomationUtilities.ReportExcelUpdate(ReportPath, TCSheetName,"0", XSICompany, objLoadManager,
+			"XS Insurance Company Name");
 	AutomationUtilities.ReportExcelUpdate(ReportPath, TCSheetName,"0", status, objLoadManager,
 			"Status");
 	AutomationUtilities.ReportExcelUpdate(ReportPath, TCSheetName,"0", starttime, objLoadManager,
@@ -739,7 +759,12 @@ public class AutomationUtilities {
 		AutomationUtilities.sAddress="";
 		AutomationUtilities.SmartyStreet="";  
 		AutomationUtilities.QuoteNo="";
-		AutomationUtilities.PolicyNo ="";
+		AutomationUtilities.PolicyNo="";
+		AutomationUtilities.XSPolicyNo="";
+		AutomationUtilities.QuoteInsuranceName= "";
+		AutomationUtilities.INSStatus="";
+		AutomationUtilities.GLInsuranceCompany="";
+		AutomationUtilities.XSInsuranceCompany = "";
 	}
 
 	static void copyFileUsingStream(File source, File dest)  {

@@ -29,16 +29,17 @@ public class HomePage extends AutomationUtilities {
 		    AutomationUtilities.LogSummary(LogPath,"Agent Name is selected Sucessfully");
 		}
 		
-		public void CreateNewQuote (WebDriver driver,LoadManager objGlLoadManager,Underwriting objGLunderwriting) throws InterruptedException, IOException 
+		public void CreateNewQuote (WebDriver driver,LoadManager objGlLoadManager,Underwriting objGLunderwriting,String Product) throws InterruptedException, IOException 
 		{
 			
-			if (objGlLoadManager.getChkConvertPolicy().equalsIgnoreCase("Yes")){
+			if (Product =="GL") {
+				if (objGlLoadManager.getChkConvertPolicy().equalsIgnoreCase("Yes")){
 				
 				buttonClick(driver,objectrepository.getdrpTypeofRecord(),10,"Type of Record");
 				buttonClick(driver,objectrepository.getdrpTypeofRecordP(),10,"Type of Record");
 				
-				objGLunderwriting.AgentSearch (driver,objGlLoadManager);
-				
+				objGLunderwriting.AgentSearch (driver,objGlLoadManager,"Both");
+				}
 			}else {
 				
 			buttonClick(driver,objectrepository.getbtnNewQuote(),10,"New Quote Button is clicked");

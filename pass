@@ -5,73 +5,12 @@
 4: ========********************************========
 5: New Quote is getting Created.
 6: TC - 1-Straight Through Flow is getting Executed.
-7: Screenshot saved successfully
-8: URL: https://dev_winston.fwcins.com/FWCPortal/User/Login/Login.html
-9: Agent UserName: Acentria36 / Agent Password:AI495!
-10: Current Label : Username is completely working.
-11: Current Label : Password is completely working.
-12:  Current Label : Login is completely working.
-13: Agent Log In is done Sucessfully
-14: Screenshot saved successfully
-15:  Current Label : Agency Contact is completely working.
-16: Current Label : AgentName is completely working.
-17:  Current Label : Continue Button is completely working.
-18: Agent Name is selected Sucessfully
-19: Screenshot saved successfully
-20:  Current Label : New Quote Button is clicked is completely working.
-21:  Current Label : Continue Button is clicked is completely working.
-22:  Current Label : Close button is saved sucessfully. is completely working.
-23:  Current Label : WC Radio Button is clicked is completely working.
-24: Current Label : FEIN Number is Entered is completely working.
-25:  Current Label : Continue Button is clicked is completely working.
-26: New Quote is going to be created
-27:  Current Label : Click on State is completely working.
-28: Current Label : State Name is completely working.
-29: Current Label : Class Code is completely working.
-30:  Current Label : Click on Continue is completely working.
-31: Screenshot saved successfully
-32: Current Label : Business Name is completely working.
-33: Insured Name / Business Name is : FCGA AUTM-290247362
-34:  Current Label : Click on Legal Entity is completely working.
-35: Current Label : Legal Entity is completely working.
-36: Current Label : Agent Entered DBA Name as Same as Business Name is completely working.
-37: Current Label : Address1 is completely working.
-38: Current Label : City is completely working.
-39: Screenshot saved successfully
-40:  Current Label : Click on Use as is is completely working.
-41:  Current Label : Click on State is completely working.
-42: Current Label : AddressState is completely working.
-43: Current Label : Zipcode is completely working.
-44: Current Label : Bussiness Start Date is entered is completely working.
-45:  Current Label : Click on Address 2 is completely working.
-46: Screenshot saved successfully
-47:  Current Label : Click on EmployerLimit is completely working.
-48: Current Label : Employer Limit is completely working.
-49: Current Label : Effective date is been entered is completely working.
-50: Screenshot saved successfully
-51: Current Label : Current Experience Mod is entered is completely working.
-52: Current Label : Owner/Officer First Name is been entered is completely working.
-53: Current Label : Owner/Officer Last Name is been entered is completely working.
-54: Current Label : Owner/Officer percentage is been entered is completely working.
-55: Screenshot saved successfully
-56:  Current Label : Include radio button is clicked is completely working.
-57: Current Label : Description is been entered is completely working.
-58: Current Label : Full time Employee is been entered is completely working.
-59: Current Label : Part time Employee is been entered is completely working.
-60: Current Label : Gross Annual Payroll is been entered is completely working.
-61: Screenshot saved successfully
-62: Current Label : Include Owner Class code is been entered is completely working.
-63:  Current Label : Owner WC FT Employee button is clicked is completely working.
-64: Current Label : Owner FT Employee is been entered is completely working.
-65: Current Label : Owner FT Employee is been entered is completely working.
-66: Screenshot saved successfully
-67:  Current Label : Next button is saved sucessfully. is completely working.
-68: Screenshot saved successfully
-69:  Current Label : Click on Use as is is completely working.
-70: System is showing validation message for DBA -- DBA Name cannot be same as Business Name of Insured
-71: Current Label : Agent Entered DBA Name as different as Business Name is completely working.
-72: Screenshot saved successfully
-73:  Current Label : Next button is saved sucessfully. is completely working.
-74: Screenshot saved successfully
-75: Business Summary have been completed Sucessfully
-76: Bedding Plants is clicked
+7: URL: https://dev_winston.fwcins.com/FWCPortal/User/Login/Login.html
+8: Agent UserName: Acentria36 / Agent Password:AI495!
+9: Agent Log In is done Sucessfully
+10: Agent Name is selected Sucessfully
+11: New Quote is going to be created
+12: Insured Name / Business Name is : FCGA AUTM-+=-~!@#$%^&*()_905909170
+13: Business Summary have been completed Successfully
+14: Industrial Question Count is : 16
+15: Bedding Plants is clicked

@@ -329,14 +329,16 @@ public class WorkersCompensation extends AutomationUtilities {
 		
 		waitforpageload(driver, 15);
 		//String ClassCode = objWCLoadManager.getWCClassCode();
-		/*String ReferalReason = driver.findElement(By.xpath("//input[@id='hdnReferralObject']")).getAttribute("value");
+		String ReferalReason = driver.findElement(By.xpath("//input[@id='hdnReferralObject']")).getAttribute("value").toString();
 		if(ReferalReason.isEmpty()) {
 			AutomationUtilities.LogSummary(LogPath, "No Referral Reason Found");
 			System.out.println("No Referral Reason Found");
+			AutomationUtilities.ClassCodeSTP = "Yes";
 		}else {
 		    AutomationUtilities.LogSummary(LogPath, "Referral Reason: "+ReferalReason);
 		    System.out.println("Referral Reason Found, Referral Reason: "+ ReferalReason);
-		}*/
+		    AutomationUtilities.ClassCodeSTP = "No";
+		}
 		
 		javascriptExecutorClick(driver, objectrepository.rdQuestion_1(), "Question-1");
 		javascriptExecutorClick(driver, objectrepository.rdQuestion_2(), "Question-2");
@@ -421,7 +423,7 @@ public class WorkersCompensation extends AutomationUtilities {
 		AutomationUtilities.LogSummary(LogPath, "Losses Page has been completed");
 	}
 
-	public void Application(LoadManager objWCLoadManager, WebDriver driver, String sBusinessNameValue,LoginPage objWCloginpage,Underwriting objWCunderwriting,HomePage objhomepage,WCIndustrialQ industrialq, String testcasePath) throws IOException, InterruptedException, AWTException, UnsupportedFlavorException {
+	public void Application(LoadManager objWCLoadManager, WebDriver driver, String sBusinessNameValue,String recordtype, LoginPage objWCloginpage,Underwriting objWCunderwriting,HomePage objhomepage,WCIndustrialQ industrialq, String testcasePath) throws IOException, InterruptedException, AWTException, UnsupportedFlavorException {
 
 		waitforpageload(driver, 15);
  
@@ -507,7 +509,7 @@ public class WorkersCompensation extends AutomationUtilities {
 			 //AutomationUtilities.Screenshot(tcSnapPath, testCaseID);
 				
 	    	 objhomepage.checkFramePopup(driver);
-	    	 objWCunderwriting.AgentSearch(driver,objWCLoadManager);
+	    	 objWCunderwriting.AgentSearch(driver,objWCLoadManager,recordtype);
 	    	 //AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
 		
 		}

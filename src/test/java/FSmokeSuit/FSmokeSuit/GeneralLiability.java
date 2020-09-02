@@ -517,7 +517,7 @@ public class GeneralLiability extends AutomationUtilities {
         AutomationUtilities.LogSummary(LogPath,"Class Specific have been completed Sucessfully");
 	}
 
-	public void Quote (LoadManager objGlLoadManager,LoginPage objGLloginpage,Underwriting objGLunderwriting,HomePage objhomepage, WebDriver driver) throws IOException, InterruptedException, AWTException, UnsupportedFlavorException {
+	public void Quote (LoadManager objGlLoadManager,LoginPage objGLloginpage,Underwriting objGLunderwriting,HomePage objhomepage,String recordtype, WebDriver driver) throws IOException, InterruptedException, AWTException, UnsupportedFlavorException {
 		
 	waitforpageload(driver, 15);
      
@@ -550,7 +550,7 @@ public class GeneralLiability extends AutomationUtilities {
 		// AutomationUtilities.Screenshot(tcSnapPath, testCaseID);
 		
     	 objhomepage.checkFramePopup(driver);
-    	 objGLunderwriting.AgentSearch(driver,objGlLoadManager);
+    	 objGLunderwriting.AgentSearch(driver,objGlLoadManager,recordtype);
     	// AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
     	 waitforpageload(driver, 115);
      }
@@ -680,6 +680,14 @@ public class GeneralLiability extends AutomationUtilities {
      		 buttonClick(driver,objectrepository.getrd_ThreeMExcess(),10,"Click on $3M Excess Option");
      	   }
     	 }
+     
+     AutomationUtilities.QuoteInsuranceName = objectrepository.getrdo_FWCIbutton().getText()+" & "+ objectrepository.getrdo_CBbutton().getText();
+     
+     if(objectrepository.getrdo_CBbutton().getText().toString() == "Clear Blue (A-)") {
+    	 AutomationUtilities.INSStatus = "Pass";
+     }else {
+    	 AutomationUtilities.INSStatus = "Fail";
+     }
      
      if(objGlLoadManager.getTypeofCompany().equalsIgnoreCase("FWCI")) {
     	 
@@ -1511,7 +1519,7 @@ public class GeneralLiability extends AutomationUtilities {
 			AutomationUtilities.OnlineTraverse (driver,objectrepository,objGlLoadManager.getCreditCardNumber(),objGlLoadManager.getCVVNumber(),objGlLoadManager.getBusinessEmail(),"Invoice");
 		}
 		
-		buttonClick(driver,objectrepository.getlnkDownloadEvidence(),10,"Clickon EOI Document");
+		buttonClick(driver,objectrepository.getlnkDownloadEvidence(),10,"Click on EOI Document");
 		AutomationUtilities.Traverse(driver,"EOI Document");
 	    //AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
 		
@@ -1523,6 +1531,19 @@ public class GeneralLiability extends AutomationUtilities {
 		AutomationUtilities.LogSummary(LogPath,"Policy Issuance is completed successfully");
 	}
 	
+	public void GLPolicySummary(LoadManager objLoadManager,Underwriting objGLunderwriting,String recordtype,
+			WebDriver objWebDriver) throws InterruptedException, IOException {
+		
+		buttonClick(driver,objectrepository.getlnkRecords(),10,"Click on Record Link");
+		waitforpageload(driver, 20);
+		
+		buttonClick(driver,objectrepository.getRecordsdrpType(),10,"Click drop type");
+		buttonClick(driver,objectrepository.getRecordsdrpPolicy(),10, "Click drop down Policy");
+		waitforpageload(driver, 20);
+		
+		objGLunderwriting.AgentSearch(driver,objLoadManager,recordtype);
+    	 waitforpageload(driver, 115);
+	}	 
 	public void WriteGLQuoteDetails (String testcasePath, String TCSheetName,LoadManager objGlLoadManager) {
 		
 	AutomationUtilities.ExcelUpdate(testcasePath, TCSheetName, AutomationUtilities.sBusinessName, objGlLoadManager,
@@ -1558,5 +1579,6 @@ public class GeneralLiability extends AutomationUtilities {
 						"CB Producer Fee");
 		 }
 	 }
-}	 
+}
+
 }
