@@ -190,8 +190,8 @@ public class AutomationDriver {
 				AutomationUtilities.ExcelUpdate(testcasePath, TCSheetName, AutomationUtilities.sBusinessName, objLoadManager,
 						"Insured Name");
 				objworkerscompensation.GeneralQuestions(objLoadManager,industrialq, objWebDriver);
-				//objworkerscompensation.Losses(objLoadManager, objWebDriver);
-				//objworkerscompensation.Application(objLoadManager, objWebDriver, AutomationUtilities.sBusinessName,"Quote",objLoginPage,objunderwriting,objhomepage,industrialq,testcasePath);
+				objworkerscompensation.Losses(objLoadManager, objWebDriver);
+				objworkerscompensation.Application(objLoadManager, objWebDriver, AutomationUtilities.sBusinessName,"Quote",objLoginPage,objunderwriting,objhomepage,industrialq,testcasePath);
 				//objworkerscompensation.PolicyIssue(objLoadManager, objWebDriver);
 				//objworkerscompensation.ThankYouPage(objLoadManager, objWebDriver);
 			}
@@ -201,7 +201,7 @@ public class AutomationDriver {
 			
 			EndTime = myFormatObj.format(myDateObj).toString();
 			AutomationUtilities.ReportGeneration(TCReportPath,TCRPSHEETNAME,objLoadManager,objLoadManager.getTestCaseId(),Product,
-				objLoadManager.getTCScenarios(),AutomationUtilities.sClassCode,AutomationUtilities.sClassCodeDesc,AutomationUtilities.sBusinessName,
+				objLoadManager.getTCScenarios(),AutomationUtilities.sClassCode,AutomationUtilities.sClassCodeDesc,AutomationUtilities.sClassCodeGroup,AutomationUtilities.sBusinessName,
 				AutomationUtilities.IndustialQ,AutomationUtilities.ClassCodeSTP,AutomationUtilities.sReferralReason,AutomationUtilities.sAddress,AutomationUtilities.SmartyStreet,  
 				AutomationUtilities.QuoteNo,AutomationUtilities.QuoteInsuranceName,AutomationUtilities.INSStatus,AutomationUtilities.PolicyNo,AutomationUtilities.XSPolicyNo,AutomationUtilities.GLInsuranceCompany,AutomationUtilities.XSInsuranceCompany,"Pass",
 				StartTime,EndTime);
@@ -246,7 +246,7 @@ public class AutomationDriver {
 			
 			EndTime = myFormatObj.format(myDateObj).toString();
 			AutomationUtilities.ReportGeneration(TCReportPath,TCRPSHEETNAME,objLoadManager,objLoadManager.getTestCaseId(),Product,
-					objLoadManager.getTCScenarios(),AutomationUtilities.sClassCode,AutomationUtilities.sClassCodeDesc,AutomationUtilities.sBusinessName,
+					objLoadManager.getTCScenarios(),AutomationUtilities.sClassCode,AutomationUtilities.sClassCodeDesc,AutomationUtilities.sClassCodeGroup,AutomationUtilities.sBusinessName,
 					AutomationUtilities.IndustialQ,AutomationUtilities.ClassCodeSTP,AutomationUtilities.sReferralReason,AutomationUtilities.sAddress,AutomationUtilities.SmartyStreet,  
 					AutomationUtilities.QuoteNo,AutomationUtilities.QuoteInsuranceName,AutomationUtilities.INSStatus,AutomationUtilities.PolicyNo,AutomationUtilities.XSPolicyNo,
 					AutomationUtilities.GLInsuranceCompany,AutomationUtilities.XSInsuranceCompany,"Fail",StartTime,EndTime);

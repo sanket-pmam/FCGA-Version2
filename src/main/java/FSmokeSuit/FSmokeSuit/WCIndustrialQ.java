@@ -56,7 +56,7 @@ public class WCIndustrialQ extends AutomationUtilities{
 					
 				break;
 				
-            case"0013":
+            case"Barber or Hair Salon":
 				
 				checkCheckBox(driver, IQobjectrepository.chkBedding(), 2, "Bedding Plants");
 				javascriptExecutorClick(driver, IQobjectrepository.rdIQuestion_A1(), "Question-1");

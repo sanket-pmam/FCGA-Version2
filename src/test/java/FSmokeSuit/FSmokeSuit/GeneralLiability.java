@@ -682,13 +682,13 @@ public class GeneralLiability extends AutomationUtilities {
     	 }
      
      AutomationUtilities.QuoteInsuranceName = objectrepository.getrdo_FWCIbutton().getText()+" & "+ objectrepository.getrdo_CBbutton().getText();
-     
-     if(objectrepository.getrdo_CBbutton().getText().toString() == "Clear Blue (A-)") {
+     //System.out.println("Carrier Name :"+objectrepository.getrdo_CBbutton().getText());
+     if(objectrepository.getrdo_CBbutton().getText().equalsIgnoreCase("Clear Blue (A-)") ) {
     	 AutomationUtilities.INSStatus = "Pass";
      }else {
     	 AutomationUtilities.INSStatus = "Fail";
      }
-     
+     AutomationUtilities.Screenshot(tcSnapPath,testCaseID,driver);
      if(objGlLoadManager.getTypeofCompany().equalsIgnoreCase("FWCI")) {
     	 
     	 buttonClick(driver,objectrepository.getrdo_FWCIbutton(),10,"Click on FWCI Insurance Company");
@@ -706,7 +706,7 @@ public class GeneralLiability extends AutomationUtilities {
      driver.manage().timeouts().implicitlyWait(25, TimeUnit.SECONDS);
      Thread.sleep(5000);
     
-     //AutomationUtilities.Screenshot(tcSnapPath,testCaseID);
+     //AutomationUtilities.Screenshot(tcSnapPath,testCaseID,driver);
      buttonClick(driver,objectrepository.getbtn_ICSavebutton(),20,"Click on Save Insurance Company");
      
      Thread.sleep(6000);

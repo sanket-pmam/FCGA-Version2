@@ -89,9 +89,10 @@ public class WorkersCompensation extends AutomationUtilities {
 		}else {
 			AutomationUtilities.sBusinessName =	objWCLoadManager.getWCBusinessName();
 		}
-		sendKeysToTextField(driver,objectrepository.gettxtWCBussInsuredName(), AutomationUtilities.sBusinessName, "Business Name");
 		System.out.println("Insured Name / Business Name is : " + AutomationUtilities.sBusinessName);
 		AutomationUtilities.LogSummary(LogPath, "Insured Name / Business Name is : " + AutomationUtilities.sBusinessName);
+		sendKeysToTextField(driver,objectrepository.gettxtWCBussInsuredName(), AutomationUtilities.sBusinessName, "Business Name");
+
 
 		buttonClick(driver,objectrepository.getdpdWCLegalEntity(), 10, "Click on Legal Entity");
 		EsendKeysToTextField(driver,objectrepository.gettxtUniquetextbox(), objWCLoadManager.getWCLegalEntity(), "Legal Entity");
@@ -328,7 +329,7 @@ public class WorkersCompensation extends AutomationUtilities {
 	public void GeneralQuestions(LoadManager objWCLoadManager,WCIndustrialQ industrialq ,WebDriver driver) throws IOException, InterruptedException, AWTException {
 		
 		waitforpageload(driver, 15);
-		//String ClassCode = objWCLoadManager.getWCClassCode();
+		ClassCode = objectrepository.gettxtWCClassCodes().getText();
 		String ReferalReason = driver.findElement(By.xpath("//input[@id='hdnReferralObject']")).getAttribute("value").toString();
 		if(ReferalReason.isEmpty()) {
 			AutomationUtilities.LogSummary(LogPath, "No Referral Reason Found");
@@ -354,8 +355,8 @@ public class WorkersCompensation extends AutomationUtilities {
 		javascriptExecutorClick(driver, objectrepository.rdQuestion_12(), "Question-12");
 		javascriptExecutorClick(driver, objectrepository.rdQuestion_13(), "Question-13");
 	
-		
-		//industrialq.CheckWCIndustrialQ (ClassCode,driver);
+		//industrialq.CheckWCIndustrialQ (objWCLoadManager.getWCClassCodeGroup(),driver);
+		industrialq.CheckWCIndustrialQ (ClassCode,driver);
 		
 		List<WebElement> elementName = driver.findElements(By.xpath("//tr[contains(@data-fieldid,'IQ')and @data-level='Primary']"));
         int IndustialQ = elementName.size();

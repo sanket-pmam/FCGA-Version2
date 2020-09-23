@@ -67,6 +67,7 @@ public class AutomationUtilities {
    public static String sBusinessName;
    public static String sClassCode;
    public static String sClassCodeDesc = "";
+   public static String sClassCodeGroup ="";
    public static String QuoteDate;
    public static String CountyCode;
    public static String FWCIPremium;
@@ -698,7 +699,7 @@ public class AutomationUtilities {
     }
    
     public static void ReportGeneration(String ReportPath, String TCSheetName, LoadManager objLoadManager, String testcaseid2, 
-    		String product, String tcScenarios,String tcClassCode, String tcClassCodeDesc, String insuredname,String IndustialQ,
+    		String product, String tcScenarios,String tcClassCode, String tcClassCodeDesc,String tcClassCodeGr, String insuredname,String IndustialQ,
     		String CCStp,String Reason, String Address, String SmartyStreet, String quoteNo2, String QuoteIName, String INSStatus,
     		String policyNo2, String XSpolicyNo2,String GLICompany, String XSICompany, String status,String starttime,String endtime) {
 	
@@ -712,6 +713,8 @@ public class AutomationUtilities {
 			"Class Code");
 	AutomationUtilities.ReportExcelUpdate(ReportPath, TCSheetName,"0", tcClassCodeDesc, objLoadManager,
 			"Class Description");
+	AutomationUtilities.ReportExcelUpdate(ReportPath, TCSheetName,"0", tcClassCodeGr, objLoadManager,
+			"Class Group");
 	AutomationUtilities.ReportExcelUpdate(ReportPath, TCSheetName,"0", insuredname, objLoadManager,
 			"Insured Name");
 	AutomationUtilities.ReportExcelUpdate(ReportPath, TCSheetName,"0", IndustialQ, objLoadManager,
