@@ -65,6 +65,7 @@ public class AutomationUtilities {
    public static WebDriverWait wait=null;
    public static Robot rbt;
    public static String sBusinessName;
+   public static String sDBAName;
    public static String sClassCode;
    public static String sClassCodeDesc = "";
    public static String sClassCodeGroup ="";
