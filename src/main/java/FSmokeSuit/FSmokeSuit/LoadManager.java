@@ -1966,4 +1966,5 @@ public class LoadManager implements Cloneable {
 		public String getWCUWModifyClassCodeGroup(){
 			return UWWCClassCodeGr;
 		}
+		
 	}

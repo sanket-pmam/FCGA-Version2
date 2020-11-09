@@ -516,31 +516,50 @@ public class WorkersCompensation extends AutomationUtilities {
 		
 		}
 		
-		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-		buttonClick(driver,objectrepository.getbtnWCDownloadQuote(),20,"Quote Document");
-		Thread.sleep(3000);
-		AutomationUtilities.Traverse(driver,"Quote Document");
-	   // System.out.println("Download WC Quote Document is clicked sucessfully");
-	    //AutomationUtilities.LogSummary(LogPath,"Download WC Quote Document is clicked successfully");
-	     
+		/*if(objWCLoadManager.getWCUWModifyState().isEmpty()) {
+			AutomationUtilities.PhysicalState = objWCLoadManager.getState();
+		}else {
+		    AutomationUtilities.PhysicalState = objWCLoadManager.getWCUWModifyState();
+		}*/
 		
-		buttonClick(driver,objectrepository.getbtnWCDownloadRatingWorksheet(),50,"Rating Document");
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		Thread.sleep(3000);
-		buttonClick(driver,objectrepository.getlnkWCCondensedRatingWorksheet(),15,"Condensed Rating Worksheet");
-		Thread.sleep(3000);
-		AutomationUtilities.Traverse(driver,"Rating Document");
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		buttonClick(driver,objectrepository.gettxtAppClosebtn(),10,"Close Condensed Rating Worksheet");
-	    //System.out.println("Download WC Rating Document is clicked successfully");
-	    //AutomationUtilities.LogSummary(LogPath,"Download WC Rating Document is clicked successfully");
-		
+		if((CheckElementPresent(objectrepository.getWCFWCICarrier()) == true) && (CheckElementPresent(objectrepository.getWCBICarrier()) == true)) {
+			
+		//FWCI --	
+			buttonClick(driver,objectrepository.getbtnWCFWCIDownloadQuote(),20,"Quote Document");
+			Thread.sleep(3000);
+			AutomationUtilities.Traverse(driver,"FWCI Quote Document");
+			buttonClick(driver,objectrepository.getbtnWCFWCIDownloadRatingWorksheet(),50,"Rating Document");
+			Thread.sleep(3000);
+			AutomationUtilities.Traverse(driver,"FWCI Rating Document");
+			
+		// BI --
+			
+			buttonClick(driver,objectrepository.getbtnWCBIDownloadQuote(),20,"Quote Document");
+			Thread.sleep(3000);
+			AutomationUtilities.Traverse(driver,"BI Quote Document");
+			buttonClick(driver,objectrepository.getbtnWCBIDownloadRatingWorksheet(),50,"Rating Document");
+			Thread.sleep(3000);
+			AutomationUtilities.Traverse(driver," BI Rating Document");
+			
+		}else if (CheckElementPresent(objectrepository.getWCFWCICarrier()) == true){
+			
+			buttonClick(driver,objectrepository.getbtnWCFWCIDownloadQuote(),20,"Quote Document");
+			Thread.sleep(3000);
+			AutomationUtilities.Traverse(driver,"FWCI Quote Document");
+			buttonClick(driver,objectrepository.getbtnWCFWCIDownloadRatingWorksheet(),50,"Rating Document");
+			Thread.sleep(3000);
+			AutomationUtilities.Traverse(driver,"FWCI Rating Document");
+			
+		}
+		if(objWCLoadManager.getWCCarierName().equalsIgnoreCase("FWCI")) {
+			buttonClick(driver,objectrepository.getbtnWCFWCICarrier(),20,"FWCI Carrier Selected");
+		}else {
+			buttonClick(driver,objectrepository.getbtnWCBICarrier(),20,"BI Carrier Selected");
+		}
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	    buttonClick(driver,objectrepository.getbtnWCDownloadApplication(),10,"Application Document");
 	    Thread.sleep(1000);
 	    AutomationUtilities.Traverse(driver,"Application Document");
-	   // System.out.println("Download WC Application Document is clicked sucessfully");
-	   // AutomationUtilities.LogSummary(LogPath,"Download WC Application Document is clicked successfully");
 		
 		Thread.sleep(2000);
 		buttonClick(driver,objectrepository.getWCMakePayment(),10,"Click on Make Payment");

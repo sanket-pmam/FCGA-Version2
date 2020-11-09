@@ -1,3 +1,4 @@
+
 package FSmokeSuit.FSmokeSuit;
 
 import java.io.File;
@@ -370,16 +371,17 @@ return testCaseData;
 	                	case 87:  dataObj.setWCUWModifyAnyLosses(cellObj.getStringCellValue()); break;
 	                	case 88:  dataObj.setWCUWModifyClaims(cellObj.getStringCellValue()); break;
 	                	case 89:  dataObj.setWCUWModifyTotalIncurred(cellObj.getStringCellValue()); break;
-	                	case 90:  dataObj.setPaymentOption(cellObj.getStringCellValue()); break;
-	                	case 91:  dataObj.setDepositPaymentMethod(cellObj.getStringCellValue()); break;
-	                	case 92:  dataObj.setCreditCardNumber(cellObj.getStringCellValue()); break;
-	                	case 93:  dataObj.setCVVNumber(cellObj.getStringCellValue()); break;
+	                	case 90:  dataObj.setWCCarierName(cellObj.getStringCellValue()); break;
+	                	case 91:  dataObj.setPaymentOption(cellObj.getStringCellValue()); break;
+	                	case 92:  dataObj.setDepositPaymentMethod(cellObj.getStringCellValue()); break;
+	                	case 93:  dataObj.setCreditCardNumber(cellObj.getStringCellValue()); break;
+	                	case 94:  dataObj.setCVVNumber(cellObj.getStringCellValue()); break;
 	                	//-----------------------------------------------------
 	                	
-	                	case 94:  dataObj.setScriptStatus(cellObj.getStringCellValue()); break;   
-	                	case 95:  dataObj.setInsuredName(cellObj.getStringCellValue()); break;
-	                	case 96:  dataObj.setReferralReason(cellObj.getStringCellValue()); break;
-	                	case 97:  dataObj.setPolicyNo(cellObj.getStringCellValue()); break;
+	                	case 95:  dataObj.setScriptStatus(cellObj.getStringCellValue()); break;   
+	                	case 96:  dataObj.setInsuredName(cellObj.getStringCellValue()); break;
+	                	case 97:  dataObj.setReferralReason(cellObj.getStringCellValue()); break;
+	                	case 98:  dataObj.setPolicyNo(cellObj.getStringCellValue()); break;
 	                	
 	                	
 	                	}	                	

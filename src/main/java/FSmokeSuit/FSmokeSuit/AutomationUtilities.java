@@ -52,6 +52,7 @@ import com.google.common.base.Function;
 public class AutomationUtilities {     
 	
    public static String sReferralReason = "";
+   public static String PhysicalState="";
    public static String LogPath;
    public static String fileContents="";
    public static int logcount = 1;

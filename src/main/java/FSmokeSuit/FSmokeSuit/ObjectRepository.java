@@ -915,13 +915,25 @@ public class ObjectRepository {
 	@FindBy (xpath="//input[@value='Make Payment & Issue']")
 	public WebElement WCMakePayment;
 	
-	@FindBy (xpath="//input[@id='btnDownloadQuote']")
-	public WebElement btnWCDownloadQuote;
+	@FindBy (xpath="//input[@id='btnDownloadFWCIQuote']")
+	public WebElement btnWCFWCIDownloadQuote;
 	
-	@FindBy (xpath="//input[@id='btnDownloadRatingWorksheet']")
-	public WebElement btnWCDownloadRatingWorksheet;
+	@FindBy (xpath="//input[@id='btnDownloadFWCIRatingWorksheet']")
+	public WebElement btnWCFWCIDownloadRatingWorksheet;
 	
-	@FindBy (xpath="//input[@id='btnDownloadApplication']")
+	@FindBy (xpath="//input[@id='btnDownloadBMQuote']")
+	public WebElement btnWCBIDownloadQuote;
+	
+	@FindBy (xpath="//button[@id='btnCarrierFWCI']")
+	public WebElement btnWCFWCICarrier;
+	
+	@FindBy (xpath="//button[@id='btnCarrierBest']")
+	public WebElement btnWCBICarrier;
+	
+	@FindBy (xpath="//input[@id='btnDownloadBMRatingWorksheet']")
+	public WebElement btnWCBIDownloadRatingWorksheet;
+	
+	@FindBy (xpath="//input[@id='btnPrintSubmit']")
 	public WebElement btnWCDownloadApplication;
 	
 	@FindBy (xpath="//a[@id='lnkDownloadBinder']")
@@ -1037,6 +1049,12 @@ public class ObjectRepository {
 	
 	@FindBy (xpath="//button[@id='BtnClose']")
 	public WebElement txtAppClosebtn;
+	
+	@FindBy (xpath="//div[@id='pnlCardHeaderFWCI']/p[1]")
+	public WebElement WCFWCICarrier;
+	
+	@FindBy (xpath="//div[@id='pnlCardHeaderBest']/p[1]")
+	public WebElement WCBICarrier;
 	
 	//------notes and messages--------
 	
@@ -2155,11 +2173,11 @@ public class ObjectRepository {
   public WebElement getlnkWCCondensedRatingWorksheet() {
 	  return lnkWCCondensedRatingWorksheet;
   }
-  public WebElement getbtnWCDownloadQuote() {
-	  return btnWCDownloadQuote;
+  public WebElement getbtnWCFWCIDownloadQuote() {
+	  return btnWCFWCIDownloadQuote;
   }
-  public WebElement getbtnWCDownloadRatingWorksheet() {
-	  return btnWCDownloadRatingWorksheet;
+  public WebElement getbtnWCFWCIDownloadRatingWorksheet() {
+	  return btnWCFWCIDownloadRatingWorksheet;
   }
   public WebElement getbtnWCDownloadApplication() {
 	  return btnWCDownloadApplication;
@@ -2393,5 +2411,27 @@ public WebElement getRecordsdrpType() {
 
 public WebElement getRecordsdrpPolicy() {
 	return RecordsdrpPolicy;
+}
+
+public WebElement getWCFWCICarrier() {
+	return WCFWCICarrier;
+}
+
+public WebElement getWCBICarrier() {
+	return WCBICarrier;
+}
+
+public WebElement getbtnWCBIDownloadQuote() {
+	return btnWCBIDownloadQuote;
+}
+public WebElement getbtnWCBIDownloadRatingWorksheet() {
+	return btnWCBIDownloadRatingWorksheet;
+}
+
+public WebElement getbtnWCFWCICarrier() {
+	return btnWCFWCICarrier;
+}
+public WebElement getbtnWCBICarrier() {
+	return btnWCBICarrier;
 }
 }
