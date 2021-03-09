@@ -88,6 +88,7 @@ public class AutomationUtilities {
    public static String InputAIForms;
    public static String InputWSForms;
    public static String DeclineReason;
+   public static String WCClassCode;
    public static String SpecialChar;
    public static String ClassCodeSTP;
    public static String GLInsuranceCompany;
@@ -460,6 +461,92 @@ public class AutomationUtilities {
         System.out.println("Test data file not found");
         } 
      }
+    
+    public static void ReadWriteIndustryQuestion (String testcasePath,String tcSheetName,int count, int tccount,String Data,String logpath,String ColName ) {
+    	
+    	File file =    new File(testcasePath);
+
+        try {
+           
+            FileInputStream fis = new FileInputStream(file);
+    	    XSSFWorkbook wb = new XSSFWorkbook(fis);
+    	    XSSFSheet sheet = wb.getSheet(tcSheetName);
+    	    XSSFRow headerRow = sheet.getRow(0);			      
+            Row rowObj=sheet.getRow(0);
+            int Rowcount = 0;
+    	    String result = "";
+    	    String Output="";
+    	    int resultCol = -1;
+    	    
+    	    for (Cell cell : headerRow){
+    	        result = cell.getStringCellValue();
+    	        if (result.equals(ColName)){
+    	            resultCol = cell.getColumnIndex();
+    	            break;
+    	         }
+    	    }
+    	    if (resultCol == -1){
+    	        System.out.println("Searched Collumn is not found in sheet");
+    	    } 
+          	        	
+    	    while(result.equalsIgnoreCase("IndustryQuestion (Expected)")){
+    	    	
+    	    	for(int rowNum=1;rowNum<=sheet.getLastRowNum();rowNum++) {
+    	        	rowObj=sheet.getRow(rowNum);
+    	        	Cell cellObj=rowObj.getCell(resultCol);
+    	        	Rowcount = rowNum;
+    	        	
+    	        	if(cellObj.getStringCellValue().equalsIgnoreCase(Data)) {
+    	        		
+    	        		Output ="Passed";
+    	        		break;
+    	        		
+    	            } else { 
+    	            	
+    	    	       Output ="Failed";
+    	         }
+                	
+    	       }
+    	    	 
+    	      XSSFRow row = sheet.getRow(Rowcount);
+    	      XSSFCell xssfCell = row.getCell(resultCol+tccount); 
+    	      xssfCell.setCellValue(Output+"For Class Code : "+WCClassCode);
+    	      AutomationUtilities.LogSummary(logpath,"IndustryQuestion "+count+" for class code :"+WCClassCode+" : " +Output);
+    	      result="xxx";
+    	      
+    	        fis.close();
+    	        
+    	     if(Output =="Passed") {   
+    	    	 
+    		    FileOutputStream outputStream = new FileOutputStream(file);
+    		    wb.write(outputStream);
+    		    outputStream.close();
+    		    outputStream=null;
+    	     }
+    	     
+    	     for (int i =1; i<=sheet.getLastRowNum(); i++) {
+    	    	 
+    	    	 rowObj=sheet.getRow(i);
+    	         Cell cellObj=rowObj.getCell(resultCol+tccount);
+    	         
+    	         if(!cellObj.getStringCellValue().equalsIgnoreCase("Passed")) {
+    	        	 cellObj.setCellValue("Failed");
+    	        	 FileOutputStream outputStream = new FileOutputStream(file);
+    	 		     wb.write(outputStream);
+    	 		     outputStream.close();
+    	 		     outputStream=null;
+    	         }
+    	     }
+    		 wb.close();  
+    	     wb=null;
+    		 fis=null;
+    		 
+            }
+          }
+        catch (IOException e) {
+            System.out.println("Test data file not found");
+            } 
+         }
 
     public static String ReadStateAbbreviations (String testcasePath,String tcSheetName,String Data,String ColName ) {
     	

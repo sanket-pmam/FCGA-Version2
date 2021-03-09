@@ -158,6 +158,8 @@ public class LoadManager implements Cloneable {
 		private String ConvertPolicyNo;
 		private String WCClassCodeGr;
 		private String UWWCClassCodeGr;
+		private String CCIndustrygroup;
+		private String CCHazardGroup;
 		private String Product;
 		private String State;
 		private String County;
@@ -1965,6 +1967,20 @@ public class LoadManager implements Cloneable {
 		}
 		public String getWCUWModifyClassCodeGroup(){
 			return UWWCClassCodeGr;
+		}
+
+		public void setWCClassCodeIndustryGroup(String sCCIndustrygroup) {
+			CCIndustrygroup = sCCIndustrygroup;
+		}
+		public String getWCClassCodeIndustryGroup(){
+			return CCIndustrygroup;
+		}
+
+		public void setWCClassCodeHazardGroup(String sCCHazardGroup) {
+			CCHazardGroup = sCCHazardGroup;			
+		}
+		public String getWCClassCodeHazardGroup(){
+			return CCHazardGroup;
 		}
 		
 	}

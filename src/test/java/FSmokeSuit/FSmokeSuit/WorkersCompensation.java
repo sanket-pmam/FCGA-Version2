@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -289,6 +290,8 @@ public class WorkersCompensation extends AutomationUtilities {
 			sendKeysToTextField(driver,objectrepository.getWCtxtUnInsuredSubcontract(), objWCLoadManager.getWCUnInsuredSubcontractor(), "Include Owner Class code is been entered");
 		}
 		
+		WCClassCode = driver.findElement(By.xpath("//input[@id='txtCode1']")).getAttribute("data-classcode").toString();
+		
 		buttonClick(driver,objectrepository.getBtnWCNext(), 05, "Next button is saved sucessfully.");
 		//AutomationUtilities.Screenshot(tcSnapPath, testCaseID);
 		
@@ -342,6 +345,17 @@ public class WorkersCompensation extends AutomationUtilities {
 		    AutomationUtilities.ClassCodeSTP = "No";
 		}
 		
+		String WCXpath = "//tr[@class='visiblerow' and @data-level='Primary']";   
+		List<WebElement> elementName = driver.findElements(By.xpath(WCXpath));
+        int lastQ = elementName.size();
+		for (int i =1; i<=lastQ;i++) {
+			//String testcasePath = "";
+			String IQCount = driver.findElement(By.xpath("//tr[@class='visiblerow' and @data-level='Primary']["+i+"]")).getAttribute("id").toString();
+			String IQValue = driver.findElement(By.xpath("//tr[@class='visiblerow' and @data-level='Primary']//td[contains(@id,'lblDescribe_"+IQCount+"')]")).getText().toString();
+			AutomationUtilities.LogSummary(LogPath,"Industry Questions"+i+" for ClassCode " +WCClassCode+" :"+IQValue);
+			//AutomationUtilities.ReadWriteIndustryQuestion (testcasePath,"TD_IQ",i,AutomationUtilities.tcCount,IQValue,LogPath,"IndustryQuestion (Expected)" );
+
+		}
 		javascriptExecutorClick(driver, objectrepository.rdQuestion_1(), "Question-1");
 		javascriptExecutorClick(driver, objectrepository.rdQuestion_2(), "Question-2");
 		javascriptExecutorClick(driver, objectrepository.rdQuestion_3(), "Question-3");
@@ -358,7 +372,7 @@ public class WorkersCompensation extends AutomationUtilities {
 	
 		//System.out.println("Class Code is "+ objWCLoadManager.getClassCode());
 		//industrialq.CheckWCIndustrialQ (objWCLoadManager.getWCClassCodeGroup(),driver);
-		industrialq.CheckWCIndustrialQ ("0005",driver);
+		//industrialq.CheckWCIndustrialQ ("0005",driver);
 		
 		/*List<WebElement> elementName = driver.findElements(By.xpath("//tr[contains(@data-fieldid,'IQ')and @data-level='Primary']"));
         int IndustialQ = elementName.size();
@@ -387,7 +401,7 @@ public class WorkersCompensation extends AutomationUtilities {
 		javascriptExecutorClick(driver, objectrepository.rdIQuestion_14(), "Question-14");
 		javascriptExecutorClick(driver, objectrepository.rdIQuestion_15(), "Question-15");*/
 
-		buttonClick(driver,objectrepository.getBtnWCNext(), 10, "Next button is saved successfully.");
+		//buttonClick(driver,objectrepository.getBtnWCNext(), 10, "Next button is saved successfully.");
 		//AutomationUtilities.Screenshot(tcSnapPath, testCaseID);
 		//System.out.println("General & Industrial Questions have been completed Successfully");
 		AutomationUtilities.LogSummary(LogPath, "General & Industrial Questions have been completed Successfully");

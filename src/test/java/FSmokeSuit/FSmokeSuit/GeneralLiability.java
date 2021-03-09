@@ -505,7 +505,7 @@ public class GeneralLiability extends AutomationUtilities {
 	        		QuestionArray.add(Qvalue[1]);
 	        
 	        		//AutomationUtilities.CheckDuplicateQuestions(QuestionArray,Qvalue[1]);
-	        		//AutomationUtilities.ReadWriteClassSpecificQuestion (testcasePath,"TD_CSQ",i,AutomationUtilities.tcCount,Qvalue[1],LogPath,"Primary Underwriting Question (Expected)" );
+	        		AutomationUtilities.ReadWriteClassSpecificQuestion (testcasePath,"TD_CSQ",i,AutomationUtilities.tcCount,Qvalue[1],LogPath,"Primary Underwriting Question (Expected)" );
 	        		driver.findElement(By.xpath("//tr[@class='visibleTr']//td[contains(text(),'Question')]//parent :: tr// following-sibling :: td//input[contains(@name,'question"+QClassSpecACount+"')]//parent :: div//label[starts-with(@for,'radio-')]")).click(); // no button
 	        	}
 		  }	
